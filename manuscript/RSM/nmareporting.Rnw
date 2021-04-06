@@ -1,0 +1,242 @@
+\documentclass[AMA,STIX1COL]{WileyNJD-v2}
+
+\usepackage{docmute}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning}
+\usepackage{xcolor}
+\definecolor{fillgray}{gray}{0.95}
+\usepackage{amsmath}
+
+% more words macro
+\usepackage[color=lightgray]{todonotes}
+
+\newcommand{\todonote}[1]{
+    \todo[inline]{\emph{draft notes} #1}
+}
+
+
+% code
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+% package
+\newcommand{\package}[1]{\texttt{\detokenize{#1::}}}
+% function
+\newcommand{\function}[1]{\texttt{\detokenize{::#1}}}
+% package::function
+\newcommand{\pkgfn}[2]{\texttt{\detokenize{#1::#2}}}
+
+\articletype{Article Type}%
+
+\received{26 April 2016}
+\revised{6 June 2016}
+\accepted{6 June 2016}
+
+\raggedbottom
+
+\begin{document}
+
+\title{A computational way station for the development of network meta-analysis reporting
+%\protect\thanks{This is an example for title footnote.}
+}
+
+\author[1]{Charles T. Gray*}
+\author{Other co-authors TBC}
+\author[2]{Matthew J. Grainger}
+\author[1]{Gavin Stewart}
+
+
+\authormark{AUTHOR ONE \textsc{et al}}
+
+
+\address[1]{\orgdiv{Evidence Synthesis Lab, School of Natural and Environmental Sciences}, \orgname{Newcastle University}, \orgaddress{\state{Newcastle upon Tyne}, \country{UK}}}
+
+\address[3]{\orgdiv{Org Division}, \orgname{Norwegian Institute for Nature Research}, \orgaddress{\state{State name}, \country{Norway}}}
+
+\corres{*Charles T. Gray, This is sample corresponding address. \email{charlestigray@gmail.com}}
+
+\presentaddress{This is sample for present address text this is sample for present address text}
+
+\abstract[Summary]{This is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract tex
+
+t this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text this is sample abstract text.}
+
+\keywords{keyword1, keyword2, keyword3, keyword4}
+
+% todo: update this
+
+\jnlcitation{\cname{%
+\author{Gray C. T.},
+\author{G. Stewart}, and
+\author{M. Grainger},
+} (\cyear{2021}),
+\ctitle{A computational way station for the development of network meta-analysis reporting}, \cjournal{R.S.M}, \cvol{draft}.}
+
+
+
+\maketitle
+
+% todo:
+
+\footnotetext{\textbf{Abbreviations} NMA, network meta-analysis; PRISMA, Preferred Reporting Items for Systematic reviews and Meta-Analyses; MECIR, Methodological Expectations of Cochrane Intervention Reviews. Software is referred to as \package{package} by name of R package.}
+
+
+<<setup, include=FALSE,echo=FALSE>>=
+knitr::opts_chunk$set(
+  echo=FALSE,
+  cache = TRUE,
+  # message=FALSE,
+  # warning=FALSE,
+  fig.height = 3
+)
+@
+
+
+
+<<pkgs, message=FALSE, echo=FALSE>>=
+# R packages used
+library(multinma) # for nma
+library(tidyverse) # general purpose
+library(patchwork)
+library(happypillpain)
+library(targets)
+library(here)
+# devtools::install_github("johnmackintosh/rockthemes")
+
+# multinma option for parallel core processing
+options(mc.cores = parallel::detectCores())
+
+# for reproducibility
+set.seed(40)
+
+@
+
+\todonote{Reminder: don't knit the .TeX file, use .Rnw.}
+
+\section{Reporting standards and Bayesian network meta-analysis}
+% manuscript contents
+
+As with many Bayesian algorithms, recent developments in underlying sampling algorithms (such as \code{stan}'s implementation in \code{R}), have enabled advances in Bayesian network meta-analysis (NMA). Software has become available, such as \package{multinma}, released in 2021, which computes Bayesian estimates for NMA using \code{stan} from an \code{R} interface. The key attraction of NMA is how it allows a comparison of multiple treatments, even where direct pairwise comparisons are not empirically available. However, a challenge exists for researchers who wish to both use these techniques and adhere to appropriate evidence synthesis reporting standards for a given discipline. One way of meeting this challenge is to provide a computational waystation for the development of toolchains for reporting NMA according to different standards, such as Cochrane or the Campbell Collaboration. This manuscript provides some toolchain and commentary about the process of computationally implementing a network meta-analysis according to Cochrane's reporting standards and how we might expand our research compendia to include in-development computational science workflows.
+
+\subsection{Network meta-analysis}
+
+Pairwise analyses between treatment and control, exposed and unexposed, intervention and no intervention, are conventionally undertaken with meta-analysis in fields such as ecology, medicine, and the social sciences~\cite{borenstein_introduction_2011}. NMA provides a means of comparing three or more treatments or interventions, including control or placebo~\cite{higgins2019cochrane}. The question answered by an NMA is not \emph{if} a treatment works, but \emph{which} treatments perform better, comparatively~\cite{harrer_doing_2019}. A particularly useful aspect of NMA is combining the results of more than one pairwise analysis and constructing indirect comparisons, where pairwise evidence is unavailable, from a network of direct comparisons. An example of direct comparisons provided by existing evidence is shown in Figure \ref{fig:network}. NMA converts the network to a complete graph, where all treatments are compared with all other treatments, that is, every node connects to every other node via \textbf{direct} or \textbf{indirect} comparison.
+
+\begin{figure}
+
+
+<<r network, message = FALSE, fig.height=5>>=
+pain_model <-
+  here("outputs", "model", "pain_model.rds") %>%
+  read_rds()
+
+plot(pain_model$network)
+
+@
+
+
+\caption{Network of treatment comparisons, the direct evidence, included in the network meta-analysis for how antidepressants affect sleep. This analysis will be discussed in detail in Section \ref{sec:toolchain}, where we describe the data and the toolchains for analysis and reporting.}
+\label{fig:network}
+\end{figure}
+
+\subsection{Reporting standards}
+
+Reporting NMA according to Cochrane's expectations is a non-trivial task; there are multiple visualisations and tables required, in accordance with standards that have been adapted and derived from existing evidence synthesis standards. Some familiarity with this ecosystem of reporting systems is required to meet the standards required for reporting a NMA according to Cochrane's expectations.
+
+Figure \ref{fig:protocol} shows the immediate development relationships between reporting standards for NMA in Cochrane intervention reviews. A researcher undertaking NMA must ensure they meet (MECIR) and (PRISMA) Extension guidelines, as MECIR was developed for pairwise meta-analysis and the PRISMA Extension provides further guidance on NMA.
+
+\begin{figure}
+\centering
+\input{protocol-fig.tex}
+\caption{Development network in which reporting protocols for NMA in Cochrane intervention reviews have been developed.} \label{fig:protocol}
+\end{figure}
+
+This figure also provides further information, to demonstrate different ways a researcher may encounter reporting standards. (QUOROM) guidelines have been superseded by PRISMA, from which MECIR was developed. If a researcher is undertaking a Campbell systematic review, they will consult (MECCIR), which was derived from MECIR. MECIR was derived from the Cochrane Handbook, which was informed by PRISMA guidelines.
+
+\section{Toolchains for NMA reporting}
+\label{sec:toolchain}
+
+To illustrate the computational challenges of reporting results using newer statistical methods, we step through providing reporting NMA results for a single analysis from an in-development Cochrane intervention review. Before discussing the codeflow in detail, we describe the data analysed.
+
+\subsection{Antidepressants for chronic pain in adults}
+
+These data are a preliminary subset of results from a currently underway Cochrane study examining the use of antidepressants to treat chronic pain in adults.
+
+\todonote{Cite protocol}
+
+These data are intended to be computationally illustrative only, as results and models are not fully developed and only reflect half of the extraction to be completed.
+
+\begin{table}
+\caption{Number of observations we have, and of some types we care about in this analysis.}
+\label{tab:obs}
+
+<<>>=
+# table of relevant variables counted
+# how many observations do we have?
+# of what types do we care about?
+@
+
+\end{table}
+
+\todonote{May need to update this if I change datasets}
+
+In addition to pain, the study examines other ways individuals are affected by chronic pain, such as depression and quality of life. These data present measures of insomnia experienced by chronic pain, with pairwise comparisons between antidepressant interventions and placebo groups.
+
+<< error=TRUE>>=
+
+@
+
+
+\todonote{Discuss number of studies and other characterists, treatments, dosages, etc.}
+
+
+\subsection{Toolchain for reporting the results of one outcome}
+
+
+In this section we focus on computationally achieving mandatory MECIR reporting for effects and interventions (R76-R99)~\cite{higgins_methodological_2016} on the sleep dataset described above. The examples provided are selected to demonstrate the challenges and nuances of reporting NMA according to MECIR in R.
+
+\todonote{Discuss with Gav how this relates to MECIR; which reporting protocols to include, R76-99?}
+
+\subsubsection{Number of studies and participants: R78}
+
+% gt with spanners
+% contribution matrix
+
+To meet this expectation, we need to \emph{state how many studies and how many participants contributed data to results for each outcome, along with the proportion of included studies}. This can be achieved with a summary table with a \textbf{contribution matrix}, which shows the proportions of studies' direct evidence contributions to the treatment comparisons.
+
+\todonote{Is this how to interpret this reporting standard?}
+
+\subsubsection{Estimated outcomes and associated uncertainty (R82-84, R88, R93, R95)}
+
+% forest plot
+
+Outcome effect estimates need to be provided (R82), along with a measure (R82) of uncertainty (we will use confidence interval) with a specified level of confidence, instead of p-values (R84)~\cite{higgins_methodological_2016}. The direction (R88) of the results also needs to be reported. Much of this can be achieved with a forest plot (R93) with appropriate labels (R95) and a table.
+
+\subsubsection{Sensitivity analysis (R94)}
+
+% threshold analysis
+
+Multiple sensitivity analyses should be presented in summary form, not multiple forest plots (R94)~\cite{higgins_methodological_2016}. A threshold analysis is not only a convenient way to summarise multiple sensitivity analyses, but more robust~\cite{phillippo_threshold_2019}.
+
+% \subsubsection{Summary of findings table (R98)}
+
+% gt with spanners
+
+
+\section{Role of computational waystations}
+
+The toolchain in Section \ref{sec:toolchain} demonstrates the computational gap between statistical methodology and reporting implementation according to a particular protocol. Even where there are well-featured software tools, such as \package{multinma}, different reporting protocols for particular disciplines across which a statistical methodology may be applied will have different requirements. Thus it is unsurprising that for recently-developed statistical methodology there are toolchain gaps that an applied scientist will need to bridge. Computational waystations provide an open science forum in which to develop toolchains, share knowledge, and extend on existing tools.
+
+
+
+% bibliography
+
+\nocite{*}% Show all bib entries - both cited and uncited; comment this line to view only cited bib entries;
+\bibliography{wileyNJD-AMA}%
+
+\clearpage
+
+\section*{Author Biography}
+
+\begin{biography}{\includegraphics[width=66pt,height=86pt,draft]{empty}}{\textbf{Author Name.} This is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text.}
+\end{biography}
+
+\end{document}

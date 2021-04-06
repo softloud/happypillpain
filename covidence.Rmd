@@ -1,0 +1,81 @@
+---
+title: "Covidence"
+description: |
+  For checking with Hollie and Gav.
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r pkgs}
+library(tidyverse)
+library(gt)
+library(RColorBrewer)
+
+```
+
+## in this document
+
+- model notes from protocol
+- QA for model
+- model definition
+
+These all have different objectives, but are overlapping. 
+
+# model definition
+
+# QA for model
+
+
+### keywords
+
+```{r data}
+keywords <- read_csv("data-raw/keywords.csv")
+
+```
+
+```{r table}
+keywords %>% 
+  gt(rowname_col = "keyword", groupname_col = "outcome") %>% 
+  data_color(
+    columns = vars("inclusion_criterion"),
+    colors = scales::col_factor(
+      palette = "Blues",
+      domain = NULL
+    )
+  ) %>% 
+  tab_header(
+    title = "Inclusion criteria",
+    subtitle = "Columns including or excluding these words are extracted from the Covid export"
+  ) %>% 
+  tab_options(
+    row_group.background.color =  "steelblue",
+    table.background.color = "aliceblue"
+  )
+
+```
+
+
+
+# protocol notes
+
+## background
+
+We want to assess the comparative efficacy of antidepressants for adults with chronic pain. 
+
+### description
+
+- **chronic pain** := > 3 months
+- **primary pain** := chronic pain as disease, e.g. lower back pain
+- **secondary pian** := pain with a specific cause, e.g., osteoarthritis
+- assessed by self report
+- affects 1/5 of adults in the world
+- affects qol, mood, sleep, physical function, depression
+
+
+

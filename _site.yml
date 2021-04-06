@@ -1,0 +1,34 @@
+name: "happypillpain"
+title: "happypillpain"
+exclude: [data-raw/, data/, docs/, hppshiny/, R/, outputs/, manuscript/]
+description: |
+  happypillpain
+output_dir: "docs"
+navbar:
+  left:
+    - text: "overview of data"
+      href: "overview.html"
+    - text: "outcome-specific preliminary analyses"
+      menu:
+        - text: "pain"
+          href: "outcome-analysis-pain.html"
+        - text: "substantial pain"
+          href: "outcome-analysis-substantial-pain.html"
+        - text: "moderate pain"
+          href: "outcome-analysis-moderate-pain.html"
+        - text: "pgic"
+          href: "outcome-analysis-pgic.html"
+        - text: "mood"
+          href: "outcome-analysis-mood.html"
+        - text: "sleep"
+        #   href: "outcome-analysis-sleep.html"
+        # - text: "phyical function"
+          href: "outcome-analysis-phyical-function.html"
+        - text: "qol"
+          href: "outcome-analysis-qol.html"
+  right:
+    - text: "covidence"
+      href: covidence.html
+    - text: "about"
+      href: "about.html"
+output: distill::distill_article

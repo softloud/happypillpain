@@ -1,0 +1,43 @@
+outcome,keyword,inclusion_criterion
+substantial pain,pain + 50%,include
+moderate pain,pain + 30%,include
+mood,Mental health,include
+mood,Depression,include
+mood,Mood,include
+mood,Anxiety,include
+mood,Mental component,include
+mood,Psychosocial,include
+mood,Sadness,include
+mood,Well-being,include
+adverse,Adverse drug reaction,include
+adverse,Adverse events,include
+adverse,Serious adverse events,include
+sleep,Sleep,include
+sleep,Insomnia,include
+pgic,Global impression,include
+pgic,Global judgement,include
+pgic,Illness severity,include
+pgic,Global Clinical Improvement,include
+pgic,PGI-I,include
+pgic,PGII-I,include
+pgic,PGIC,include
+pgic,CGI-S,include
+pgic,Patient Global Assessment,include
+pgic,Patient’s Global Evaluation,include
+physical function,Disability,include
+physical function,Function,include
+physical function,Physical component,include
+physical function,Physical function,include
+physical function,Sickness Impact Profile,include
+physical function,Physical functioning,include
+qol,Quality of Life,include
+qol,QoL – EQ-5D,include
+qol,SF-36 Total Score,include
+pain,Pain intensity,include
+pain,Pain severity,include
+pain,Pain unpleasantness,include
+pain,Somatisation,include
+pain,pain catastrophising,exclude
+pain,pain interference,exclude
+pain,50%,exclude
+pain,30%,exclude

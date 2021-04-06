@@ -1,0 +1,100 @@
+---
+title: "analysis"
+description: |
+  Efficacy of antidepressants for adults with chronic pain
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article: 
+    toc: true
+params:
+  outcome: pain
+  # model: smd
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r pkgs}
+# pkgs
+library(tidyverse)
+library(multinma)
+library(nmathresh)
+library(glue)
+library(targets)
+conflicted::conflict_prefer("filter", "dplyr")
+
+
+```
+
+```{r get data}
+this_outcome <- str_replace_all(params$outcome, " ", "-")
+
+# hpp_nma <- glue("outputs/model/nma-{this_outcome}.rds") %>% read_rds()
+
+withr::with_dir(here::here(), {
+  tar_load(models)
+})
+
+hpp_nma <-
+  models %>% 
+  keep(~.$outcome == params$outcome) %>% 
+  pluck(1)
+
+
+# all this plucking and whatnot stripped it of the class value
+class(hpp_nma) <- "stan_nma"
+
+```
+
+```{r generating outcomes, eval=FALSE}
+# this is for creating the markdown files
+tar_read(keywords) %>% 
+  filter(!str_detect(outcome, "physical|adverse")) %>% 
+  pull(outcome) %>% 
+  unique() %>% 
+  map(
+  .f = function(outcome) {
+      file_name_outcome <- str_replace_all(outcome, " ", "-")  
+    rmarkdown::render(
+      input = "template-outcome-analysis-generator.Rmd",
+      output_file = glue("docs/outcome-analysis-{file_name_outcome}.html"),
+      params = list(
+        outcome = outcome 
+      )
+    )
+  }
+  
+  )
+
+# list.files(pattern = "^outcome-analysis.+.Rmd") %>% 
+#   rmarkdown::render()
+
+
+```
+
+
+
+## network
+
+```{r network, fig.height=5, fig.width=10}
+
+plot(hpp_nma$network)
+
+```
+2
+
+## model results
+
+```{r}
+plot(hpp_nma)
+
+```
+
+```{r}
+plot_prior_posterior(hpp_nma)
+
+```
+

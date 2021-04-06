@@ -1,0 +1,131 @@
+\begin{thebibliography}{10}
+
+\bibitem{borenstein_introduction_2011}
+Michael Borenstein, Larry~V. Hedges, Julian P.~T. Higgins, and Hannah~R.
+  Rothstein.
+\newblock {\em Introduction to Meta-Analysis}.
+\newblock John Wiley \& Sons.
+\newblock Google-Books-{ID}: {JQg}9jdrq26wC.
+
+\bibitem{boutron_covid-nma_2020}
+Isabelle Boutron, Anna Chaimani, Joerg~J. Meerpohl, Asbjørn Hróbjartsson,
+  Declan Devane, Gabriel Rada, David Tovey, Giacomo Grasselli, and Philippe
+  Ravaud.
+\newblock The {COVID}-{NMA} project: Building an evidence ecosystem for the
+  {COVID}-19 pandemic.
+\newblock 173(12):1015--1017.
+
+\bibitem{gopalakrishnan_systematic_2013}
+S.~Gopalakrishnan and P.~Ganeshkumar.
+\newblock Systematic reviews and meta-analysis: Understanding the best evidence
+  in primary healthcare.
+\newblock 2(1):9--14.
+
+\bibitem{harrer_doing_2019}
+Mathias Harrer, Prof Dr~Pim Cuijpers², Prof Dr Toshi~A. Furukawa³, and Assoc
+  Prof Dr David~D. Ebert².
+\newblock {\em Doing Meta-Analysis in R}.
+
+\bibitem{higgins_methodological_2016}
+JPT Higgins, T~Lasserson, J~Chandler, D~Tovey, R~Churchill, and {others}.
+\newblock Methodological expectations of cochrane intervention reviews.
+\newblock 5.
+
+\bibitem{higgins2019cochrane}
+Julian~{PT} Higgins, James Thomas, Jacqueline Chandler, Miranda Cumpston,
+  Tianjing Li, Matthew~J Page, and Vivian~A Welch.
+\newblock {\em Cochrane handbook for systematic reviews of interventions}.
+\newblock John Wiley \& Sons.
+
+\bibitem{hutton_prisma_2015}
+Brian Hutton, Georgia Salanti, Deborah~M. Caldwell, Anna Chaimani,
+  Christopher~H. Schmid, Chris Cameron, John~P.A. Ioannidis, Sharon Straus,
+  Kristian Thorlund, Jeroen~P. Jansen, Cynthia Mulrow, Ferrán Catalá-López,
+  Peter~C. Gøtzsche, Kay Dickersin, Isabelle Boutron, Douglas~G. Altman, and
+  David Moher.
+\newblock The {PRISMA} extension statement for reporting of systematic reviews
+  incorporating network meta-analyses of health care interventions: Checklist
+  and explanations.
+\newblock 162(11):777--784.
+\newblock Publisher: American College of Physicians.
+
+\bibitem{liberati_prisma_2009}
+Alessandro Liberati, Douglas~G. Altman, Jennifer Tetzlaff, Cynthia Mulrow,
+  Peter~C. Gøtzsche, John~P.A. Ioannidis, Mike Clarke, P.~J. Devereaux, Jos
+  Kleijnen, and David Moher.
+\newblock The {PRISMA} statement for reporting systematic reviews and
+  meta-analyses of studies that evaluate health care interventions: Explanation
+  and elaboration.
+\newblock 151(4):W--65.
+\newblock Num Pages: W-94 Publisher: American College of Physicians.
+
+\bibitem{statrethinkingbook}
+Richard {McElreath}.
+\newblock {\em Statistical rethinking: A bayesian course with examples in R and
+  stan}.
+\newblock {CRC} Press.
+
+\bibitem{moher_problem_2013}
+David Moher.
+\newblock The problem of duplicate systematic reviews.
+\newblock 347:f5040.
+\newblock Publisher: British Medical Journal Publishing Group Section:
+  Editorial.
+
+\bibitem{moller_are_2018}
+Morten~Hylander Møller, John P.~A. Ioannidis, and Michael Darmon.
+\newblock Are systematic reviews and meta-analyses still useful research? we
+  are not sure.
+\newblock 44(4):518--520.
+
+\bibitem{nakagawa_orchard_2021}
+Shinichi Nakagawa, Malgorzata Lagisz, Rose~E. O'Dea, Joanna Rutkowska, Yefeng
+  Yang, Daniel W.~A. Noble, and Alistair~M. Senior.
+\newblock The orchard plot: Cultivating a forest plot for use in ecology,
+  evolution, and beyond.
+\newblock 12(1):4--12.
+\newblock \_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/jrsm.1424.
+
+\bibitem{naumann_too_2021}
+David Naumann.
+\newblock Too many systematic reviews for a disease that has existed for a few
+  months.
+
+\bibitem{phillippo_multinma_2020}
+David~M. Phillippo.
+\newblock multinma: Network meta-analysis of individual and aggregate data in
+  stan.
+
+\bibitem{phillippo_sensitivity_2018}
+David~M. Phillippo, Sofia Dias, A.~E. Ades, Vanessa Didelez, and Nicky~J.
+  Welton.
+\newblock Sensitivity of treatment recommendations to bias in network
+  meta-analysis.
+\newblock 181(3):843--867.
+\newblock \_eprint:
+  https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssa.12341.
+
+\bibitem{richards_too_2018}
+Derek Richards.
+\newblock Too many reviews too few trials.
+\newblock 19(1):2--2.
+\newblock Number: 1 Publisher: Nature Publishing Group.
+
+\bibitem{rucker_netmeta_2021}
+Gerta Rücker, Ulrike Krahn, Jochem König, Orestis Efthimiou, and Guido
+  Schwarzer.
+\newblock netmeta: Network meta-analysis using frequentist methods.
+
+\bibitem{valkenhoef_gemtc_2020}
+Gert~van Valkenhoef and Joel Kuiper.
+\newblock gemtc: Network meta-analysis using bayesian methods.
+
+\bibitem{wickham_tidyverse_2017}
+Hadley Wickham.
+\newblock tidyverse: Easily install and load the 'tidyverse'.
+
+\bibitem{wickham_usethis:_2019}
+Hadley Wickham and Jennifer Bryan.
+\newblock usethis: Automate package and project setup.
+
+\end{thebibliography}
