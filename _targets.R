@@ -96,7 +96,7 @@ list(
   tar_target(keywords,
              read_csv("data-raw/keywords.csv")),
   tar_target(hpp_dat, preliminary_scrub(raw_hpp_dat)),
-  tar_target(write_hpp_dat, write_rds(hpp_dat, "outputs/hpp_dat.rds")),
+  # tar_target(write_hpp_dat, write_rds(hpp_dat, "outputs/hpp_dat.rds")),
   tar_target(raw_names, names(raw_hpp_dat)),
   tar_target(outcomes_of_interest,
              keywords %>%
