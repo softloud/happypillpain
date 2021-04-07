@@ -3,7 +3,7 @@ title: "happypillpain"
 description: |
   happypillpain
 output_dir: "docs"
-exclude: ["data-raw", "data/", "docs/", "hppshiny/", "R/", "outputs/", "manuscript/", "manuscript"]
+exclude: ["data-raw", "data", "docs/", "hppshiny", "R", "outputs/", "manuscript"]
 navbar:
   left:
     - text: "overview of data"
@@ -21,9 +21,9 @@ navbar:
         - text: "mood"
           href: "outcome-analysis-mood.html"
         - text: "sleep"
-        #   href: "outcome-analysis-sleep.html"
+          href: "outcome-analysis-sleep.html"
         # - text: "phyical function"
-          href: "outcome-analysis-phyical-function.html"
+          # href: "outcome-analysis-phyical-function.html"
         - text: "qol"
           href: "outcome-analysis-qol.html"
   right:

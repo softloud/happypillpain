@@ -21,6 +21,7 @@ library(happypillpain)
 library(janitor)
 library(gt)
 library(RColorBrewer)
+library(glue)
 
 ```
 

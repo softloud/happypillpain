@@ -1,0 +1,302 @@
+---
+title: "threshold analysis"
+description: |
+  Primary pain analysis model results
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkgs}
+library(nmathresh)
+library(tidyverse)
+conflicted::conflict_prefer("filter", "dplyr")
+
+```
+
+```{r get data}
+# we might need input and out data of model, or the network
+
+# can be called by model$network$agd_arm
+# pain_netdat <- # data that goes into set_agd_arm
+#   read_rds("outputs/netdat/pain_netdat.rds")
+
+# this is an object in the model
+# pain_network <- # network created by set_agd_arm
+#   read_rds("outputs/network/pain_network.rds")
+
+pain_model <- # get the nma model output
+  read_rds("outputs/model/pain_model.rds")
+  
+
+```
+
+
+
+```{r k treatments}
+K <- pain_model %>% pluck("network","treatments") %>% n_distinct()
+
+
+```
+
+## contrast-level threshold analysis
+
+For a contrast-level threshold analysis, we need 
+
+```{r eval=FALSE}
+nma_thresh(
+  mean.dk,
+  lhood,
+  post,
+  nmatype = "fixed",
+  X = NULL,
+  
+  # don't think we need to worry about these for first pass
+  
+  # mu.design = NULL, 
+  # delta.design = NULL,
+  # opt.max = TRUE,
+  # trt.rank = 1,
+  # trt.code = NULL,
+  # trt.sub = NULL,
+  # mcid = 0,
+  # mcid.type = "decision"
+)
+
+
+
+```
+
+### `mean.dk` argument
+
+> Posterior means of basic treatment parameters $d_k$. 
+
+So, unpacking the theory. I think what has been confusing me is that there is both $d_{ab}$, the effect of $b$ compared with $a$, for the model input and output. 
+
+Now in this case it's _posterior_. So, I need to extract the mean estimates from
+`pain_model`.
+
+We have the prior, for treatments, 
+
+> Is $d \equiv d_{ab}$? 
+
+
+$$
+d_{ab} \sim N(d_0)
+$$
+
+
+```{r}
+# impatiently getting to the code
+mean_dk <- summary(pain_model, pars = c("mu")) %>% 
+  as_tibble() %>% 
+  pull(mean)
+
+```
+
+
+### `lhood` argument
+
+
+And, for `lhood`, we need to do some work. Using the posterior covariance matrix (need to look up definition) and the 
+
+> design matrix of the contrasts with data (see network diagram). (From `nmathresh::` vignette)
+
+
+```{r eval=FALSE}
+lik.cov <- recon_vcov(post_cov_treatment_effect_par, X)
+
+```
+
+#### design matrix of contrasts in data
+
+
+```{r}
+# get all pairwise contrasts
+# see which ones are in it? look at what david did
+# how to tell which way nma puts the - ah order of treatments in nma network
+treatments <- 
+  pain_model %>% pluck("network", "treatments") %>% as.character()
+
+# first is placebo
+
+# get all combinations
+
+
+```
+
+
+```{r}
+combinations <- 
+cross3(as.character(pain_model$network$studies), treatments, treatments) %>% transpose() 
+
+match_matrix_col <- function(x){
+      which(x == treatments)
+    }
+
+combinations_df <-
+  tibble(
+    study = pluck(combinations,1),
+    a = pluck(combinations, 2),
+    b = pluck(combinations, 3)
+  ) %>% 
+  mutate(across(everything(), as.character)) %>% 
+  # filter out the ones where the contrast is with itself
+  filter(a != b)  %>% 
+  mutate(
+    a_x = map_int(a, match_matrix_col),
+    b_x = map_int(b, match_matrix_col)
+  ) %>% 
+  # get rid of the comparisons where a is after b
+  filter(a_x < b_x) 
+
+```
+
+So, I understand what the columns of the design matrix are, I think. But how do I identify what rows are assigned to which study's observations. What about studies that have more than two arms? There will be at least two rows for those studies in this design matrix. 
+
+I can check which columns are matched, but how do I know what the order of rows is?
+
+```{r}
+# now to check which combinations exist within a given study 
+# what are the rows
+
+# first identify which combinations are present
+detected_combinations <- 
+combinations_df %>% 
+  mutate(
+    detected = pmap_lgl(
+      list(
+        study, a, b
+      ),
+      .f = function(id, x, y){
+        treatments_in_this_study <-
+      pain_model$network$agd_arm %>% 
+        filter(.study == id) %>% 
+          pull(.trt)
+      # check if both treatments are in
+        x %in% treatments_in_this_study & y %in% treatments_in_this_study
+        
+    })
+  ) %>% 
+  filter(detected) %>% 
+  select(-detected)
+
+  
+```
+
+```{r}
+matrix_wrangle <- 
+detected_combinations %>% 
+  pivot_longer(
+    cols = c(a_x, b_x)
+  ) %>% 
+  mutate(matrix_col = map_chr(value, .f = function(x){
+    treatments[x]
+  })) %>% 
+  mutate(matrix_val = if_else(name == "a_x", -1, 1)) %>%
+  select(-name, -value) %>% 
+  pivot_wider(
+    id_cols = c(study, a, b),
+    names_from = matrix_col,
+    values_from = matrix_val,
+    values_fill = 0
+  )
+
+```
+
+
+```{r create X}
+
+pain_x <- 
+  matrix_wrangle %>% 
+  select(-c(1:4)) %>% 
+  as.matrix()
+
+
+```
+
+Checking the dimensions. From David's work, I have 
+$$
+|X| = N \times (K -1)
+$$
+where $N$ is the total number of relative effects and $K$ is the total number of of treatments. 
+
+```{r}
+# total number of relative effects
+nrow(detected_combinations)
+
+# total number of treatments less placebo
+length(treatments) - 1
+
+# dimensions of x - moment of truth
+dim(pain_x)
+
+```
+
+
+
+#### posterior covariance matrix
+
+```{r}
+# do I recall it being as easy as cov? no
+# cov(pain_model)
+post_sd <- 
+  summary(pain_model) %>% 
+  as_tibble() %>% 
+  filter(str_detect(parameter, "^d")) %>% 
+  select(parameter, sd)
+
+post_cov <-
+  post_sd %>% 
+  mutate(var = sd^2) %>% 
+  pull(var) %>% 
+  diag()
+
+```
+
+Aha! In sensitivity paper [todo citations] The posterior covariance matrix is $\Sigma_n = (\Sigma_d^{-1} + X^TV^{1}X)^{-1}$ where everything is a matrix. Now to identify what $V$ nad $\Sigma_n$ and $\Sigma_d$ are. 
+
+Now, we have the model structure
+
+- prior $d \sim N(d_0, \sigma_d)$
+- likelihood $y|\delta \sim N(\delta, V)$
+- FE model $\delta = Xd$
+
+Where everything is a vector or matrix. 
+
+So, $\Sigma_d$ is the variance of the prior. 
+
+And $V$ is a block diagonal matrix $\text{diag}(V_1, \dots, V_n)$, where $V_j = (A_j -1 \times A_j - 1)$ covariance matrix for study $j$. 
+
+So surely this would correspond to the combinations? 
+
+```{r}
+# damn need values of sds?
+combinations_df
+
+# can I just calculate it?
+
+# pain_model$network$agd_arm %>% 
+#  select(study)
+
+```
+
+Next up, identify the dimensions and indexing of each matrix. 
+
+```{r}
+lik_cov <- recon_vcov(
+  post = post_cov, X = pain_x
+)
+  
+```
+
+
+
+## study-level threshold analysis
+
+

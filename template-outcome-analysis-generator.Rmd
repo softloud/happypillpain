@@ -30,10 +30,6 @@ conflicted::conflict_prefer("filter", "dplyr")
 ```
 
 ```{r get data}
-this_outcome <- str_replace_all(params$outcome, " ", "-")
-
-# hpp_nma <- glue("outputs/model/nma-{this_outcome}.rds") %>% read_rds()
-
 withr::with_dir(here::here(), {
   tar_load(models)
 })
@@ -51,10 +47,8 @@ class(hpp_nma) <- "stan_nma"
 
 ```{r generating outcomes, eval=FALSE}
 # this is for creating the markdown files
-tar_read(keywords) %>% 
-  filter(!str_detect(outcome, "physical|adverse")) %>% 
-  pull(outcome) %>% 
-  unique() %>% 
+models %>% 
+  map_chr("outcome") %>% 
   map(
   .f = function(outcome) {
       file_name_outcome <- str_replace_all(outcome, " ", "-")  
@@ -68,9 +62,6 @@ tar_read(keywords) %>%
   }
   
   )
-
-# list.files(pattern = "^outcome-analysis.+.Rmd") %>% 
-#   rmarkdown::render()
 
 
 ```

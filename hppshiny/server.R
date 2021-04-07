@@ -1,22 +1,24 @@
 library(tidyverse)
 library(multinma)
 conflicted::conflict_prefer("filter", "dplyr")
+library(targets)
 
 # pretty sure I can do some static stuff that doesn't run
 # every time someone changes something in the app
 # I think this runs when the app is first spun up
 
 # get data
-# model_results <-
-#   read_rds("../outputs/models.rds") %>%
-#   filter(outcome_id != "adverse")
+tar_load(models)
 
+choices <- models %>% map_chr("outcome")
+
+outcomes_text <- paste0(choices, collapse = "; ")
 
 function(input, output) {
   outcome_nma <- reactive({
     model_results %>%
-      filter(outcome_id == input$outcome) %>%
-      pluck('model', 1)
+      keep(~ .$outcome == input$outcome) %>%
+      pluck(1)
   })
 
   output$network <- renderPlot({

@@ -1,0 +1,128 @@
+---
+title: "Summary tables"
+description: |
+  Primary pain analysis
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+
+```
+
+```{r pkgs}
+library(tidyverse)
+library(gt)
+library(RColorBrewer)
+
+```
+
+
+
+```{r wrangle to model inputs}
+
+netdat <- read_rds("outputs/netdat/pain_netdat.rds")
+
+```
+
+```{r tabledat}
+tabledat <- 
+  netdat %>% 
+  select(study, arm, intervention, scale, mean, se, n, intervention_type)
+
+```
+
+
+
+## counts by intervention 
+
+```{r fig.width=10}
+
+tabledat %>%
+  group_by(intervention, intervention_type) %>% 
+  summarise(
+    studies = n_distinct(study),
+    scales = n_distinct(scale)
+  ) %>% 
+  arrange(desc(studies)) %>% 
+  ungroup() %>% 
+  mutate(
+    intervention_type = fct_relevel(intervention_type, "Placebo", after = Inf)
+  ) %>% 
+  gt::gt(
+    rowname_col = "intervention",
+    groupname_col = "intervention_type"
+    ) %>% 
+  tab_options(
+    table.background.color = "aliceblue",
+    summary_row.background.color = "steelblue",
+    row_group.background.color = "cadetblue",
+    grand_summary_row.background.color = "#31a354"
+  ) %>% 
+  summary_rows(
+    groups = TRUE,
+    fns = list(total = ~sum(.)),
+    formatter = fmt_number,
+    decimals = 0
+  ) %>% 
+  grand_summary_rows(
+    fns = list("grand total" = ~sum(.)),
+    formatter = fmt_number,
+    decimals = 0
+  )
+
+
+```
+
+## counts by study
+
+```{r}
+tabledat %>%
+  dplyr::filter(arm != "Placebo") %>% 
+  select(study, intervention, arm, intervention_type) %>% 
+  gt(
+    rowname_col = "study",
+    groupname_col = c("intervention_type")
+    
+  ) %>% 
+  data_color(
+    columns = vars(intervention),
+    colors = scales::col_factor(
+        palette = "BuGn",
+        domain = NULL
+      )
+    ) %>% 
+  tab_options(
+    table.background.color = "aliceblue"
+  ) %>% 
+   tab_options(
+    table.background.color = "aliceblue",
+    summary_row.background.color = "steelblue",
+    row_group.background.color = "cadetblue",
+    grand_summary_row.background.color = "#31a354"
+  ) %>% 
+  summary_rows(
+    groups = TRUE,
+    fns = list(total = ~n_distinct(.)),
+    formatter = fmt_number,
+    decimals = 0
+  ) %>% 
+  grand_summary_rows(
+    fns = list(grand_total = ~n_distinct(.)),
+    formatter = fmt_number,
+    decimals = 0
+  )
+
+```
+
+
+
+
+
+
+
+

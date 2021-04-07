@@ -3,14 +3,6 @@ library(shinythemes)
 library(glue)
 
 
-model_results <-
-  read_rds("../outputs/models.rds") %>%
-  filter(outcome_id != "adverse")
-
-choices <- model_results %>% pull(outcome_id) %>% unique()
-
-outcomes_text <- paste0(choices, collapse = "; ")
-
 
 fluidPage(
   theme = shinytheme("flatly"),

@@ -1,0 +1,176 @@
+---
+title: "pain"
+description: |
+  Primary pain outcome
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r pkgs}
+library(tidyverse)
+library(gt)
+library(here)
+library(multinma)
+library(nmathresh)
+library(Rg)
+conflicted::conflict_prefer("filter", "dplyr")
+
+```
+
+
+```{r get data}
+# need to do keywords from word doc
+pain_dat <- read_csv("outputs/pain.csv")
+
+```
+
+## Scope of this dataset
+
+- post-intervention
+- parallel studies
+- pain outcome 
+- dosage not taken into account
+
+## summaries and counts
+
+### the data
+
+
+```{r wrangle to model inputs}
+
+netdat <- read_rds("outputs/netdat/netdat_pain.csv")
+
+```
+
+```{r include=FALSE}
+# check that there are not multiple measures per study
+netdat %>% 
+  count(study_arm_id, mean) %>% 
+  filter(n  > 1)
+
+# thank goodness
+
+```
+
+
+```{r}
+tabledat <- 
+  netdat %>% 
+  select(study, arm, intervention, scale, mean, se, n) 
+```
+
+```{r}
+tabledat %>% 
+  gt() 
+
+```
+
+
+## counts by intervention 
+
+```{r}
+
+tabledat %>%
+  group_by(intervention) %>% 
+  summarise(
+    studies = n_distinct(study),
+    scales = n_distinct(scale)
+  ) %>% 
+  gt::gt() %>% 
+   data_color(
+    columns = vars(),
+    colors = scales::col_numeric(
+      palette = "Blues",
+      domain = NULL
+    )
+  ) 
+ 
+ 
+
+```
+
+## counts by study
+
+```{r}
+tabledat %>% 
+  group_by(study) %>% 
+  summarise(
+    interventions = n_distinct(intervention),
+    arms = n_distinct(arm)
+  ) %>% 
+  gt()
+
+```
+
+
+
+
+## network
+
+```{r network}
+
+
+painnet <- read_rds("outputs/network/pain_network.rds")
+
+
+```
+
+```{r network plot, fig.height=7, fig.width=10}
+plot(painnet)
+
+
+```
+
+```{r message=FALSE,warning=FALSE,include=FALSE}
+pain_nma <- read_rds("outputs/model/pain_model.rds")
+
+```
+
+
+## model estimates
+
+```{r fig.height=10}
+
+plot(pain_nma)
+
+
+
+```
+
+```{r fig.height=10, fig.width=10}
+
+plot_prior_posterior(pain_nma)
+```
+
+
+## threshold analysis
+
+### contrast
+
+```{r eval=FALSE}
+# number  of treatments
+K <- "todo"
+
+# contrast design matrix 
+X <- "todo"
+
+# get posterior covariance matrix
+post_cov_matrix <- "todo"
+
+
+lik_cov <- recon_vconv(post_cov_matrix, X = X)
+
+
+
+```
+
+
+### study 
+
+
