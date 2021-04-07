@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-data-raw/review_+.csv
+data-raw/review_*.csv
 data/
 outputs/
 targets/
