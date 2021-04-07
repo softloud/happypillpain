@@ -1,0 +1,16 @@
+base
+knitr
+multinma
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+patchwork
+happypillpain
+targets
+here

@@ -1,0 +1,108 @@
+\documentclass[draft]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning}
+\usepackage{xcolor}
+\definecolor{fillgray}{gray}{0.95}
+\usepackage{amsmath}
+
+
+% https://tex.stackexchange.com/questions/168314/how-to-use-latex-commands-to-draw-a-flowchart
+\begin{document}
+
+\begin{tikzpicture}[nodes = {
+draw=fillgray,
+fill=fillgray,
+rounded corners,
+align=center,
+text width=6cm
+},
+node distance=4cm,
+arrows = {-latex}]
+
+% protocols
+\node (QUOROM)  {
+\textcolor{gray}{
+\large{QUOROM}\\
+\small{\emph{QUality Of Reporting Of Meta-analysis}~\cite{moher_improving_1999}}\\
+\normalsize{2000}\\
+\medskip
+\small{Checklist Items: 18}
+}
+};
+\node (PRISMA) [below = 1.5cm of QUOROM] {
+\large{PRISMA}\\
+\small{\emph{Preferred Reporting Items for Systematic reviews and Meta-Analyses}~\cite{liberati_prisma_2009}}\\
+\normalsize{2009}\\
+\medskip
+
+\small{Checklist Items: 27}
+};
+\node (MECIR) [below = 1.5cm of PRISMA] {
+\large{MECIR}\\
+\small{\emph{Methodological Expectations of Cochrane Intervention Reviews}~\cite{higgins_methodological_2016}}\\
+\normalsize{2016}\\
+\medskip
+
+\small{
+\[
+\text{Checklist Items: }
+\begin{cases}
+\text{Conduct} & 75\\
+\text{Reporting} & 44\\
+\text{Updates} & 7
+\end{cases}
+\]
+}
+};
+\node (PRISMAext) [right =2cm of PRISMA] {
+\large{PRISMA Extension}\\
+\small{\emph{PRISMA Extension Statement for Reporting of Systematic Reviews Incorporating Network Meta-Analyses}~\cite{hutton_prisma_2015}}\\
+\normalsize{2015}\\
+\medskip
+\small{Checklist Items: 32}
+};
+
+\node (handbook) [right = 2cm of MECIR] {
+\large{Handbook}\\
+\small{\emph{Cochrane handbook for systematic reviews of interventions}~\cite{higgins2019cochrane}}\\
+\normalsize{2019}\\
+\medskip
+\small{26 Chapters}
+
+};
+
+\node (MECCIR) [below = 1.5cm of MECIR] {
+\large{MECCIR}\\
+\small{\emph{Methodological Expectations of Campbell Collaboration Intervention Reviews}~\cite{noauthor_campbell_2014}}\\
+\normalsize{2016}\\
+\medskip
+
+\small{
+\[
+\text{Checklist Items: }
+\begin{cases}
+\text{Conduct} & 79\\
+\text{Reporting} & 59
+\end{cases}
+\]
+}
+
+};
+
+
+% connections
+\draw [dotted, gray] (QUOROM) to (PRISMA);
+\draw  [dashed] (PRISMA) to (PRISMAext);
+\draw [dashed] (PRISMA) to (handbook);
+\draw  [dashed](PRISMAext) to (handbook);
+\draw [dashed] (handbook) to (MECIR);
+\draw [dashed] (MECIR) to (MECCIR);
+\draw [dashed] (handbook) to (MECCIR);
+
+\end{tikzpicture}
+
+%\bibliographystyle{plain}
+%\bibliography{wileyNJD-AMA}
+
+\end{document}

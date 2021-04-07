@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: nmareporting.aux
+The style file: WileyNJD-AMA.bst
+Database file #1: wileyNJD-AMA.bib
+Warning--entry type for "noauthor_campbell_2014" isn't style-file defined
+--line 143 of file wileyNJD-AMA.bib
+Warning--empty year in borenstein_introduction_2011
+Warning--empty year in higgins2019cochrane
+Warning--empty publisher in harrer_doing_2019
+Warning--empty year in harrer_doing_2019
+Warning--empty journal in moher_improving_1999
+Warning--empty year in moher_improving_1999
+Warning--empty journal in liberati_prisma_2009
+Warning--empty year in liberati_prisma_2009
+Warning--empty journal in higgins_methodological_2016
+Warning--empty year in higgins_methodological_2016
+Warning--empty journal in hutton_prisma_2015
+Warning--empty year in hutton_prisma_2015
+`howpublished' is a missing field, not a string, for entry noauthor_campbell_2014
+while executing---line 1090 of file WileyNJD-AMA.bst
+Warning--empty journal in phillippo_threshold_2019
+Warning--empty year in phillippo_threshold_2019
+Warning--empty year in wickham_r_2015
+Warning--empty journal in phillippo_sensitivity_2018
+Warning--empty year in phillippo_sensitivity_2018
+Warning--empty journal in thoemmes_graphical_2015
+Warning--empty year in thoemmes_graphical_2015
+Warning--empty journal in morris_estimating_2008
+Warning--empty year in morris_estimating_2008
+You've used 13 entries,
+            2067 wiz_defined-function locations,
+            600 strings with 7739 characters,
+and the built_in function-call counts, 2524 in all, are:
+= -- 181
+> -- 125
+< -- 0
++ -- 57
+- -- 44
+* -- 284
+:= -- 422
+add.period$ -- 17
+call.type$ -- 13
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 34
+duplicate$ -- 127
+empty$ -- 257
+format.name$ -- 44
+if$ -- 536
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 16
+newline$ -- 55
+num.names$ -- 12
+pop$ -- 63
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 19
+stack$ -- 0
+substring$ -- 0
+swap$ -- 25
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 21
+while$ -- 12
+width$ -- 15
+write$ -- 131
+(There was 1 error message)

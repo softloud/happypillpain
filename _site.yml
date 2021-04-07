@@ -1,9 +1,9 @@
 name: "happypillpain"
 title: "happypillpain"
-exclude: [data-raw/, data/, docs/, hppshiny/, R/, outputs/, manuscript/]
 description: |
   happypillpain
 output_dir: "docs"
+exclude: ["data-raw", "data/", "docs/", "hppshiny/", "R/", "outputs/", "manuscript/", "manuscript"]
 navbar:
   left:
     - text: "overview of data"
