@@ -68,14 +68,38 @@ keywords %>%
 
 We want to assess the comparative efficacy of antidepressants for adults with chronic pain. 
 
-### description
+### condition
 
 - **chronic pain** := > 3 months
 - **primary pain** := chronic pain as disease, e.g. lower back pain
 - **secondary pian** := pain with a specific cause, e.g., osteoarthritis
 - assessed by self report
 - affects 1/5 of adults in the world
-- affects qol, mood, sleep, physical function, depression
+- affects qol, mood, sleep, physical function
 
+### intervention
+
+- different classes of treatment for chemical structure and mechanism of action
+- common classes: TCA, SSRI, SNRI, MAOI
+- antidepressants are sometimes used 'off-license' to treat chronic pain
+- adverse events (e.g., headaches, weight loss) are associated with antidepressants
+
+### how
+
+- antidepressants work by targeting neurotransmitters & receptors associated with mood & emotion
+- prevent signal of pain from being absorbed
+- perceived pain is reduced
+
+## important
+
+- no nma yet in pain + antidepressants
+- contradictory evidence
+- no comparison of pain vs mood
+
+## objectives
+
+- assess improvements in pain, mood, pgic, physical function, sleep, and qol by type, class, dose
+- adverse events by type, class, dose
+- rank efficacy in treating pain, negative affect, and adverse events
 
 

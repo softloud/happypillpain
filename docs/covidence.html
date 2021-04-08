@@ -91,8 +91,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-04-07"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-04-07"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-04-08"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-04-08"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="happypillpain: Covidence"/>
@@ -110,7 +110,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Covidence"]},{"type":"character","attributes":{},"value":["For checking with Hollie and Gav.\n"]},{"type":"character","attributes":{},"value":["2021-04-07"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Covidence"]},{"type":"character","attributes":{},"value":["For checking with Hollie and Gav.\n"]},{"type":"character","attributes":{},"value":["2021-04-08"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2055,7 +2055,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Covidence","description":"For checking with Hollie and Gav.","authors":[],"publishedDate":"2021-04-07T00:00:00.000+01:00"}
+{"title":"Covidence","description":"For checking with Hollie and Gav.","authors":[],"publishedDate":"2021-04-08T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2077,7 +2077,7 @@ outcome-specific preliminary analyses
 <a href="outcome-analysis-moderate-pain.html">moderate pain</a>
 <a href="outcome-analysis-pgic.html">pgic</a>
 <a href="outcome-analysis-mood.html">mood</a>
-<a href="outcome-analysis-phyical-function.html">sleep</a>
+<a href="outcome-analysis-sleep.html">sleep</a>
 <a href="outcome-analysis-qol.html">qol</a>
 </div>
 </div>
@@ -2116,8 +2116,12 @@ outcome-specific preliminary analyses
 <ul>
 <li><a href="#background">background</a>
 <ul>
-<li><a href="#description">description</a></li>
+<li><a href="#condition">condition</a></li>
+<li><a href="#intervention">intervention</a></li>
+<li><a href="#how">how</a></li>
 </ul></li>
+<li><a href="#important">important</a></li>
+<li><a href="#objectives">objectives</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -2143,7 +2147,7 @@ outcome-specific preliminary analyses
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#scunscpyeb .gt_table {
+#ynsspyncyz .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2168,7 +2172,7 @@ outcome-specific preliminary analyses
   border-left-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_heading {
+#ynsspyncyz .gt_heading {
   background-color: aliceblue;
   text-align: center;
   border-bottom-color: aliceblue;
@@ -2180,7 +2184,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_title {
+#ynsspyncyz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2190,7 +2194,7 @@ outcome-specific preliminary analyses
   border-bottom-width: 0;
 }
 
-#scunscpyeb .gt_subtitle {
+#ynsspyncyz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2200,13 +2204,13 @@ outcome-specific preliminary analyses
   border-top-width: 0;
 }
 
-#scunscpyeb .gt_bottom_border {
+#ynsspyncyz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_col_headings {
+#ynsspyncyz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2221,7 +2225,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_col_heading {
+#ynsspyncyz .gt_col_heading {
   color: #333333;
   background-color: aliceblue;
   font-size: 100%;
@@ -2241,7 +2245,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#scunscpyeb .gt_column_spanner_outer {
+#ynsspyncyz .gt_column_spanner_outer {
   color: #333333;
   background-color: aliceblue;
   font-size: 100%;
@@ -2253,15 +2257,15 @@ outcome-specific preliminary analyses
   padding-right: 4px;
 }
 
-#scunscpyeb .gt_column_spanner_outer:first-child {
+#ynsspyncyz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#scunscpyeb .gt_column_spanner_outer:last-child {
+#ynsspyncyz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#scunscpyeb .gt_column_spanner {
+#ynsspyncyz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2273,7 +2277,7 @@ outcome-specific preliminary analyses
   width: 100%;
 }
 
-#scunscpyeb .gt_group_heading {
+#ynsspyncyz .gt_group_heading {
   padding: 8px;
   color: #FFFFFF;
   background-color: steelblue;
@@ -2295,7 +2299,7 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#scunscpyeb .gt_empty_group_heading {
+#ynsspyncyz .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: steelblue;
@@ -2310,15 +2314,15 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#scunscpyeb .gt_from_md > :first-child {
+#ynsspyncyz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#scunscpyeb .gt_from_md > :last-child {
+#ynsspyncyz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#scunscpyeb .gt_row {
+#ynsspyncyz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2337,7 +2341,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#scunscpyeb .gt_stub {
+#ynsspyncyz .gt_stub {
   color: #333333;
   background-color: aliceblue;
   font-size: 100%;
@@ -2349,7 +2353,7 @@ outcome-specific preliminary analyses
   padding-left: 12px;
 }
 
-#scunscpyeb .gt_summary_row {
+#ynsspyncyz .gt_summary_row {
   color: #333333;
   background-color: aliceblue;
   text-transform: inherit;
@@ -2359,7 +2363,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#scunscpyeb .gt_first_summary_row {
+#ynsspyncyz .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2369,7 +2373,7 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_grand_summary_row {
+#ynsspyncyz .gt_grand_summary_row {
   color: #333333;
   background-color: aliceblue;
   text-transform: inherit;
@@ -2379,7 +2383,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#scunscpyeb .gt_first_grand_summary_row {
+#ynsspyncyz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2389,11 +2393,11 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_striped {
+#ynsspyncyz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#scunscpyeb .gt_table_body {
+#ynsspyncyz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2402,7 +2406,7 @@ outcome-specific preliminary analyses
   border-bottom-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_footnotes {
+#ynsspyncyz .gt_footnotes {
   color: #333333;
   background-color: aliceblue;
   border-bottom-style: none;
@@ -2416,13 +2420,13 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_footnote {
+#ynsspyncyz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#scunscpyeb .gt_sourcenotes {
+#ynsspyncyz .gt_sourcenotes {
   color: #333333;
   background-color: aliceblue;
   border-bottom-style: none;
@@ -2436,46 +2440,46 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#scunscpyeb .gt_sourcenote {
+#ynsspyncyz .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#scunscpyeb .gt_left {
+#ynsspyncyz .gt_left {
   text-align: left;
 }
 
-#scunscpyeb .gt_center {
+#ynsspyncyz .gt_center {
   text-align: center;
 }
 
-#scunscpyeb .gt_right {
+#ynsspyncyz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#scunscpyeb .gt_font_normal {
+#ynsspyncyz .gt_font_normal {
   font-weight: normal;
 }
 
-#scunscpyeb .gt_font_bold {
+#ynsspyncyz .gt_font_bold {
   font-weight: bold;
 }
 
-#scunscpyeb .gt_font_italic {
+#ynsspyncyz .gt_font_italic {
   font-style: italic;
 }
 
-#scunscpyeb .gt_super {
+#ynsspyncyz .gt_super {
   font-size: 65%;
 }
 
-#scunscpyeb .gt_footnote_marks {
+#ynsspyncyz .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="scunscpyeb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ynsspyncyz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="2" class="gt_heading gt_title gt_font_normal" style>Inclusion criteria</th>
@@ -2694,14 +2698,39 @@ outcome-specific preliminary analyses
 <h1 id="protocol-notes">protocol notes</h1>
 <h2 id="background">background</h2>
 <p>We want to assess the comparative efficacy of antidepressants for adults with chronic pain.</p>
-<h3 id="description">description</h3>
+<h3 id="condition">condition</h3>
 <ul>
 <li><strong>chronic pain</strong> := &gt; 3 months</li>
 <li><strong>primary pain</strong> := chronic pain as disease, e.g. lower back pain</li>
 <li><strong>secondary pian</strong> := pain with a specific cause, e.g., osteoarthritis</li>
 <li>assessed by self report</li>
 <li>affects 1/5 of adults in the world</li>
-<li>affects qol, mood, sleep, physical function, depression</li>
+<li>affects qol, mood, sleep, physical function</li>
+</ul>
+<h3 id="intervention">intervention</h3>
+<ul>
+<li>different classes of treatment for chemical structure and mechanism of action</li>
+<li>common classes: TCA, SSRI, SNRI, MAOI</li>
+<li>antidepressants are sometimes used ‘off-license’ to treat chronic pain</li>
+<li>adverse events (e.g., headaches, weight loss) are associated with antidepressants</li>
+</ul>
+<h3 id="how">how</h3>
+<ul>
+<li>antidepressants work by targeting neurotransmitters &amp; receptors associated with mood &amp; emotion</li>
+<li>prevent signal of pain from being absorbed</li>
+<li>perceived pain is reduced</li>
+</ul>
+<h2 id="important">important</h2>
+<ul>
+<li>no nma yet in pain + antidepressants</li>
+<li>contradictory evidence</li>
+<li>no comparison of pain vs mood</li>
+</ul>
+<h2 id="objectives">objectives</h2>
+<ul>
+<li>assess improvements in pain, mood, pgic, physical function, sleep, and qol by type, class, dose</li>
+<li>adverse events by type, class, dose</li>
+<li>rank efficacy in treating pain, negative affect, and adverse events</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

@@ -8,11 +8,9 @@ library(targets)
 # I think this runs when the app is first spun up
 
 # get data
-tar_load(models)
-
-choices <- models %>% map_chr("outcome")
-
-outcomes_text <- paste0(choices, collapse = "; ")
+withr::with_dir(here::here(), {
+  tar_load(models)
+})
 
 function(input, output) {
   outcome_nma <- reactive({

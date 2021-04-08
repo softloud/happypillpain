@@ -2,7 +2,12 @@ library(tidyverse)
 library(shinythemes)
 library(glue)
 
+withr::with_dir(here::here(), {
+  tar_load(outcomes_of_interest)
+})
 
+outcomes_text <- 
+  paste0(outcomes_of_interest, collapse = "; ")
 
 fluidPage(
   theme = shinytheme("flatly"),
@@ -22,7 +27,7 @@ fluidPage(
       selectInput(
         inputId = "outcome",
         label = "Select an outcome:",
-        choices = choices,
+        choices = outcomes_of_interest,
         selected = "pain"
       ),
 
