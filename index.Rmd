@@ -86,3 +86,45 @@ dev <- suppressMessages(
 dev
 ```
 
+```{r}
+# update 
+```
+
+
+```{r get data}
+withr::with_dir(here::here(), {
+  tar_load(models)
+})
+
+hpp_nma <-
+  models %>% 
+  keep(~.$outcome == params$outcome) %>% 
+  pluck(1)
+
+
+# all this plucking and whatnot stripped it of the class value
+class(hpp_nma) <- "stan_nma"
+
+```
+
+```{r generating outcomes}
+# this is for creating the markdown files
+models %>% 
+  map_chr("outcome") %>% 
+  map(
+  .f = function(outcome) {
+      file_name_outcome <- str_replace_all(outcome, " ", "-")  
+    rmarkdown::render(
+      input = "template-outcome-analysis-generator.Rmd",
+      output_file = glue("docs/outcome-analysis-{file_name_outcome}.html"),
+      params = list(
+        outcome = outcome 
+      )
+    )
+  }
+  
+  )
+
+
+```
+

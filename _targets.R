@@ -78,13 +78,14 @@ set_binom_network <- function(obs_binom_network) {
 
 
 list(
-  tar_target(raw_dat_path,
-             # use raw_hpp_dat_path() to get the latest path
-             # this target is here so it's easier to swap in and out the latest file path
-             "/home/cantabile/Documents/gh-repos/happypillpain/data-raw/review_91309_extracted_data_csv_20210405154804.csv"             ),
+  tar_target(
+    raw_dat_path,
+    # use raw_hpp_dat_path() to get the latest path
+    # this target is here so it's easier to swap in and out the latest file path
+    "data-raw/review_91309_extracted_data_csv_20210408052653.csv"
+  ),
   tar_target(data_update_date,
-             raw_hpp_dat_date(raw_dat_path)
-             ),
+             raw_hpp_dat_date(raw_dat_path)),
   # stuff for all analyses
   tar_target(raw_hpp_dat,
              # use raw_hpp_dat_path() to get the latest path
@@ -124,7 +125,7 @@ list(
     pattern = map(obs_measures),
     iteration = "list"
   ),
-
+  
   # assign timepoints
   tar_target(
     obs_timepoints,
@@ -132,7 +133,7 @@ list(
     pattern = map(obs_wide_by_measures),
     iteration = "list"
   ),
-
+  
   # assign meta parameters
   tar_target(
     obs_meta,
@@ -140,7 +141,7 @@ list(
     pattern = map(obs_timepoints),
     iteration = "list"
   ),
-
+  
   # convert measures to numeric
   tar_target(
     obs_numeric,
@@ -148,7 +149,7 @@ list(
     pattern = map(obs_meta),
     iteration = "list"
   ),
-
+  
   # now for assumptions, filters atm
   tar_target(
     obs_postint,
@@ -157,7 +158,7 @@ list(
     pattern = map(obs_numeric, outcomes_of_interest),
     iteration = "list"
   ),
-
+  
   tar_target(
     outcomes,
     tibble(outcome_id = outcomes_of_interest) %>%
@@ -175,16 +176,14 @@ list(
         outcome_index = row_number()
       )
   ),
-
+  
   tar_target(obs_smd,
              index <-
-             obs_postint[c(outcomes %>% dplyr::filter(model_type == "smd") %>% pull(outcome_index))]
-             ),
-
+               obs_postint[c(outcomes %>% dplyr::filter(model_type == "smd") %>% pull(outcome_index))]),
+  
   tar_target(obs_binom,
-             obs_postint[(outcomes %>% dplyr::filter(model_type == "binom") %>% pull(outcome_index))]
-  ),
-
+             obs_postint[(outcomes %>% dplyr::filter(model_type == "binom") %>% pull(outcome_index))]),
+  
   # need to try this out on just means
   # what about binomials?
   tar_target(
@@ -204,129 +203,49 @@ list(
     pattern = map(obs_smd),
     iteration = "list"
   ),
-
+  
   tar_target(
     model_smd,
     nma(network_smd),
     pattern = map(network_smd),
     iteration = "list"
   ),
-
-
+  
+  
   # need to try this out on just means
   # what about binomials?
   tar_target(
     network_binom,
     obs_binom %>% pluck(1) %>%
-    set_binom_network(),
+      set_binom_network(),
     pattern = map(obs_binom),
     iteration = "list"
   ),
-
-
+  
+  
   tar_target(
     model_binom,
     nma(network_binom),
     pattern = map(network_binom),
     iteration = "list"
   ),
-
+  
   # NB in the wrangle data function there was a note about single-arm studies, may need to check
-  tar_target(
-    models,
-    append(model_binom, model_smd) %>%
-      map(.f = function(this_model) {
-        this_outcome <-
-          this_model %>%
-          pluck("network", "agd_arm", "outcome") %>%
-          unique()
-
-        append(this_model, list(outcome = this_outcome))
-
-      })
-  ),
-
-  # tar_target(
-  #   file_names,
-  #   models %>%
-  #     map("outcome") %>%
-  #     str_replace_all(" ", "-") %>%
-  #     map_chr(.f = function(x){
-  #       glue("outputs/model/nma-{x}.rds")
-  #     })
-  # ),
-  #
-  # tar_target(
-  #   write_models,
-  #   write_rds(models[[1]], file_names),
-  #   pattern = map(models, file_names)
-  # ),
-
-  # this is here so I can comment out targets
+  tar_target(models,
+             append(model_binom, model_smd) %>%
+               map(
+                 .f = function(this_model) {
+                   this_outcome <-
+                     this_model %>%
+                     pluck("network", "agd_arm", "outcome") %>%
+                     unique()
+                   
+                   append(this_model, list(outcome = this_outcome))
+                   
+                 }
+               )),
+  
+ 
   NULL
 )
 
-
-
-
-# End this file with a list of target objects.
-# pain <-
-#   list(
-#   # stuff for all analyses
-#   tar_target(
-#     raw_hpp_dat,
-#     # use raw_hpp_dat_path() to get the latest path
-#     read_csv(
-#       file = "/home/cantabile/Documents/gh-repos/happypillpain/data-raw/review_91309_extracted_data_csv_20210316223545.csv",
-#       col_types = cols(.default = "c")
-#     ),
-#     format = "rds"
-#   ),
-#   tar_target(keywords,
-#              read_csv("data-raw/keywords.csv")),
-#   tar_target(hpp_dat, preliminary_scrub(raw_hpp_dat)),
-#   tar_target(raw_names, names(raw_hpp_dat)),
-#
-#
-#   # primary outcome of interest ---------------------------------------------
-#
-#   # fucking wrangling
-#   tar_target(obs_pain,
-#              # added keywords
-#              extract_obs("pain", hpp_dat, raw_names, keywords)),
-#   tar_target(obs_pain_measures, measure_types(obs_pain)),
-#   tar_target(obs_pain_wide, measures_wide(obs_pain_measures)),
-#   tar_target(obs_pain_timepoints,
-#              assign_timepoints(obs_pain_wide)),
-#   tar_target(obs_pain_meta,
-#              meta_par(obs_pain_timepoints, hpp_dat)),
-#   tar_target(obs_pain_wrangled, measures_numeric(obs_pain_meta)),
-#
-#   # network
-#   tar_target(netdat_pain, wrangle_netdat_pain(obs_pain_wrangled)),
-#   tar_target(
-#     network_pain,
-#     set_agd_arm(
-#       data = netdat_pain,
-#       study = study,
-#       trt = intervention,
-#       trt_ref = "placebo",
-#       y = mean,
-#       se = se,
-#       sample_size = n
-#     )
-#   ),
-#
-#   # model
-#
-#   tar_target(pain_model, nma(network_pain)),
-#   tar_target(
-#     model_write_pain,
-#     write_rds(pain_model, "outputs/model/pain_model.rds")
-#   ),
-#
-#
-#   # this is just here so I can comment out targets
-#   NULL
-#
-# )
