@@ -55,7 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -76,7 +76,7 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
@@ -91,8 +91,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-04-08"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-04-08"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-04-20"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-04-20"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="happypillpain: analysis"/>
@@ -107,10 +107,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta property="twitter:description" content="Efficacy of antidepressants for adults with chronic pain"/>
 
   <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Cochrane handbook for systematic reviews of interventions;citation_publication_date=2019;citation_publisher=John Wiley &amp; Sons;citation_author=Julian PT Higgins;citation_author=James Thomas;citation_author=Jacqueline Chandler;citation_author=Miranda Cumpston;citation_author=Tianjing Li;citation_author=Matthew J Page;citation_author=Vivian A Welch"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output","params"]}},"value":[{"type":"character","attributes":{},"value":["analysis"]},{"type":"character","attributes":{},"value":["Efficacy of antidepressants for adults with chronic pain\n"]},{"type":"character","attributes":{},"value":["2021-04-08"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["outcome"]}},"value":[{"type":"character","attributes":{},"value":["pain"]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output","params","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["analysis"]},{"type":"character","attributes":{},"value":["Efficacy of antidepressants for adults with chronic pain\n"]},{"type":"character","attributes":{},"value":["last updated 2021-04-20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["outcome"]}},"value":[{"type":"character","attributes":{},"value":["pain"]}]},{"type":"character","attributes":{},"value":["references.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1864,7 +1866,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -2055,7 +2060,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"analysis","description":"Efficacy of antidepressants for adults with chronic pain","authors":[],"publishedDate":"2021-04-08T00:00:00.000+01:00"}
+{"title":"analysis","description":"Efficacy of antidepressants for adults with chronic pain","authors":[],"publishedDate":"2021-04-20T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2074,11 +2079,7 @@ outcome-specific preliminary analyses
 <div class="nav-dropdown-content">
 <a href="outcome-analysis-pain.html">pain</a>
 <a href="outcome-analysis-substantial-pain.html">substantial pain</a>
-<a href="outcome-analysis-moderate-pain.html">moderate pain</a>
-<a href="outcome-analysis-pgic.html">pgic</a>
 <a href="outcome-analysis-mood.html">mood</a>
-<a href="outcome-analysis-sleep.html">sleep</a>
-<a href="outcome-analysis-qol.html">qol</a>
 </div>
 </div>
 </div>
@@ -2106,8 +2107,25 @@ outcome-specific preliminary analyses
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#network">network</a></li>
+<li><a href="#network-and-model">network and model</a>
+<ul>
+<li><a href="#arm-based-likelihood">arm-based likelihood</a></li>
+<li><a href="#contrast-based-likelihood">contrast-based likelihood</a></li>
+</ul></li>
 <li><a href="#model-results">model results</a></li>
+<li><a href="#pairwise-analyses">pairwise analyses</a>
+<ul>
+<li><a href="#why-do-pairwise">why do pairwise</a></li>
+<li><a href="#pairwise-meta-analysis">pairwise meta-analysis</a></li>
+<li><a href="#pairwise-model">pairwise model</a></li>
+</ul></li>
+<li><a href="#input-design-matrix">input: design matrix</a></li>
+<li><a href="#output">output</a>
+<ul>
+<li><a href="#structuring-nma-data-for-metafor">structuring nma data for metafor</a></li>
+<li><a href="#concise-summary">concise summary</a></li>
+<li><a href="#long-form-supplementary">long-form supplementary</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2120,19 +2138,589 @@ outcome-specific preliminary analyses
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h2 id="network">network</h2>
+<h2 id="network-and-model">network and model</h2>
+<p>Network meta-analysis provides a means of aggregating and comparing the results of all studies examining the effect of antidepressants on pain.</p>
+<p>We now define the parameters of the model for the pain outcome, using White <em>et al.</em>’s notation.</p>
+<p>Let <span class="math inline">\(i = 1, \dots, n\)</span> denote the study, and <span class="math inline">\(k = 1, \dots, K\)</span> denote the treatment.</p>
+<p>Let <span class="math inline">\(R_i\)</span> be the set of treatments in study <span class="math inline">\(i\)</span>, which we call the study design.</p>
+<p>Let <span class="math inline">\(\theta_{ik}^a\)</span> be the parameter of interest in arm <span class="math inline">\(k\)</span> of study <span class="math inline">\(i\)</span> <span class="citation" data-cites="white2019">(<a href="#ref-white2019" role="doc-biblioref">White et al. 2019</a>)</span>.</p>
+<p>Let <span class="math inline">\(y_{ik}^a\)</span> denote the observed effect for arm <span class="math inline">\(k\)</span> of study <span class="math inline">\(i\)</span>.</p>
+<h3 id="arm-based-likelihood">arm-based likelihood</h3>
+<p>Arm-based likelihood is</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="template-outcome-analysis-generator_files/figure-html5/network-1.png" width="960" /></p>
 </div>
-<p>2</p>
+<h3 id="contrast-based-likelihood">contrast-based likelihood</h3>
 <h2 id="model-results">model results</h2>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="template-outcome-analysis-generator_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+<p><img src="template-outcome-analysis-generator_files/figure-html5/network%20plot-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="template-outcome-analysis-generator_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+<p><img src="template-outcome-analysis-generator_files/figure-html5/model%20results-1.png" width="624" /></p>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="pairwise-analyses">pairwise analyses</h2>
+<p>Individual analyses for each treatment, compared with placebo.</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+adapt notation to our problem</li>
+</ul>
+<h3 id="why-do-pairwise">why do pairwise</h3>
+<h3 id="pairwise-meta-analysis">pairwise meta-analysis</h3>
+<p>We want to fit a pairwise meta-analysis for each treatment, with concise summaries, as well as in-depth supplementary material. We split the analysis into two components, as the number of interventions per outcome is considerable, see below Table, in some cases, according to recommendations in Section 11.6.4 of the Handbook <span class="citation" data-cites="higgins2019cochrane">(<a href="#ref-higgins2019cochrane" role="doc-biblioref">Higgins et al. 2019</a>)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ajrmgcfhdk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ajrmgcfhdk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ajrmgcfhdk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ajrmgcfhdk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ajrmgcfhdk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ajrmgcfhdk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ajrmgcfhdk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ajrmgcfhdk .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ajrmgcfhdk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ajrmgcfhdk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ajrmgcfhdk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ajrmgcfhdk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ajrmgcfhdk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ajrmgcfhdk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ajrmgcfhdk .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ajrmgcfhdk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ajrmgcfhdk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ajrmgcfhdk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ajrmgcfhdk .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ajrmgcfhdk .gt_left {
+  text-align: left;
+}
+
+#ajrmgcfhdk .gt_center {
+  text-align: center;
+}
+
+#ajrmgcfhdk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ajrmgcfhdk .gt_font_normal {
+  font-weight: normal;
+}
+
+#ajrmgcfhdk .gt_font_bold {
+  font-weight: bold;
+}
+
+#ajrmgcfhdk .gt_font_italic {
+  font-style: italic;
+}
+
+#ajrmgcfhdk .gt_super {
+  font-size: 65%;
+}
+
+#ajrmgcfhdk .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ajrmgcfhdk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Number of studies and interventions, by outcome</th>
+    </tr>
+    <tr>
+      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Interventions include placebo, as sometimes there are more than one type of placebo</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Number of studies</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Number of interventions</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">substantial pain</td>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_center">5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">pain</td>
+      <td class="gt_row gt_center">44</td>
+      <td class="gt_row gt_center">28</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">mood</td>
+      <td class="gt_row gt_center">61</td>
+      <td class="gt_row gt_center">42</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+<h3 id="pairwise-model">pairwise model</h3>
+<p>To avoid confusion, we need to state the pairwise models being fun using the same notation as we use for the network meta-analysis models.</p>
+<p>Here we consider a subset of data for <span class="math inline">\(j\)</span>, that is for only one outcome, <span class="math inline">\(j&#39;\)</span>, so that we expect the same as above except we fix the index, so that <span class="math inline">\(y^a_{j = j&#39;|ki}\)</span>.</p>
+<p><span class="math display">\[
+d_i \sim N(\delta_i, \sigma^2)\\
+\delta_{i} \sim N(\delta, \tau^2)
+\]</span> Given the data, what description of the data is most plausible, if we define the components of the data as follows? We assume a random-effects structure, which is to say, we can approximate, with a measurable degree of plausibility, the expected value of a standardised mean difference <span class="math inline">\(d_i\)</span> of an outcome <span class="math inline">\(j&#39;\)</span> of interest for a study <span class="math inline">\(i\)</span> and antidepressant treatment <span class="math inline">\(k\)</span>, as compared with placebo. We assume there is variability introduced by the study design <span class="math inline">\(\tau^2\)</span>, as well as sampling error <span class="math inline">\(\sigma^2\)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="template-outcome-analysis-generator_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<h2 id="input-design-matrix">input: design matrix</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>A random effects NMA with a normal likelihood (identity link).
+Inference for Stan model: normal.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                        mean se_mean    sd    2.5%     25%     50%
+d[abt]                 -0.15    0.03  0.69   -1.54   -0.61   -0.15
+d[acetaminophen]       28.11    0.05  2.33   23.61   26.55   28.06
+d[amitriptyline]       -0.77    0.02  0.51   -1.75   -1.11   -0.77
+d[benzotropine]         7.42    0.06  2.87    1.75    5.49    7.38
+d[cbt]                 -0.16    0.20  5.88  -11.51   -4.22   -0.15
+d[cbt + placebo]        0.31    0.20  5.84  -11.16   -3.61    0.28
+d[citalopram]           0.18    0.20  7.04  -13.59   -4.53    0.18
+d[cst + placebo]       -1.27    0.07  2.86   -6.75   -3.20   -1.26
+d[cst + sertraline]    -2.88    0.07  2.66   -8.06   -4.73   -2.94
+d[cyclobenzaprine]     -0.61    0.03  0.99   -2.58   -1.27   -0.62
+d[desipramine]         -1.09    0.04  1.68   -4.33   -2.25   -1.11
+d[desipramine + cbt]    0.06    0.04  1.64   -3.21   -1.02    0.09
+d[desvenlafaxine]      -0.74    0.04  0.86   -2.42   -1.31   -0.75
+d[diphenhydramine]      0.27    0.21  5.97  -11.48   -3.84    0.35
+d[duloxetine]          -0.59    0.03  0.23   -1.05   -0.75   -0.60
+d[education]            1.01    0.20  5.86  -10.30   -2.97    0.97
+d[fluoxetine]          -0.63    0.03  0.99   -2.60   -1.28   -0.60
+d[gabapentin]          -2.90    0.05  1.96   -6.70   -4.20   -2.95
+d[maprotiline]         -0.60    0.20  5.97  -12.38   -4.71   -0.58
+d[melatonin]           -1.67    0.12  5.38  -12.13   -5.21   -1.72
+d[milnacipran]         -0.99    0.02  0.65   -2.27   -1.44   -0.99
+d[mirtazapine]         -0.42    0.02  1.07   -2.47   -1.13   -0.41
+d[nortriptyline]        2.00    0.02  1.04   -0.05    1.31    2.01
+d[paroxetine]           0.78    0.20  5.93  -11.18   -3.24    0.86
+d[placebo + cbt]       -1.03    0.04  1.67   -4.29   -2.15   -1.01
+d[reboxetine]           0.52    0.20  7.04  -13.00   -4.20    0.48
+d[sertraline]          -6.20    0.07  2.47  -11.12   -7.84   -6.19
+lp__                 -670.03    0.42 10.71 -691.75 -676.97 -669.84
+tau                     1.08    0.01  0.12    0.88    1.00    1.08
+                         75%   97.5% n_eff Rhat
+d[abt]                  0.32    1.18   750 1.01
+d[acetaminophen]       29.68   32.67  2405 1.00
+d[amitriptyline]       -0.42    0.21   781 1.01
+d[benzotropine]         9.40   13.19  2715 1.00
+d[cbt]                  3.78   11.51   859 1.00
+d[cbt + placebo]        4.15   11.90   869 1.00
+d[citalopram]           4.86   14.23  1245 1.00
+d[cst + placebo]        0.64    4.41  1533 1.00
+d[cst + sertraline]    -1.08    2.29  1385 1.00
+d[cyclobenzaprine]      0.06    1.27  1228 1.00
+d[desipramine]          0.03    2.22  1527 1.00
+d[desipramine + cbt]    1.16    3.29  1561 1.00
+d[desvenlafaxine]      -0.19    1.03   607 1.00
+d[diphenhydramine]      4.39   11.57   842 1.00
+d[duloxetine]          -0.43   -0.13    63 1.09
+d[education]            4.95   12.47   845 1.00
+d[fluoxetine]           0.04    1.29  1493 1.00
+d[gabapentin]          -1.59    0.90  1718 1.00
+d[maprotiline]          3.49   11.03   884 1.00
+d[melatonin]            1.89    9.26  1944 1.00
+d[milnacipran]         -0.55    0.29   917 1.01
+d[mirtazapine]          0.30    1.63  1908 1.00
+d[nortriptyline]        2.70    4.03  1857 1.00
+d[paroxetine]           4.76   12.23   856 1.00
+d[placebo + cbt]        0.07    2.29  1528 1.00
+d[reboxetine]           5.38   14.68  1242 1.00
+d[sertraline]          -4.51   -1.46  1310 1.00
+lp__                 -662.61 -649.98   643 1.01
+tau                     1.16    1.33   350 1.01
+
+Samples were drawn using NUTS(diag_e) at Tue Apr 20 02:58:07 2021.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+</div>
+<h2 id="output">output</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>A random effects NMA with a normal likelihood (identity link).
+Inference for Stan model: normal.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                        mean se_mean    sd    2.5%     25%     50%
+d[abt]                 -0.15    0.03  0.69   -1.54   -0.61   -0.15
+d[acetaminophen]       28.11    0.05  2.33   23.61   26.55   28.06
+d[amitriptyline]       -0.77    0.02  0.51   -1.75   -1.11   -0.77
+d[benzotropine]         7.42    0.06  2.87    1.75    5.49    7.38
+d[cbt]                 -0.16    0.20  5.88  -11.51   -4.22   -0.15
+d[cbt + placebo]        0.31    0.20  5.84  -11.16   -3.61    0.28
+d[citalopram]           0.18    0.20  7.04  -13.59   -4.53    0.18
+d[cst + placebo]       -1.27    0.07  2.86   -6.75   -3.20   -1.26
+d[cst + sertraline]    -2.88    0.07  2.66   -8.06   -4.73   -2.94
+d[cyclobenzaprine]     -0.61    0.03  0.99   -2.58   -1.27   -0.62
+d[desipramine]         -1.09    0.04  1.68   -4.33   -2.25   -1.11
+d[desipramine + cbt]    0.06    0.04  1.64   -3.21   -1.02    0.09
+d[desvenlafaxine]      -0.74    0.04  0.86   -2.42   -1.31   -0.75
+d[diphenhydramine]      0.27    0.21  5.97  -11.48   -3.84    0.35
+d[duloxetine]          -0.59    0.03  0.23   -1.05   -0.75   -0.60
+d[education]            1.01    0.20  5.86  -10.30   -2.97    0.97
+d[fluoxetine]          -0.63    0.03  0.99   -2.60   -1.28   -0.60
+d[gabapentin]          -2.90    0.05  1.96   -6.70   -4.20   -2.95
+d[maprotiline]         -0.60    0.20  5.97  -12.38   -4.71   -0.58
+d[melatonin]           -1.67    0.12  5.38  -12.13   -5.21   -1.72
+d[milnacipran]         -0.99    0.02  0.65   -2.27   -1.44   -0.99
+d[mirtazapine]         -0.42    0.02  1.07   -2.47   -1.13   -0.41
+d[nortriptyline]        2.00    0.02  1.04   -0.05    1.31    2.01
+d[paroxetine]           0.78    0.20  5.93  -11.18   -3.24    0.86
+d[placebo + cbt]       -1.03    0.04  1.67   -4.29   -2.15   -1.01
+d[reboxetine]           0.52    0.20  7.04  -13.00   -4.20    0.48
+d[sertraline]          -6.20    0.07  2.47  -11.12   -7.84   -6.19
+lp__                 -670.03    0.42 10.71 -691.75 -676.97 -669.84
+tau                     1.08    0.01  0.12    0.88    1.00    1.08
+                         75%   97.5% n_eff Rhat
+d[abt]                  0.32    1.18   750 1.01
+d[acetaminophen]       29.68   32.67  2405 1.00
+d[amitriptyline]       -0.42    0.21   781 1.01
+d[benzotropine]         9.40   13.19  2715 1.00
+d[cbt]                  3.78   11.51   859 1.00
+d[cbt + placebo]        4.15   11.90   869 1.00
+d[citalopram]           4.86   14.23  1245 1.00
+d[cst + placebo]        0.64    4.41  1533 1.00
+d[cst + sertraline]    -1.08    2.29  1385 1.00
+d[cyclobenzaprine]      0.06    1.27  1228 1.00
+d[desipramine]          0.03    2.22  1527 1.00
+d[desipramine + cbt]    1.16    3.29  1561 1.00
+d[desvenlafaxine]      -0.19    1.03   607 1.00
+d[diphenhydramine]      4.39   11.57   842 1.00
+d[duloxetine]          -0.43   -0.13    63 1.09
+d[education]            4.95   12.47   845 1.00
+d[fluoxetine]           0.04    1.29  1493 1.00
+d[gabapentin]          -1.59    0.90  1718 1.00
+d[maprotiline]          3.49   11.03   884 1.00
+d[melatonin]            1.89    9.26  1944 1.00
+d[milnacipran]         -0.55    0.29   917 1.01
+d[mirtazapine]          0.30    1.63  1908 1.00
+d[nortriptyline]        2.70    4.03  1857 1.00
+d[paroxetine]           4.76   12.23   856 1.00
+d[placebo + cbt]        0.07    2.29  1528 1.00
+d[reboxetine]           5.38   14.68  1242 1.00
+d[sertraline]          -4.51   -1.46  1310 1.00
+lp__                 -662.61 -649.98   643 1.01
+tau                     1.16    1.33   350 1.01
+
+Samples were drawn using NUTS(diag_e) at Tue Apr 20 02:58:07 2021.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+</div>
+<h3 id="structuring-nma-data-for-metafor">structuring nma data for metafor</h3>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h3 id="concise-summary">concise summary</h3>
+<h3 id="long-form-supplementary">long-form supplementary</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-higgins2019cochrane" class="csl-entry" role="doc-biblioentry">
+Higgins, Julian PT, James Thomas, Jacqueline Chandler, Miranda Cumpston, Tianjing Li, Matthew J Page, and Vivian A Welch. 2019. <em>Cochrane Handbook for Systematic Reviews of Interventions</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-white2019" class="csl-entry" role="doc-biblioentry">
+White, Ian R., Rebecca M. Turner, Amalia Karahalios, and Georgia Salanti. 2019. <span>“A Comparison of Arm-Based and Contrast-Based Models for Network Meta-Analysis.”</span> <em>Statistics in Medicine</em> 38 (27): 5197–5213. https://doi.org/<a href="https://doi.org/10.1002/sim.8360">https://doi.org/10.1002/sim.8360</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2140,11 +2728,23 @@ outcome-specific preliminary analyses
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->

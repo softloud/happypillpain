@@ -14,9 +14,14 @@ withr::with_dir(here::here(), {
 
 function(input, output) {
   outcome_nma <- reactive({
-    model_results %>%
+    models %>%
       keep(~ .$outcome == input$outcome) %>%
       pluck(1)
+  })
+  
+  output$choices <- reactive({
+    models %>% 
+      map_chr("outcome")
   })
 
   output$network <- renderPlot({

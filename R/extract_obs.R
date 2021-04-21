@@ -28,71 +28,50 @@
 extract_obs <-
   function(outcome,
            dat,
-           raw_names,
            keywords,
            measures_troubleshoot = FALSE) {
-    # # for troubleshooting
-    # outcome <- "measures"
-    # dat <- tar_load(hpp_dat)
-    # raw_names <- tar_load(raw_names)
-    # keywords <- tar_load(keywords)
-
+    
+    
     keywords_for_outcome <-
       outcome_keywords(outcome, keywords) %>%
       dplyr::filter(inclusion_criterion == "include") %>%
       # this is hacky as it assumes we'll include all columns that match
       # and there is no combination or exclusion
-      dplyr::pull(keyword)
+      dplyr::pull(keyword) %>% 
+      paste0(collapse = "|")
 
     keywords_to_exclude <-
       outcome_keywords(outcome, keywords) %>%
       dplyr::filter(inclusion_criterion == "exclude") %>%
-      dplyr::pull(keyword)
-
-
-    # identify which columns include keywords
-    keyword_columns <-
-      raw_names %>%
-      stringr::str_detect(paste0(keywords_for_outcome, collapse = "|")) %>%
-      which()
-
-
-
-    # get relevant columns
-    relevant_columns <-
-      # nb this is currently assuming there's only one keyword
-      if (any(stringr::str_detect(keywords_for_outcome, "%"))) {
-        # >= 50% >= 30% pain
-        pain_threshold <-
-          stringr::str_extract(keywords_for_outcome, "\\d{2}")
-        dat %>%
-          dplyr::select(study_arm_id, contains("pain") &
-                          contains(glue::glue("{pain_threshold}_percent")))
+      dplyr::pull(keyword) %>% 
+      paste0(collapse = "|")
+    
+    exclude_column <- function(col_name) {
+      if (keywords_to_exclude == "") {
+        return(FALSE)
       } else {
-        dat %>%
-          dplyr::select(study_arm_id, dplyr::all_of(keyword_columns))
+        str_detect(col_name, keywords_to_exclude)
       }
-
-
-    # exclusions --------------------------------------------------------------
-
-    with_exclusions <- if (length(keywords_to_exclude) > 1) {
-      exclusion_columns <-
-        raw_names %>%
-        stringr::str_detect(paste0(keywords_to_exclude, collapse = "|")) %>%
-        which()
-      relevant_columns %>%
-        # filter for columns to exclude
-        dplyr::select(-dplyr::any_of(exclusion_columns))
-    } else {
-      relevant_columns
     }
 
-
-
+    relevant_columns <- 
+      tibble(
+        col = dat %>% names(),
+        include = str_detect(col, keywords_for_outcome),
+        exclude = map_lgl(col, exclude_column)
+      ) %>% 
+      filter(
+        include & !exclude
+      ) %>% 
+      pull(col)
+    
+    assertthat::assert_that(length(relevant_columns) > 0, 
+                            msg = glue("Did not extract any columns based on keywords for outcome: {outcome}"))
+    
     # get relevant columns and pivot longer
-    with_exclusions %>%
-      tidyr::pivot_longer(
+    dat %>%
+    select(study_arm_id, relevant_columns) %>% 
+            tidyr::pivot_longer(
         cols = -study_arm_id,
         names_to = "column_header",
         values_to = "obs",
@@ -136,6 +115,7 @@ measure_types <- function(dat) {
           stringr::str_detect(measure_desc, "_scl_") ~ "scl",
           stringr::str_detect(measure_desc, "_rps_") ~ "rps",
           stringr::str_detect(measure_desc, "_nrs_") ~ "nrs",
+          stringr::str_detect(measure_desc, "_bocf_") ~ "bocf",
           stringr::str_detect(measure_desc, "_mcgill_|_mpq_") ~ "mpq",
           TRUE ~ "not matched"
         )
@@ -223,7 +203,9 @@ assign_timepoints <- function(obs_wide) {
 
 outcome_keywords <- function(outcome, keywords) {
   keywords %>%
-    dplyr::filter(outcome == !!outcome)
+    dplyr::filter(outcome == !!outcome) %>% 
+    mutate(across(everything(), tolower)) %>% 
+    mutate(across(everything(), str_replace, "\\s", "_"))
 }
 
 

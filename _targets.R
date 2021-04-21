@@ -20,6 +20,8 @@ suppressMessages({
   library(janitor)
 })
 library(multinma)
+library(metafor)
+library(dontpanic)
 
 # Set target-specific options such as packages.
 # tar_option_set(packages = "dplyr") e.g.
@@ -78,6 +80,18 @@ set_binom_network <- function(obs_binom_network) {
 
 
 list(
+  # wrangling ---------------------------------------------------------------
+  tar_target(
+    colnames_adverse,
+    read_csv("data-raw/Adverse events column names.xlsx")
+  ),
+  
+  tar_target(
+    colnames_moodpain,
+    read_csv("data-raw/Mood and pain column headings.xlsx")
+  ),
+  
+  
   tar_target(
     raw_dat_path,
     # use raw_hpp_dat_path() to get the latest path
@@ -96,18 +110,32 @@ list(
              format = "rds"),
   tar_target(keywords,
              read_csv("data-raw/keywords.csv")),
-  tar_target(hpp_dat, preliminary_scrub(raw_hpp_dat)),
-  # tar_target(write_hpp_dat, write_rds(hpp_dat, "outputs/hpp_dat.rds")),
-  tar_target(raw_names, names(raw_hpp_dat)),
-  tar_target(outcomes_of_interest,
+  tar_target(
+    hpp_dat ,
+    # latter part for hashing
+    preliminary_scrub(raw_hpp_dat) %>% dontpanic::lotr_study_hash(
+      study_col = study_identifier,
+      trt_col = intervention_drug,
+      sep = " "
+    )
+  ),
+  
+  tar_target(all_outcomes,
              keywords %>%
                pull(outcome) %>%
                unique()),
+  
+  tar_target(outcomes_excluded_from_pipeline,
+             all_outcomes[-c(1, 6, 7)]),
+  
+  tar_target(outcomes_of_interest,
+             all_outcomes[c(1, 6, 7)]),
+  
   # get measure observations
   tar_target(
     obs,
     # added keywords
-    extract_obs(outcomes_of_interest, hpp_dat, raw_names, keywords),
+    extract_obs(outcomes_of_interest, hpp_dat, keywords),
     pattern = map(outcomes_of_interest),
     iteration = "list"
   ),
@@ -170,7 +198,7 @@ list(
           TRUE ~ outcome_id
         ),
         model_type =  case_when(
-          network_id %in% c("subpain", "modpain") ~ "binom",
+          network_id %in% c("subpain", "modpain", "adverse") ~ "binom",
           network_id %in% c("mood", "sleep", "pain", "pgic", "physical", "qol") ~ "smd"
         ),
         outcome_index = row_number()
@@ -184,12 +212,16 @@ list(
   tar_target(obs_binom,
              obs_postint[(outcomes %>% dplyr::filter(model_type == "binom") %>% pull(outcome_index))]),
   
+  
+  
+  # re arm-based model ------------------------------------------------------
+  
   # need to try this out on just means
   # what about binomials?
   tar_target(
     network_smd,
     obs_smd %>%
-      pluck(1) %>%
+      pluck(1) %>% # why does it need this line? hmmm
       set_agd_arm(
         data = .,
         study = study_identifier,
@@ -206,7 +238,7 @@ list(
   
   tar_target(
     model_smd,
-    nma(network_smd),
+    nma(network_smd, trt_effects = "random"),
     pattern = map(network_smd),
     iteration = "list"
   ),
@@ -240,12 +272,63 @@ list(
                      pluck("network", "agd_arm", "outcome") %>%
                      unique()
                    
-                   append(this_model, list(outcome = this_outcome))
+                   output_model <-
+                     append(this_model,
+                            list(outcome = this_outcome))
+                   class(output_model) <- "stan_nma"
+                   output_model
                    
                  }
                )),
   
- 
+  
+  # re contrast-based models ------------------------------------------------
+  
+  
+  # pairwise ----------------------------------------------------------------
+  
+  tar_target(pairwise_smd,
+             obs_smd,
+             # %>%
+             # go wide first
+             # escalc() %>%
+             # rma(),
+             pattern = map(obs_smd)),
+  
+  # tar_target(pairwise_smd),
+  
+  # then do binom
+  
+  # tar_target(pairwise_models),
+  
+  
+  # update site -------------------------------------------------------------
+  
+  # don't know why this doesn't work
+  
+  # tar_target(update_outcomes,
+  #            {
+  #              models %>%
+  #                map_chr("outcome") %>%
+  #                map(
+  #                  .f = function(outcome) {
+  #                    file_name_outcome <- str_replace_all(outcome, " ", "-")
+  #                    rmarkdown::render(
+  #                      input = "template-outcome-analysis-generator.Rmd",
+  #                      output_file = glue("docs/outcome-analysis-{file_name_outcome}.html"),
+  #                      params = list(outcome = outcome)
+  #                    )
+  #                  }
+  #
+  #                )
+  #
+  #            }),
+  # tar_target(update_site,
+  #
+  #            rmarkdown::render_site()
+  #
+  #            )
+  # ,
+  #
   NULL
 )
-

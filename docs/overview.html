@@ -55,7 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -76,7 +76,7 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
@@ -91,8 +91,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-04-08"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-04-08"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-04-20"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-04-20"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="happypillpain: overview"/>
@@ -110,7 +110,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["overview"]},{"type":"character","attributes":{},"value":["Summary information about all data for all outcomes.\n"]},{"type":"character","attributes":{},"value":["2021-04-08"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["overview"]},{"type":"character","attributes":{},"value":["Summary information about all data for all outcomes.\n"]},{"type":"character","attributes":{},"value":["2021-04-20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1864,7 +1864,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -2055,7 +2058,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"overview","description":"Summary information about all data for all outcomes.","authors":[],"publishedDate":"2021-04-08T00:00:00.000+01:00"}
+{"title":"overview","description":"Summary information about all data for all outcomes.","authors":[],"publishedDate":"2021-04-20T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2074,11 +2077,7 @@ outcome-specific preliminary analyses
 <div class="nav-dropdown-content">
 <a href="outcome-analysis-pain.html">pain</a>
 <a href="outcome-analysis-substantial-pain.html">substantial pain</a>
-<a href="outcome-analysis-moderate-pain.html">moderate pain</a>
-<a href="outcome-analysis-pgic.html">pgic</a>
 <a href="outcome-analysis-mood.html">mood</a>
-<a href="outcome-analysis-sleep.html">sleep</a>
-<a href="outcome-analysis-qol.html">qol</a>
 </div>
 </div>
 </div>
@@ -2126,7 +2125,7 @@ outcome-specific preliminary analyses
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>As of Thursday 8 April 2021, the analysis currently includes 162 out of an expected 178 studies.</p>
+<p>As of Tuesday 20 April 2021, the analysis currently includes 166 out of an expected 178 studies.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="overview_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
@@ -2140,7 +2139,7 @@ outcome-specific preliminary analyses
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kkbekiktyu .gt_table {
+#jygkxlyxyp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2165,7 +2164,7 @@ outcome-specific preliminary analyses
   border-left-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_heading {
+#jygkxlyxyp .gt_heading {
   background-color: #f0f0f0;
   text-align: center;
   border-bottom-color: #f0f0f0;
@@ -2177,7 +2176,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_title {
+#jygkxlyxyp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2187,7 +2186,7 @@ outcome-specific preliminary analyses
   border-bottom-width: 0;
 }
 
-#kkbekiktyu .gt_subtitle {
+#jygkxlyxyp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2197,13 +2196,13 @@ outcome-specific preliminary analyses
   border-top-width: 0;
 }
 
-#kkbekiktyu .gt_bottom_border {
+#jygkxlyxyp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_col_headings {
+#jygkxlyxyp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2218,7 +2217,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_col_heading {
+#jygkxlyxyp .gt_col_heading {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -2238,7 +2237,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#kkbekiktyu .gt_column_spanner_outer {
+#jygkxlyxyp .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -2250,15 +2249,15 @@ outcome-specific preliminary analyses
   padding-right: 4px;
 }
 
-#kkbekiktyu .gt_column_spanner_outer:first-child {
+#jygkxlyxyp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kkbekiktyu .gt_column_spanner_outer:last-child {
+#jygkxlyxyp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kkbekiktyu .gt_column_spanner {
+#jygkxlyxyp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2270,7 +2269,7 @@ outcome-specific preliminary analyses
   width: 100%;
 }
 
-#kkbekiktyu .gt_group_heading {
+#jygkxlyxyp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #bdbdbd;
@@ -2292,7 +2291,7 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#kkbekiktyu .gt_empty_group_heading {
+#jygkxlyxyp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #bdbdbd;
@@ -2307,15 +2306,15 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#kkbekiktyu .gt_from_md > :first-child {
+#jygkxlyxyp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kkbekiktyu .gt_from_md > :last-child {
+#jygkxlyxyp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kkbekiktyu .gt_row {
+#jygkxlyxyp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2334,7 +2333,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#kkbekiktyu .gt_stub {
+#jygkxlyxyp .gt_stub {
   color: #333333;
   background-color: #f0f0f0;
   font-size: 100%;
@@ -2346,7 +2345,7 @@ outcome-specific preliminary analyses
   padding-left: 12px;
 }
 
-#kkbekiktyu .gt_summary_row {
+#jygkxlyxyp .gt_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -2356,7 +2355,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#kkbekiktyu .gt_first_summary_row {
+#jygkxlyxyp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2366,7 +2365,7 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_grand_summary_row {
+#jygkxlyxyp .gt_grand_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -2376,7 +2375,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#kkbekiktyu .gt_first_grand_summary_row {
+#jygkxlyxyp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2386,11 +2385,11 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_striped {
+#jygkxlyxyp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kkbekiktyu .gt_table_body {
+#jygkxlyxyp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2399,7 +2398,7 @@ outcome-specific preliminary analyses
   border-bottom-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_footnotes {
+#jygkxlyxyp .gt_footnotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -2413,13 +2412,13 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_footnote {
+#jygkxlyxyp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#kkbekiktyu .gt_sourcenotes {
+#jygkxlyxyp .gt_sourcenotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -2433,46 +2432,46 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#kkbekiktyu .gt_sourcenote {
+#jygkxlyxyp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#kkbekiktyu .gt_left {
+#jygkxlyxyp .gt_left {
   text-align: left;
 }
 
-#kkbekiktyu .gt_center {
+#jygkxlyxyp .gt_center {
   text-align: center;
 }
 
-#kkbekiktyu .gt_right {
+#jygkxlyxyp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kkbekiktyu .gt_font_normal {
+#jygkxlyxyp .gt_font_normal {
   font-weight: normal;
 }
 
-#kkbekiktyu .gt_font_bold {
+#jygkxlyxyp .gt_font_bold {
   font-weight: bold;
 }
 
-#kkbekiktyu .gt_font_italic {
+#jygkxlyxyp .gt_font_italic {
   font-style: italic;
 }
 
-#kkbekiktyu .gt_super {
+#jygkxlyxyp .gt_super {
   font-size: 65%;
 }
 
-#kkbekiktyu .gt_footnote_marks {
+#jygkxlyxyp .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="kkbekiktyu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="jygkxlyxyp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2485,26 +2484,26 @@ outcome-specific preliminary analyses
   <tbody class="gt_table_body">
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">SNRI</td>
-      <td class="gt_row gt_center" style="background-color: #08306B; color: #FFFFFF;">72</td>
-      <td class="gt_row gt_center" style="background-color: #D4EECE; color: #000000;">8</td>
-      <td class="gt_row gt_left">milnacipran; duloxetine; desvenlafaxine; pregabalin; venlafaxine; esreboxetine; cbt; education</td>
+      <td class="gt_row gt_center" style="background-color: #08306B; color: #FFFFFF;">73</td>
+      <td class="gt_row gt_center" style="background-color: #D6EFD0; color: #000000;">8</td>
+      <td class="gt_row gt_left">venlafaxine; milnacipran; duloxetine; desvenlafaxine; pregabalin; esreboxetine; cbt; education</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">TCA</td>
-      <td class="gt_row gt_center" style="background-color: #0D559F; color: #FFFFFF;">62</td>
-      <td class="gt_row gt_center" style="background-color: #47AE60; color: #000000;">23</td>
-      <td class="gt_row gt_left">amitriptyline; amitriptyline + fluphenazine; amitriptyline + placebo; imipramine; dothiepin; desipramine; amitriptyline + pyschotherapy; amitriptyline + support; doxepin; nortriptyline; morphine + nortriptyline; nortriptyline + cbt; nortriptyline + mgt; combination; epidural; physiotherapy + amitriptyline; physical + amitriptyline; amitriptyline + cbt; nortriptyline + morphine; desipramine + cbt; gabapentin; trimipramine; clomipramine</td>
+      <td class="gt_row gt_center" style="background-color: #084D96; color: #FFFFFF;">65</td>
+      <td class="gt_row gt_center" style="background-color: #4FB163; color: #000000;">23</td>
+      <td class="gt_row gt_left">amitriptyline; nortriptyline; amitriptyline + fluphenazine; amitriptyline + placebo; imipramine; dothiepin; desipramine; amitriptyline + pyschotherapy; amitriptyline + support; doxepin; morphine + nortriptyline; nortriptyline + cbt; nortriptyline + mgt; combination; epidural; physiotherapy + amitriptyline; physical + amitriptyline; amitriptyline + cbt; nortriptyline + morphine; desipramine + cbt; gabapentin; trimipramine; clomipramine</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">not an antidepressant</td>
-      <td class="gt_row gt_center" style="background-color: #3684BF; color: #FFFFFF;">49</td>
-      <td class="gt_row gt_center" style="background-color: #00441B; color: #FFFFFF;">37</td>
+      <td class="gt_row gt_center" style="background-color: #3583BE; color: #FFFFFF;">50</td>
+      <td class="gt_row gt_center" style="background-color: #00441B; color: #FFFFFF;">38</td>
       <td class="gt_row gt_left">NA</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">SSRI</td>
-      <td class="gt_row gt_center" style="background-color: #97C6DF; color: #000000;">29</td>
-      <td class="gt_row gt_center" style="background-color: #D4EECE; color: #000000;">8</td>
+      <td class="gt_row gt_center" style="background-color: #93C4DF; color: #000000;">30</td>
+      <td class="gt_row gt_center" style="background-color: #D6EFD0; color: #000000;">8</td>
       <td class="gt_row gt_left">fluoxetine + placebo; paroxetine; citalopram; escitalopram; fluoxetine; zimelidine; sertraline; cst + sertraline</td>
     </tr>
     <tr>
@@ -2608,7 +2607,7 @@ outcome-specific preliminary analyses
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ezhrfcmrcr .gt_table {
+#ngphayapux .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2633,7 +2632,7 @@ outcome-specific preliminary analyses
   border-left-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_heading {
+#ngphayapux .gt_heading {
   background-color: #f0f0f0;
   text-align: center;
   border-bottom-color: #f0f0f0;
@@ -2645,7 +2644,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_title {
+#ngphayapux .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2655,7 +2654,7 @@ outcome-specific preliminary analyses
   border-bottom-width: 0;
 }
 
-#ezhrfcmrcr .gt_subtitle {
+#ngphayapux .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2665,13 +2664,13 @@ outcome-specific preliminary analyses
   border-top-width: 0;
 }
 
-#ezhrfcmrcr .gt_bottom_border {
+#ngphayapux .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_col_headings {
+#ngphayapux .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2686,7 +2685,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_col_heading {
+#ngphayapux .gt_col_heading {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -2706,7 +2705,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#ezhrfcmrcr .gt_column_spanner_outer {
+#ngphayapux .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -2718,15 +2717,15 @@ outcome-specific preliminary analyses
   padding-right: 4px;
 }
 
-#ezhrfcmrcr .gt_column_spanner_outer:first-child {
+#ngphayapux .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ezhrfcmrcr .gt_column_spanner_outer:last-child {
+#ngphayapux .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ezhrfcmrcr .gt_column_spanner {
+#ngphayapux .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2738,7 +2737,7 @@ outcome-specific preliminary analyses
   width: 100%;
 }
 
-#ezhrfcmrcr .gt_group_heading {
+#ngphayapux .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #bdbdbd;
@@ -2760,7 +2759,7 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#ezhrfcmrcr .gt_empty_group_heading {
+#ngphayapux .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #bdbdbd;
@@ -2775,15 +2774,15 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#ezhrfcmrcr .gt_from_md > :first-child {
+#ngphayapux .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ezhrfcmrcr .gt_from_md > :last-child {
+#ngphayapux .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ezhrfcmrcr .gt_row {
+#ngphayapux .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2802,7 +2801,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#ezhrfcmrcr .gt_stub {
+#ngphayapux .gt_stub {
   color: #333333;
   background-color: #f0f0f0;
   font-size: 100%;
@@ -2814,7 +2813,7 @@ outcome-specific preliminary analyses
   padding-left: 12px;
 }
 
-#ezhrfcmrcr .gt_summary_row {
+#ngphayapux .gt_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -2824,7 +2823,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#ezhrfcmrcr .gt_first_summary_row {
+#ngphayapux .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2834,7 +2833,7 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_grand_summary_row {
+#ngphayapux .gt_grand_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -2844,7 +2843,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#ezhrfcmrcr .gt_first_grand_summary_row {
+#ngphayapux .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2854,11 +2853,11 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_striped {
+#ngphayapux .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ezhrfcmrcr .gt_table_body {
+#ngphayapux .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2867,7 +2866,7 @@ outcome-specific preliminary analyses
   border-bottom-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_footnotes {
+#ngphayapux .gt_footnotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -2881,13 +2880,13 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_footnote {
+#ngphayapux .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ezhrfcmrcr .gt_sourcenotes {
+#ngphayapux .gt_sourcenotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -2901,46 +2900,46 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ezhrfcmrcr .gt_sourcenote {
+#ngphayapux .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ezhrfcmrcr .gt_left {
+#ngphayapux .gt_left {
   text-align: left;
 }
 
-#ezhrfcmrcr .gt_center {
+#ngphayapux .gt_center {
   text-align: center;
 }
 
-#ezhrfcmrcr .gt_right {
+#ngphayapux .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ezhrfcmrcr .gt_font_normal {
+#ngphayapux .gt_font_normal {
   font-weight: normal;
 }
 
-#ezhrfcmrcr .gt_font_bold {
+#ngphayapux .gt_font_bold {
   font-weight: bold;
 }
 
-#ezhrfcmrcr .gt_font_italic {
+#ngphayapux .gt_font_italic {
   font-style: italic;
 }
 
-#ezhrfcmrcr .gt_super {
+#ngphayapux .gt_super {
   font-size: 65%;
 }
 
-#ezhrfcmrcr .gt_footnote_marks {
+#ngphayapux .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="ezhrfcmrcr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ngphayapux" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2952,32 +2951,32 @@ outcome-specific preliminary analyses
   <tbody class="gt_table_body">
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Fibromyalgia</td>
-      <td class="gt_row gt_center" style="background-color: #08306B; color: #FFFFFF;">53</td>
+      <td class="gt_row gt_center" style="background-color: #08306B; color: #FFFFFF;">54</td>
       <td class="gt_row gt_center" style="background-color: #00441B; color: #FFFFFF;">72</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Chronic low back pain</td>
-      <td class="gt_row gt_center" style="background-color: #DCEAF6; color: #000000;">8</td>
+      <td class="gt_row gt_center" style="background-color: #DDEAF7; color: #000000;">8</td>
       <td class="gt_row gt_center" style="background-color: #D6EFD0; color: #000000;">15</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Diabetic peripheral neuropathy</td>
-      <td class="gt_row gt_center" style="background-color: #EBF4FB; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #ECF4FB; color: #000000;">4</td>
       <td class="gt_row gt_center" style="background-color: #E4F5DF; color: #000000;">11</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Painful diabetic neuropathy</td>
-      <td class="gt_row gt_center" style="background-color: #EBF4FB; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #ECF4FB; color: #000000;">4</td>
       <td class="gt_row gt_center" style="background-color: #E4F5DF; color: #000000;">11</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Diabetic peripheral neuropathic pain</td>
-      <td class="gt_row gt_center" style="background-color: #EBF4FB; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #ECF4FB; color: #000000;">4</td>
       <td class="gt_row gt_center" style="background-color: #EBF7E7; color: #000000;">8</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Knee osteoarthritis</td>
-      <td class="gt_row gt_center" style="background-color: #EBF4FB; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #ECF4FB; color: #000000;">4</td>
       <td class="gt_row gt_center" style="background-color: #EFF9EB; color: #000000;">6</td>
     </tr>
     <tr>
@@ -3012,6 +3011,11 @@ outcome-specific preliminary analyses
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Post-herpetic neuralgia</td>
+      <td class="gt_row gt_center" style="background-color: #F3F9FE; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Postherpetic neuralgia</td>
       <td class="gt_row gt_center" style="background-color: #F3F9FE; color: #000000;">2</td>
       <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">5</td>
     </tr>
@@ -3140,11 +3144,6 @@ condition in each study group.</td>
       <td class="gt_row gt_center" style="background-color: #F5FBF3; color: #000000;">3</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Postherpetic neuralgia</td>
-      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
-      <td class="gt_row gt_center" style="background-color: #F5FBF3; color: #000000;">3</td>
-    </tr>
-    <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Severe IBS</td>
       <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
       <td class="gt_row gt_center" style="background-color: #F5FBF3; color: #000000;">3</td>
@@ -3200,6 +3199,11 @@ condition in each study group.</td>
       <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">2</td>
     </tr>
     <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Chronic pain of various origins</td>
+      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
+      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">2</td>
+    </tr>
+    <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">chronic pain syndromes
 from deafferentation and with oncological pain
 with deafferentation component . Of the 45 patients entered into the
@@ -3236,6 +3240,11 @@ and 18 by pain from other causes.</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Fibromyalgia with insomnia</td>
+      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
+      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">Functional Chest Pain</td>
       <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
       <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">2</td>
     </tr>
@@ -3372,7 +3381,7 @@ was the predominant complaint.</td>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#bollqaykae .gt_table {
+#xlfrwjgsyj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3397,7 +3406,7 @@ was the predominant complaint.</td>
   border-left-color: #D3D3D3;
 }
 
-#bollqaykae .gt_heading {
+#xlfrwjgsyj .gt_heading {
   background-color: #f0f0f0;
   text-align: center;
   border-bottom-color: #f0f0f0;
@@ -3409,7 +3418,7 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#bollqaykae .gt_title {
+#xlfrwjgsyj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3419,7 +3428,7 @@ was the predominant complaint.</td>
   border-bottom-width: 0;
 }
 
-#bollqaykae .gt_subtitle {
+#xlfrwjgsyj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3429,13 +3438,13 @@ was the predominant complaint.</td>
   border-top-width: 0;
 }
 
-#bollqaykae .gt_bottom_border {
+#xlfrwjgsyj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bollqaykae .gt_col_headings {
+#xlfrwjgsyj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3450,7 +3459,7 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#bollqaykae .gt_col_heading {
+#xlfrwjgsyj .gt_col_heading {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -3470,7 +3479,7 @@ was the predominant complaint.</td>
   overflow-x: hidden;
 }
 
-#bollqaykae .gt_column_spanner_outer {
+#xlfrwjgsyj .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -3482,15 +3491,15 @@ was the predominant complaint.</td>
   padding-right: 4px;
 }
 
-#bollqaykae .gt_column_spanner_outer:first-child {
+#xlfrwjgsyj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bollqaykae .gt_column_spanner_outer:last-child {
+#xlfrwjgsyj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bollqaykae .gt_column_spanner {
+#xlfrwjgsyj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3502,7 +3511,7 @@ was the predominant complaint.</td>
   width: 100%;
 }
 
-#bollqaykae .gt_group_heading {
+#xlfrwjgsyj .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #bdbdbd;
@@ -3524,7 +3533,7 @@ was the predominant complaint.</td>
   vertical-align: middle;
 }
 
-#bollqaykae .gt_empty_group_heading {
+#xlfrwjgsyj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #bdbdbd;
@@ -3539,15 +3548,15 @@ was the predominant complaint.</td>
   vertical-align: middle;
 }
 
-#bollqaykae .gt_from_md > :first-child {
+#xlfrwjgsyj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bollqaykae .gt_from_md > :last-child {
+#xlfrwjgsyj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bollqaykae .gt_row {
+#xlfrwjgsyj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3566,7 +3575,7 @@ was the predominant complaint.</td>
   overflow-x: hidden;
 }
 
-#bollqaykae .gt_stub {
+#xlfrwjgsyj .gt_stub {
   color: #333333;
   background-color: #f0f0f0;
   font-size: 100%;
@@ -3578,7 +3587,7 @@ was the predominant complaint.</td>
   padding-left: 12px;
 }
 
-#bollqaykae .gt_summary_row {
+#xlfrwjgsyj .gt_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -3588,7 +3597,7 @@ was the predominant complaint.</td>
   padding-right: 5px;
 }
 
-#bollqaykae .gt_first_summary_row {
+#xlfrwjgsyj .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3598,7 +3607,7 @@ was the predominant complaint.</td>
   border-top-color: #D3D3D3;
 }
 
-#bollqaykae .gt_grand_summary_row {
+#xlfrwjgsyj .gt_grand_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -3608,7 +3617,7 @@ was the predominant complaint.</td>
   padding-right: 5px;
 }
 
-#bollqaykae .gt_first_grand_summary_row {
+#xlfrwjgsyj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3618,11 +3627,11 @@ was the predominant complaint.</td>
   border-top-color: #D3D3D3;
 }
 
-#bollqaykae .gt_striped {
+#xlfrwjgsyj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bollqaykae .gt_table_body {
+#xlfrwjgsyj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3631,7 +3640,7 @@ was the predominant complaint.</td>
   border-bottom-color: #D3D3D3;
 }
 
-#bollqaykae .gt_footnotes {
+#xlfrwjgsyj .gt_footnotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -3645,13 +3654,13 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#bollqaykae .gt_footnote {
+#xlfrwjgsyj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#bollqaykae .gt_sourcenotes {
+#xlfrwjgsyj .gt_sourcenotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -3665,46 +3674,46 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#bollqaykae .gt_sourcenote {
+#xlfrwjgsyj .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#bollqaykae .gt_left {
+#xlfrwjgsyj .gt_left {
   text-align: left;
 }
 
-#bollqaykae .gt_center {
+#xlfrwjgsyj .gt_center {
   text-align: center;
 }
 
-#bollqaykae .gt_right {
+#xlfrwjgsyj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bollqaykae .gt_font_normal {
+#xlfrwjgsyj .gt_font_normal {
   font-weight: normal;
 }
 
-#bollqaykae .gt_font_bold {
+#xlfrwjgsyj .gt_font_bold {
   font-weight: bold;
 }
 
-#bollqaykae .gt_font_italic {
+#xlfrwjgsyj .gt_font_italic {
   font-style: italic;
 }
 
-#bollqaykae .gt_super {
+#xlfrwjgsyj .gt_super {
   font-size: 65%;
 }
 
-#bollqaykae .gt_footnote_marks {
+#xlfrwjgsyj .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="bollqaykae" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="xlfrwjgsyj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -3720,22 +3729,27 @@ was the predominant complaint.</td>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">duloxetine</td>
       <td class="gt_row gt_center" style="background-color: #08306B; color: #FFFFFF;">43</td>
-      <td class="gt_row gt_center" style="background-color: #00441B; color: #FFFFFF;">23</td>
+      <td class="gt_row gt_center" style="background-color: #005221; color: #FFFFFF;">23</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">amitriptyline</td>
-      <td class="gt_row gt_center" style="background-color: #1C68AE; color: #FFFFFF;">34</td>
-      <td class="gt_row gt_center" style="background-color: #00441B; color: #FFFFFF;">23</td>
+      <td class="gt_row gt_center" style="background-color: #1762A9; color: #FFFFFF;">35</td>
+      <td class="gt_row gt_center" style="background-color: #00441B; color: #FFFFFF;">24</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">milnacipran</td>
       <td class="gt_row gt_center" style="background-color: #9CC9E0; color: #000000;">17</td>
-      <td class="gt_row gt_center" style="background-color: #95D391; color: #000000;">10</td>
+      <td class="gt_row gt_center" style="background-color: #9BD696; color: #000000;">10</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">paroxetine</td>
       <td class="gt_row gt_center" style="background-color: #D1E3F3; color: #000000;">9</td>
-      <td class="gt_row gt_center" style="background-color: #B2E0AC; color: #000000;">8</td>
+      <td class="gt_row gt_center" style="background-color: #B7E2B0; color: #000000;">8</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">venlafaxine</td>
+      <td class="gt_row gt_center" style="background-color: #D6E6F4; color: #000000;">8</td>
+      <td class="gt_row gt_center" style="background-color: #A9DDA3; color: #000000;">9</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">fluoxetine</td>
@@ -3743,34 +3757,29 @@ was the predominant complaint.</td>
       <td class="gt_row gt_center" style="background-color: #EAF7E6; color: #000000;">3</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">venlafaxine</td>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">nortriptyline</td>
       <td class="gt_row gt_center" style="background-color: #DBE9F6; color: #000000;">7</td>
-      <td class="gt_row gt_center" style="background-color: #A5DA9E; color: #000000;">9</td>
+      <td class="gt_row gt_center" style="background-color: #D9F0D3; color: #000000;">5</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">imipramine</td>
       <td class="gt_row gt_center" style="background-color: #DFECF7; color: #000000;">6</td>
-      <td class="gt_row gt_center" style="background-color: #D7F0D1; color: #000000;">5</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">nortriptyline</td>
-      <td class="gt_row gt_center" style="background-color: #DFECF7; color: #000000;">6</td>
-      <td class="gt_row gt_center" style="background-color: #E2F4DD; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #D9F0D3; color: #000000;">5</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">citalopram</td>
       <td class="gt_row gt_center" style="background-color: #E4EFF9; color: #000000;">5</td>
-      <td class="gt_row gt_center" style="background-color: #E2F4DD; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #E4F4DF; color: #000000;">4</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">desipramine</td>
       <td class="gt_row gt_center" style="background-color: #E4EFF9; color: #000000;">5</td>
-      <td class="gt_row gt_center" style="background-color: #E2F4DD; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #E4F4DF; color: #000000;">4</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">maprotiline</td>
       <td class="gt_row gt_center" style="background-color: #E9F2FA; color: #000000;">4</td>
-      <td class="gt_row gt_center" style="background-color: #D7F0D1; color: #000000;">5</td>
+      <td class="gt_row gt_center" style="background-color: #D9F0D3; color: #000000;">5</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">escitalopram</td>
@@ -3780,7 +3789,7 @@ was the predominant complaint.</td>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">mirtazapine</td>
       <td class="gt_row gt_center" style="background-color: #EDF5FC; color: #000000;">3</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">trazodone</td>
@@ -3788,24 +3797,29 @@ was the predominant complaint.</td>
       <td class="gt_row gt_center" style="background-color: #EAF7E6; color: #000000;">3</td>
     </tr>
     <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">amitriptyline + placebo</td>
+      <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
+    </tr>
+    <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">clomipramine</td>
       <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">desvenlafaxine</td>
       <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
-      <td class="gt_row gt_center" style="background-color: #B2E0AC; color: #000000;">8</td>
+      <td class="gt_row gt_center" style="background-color: #B7E2B0; color: #000000;">8</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">dothiepin</td>
       <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">doxepin</td>
       <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">esreboxetine</td>
@@ -3813,9 +3827,14 @@ was the predominant complaint.</td>
       <td class="gt_row gt_center" style="background-color: #EAF7E6; color: #000000;">3</td>
     </tr>
     <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">fluoxetine + placebo</td>
+      <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
+    </tr>
+    <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">mianserin</td>
       <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">sertraline</td>
@@ -3823,17 +3842,7 @@ was the predominant complaint.</td>
       <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">amitriptyline + placebo</td>
-      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
-      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
-    </tr>
-    <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">bupropion</td>
-      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
-      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">fluoxetine + placebo</td>
       <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
       <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
     </tr>
@@ -3868,12 +3877,12 @@ was the predominant complaint.</td>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">pregabalin</td>
       <td class="gt_row gt_center" style="background-color: #D1E3F3; color: #000000;">9</td>
-      <td class="gt_row gt_center" style="background-color: #B2E0AC; color: #000000;">8</td>
+      <td class="gt_row gt_center" style="background-color: #B7E2B0; color: #000000;">8</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">gabapentin</td>
       <td class="gt_row gt_center" style="background-color: #E9F2FA; color: #000000;">4</td>
-      <td class="gt_row gt_center" style="background-color: #E2F4DD; color: #000000;">4</td>
+      <td class="gt_row gt_center" style="background-color: #E4F4DF; color: #000000;">4</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">carbamazepine</td>
@@ -3891,7 +3900,7 @@ was the predominant complaint.</td>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">benzotropine</td>
       <td class="gt_row gt_center" style="background-color: #F2F8FD; color: #000000;">2</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">benztropine</td>
@@ -3945,6 +3954,14 @@ was the predominant complaint.</td>
     </tr>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">aerobic</td>
+      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
+      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="3" class="gt_group_heading">Antidepressant + Active placebo: Vitamin B2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">amitriptyline</td>
       <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
       <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
     </tr>
@@ -4163,7 +4180,7 @@ was the predominant complaint.</td>
     <tr>
       <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">fluoxetine</td>
       <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
-      <td class="gt_row gt_center" style="background-color: #F0F9ED; color: #000000;">2</td>
+      <td class="gt_row gt_center" style="background-color: #F1FAEE; color: #000000;">2</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">Antidepressant + Placebo</td>
@@ -4360,6 +4377,14 @@ was the predominant complaint.</td>
       <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
     </tr>
     <tr class="gt_group_heading_row">
+      <td colspan="3" class="gt_group_heading">Active placebo: Vitamin B2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #D9D9D9; color: #000000;">riboflavin</td>
+      <td class="gt_row gt_center" style="background-color: #F7FBFF; color: #000000;">1</td>
+      <td class="gt_row gt_center" style="background-color: #F7FCF5; color: #000000;">1</td>
+    </tr>
+    <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">Antidepressant + anticonvulsant</td>
     </tr>
     <tr>
@@ -4394,7 +4419,7 @@ was the predominant complaint.</td>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kizafmlqbj .gt_table {
+#pglzwsvszu .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4419,7 +4444,7 @@ was the predominant complaint.</td>
   border-left-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_heading {
+#pglzwsvszu .gt_heading {
   background-color: #f0f0f0;
   text-align: center;
   border-bottom-color: #f0f0f0;
@@ -4431,7 +4456,7 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_title {
+#pglzwsvszu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4441,7 +4466,7 @@ was the predominant complaint.</td>
   border-bottom-width: 0;
 }
 
-#kizafmlqbj .gt_subtitle {
+#pglzwsvszu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4451,13 +4476,13 @@ was the predominant complaint.</td>
   border-top-width: 0;
 }
 
-#kizafmlqbj .gt_bottom_border {
+#pglzwsvszu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_col_headings {
+#pglzwsvszu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4472,7 +4497,7 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_col_heading {
+#pglzwsvszu .gt_col_heading {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -4492,7 +4517,7 @@ was the predominant complaint.</td>
   overflow-x: hidden;
 }
 
-#kizafmlqbj .gt_column_spanner_outer {
+#pglzwsvszu .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #969696;
   font-size: 100%;
@@ -4504,15 +4529,15 @@ was the predominant complaint.</td>
   padding-right: 4px;
 }
 
-#kizafmlqbj .gt_column_spanner_outer:first-child {
+#pglzwsvszu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kizafmlqbj .gt_column_spanner_outer:last-child {
+#pglzwsvszu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kizafmlqbj .gt_column_spanner {
+#pglzwsvszu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4524,7 +4549,7 @@ was the predominant complaint.</td>
   width: 100%;
 }
 
-#kizafmlqbj .gt_group_heading {
+#pglzwsvszu .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #bdbdbd;
@@ -4546,7 +4571,7 @@ was the predominant complaint.</td>
   vertical-align: middle;
 }
 
-#kizafmlqbj .gt_empty_group_heading {
+#pglzwsvszu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #bdbdbd;
@@ -4561,15 +4586,15 @@ was the predominant complaint.</td>
   vertical-align: middle;
 }
 
-#kizafmlqbj .gt_from_md > :first-child {
+#pglzwsvszu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kizafmlqbj .gt_from_md > :last-child {
+#pglzwsvszu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kizafmlqbj .gt_row {
+#pglzwsvszu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4588,7 +4613,7 @@ was the predominant complaint.</td>
   overflow-x: hidden;
 }
 
-#kizafmlqbj .gt_stub {
+#pglzwsvszu .gt_stub {
   color: #333333;
   background-color: #f0f0f0;
   font-size: 100%;
@@ -4600,7 +4625,7 @@ was the predominant complaint.</td>
   padding-left: 12px;
 }
 
-#kizafmlqbj .gt_summary_row {
+#pglzwsvszu .gt_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -4610,7 +4635,7 @@ was the predominant complaint.</td>
   padding-right: 5px;
 }
 
-#kizafmlqbj .gt_first_summary_row {
+#pglzwsvszu .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4620,7 +4645,7 @@ was the predominant complaint.</td>
   border-top-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_grand_summary_row {
+#pglzwsvszu .gt_grand_summary_row {
   color: #333333;
   background-color: #f0f0f0;
   text-transform: inherit;
@@ -4630,7 +4655,7 @@ was the predominant complaint.</td>
   padding-right: 5px;
 }
 
-#kizafmlqbj .gt_first_grand_summary_row {
+#pglzwsvszu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4640,11 +4665,11 @@ was the predominant complaint.</td>
   border-top-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_striped {
+#pglzwsvszu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kizafmlqbj .gt_table_body {
+#pglzwsvszu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4653,7 +4678,7 @@ was the predominant complaint.</td>
   border-bottom-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_footnotes {
+#pglzwsvszu .gt_footnotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -4667,13 +4692,13 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_footnote {
+#pglzwsvszu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#kizafmlqbj .gt_sourcenotes {
+#pglzwsvszu .gt_sourcenotes {
   color: #333333;
   background-color: #f0f0f0;
   border-bottom-style: none;
@@ -4687,46 +4712,46 @@ was the predominant complaint.</td>
   border-right-color: #D3D3D3;
 }
 
-#kizafmlqbj .gt_sourcenote {
+#pglzwsvszu .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#kizafmlqbj .gt_left {
+#pglzwsvszu .gt_left {
   text-align: left;
 }
 
-#kizafmlqbj .gt_center {
+#pglzwsvszu .gt_center {
   text-align: center;
 }
 
-#kizafmlqbj .gt_right {
+#pglzwsvszu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kizafmlqbj .gt_font_normal {
+#pglzwsvszu .gt_font_normal {
   font-weight: normal;
 }
 
-#kizafmlqbj .gt_font_bold {
+#pglzwsvszu .gt_font_bold {
   font-weight: bold;
 }
 
-#kizafmlqbj .gt_font_italic {
+#pglzwsvszu .gt_font_italic {
   font-style: italic;
 }
 
-#kizafmlqbj .gt_super {
+#pglzwsvszu .gt_super {
   font-size: 65%;
 }
 
-#kizafmlqbj .gt_footnote_marks {
+#pglzwsvszu .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="kizafmlqbj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="pglzwsvszu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>

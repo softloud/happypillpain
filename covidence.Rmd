@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(gt)
 library(RColorBrewer)
+library(targets)
 
 ```
 
@@ -27,9 +28,127 @@ library(RColorBrewer)
 
 These all have different objectives, but are overlapping. 
 
+# notation
+
+Network meta-analysis provides a means of aggregating and comparing the results of all studies examining the effect of antidepressants on an outcome of interest.
+
+We now define the parameters of the model for outcome, using White *et al.*'s notation.
+
+Let $i = 1, \dots, n$ denote the study, and $k = 1, \dots, K$ denote the treatment. 
+
+Let $R_i$ be the set of treatments in study $i$, which we call the study design. 
+
+Let $\theta_{ik}^a$ be the parameter of interest in arm $k$ of study $i$ [@white2019].
+
+Now we define our problem of measuring the efficacy of antidepressants in the treatment of adults with chronic pain. 
+
+We have multiple outcomes. Let $j = 1, \dots J$ denote the outcome. 
+
+Let $y_{jik}^a$ denote the $j$th outcome effect for arm $k$ of study $i$. In a network meta-analaysis, we know it's likely $R_i \subsetneqq K$, that is, only some of the $K$ treatments are compared in each study.  
+
+Let $d_{ik}^a$ denote the contrast effect for arm $k$'s relative effect to placebo $k'$ in study $i$.
+
 # model definition
 
+Our current objective is to model the primary outcomes using nma, performing the appropriate diagnostic statistical checks. 
+
+We need to check the inputs and the outputs are correct. 
+
+We can use the data to describe the arms or the contrasts.
+
+## describe the arms
+
+We assume 
+
+$$
+\begin{cases}
+y_{jik}^a \sim N(\Theta_{jki}, \Sigma_{ji})\\
+\theta_{jki} \sim N(0, \tau^2)
+\end{cases}
+$$
+so, the model describes the measurements of each arm in a study's effect for an outcome of interest. 
+
+The estimation happens on arm level, which is more precise than contrast level, but there are computational costs associated with arm-based, where contrast-based might be a solution. The output, then, is,
+
+$$
+d_{ijk} := d(y_{jik}, y_{jik'}, \sigma_{ji}^2)
+$$
+
+where $d$ is an appropriate measure of comparison, such as the $g$ adjustment for standardised mean difference, between treatment $k$ and overall comparator, such as placebo, $k'$. 
+
+And, for a contrast-based output, we would have an estimate of $d$, not the components of $d$,
+
+$$
+\begin{cases}
+y^c_{jikk'} \sim N(\delta_{jijk'}, \sigma_{ji}^2)\\
+\delta_{jik} \sim N(0, \tau^2)
+\end{cases}
+$$
+
+- [ ] ensure that checks are in place
+
+## in words
+
+So, we assume the observed measure $y^c_{jik}$, of pain affect, $j$, (ask Hollie about affect vs effect in this context), is a comparison between the $i$th study's $k'$ treatment. 
+
+For the pairwise meta-analyses, $k'$ is fixed to placebo, however, in the nma, $k'$ can be any of the set of $k = 1, \dots, K$ treatments. 
+
+We assume this comparison may be thought of in terms of a the $k$th treatment's effect as compared to $k'$, $\delta_{ijk'}$,
+$$
+y^c_{jikk'} := \delta_{jk'} + \delta_{ji} + \varepsilon_{jikk'} 
+$$
+- how do white et al. do the notation for nma? k vs k'?
+
+where 
+$$
+\delta_{jikk'} = \delta_{jkk'} + \delta_{ji}
+$$
+denotes the comparison of the $j$th outcome between treatments $k$ and $k'$ in the $i$th study, where $\delta_{ji}$ denotes the $i$th study...
+
+## contrast vs arm-based
+
+## design matrices
+
+### what should it be?
+
+$$
+\begin{array}
+\[y^a_{j11}, y^a_{j12,}\]
+\end{array}
+$$
+
+### what do we have?
+
+
+```{r load targets data}
+withr::with_dir(here::here(), {
+  tar_load(models)
+})
+
+
+```
+
+```{r}
+# what went into the model
+models %>% 
+  pluck(1, "network", "agd_arm") %>% 
+  select(starts_with(".")) %>% 
+# tag when there are two placebos per study
+  group_by(.study, .trt) %>% 
+  mutate(
+    n_study_int = 1:n()
+  )
+
+
+
+```
+
+
+
+
 # QA for model
+
+- [ ] 
 
 
 ### keywords
@@ -59,8 +178,6 @@ keywords %>%
   )
 
 ```
-
-
 
 # protocol notes
 

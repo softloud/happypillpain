@@ -5,8 +5,8 @@ account: softloud
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3835812
-bundleId: 4382486
+bundleId: 4462497
 url: https://softloud.shinyapps.io/happypillpain/
-when: 1616461472.93354
+when: 1618256456.64299
 asMultiple: FALSE
 asStatic: FALSE

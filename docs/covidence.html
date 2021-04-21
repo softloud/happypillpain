@@ -55,7 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -76,7 +76,7 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
@@ -91,8 +91,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-04-08"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-04-08"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-04-20"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-04-20"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="happypillpain: Covidence"/>
@@ -110,7 +110,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Covidence"]},{"type":"character","attributes":{},"value":["For checking with Hollie and Gav.\n"]},{"type":"character","attributes":{},"value":["2021-04-08"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Covidence"]},{"type":"character","attributes":{},"value":["For checking with Hollie and Gav.\n"]},{"type":"character","attributes":{},"value":["2021-04-20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1864,7 +1864,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -2055,7 +2058,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Covidence","description":"For checking with Hollie and Gav.","authors":[],"publishedDate":"2021-04-08T00:00:00.000+01:00"}
+{"title":"Covidence","description":"For checking with Hollie and Gav.","authors":[],"publishedDate":"2021-04-20T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2074,11 +2077,7 @@ outcome-specific preliminary analyses
 <div class="nav-dropdown-content">
 <a href="outcome-analysis-pain.html">pain</a>
 <a href="outcome-analysis-substantial-pain.html">substantial pain</a>
-<a href="outcome-analysis-moderate-pain.html">moderate pain</a>
-<a href="outcome-analysis-pgic.html">pgic</a>
 <a href="outcome-analysis-mood.html">mood</a>
-<a href="outcome-analysis-sleep.html">sleep</a>
-<a href="outcome-analysis-qol.html">qol</a>
 </div>
 </div>
 </div>
@@ -2107,7 +2106,18 @@ outcome-specific preliminary analyses
 <h3>Contents</h3>
 <ul>
 <li><a href="#in-this-document">in this document</a></li>
-<li><a href="#model-definition">model definition</a></li>
+<li><a href="#notation">notation</a></li>
+<li><a href="#model-definition">model definition</a>
+<ul>
+<li><a href="#describe-the-arms">describe the arms</a></li>
+<li><a href="#in-words">in words</a></li>
+<li><a href="#contrast-vs-arm-based">contrast vs arm-based</a></li>
+<li><a href="#design-matrices">design matrices</a>
+<ul>
+<li><a href="#what-should-it-be">what should it be?</a></li>
+<li><a href="#what-do-we-have">what do we have?</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#qa-for-model">QA for model</a>
 <ul>
 <li><a href="#keywords">keywords</a></li>
@@ -2136,8 +2146,90 @@ outcome-specific preliminary analyses
 <li>model definition</li>
 </ul>
 <p>These all have different objectives, but are overlapping.</p>
+<h1 id="notation">notation</h1>
+<p>Network meta-analysis provides a means of aggregating and comparing the results of all studies examining the effect of antidepressants on an outcome of interest.</p>
+<p>We now define the parameters of the model for outcome, using White <em>et al.</em>’s notation.</p>
+<p>Let <span class="math inline">\(i = 1, \dots, n\)</span> denote the study, and <span class="math inline">\(k = 1, \dots, K\)</span> denote the treatment.</p>
+<p>Let <span class="math inline">\(R_i\)</span> be the set of treatments in study <span class="math inline">\(i\)</span>, which we call the study design.</p>
+<p>Let <span class="math inline">\(\theta_{ik}^a\)</span> be the parameter of interest in arm <span class="math inline">\(k\)</span> of study <span class="math inline">\(i\)</span> <span class="citation" data-cites="white2019">[@white2019]</span>.</p>
+<p>Now we define our problem of measuring the efficacy of antidepressants in the treatment of adults with chronic pain.</p>
+<p>We have multiple outcomes. Let <span class="math inline">\(j = 1, \dots J\)</span> denote the outcome.</p>
+<p>Let <span class="math inline">\(y_{jik}^a\)</span> denote the <span class="math inline">\(j\)</span>th outcome effect for arm <span class="math inline">\(k\)</span> of study <span class="math inline">\(i\)</span>. In a network meta-analaysis, we know it’s likely <span class="math inline">\(R_i \subsetneqq K\)</span>, that is, only some of the <span class="math inline">\(K\)</span> treatments are compared in each study.</p>
+<p>Let <span class="math inline">\(d_{ik}^a\)</span> denote the contrast effect for arm <span class="math inline">\(k\)</span>’s relative effect to placebo <span class="math inline">\(k&#39;\)</span> in study <span class="math inline">\(i\)</span>.</p>
 <h1 id="model-definition">model definition</h1>
+<p>Our current objective is to model the primary outcomes using nma, performing the appropriate diagnostic statistical checks.</p>
+<p>We need to check the inputs and the outputs are correct.</p>
+<p>We can use the data to describe the arms or the contrasts.</p>
+<h2 id="describe-the-arms">describe the arms</h2>
+<p>We assume</p>
+<p><span class="math display">\[
+\begin{cases}
+y_{jik}^a \sim N(\Theta_{jki}, \Sigma_{ji})\\
+\theta_{jki} \sim N(0, \tau^2)
+\end{cases}
+\]</span> so, the model describes the measurements of each arm in a study’s effect for an outcome of interest.</p>
+<p>The estimation happens on arm level, which is more precise than contrast level, but there are computational costs associated with arm-based, where contrast-based might be a solution. The output, then, is,</p>
+<p><span class="math display">\[
+d_{ijk} := d(y_{jik}, y_{jik&#39;}, \sigma_{ji}^2)
+\]</span></p>
+<p>where <span class="math inline">\(d\)</span> is an appropriate measure of comparison, such as the <span class="math inline">\(g\)</span> adjustment for standardised mean difference, between treatment <span class="math inline">\(k\)</span> and overall comparator, such as placebo, <span class="math inline">\(k&#39;\)</span>.</p>
+<p>And, for a contrast-based output, we would have an estimate of <span class="math inline">\(d\)</span>, not the components of <span class="math inline">\(d\)</span>,</p>
+<p><span class="math display">\[
+\begin{cases}
+y^c_{jikk&#39;} \sim N(\delta_{jijk&#39;}, \sigma_{ji}^2)\\
+\delta_{jik} \sim N(0, \tau^2)
+\end{cases}
+\]</span></p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+ensure that checks are in place</li>
+</ul>
+<h2 id="in-words">in words</h2>
+<p>So, we assume the observed measure <span class="math inline">\(y^c_{jik}\)</span>, of pain affect, <span class="math inline">\(j\)</span>, (ask Hollie about affect vs effect in this context), is a comparison between the <span class="math inline">\(i\)</span>th study’s <span class="math inline">\(k&#39;\)</span> treatment.</p>
+<p>For the pairwise meta-analyses, <span class="math inline">\(k&#39;\)</span> is fixed to placebo, however, in the nma, <span class="math inline">\(k&#39;\)</span> can be any of the set of <span class="math inline">\(k = 1, \dots, K\)</span> treatments.</p>
+<p>We assume this comparison may be thought of in terms of a the <span class="math inline">\(k\)</span>th treatment’s effect as compared to <span class="math inline">\(k&#39;\)</span>, <span class="math inline">\(\delta_{ijk&#39;}\)</span>, <span class="math display">\[
+y^c_{jikk&#39;} := \delta_{jk&#39;} + \delta_{ji} + \varepsilon_{jikk&#39;} 
+\]</span> - how do white et al. do the notation for nma? k vs k’?</p>
+<p>where <span class="math display">\[
+\delta_{jikk&#39;} = \delta_{jkk&#39;} + \delta_{ji}
+\]</span> denotes the comparison of the <span class="math inline">\(j\)</span>th outcome between treatments <span class="math inline">\(k\)</span> and <span class="math inline">\(k&#39;\)</span> in the <span class="math inline">\(i\)</span>th study, where <span class="math inline">\(\delta_{ji}\)</span> denotes the <span class="math inline">\(i\)</span>th study…</p>
+<h2 id="contrast-vs-arm-based">contrast vs arm-based</h2>
+<h2 id="design-matrices">design matrices</h2>
+<h3 id="what-should-it-be">what should it be?</h3>
+<p><span class="math display">\[
+\begin{array}
+\[y^a_{j11}, y^a_{j12,}\]
+\end{array}
+\]</span></p>
+<h3 id="what-do-we-have">what do we have?</h3>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code># A tibble: 15 x 6
+# Groups:   .study, .trt [9]
+   .study       .trt            .r    .n .sample_size n_study_int
+   &lt;fct&gt;        &lt;fct&gt;        &lt;int&gt; &lt;int&gt;        &lt;int&gt;       &lt;int&gt;
+ 1 Wang 2017    placebo         23    68           68           1
+ 2 Wang 2017    duloxetine      35    83           83           1
+ 3 Lipone 2020  placebo         10    22           22           1
+ 4 Lipone 2020  trazodone       16    27           27           1
+ 5 Lipone 2020  trazodone       14    27           27           2
+ 6 Loldrup 1989 placebo         26    71           71           1
+ 7 Loldrup 1989 placebo         25    66           66           2
+ 8 Loldrup 1989 clomipramine    28    56           56           1
+ 9 Loldrup 1989 clomipramine    29    62           62           2
+10 Loldrup 1989 mianserin       30    53           53           1
+11 Loldrup 1989 mianserin       28    64           64           2
+12 Uchio 2018   placebo         26    68           68           1
+13 Uchio 2018   placebo         27    69           69           2
+14 Uchio 2018   duloxetine      54    98           98           1
+15 Uchio 2018   duloxetine      73   114          114           2</code></pre>
+</div>
 <h1 id="qa-for-model">QA for model</h1>
+<ul>
+<li>[ ]</li>
+</ul>
 <h3 id="keywords">keywords</h3>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -2147,7 +2239,7 @@ outcome-specific preliminary analyses
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ynsspyncyz .gt_table {
+#ocwohzycsx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2172,7 +2264,7 @@ outcome-specific preliminary analyses
   border-left-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_heading {
+#ocwohzycsx .gt_heading {
   background-color: aliceblue;
   text-align: center;
   border-bottom-color: aliceblue;
@@ -2184,7 +2276,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_title {
+#ocwohzycsx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2194,7 +2286,7 @@ outcome-specific preliminary analyses
   border-bottom-width: 0;
 }
 
-#ynsspyncyz .gt_subtitle {
+#ocwohzycsx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2204,13 +2296,13 @@ outcome-specific preliminary analyses
   border-top-width: 0;
 }
 
-#ynsspyncyz .gt_bottom_border {
+#ocwohzycsx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_col_headings {
+#ocwohzycsx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2225,7 +2317,7 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_col_heading {
+#ocwohzycsx .gt_col_heading {
   color: #333333;
   background-color: aliceblue;
   font-size: 100%;
@@ -2245,7 +2337,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#ynsspyncyz .gt_column_spanner_outer {
+#ocwohzycsx .gt_column_spanner_outer {
   color: #333333;
   background-color: aliceblue;
   font-size: 100%;
@@ -2257,15 +2349,15 @@ outcome-specific preliminary analyses
   padding-right: 4px;
 }
 
-#ynsspyncyz .gt_column_spanner_outer:first-child {
+#ocwohzycsx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ynsspyncyz .gt_column_spanner_outer:last-child {
+#ocwohzycsx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ynsspyncyz .gt_column_spanner {
+#ocwohzycsx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2277,7 +2369,7 @@ outcome-specific preliminary analyses
   width: 100%;
 }
 
-#ynsspyncyz .gt_group_heading {
+#ocwohzycsx .gt_group_heading {
   padding: 8px;
   color: #FFFFFF;
   background-color: steelblue;
@@ -2299,7 +2391,7 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#ynsspyncyz .gt_empty_group_heading {
+#ocwohzycsx .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: steelblue;
@@ -2314,15 +2406,15 @@ outcome-specific preliminary analyses
   vertical-align: middle;
 }
 
-#ynsspyncyz .gt_from_md > :first-child {
+#ocwohzycsx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ynsspyncyz .gt_from_md > :last-child {
+#ocwohzycsx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ynsspyncyz .gt_row {
+#ocwohzycsx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2341,7 +2433,7 @@ outcome-specific preliminary analyses
   overflow-x: hidden;
 }
 
-#ynsspyncyz .gt_stub {
+#ocwohzycsx .gt_stub {
   color: #333333;
   background-color: aliceblue;
   font-size: 100%;
@@ -2353,7 +2445,7 @@ outcome-specific preliminary analyses
   padding-left: 12px;
 }
 
-#ynsspyncyz .gt_summary_row {
+#ocwohzycsx .gt_summary_row {
   color: #333333;
   background-color: aliceblue;
   text-transform: inherit;
@@ -2363,7 +2455,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#ynsspyncyz .gt_first_summary_row {
+#ocwohzycsx .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2373,7 +2465,7 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_grand_summary_row {
+#ocwohzycsx .gt_grand_summary_row {
   color: #333333;
   background-color: aliceblue;
   text-transform: inherit;
@@ -2383,7 +2475,7 @@ outcome-specific preliminary analyses
   padding-right: 5px;
 }
 
-#ynsspyncyz .gt_first_grand_summary_row {
+#ocwohzycsx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2393,11 +2485,11 @@ outcome-specific preliminary analyses
   border-top-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_striped {
+#ocwohzycsx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ynsspyncyz .gt_table_body {
+#ocwohzycsx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2406,7 +2498,7 @@ outcome-specific preliminary analyses
   border-bottom-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_footnotes {
+#ocwohzycsx .gt_footnotes {
   color: #333333;
   background-color: aliceblue;
   border-bottom-style: none;
@@ -2420,13 +2512,13 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_footnote {
+#ocwohzycsx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ynsspyncyz .gt_sourcenotes {
+#ocwohzycsx .gt_sourcenotes {
   color: #333333;
   background-color: aliceblue;
   border-bottom-style: none;
@@ -2440,46 +2532,46 @@ outcome-specific preliminary analyses
   border-right-color: #D3D3D3;
 }
 
-#ynsspyncyz .gt_sourcenote {
+#ocwohzycsx .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ynsspyncyz .gt_left {
+#ocwohzycsx .gt_left {
   text-align: left;
 }
 
-#ynsspyncyz .gt_center {
+#ocwohzycsx .gt_center {
   text-align: center;
 }
 
-#ynsspyncyz .gt_right {
+#ocwohzycsx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ynsspyncyz .gt_font_normal {
+#ocwohzycsx .gt_font_normal {
   font-weight: normal;
 }
 
-#ynsspyncyz .gt_font_bold {
+#ocwohzycsx .gt_font_bold {
   font-weight: bold;
 }
 
-#ynsspyncyz .gt_font_italic {
+#ocwohzycsx .gt_font_italic {
   font-style: italic;
 }
 
-#ynsspyncyz .gt_super {
+#ocwohzycsx .gt_super {
   font-size: 65%;
 }
 
-#ynsspyncyz .gt_footnote_marks {
+#ocwohzycsx .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="ynsspyncyz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ocwohzycsx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="2" class="gt_heading gt_title gt_font_normal" style>Inclusion criteria</th>
@@ -2499,65 +2591,28 @@ outcome-specific preliminary analyses
       <td colspan="2" class="gt_group_heading">substantial pain</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left gt_stub">pain + 50%</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="2" class="gt_group_heading">moderate pain</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">pain + 30%</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="2" class="gt_group_heading">mood</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Mental health</td>
+      <td class="gt_row gt_left gt_stub">_50_</td>
       <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left gt_stub">Depression</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+      <td class="gt_row gt_left gt_stub">moderate</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left gt_stub">Mood</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+      <td class="gt_row gt_left gt_stub">50_30</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left gt_stub">Anxiety</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+      <td class="gt_row gt_left gt_stub">50_percent_50_percent</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left gt_stub">Mental component</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+      <td class="gt_row gt_left gt_stub">symptoms</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
     </tr>
     <tr>
-      <td class="gt_row gt_left gt_stub">Psychosocial</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Sadness</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Well-being</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="2" class="gt_group_heading">adverse</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Adverse drug reaction</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Adverse events</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Serious adverse events</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+      <td class="gt_row gt_left gt_stub">impact</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="2" class="gt_group_heading">sleep</td>
@@ -2568,6 +2623,52 @@ outcome-specific preliminary analyses
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">Insomnia</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">qol</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Quality of Life</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">qol</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">sf_36</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">eq_5d</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">physical function</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Disability</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Function</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Physical component</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Physical function</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Sickness Impact Profile</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Physical functioning</td>
       <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
     </tr>
     <tr class="gt_group_heading_row">
@@ -2614,48 +2715,6 @@ outcome-specific preliminary analyses
       <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
     </tr>
     <tr class="gt_group_heading_row">
-      <td colspan="2" class="gt_group_heading">physical function</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Disability</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Function</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Physical component</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Physical function</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Sickness Impact Profile</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Physical functioning</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="2" class="gt_group_heading">qol</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">Quality of Life</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">QoL – EQ-5D</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left gt_stub">SF-36 Total Score</td>
-      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
-    </tr>
-    <tr class="gt_group_heading_row">
       <td colspan="2" class="gt_group_heading">pain</td>
     </tr>
     <tr>
@@ -2689,6 +2748,83 @@ outcome-specific preliminary analyses
     <tr>
       <td class="gt_row gt_left gt_stub">30%</td>
       <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">mood</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Mental health</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Depression</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Mood</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Anxiety</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Mental component</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Psychosocial</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Sadness</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Well-being</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">moderate pain</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">_30_</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">substantial</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">50_30</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">50_percent_50_percent</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">symptoms</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">impact</td>
+      <td class="gt_row gt_left" style="background-color: #DEEBF7; color: #000000;">exclude</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">adverse</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Adverse drug reaction</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Adverse events</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_stub">Serious adverse events</td>
+      <td class="gt_row gt_left" style="background-color: #9ECAE1; color: #000000;">include</td>
     </tr>
   </tbody>
   
@@ -2732,7 +2868,7 @@ outcome-specific preliminary analyses
 <li>adverse events by type, class, dose</li>
 <li>rank efficacy in treating pain, negative affect, and adverse events</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2740,6 +2876,15 @@ outcome-specific preliminary analyses
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

@@ -6,7 +6,7 @@ withr::with_dir(here::here(), {
   tar_load(outcomes_of_interest)
 })
 
-outcomes_text <- 
+outcomes_text <-
   paste0(outcomes_of_interest, collapse = "; ")
 
 fluidPage(
@@ -15,7 +15,7 @@ fluidPage(
   h2(
     "Outcome-specific fixed-effects network meta-analysis preliminary results for parallel post-intervention studies"
   ),
-
+  
   sidebarLayout(
     sidebarPanel(
       p(
@@ -23,21 +23,22 @@ fluidPage(
           "These are network meta-analysis results for fixed-effects post-intervention results for: {outcomes_text}."
         )
       ),
-
+      
       selectInput(
         inputId = "outcome",
         label = "Select an outcome:",
         choices = outcomes_of_interest,
         selected = "pain"
       ),
-
+      
       h2("Scope of preliminary results"),
       p("- post-intervention"),
       p("- fixed-effects model"),
       p("- parallel design"),
       p("- arm-based analysis")
     ),
-    mainPanel(tabsetPanel(
+    mainPanel(
+      tabsetPanel(
       tabPanel("network",
                fluidRow(
                  column(
@@ -54,29 +55,31 @@ fluidPage(
                  ),
                  column(width = 12,
                         plotOutput("network"))
-               )),
-      tabPanel("estimated difference from placebo",
-               fluidRow(
-                 column(
-                   width = 4,
-                   p(
-                     "This provides estimates of the variations between the studies (upper segment) and
-                          the contrasts (lower segment)."
-                   )
-                 ),
-                 column(width = 5,
-                        plotOutput("estimates"))
                ))#,
-      #   tabPanel(
-      #     "plausible values, before and after",
-      #     p(
-      #       "This is a comparative way of inspecting the results shown in the estimated
-      #                       difference from placebo tab. This shows the difference of the model's estimation (filled) of
-      #                       the treatment's effect in comparison with placebo with our prior expectations (lines)."
-      #     )
-      #   ,
-      #   plotOutput("prior_post"))
-      # ))
-    ))
-  )
+    #   tabPanel("estimated difference from placebo",
+    #            fluidRow(
+    #              column(
+    #                width = 4,
+    #                p(
+    #                  "This provides estimates of the variations between the studies (upper segment) and
+    #                       the contrasts (lower segment)."
+    #                )
+    #              ),
+    #              column(width = 5,
+    #                     plotOutput("estimates"))
+    #            )),
+    #   tabPanel(
+    #     "plausible values, before and after",
+    #     p(
+    #       "This is a comparative way of inspecting the results shown in the estimated
+    #                         difference from placebo tab. This shows the difference of the model's estimation (filled) of
+    #                         the treatment's effect in comparison with placebo with our prior expectations (lines)."
+    #     )
+    #     ,
+    #     plotOutput("prior_post")
+    #   ) 
+    # )),
+    # NULL
+  )))
 )
+

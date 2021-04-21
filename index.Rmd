@@ -107,7 +107,7 @@ class(hpp_nma) <- "stan_nma"
 
 ```
 
-```{r generating outcomes}
+```{r generating outcomes, eval=FALSE}
 # this is for creating the markdown files
 models %>% 
   map_chr("outcome") %>% 
