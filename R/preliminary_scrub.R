@@ -6,8 +6,10 @@
 
 preliminary_scrub <- function(dat) {
   cleaned_names <-
-    dat %>%
-    janitor::clean_names()
+    dat  %>%
+    # janitor::clean_names()
+    rename(study_identifier = 'Study Identifier',
+           comments = Comments)
 
   # study id tags
   study_tags <-
@@ -32,9 +34,9 @@ preliminary_scrub <- function(dat) {
       # change study identifier
       study_identifier = study_tag,
       # arm id
-      study_arm_id = stringr::str_c(intervention, study_identifier, sep = " ||| "),
+      study_arm_id = stringr::str_c(study_identifier, Intervention, sep = " == "),
       intervention_drug = purrr::map_chr(
-        intervention,
+        Intervention,
         .f = function(x) {
           treatment <- tolower(x)
 
@@ -50,5 +52,6 @@ preliminary_scrub <- function(dat) {
       )
     ) %>%
     dplyr::select(study_arm_id, everything()) %>%
-    dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+    dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) %>% 
+    select(study_arm_id, intervention_drug, study_tag, everything())
 }
