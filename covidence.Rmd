@@ -17,6 +17,8 @@ library(tidyverse)
 library(gt)
 library(RColorBrewer)
 library(targets)
+library(happypillpain)
+
 
 ```
 
@@ -148,38 +150,112 @@ models %>%
 
 # QA for model
 
-- [ ] 
+## study
 
+Covidence produces a `Study Identifier` variable, however, this does not uniquely identify the study.
 
-### keywords
+```{r}
+hpp_dat <- 
+  happypillpain::raw_hpp_dat_path() %>% 
+  read_csv(
+    col_types =  cols(.default = "c")
+  ) 
 
-```{r data}
-keywords <- read_csv("data-raw/keywords.csv")
 
 ```
 
-```{r table}
-keywords %>% 
-  gt(rowname_col = "keyword", groupname_col = "outcome") %>% 
-  data_color(
-    columns = vars("inclusion_criterion"),
-    colors = scales::col_factor(
-      palette = "Blues",
-      domain = NULL
-    )
+Hollie recorded the titles of the study in the spare `comments` field in the raw data,changed to `study_title` for the analysis.
+
+```{r}
+study_id_duplicates <- 
+
+hpp_dat %>% 
+  rename(
+    study = `Study Identifier`,
+    title = Comments
   ) %>% 
-  tab_header(
-    title = "Inclusion criteria",
-    subtitle = "Columns including or excluding these words are extracted from the Covid export"
+  group_by(study) %>% 
+  summarise(
+    titles = n_distinct(title)
   ) %>% 
-  tab_options(
-    row_group.background.color =  "steelblue",
-    table.background.color = "aliceblue"
-  )
+  filter(titles > 1) %>% 
+  left_join(
+    hpp_dat %>% select(study = `Study Identifier`, title = Comments), 
+    by = "study"
+  ) %>% 
+  distinct() 
+
+study_id_duplicates %>% 
+  gt()
 
 ```
+
+Studies are tagged with a short identifier:
+
+```{r}
+dup_studies <- study_id_duplicates %>% 
+  pull(study) %>% unique() %>% 
+  paste0(collapse = "|")
+
+hpp_dat %>% 
+  preliminary_scrub() %>%
+  select(study_identifier, study_title) %>%  
+  right_join(study_id_duplicates, by = c("study_title" = "title")) %>% 
+  distinct()
+
+```
+
+
+```{r}
+# ugh fix this
+hpp_dat <- hpp_dat %>% preliminary_scrub()
+
+```
+
+
+> probably should do over with input data
+
+## arm
+
+Each row of the dataframe is considered to be one arm in one study.
+
+```{r echo=TRUE}
+# study_idenfiter + intervention combinations with more than one row
+# (should be 0)
+hpp_dat %>% 
+  count(study_identifier, intervention) %>% 
+  filter(n > 1)
+
+
+```
+
+## intervention
+
+This is more tricky, would be good to get input from others. 
+
+The intervention is encoded with what I would consider to be two distinct variables: dose and drug. 
+
+So far, Charles has extracted the drug, but not the dosage. 
+
+Here is the full list of interventions.
+
+Should any of these be collapsed together, in terms of the model?
+
+```{r}
+# possibly organise these 
+
+hpp_dat %>% 
+  count(intervention_type, intervention_drug) %>% 
+  arrange(desc(n)) %>%
+  gt()
+
+
+```
+
 
 # protocol notes
+
+
 
 ## background
 
@@ -197,7 +273,7 @@ We want to assess the comparative efficacy of antidepressants for adults with ch
 ### intervention
 
 - different classes of treatment for chemical structure and mechanism of action
-- common classes: TCA, SSRI, SNRI, MAOI
+- **common classes: TCA, SSRI, SNRI, MAOI** 
 - antidepressants are sometimes used 'off-license' to treat chronic pain
 - adverse events (e.g., headaches, weight loss) are associated with antidepressants
 
@@ -218,5 +294,16 @@ We want to assess the comparative efficacy of antidepressants for adults with ch
 - assess improvements in pain, mood, pgic, physical function, sleep, and qol by type, class, dose
 - adverse events by type, class, dose
 - rank efficacy in treating pain, negative affect, and adverse events
+
+### response variable
+
+$y_{jikk'}$ is the response measure for the $j$th outcome's $k$th treatment compared with treatment $k'$ from $R_i$ treatments in the $i$th study.
+
+### moderators and/or subgroup analyses
+
+- class of drug: e.g., TCA, SSRI, SNRI, MAOI: 
+- chronic condition: e.g. fibro, osteo 
+- primary or secondary
+- dosage
 
 

@@ -9,35 +9,29 @@
 #' @export
 
 measure_types <- function(dat) {
-  mtype_dat <-
     dat %>%
     mutate(
-      measure_desc = str_extract(column_header, "[\\w+|%]$")) %>% 
-    # dplyr::mutate(
-    #   measure_matches =
-    #     purrr::map(
-    #       column_header,
-    #       stringr::str_match,
-    #       "(.*)_([a-z]+)(?:_\\d)*$"
-    #     ),
-    #   measure_desc = purrr::map_chr(measure_matches, purrr::pluck, 2),
-    #   measure = purrr::map_chr(measure_matches, purrr::pluck, 3)
-    ) %>%
-   dplyr::select(-column_header, -measure_matches) %>%
-    # set up measure types
-    dplyr::mutate(
-      measure_scale =
-        dplyr::case_when(
-          stringr::str_detect(measure_desc, "_vas_") ~ "vas",
-          stringr::str_detect(measure_desc, "_bpi_") ~ "bpi",
-          stringr::str_detect(measure_desc, "_scl_") ~ "scl",
-          stringr::str_detect(measure_desc, "_rps_") ~ "rps",
-          stringr::str_detect(measure_desc, "_nrs_") ~ "nrs",
-          stringr::str_detect(measure_desc, "_bocf_") ~ "bocf",
-          stringr::str_detect(measure_desc, "_mcgill_|_mpq_") ~ "mpq",
-          TRUE ~ "not matched"
-        )
-    )
+      column_header = tolower(column_header),
+      matches = map(column_header, str_match, "(.+)\\s([a-z %]+)_*\\d*$") ,
+       measure = map_chr(matches, 3),
+      measure = if_else(measure == "%", "percent", measure),
+      measure_desc = map_chr(matches, 2)
+      ) %>% select(-matches, -column_header)
+  # %>% 
+  #   # set up measure types
+  #   dplyr::mutate(
+  #     measure_scale =
+  #       dplyr::case_when(
+  #         stringr::str_detect(column_header, "_vas_") ~ "vas",
+  #         stringr::str_detect(column_header, "_bpi_") ~ "bpi",
+  #         stringr::str_detect(column_header, "_scl_") ~ "scl",
+  #         stringr::str_detect(column_header, "_rps_") ~ "rps",
+  #         stringr::str_detect(column_header, "_nrs_") ~ "nrs",
+  #         stringr::str_detect(column_header, "_bocf_") ~ "bocf",
+  #         stringr::str_detect(column_header, "_mcgill_|_mpq_") ~ "mpq",
+  #         TRUE ~ "not matched"
+  #       )
+  #   )
   
  
 }
@@ -73,7 +67,7 @@ measures_wide <- function(obs_long, count_obs = FALSE) {
   # need to split so I can troubleshoot the
   obs_long %>%
     tidyr::pivot_wider(
-      id_cols = c(study_arm_id, measure_desc, measure_scale),
+      id_cols = c(study_arm_id, measure_desc),
       names_from = measure,
       values_from = obs,
       values_fill = NA

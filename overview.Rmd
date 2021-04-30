@@ -25,6 +25,45 @@ library(glue)
 
 ```
 
+```{r}
+withr::with_dir(here::here(), {
+  tar_load(hpp_models_nomod_arm)
+})
+
+```
+
+
+
+# chronic pain conditions
+
+```{r}
+  map_df(hpp_models_nomod_arm,
+       .f = function(mod){
+    mod %>% 
+      pluck("agd_arm") %>% 
+      group_by(chronic_condition) %>% 
+      summarise(
+        studies = n_distinct(.study)
+      ) %>% 
+      arrange(desc(studies)) %>% 
+      head(5) %>% 
+      mutate(outcome = mod %>% pluck('hpp_outcome'))
+  }) %>% 
+  gt(groupname_col = "outcome")
+
+```
+
+
+# main aim
+
+```{r}
+
+
+```
+
+
+
+# old stuff
 
 ```{r warning=FALSE}
 hpp_dat <-

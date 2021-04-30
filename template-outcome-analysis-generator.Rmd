@@ -33,6 +33,8 @@ conflicted::conflict_prefer("filter", "dplyr")
 withr::with_dir(here::here(), {
   tar_load(models)
   tar_load(outcomes_of_interest)
+  tar_load(drug_class_ma)
+  tar_load(chronic_condition_ma)
 })
 
 hpp_nma <-
@@ -107,11 +109,76 @@ plot_prior_posterior(hpp_nma)
 
 ```
 
+## separate subgroup analyses
+
+These are the 
+
+```{r drug class}
+drug_class_ma %>%
+  filter(!is.na(intervention_class)) %>% 
+  pivot_wider(
+    id_cols = intervention_class,
+    names_from = outcome, 
+    values_from = studies,
+    values_fill = 0
+  ) %>% 
+  gt(
+  ) %>% 
+  tab_header(
+    title = "Number of studies by class of drug",
+    subtitle = "With at least 3 studies because meta-analysis is a technique for multiple studies"
+  )
+
+```
+
+However, some of these are coming out as `NA` so need to investigate with Hollie. 
+
+```{r}
+drug_clss_ma
+
+
+```
+
+
+
+```{r chronic condition}
+chronic_condition_ma %>% 
+  filter(!is.na(chronic_condition)) %>% 
+  pivot_wider(
+    id_cols = chronic_condition,
+    names_from = outcome, 
+    values_from = studies,
+    values_fill = 0
+  ) %>% 
+  gt(
+  ) %>% 
+  tab_header(
+    title = "Number of studies by type of chronic pain condition",
+    subtitle = "With at least 3 studies because meta-analysis is a technique for multiple studies"
+  ) 
+
+```
+
+
+
+```{r echo=TRUE}
+# number of entries with chronic pain not recorded
+
+chronic_condition_ma %>% 
+  filter(is.na(chronic_condition))
+
+```
+
+Check chronic pain conditions with Hollie.
+
 ## pairwise analyses
 
 Individual analyses for each treatment, compared with placebo.
 
 -   [ ] adapt notation to our problem
+
+
+
 
 ### why do pairwise
 
@@ -246,8 +313,6 @@ tibble(
   ylim(-1, 2)
 
 ```
-
-
 
 ## input: design matrix 
 

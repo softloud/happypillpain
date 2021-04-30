@@ -9,12 +9,12 @@ preliminary_scrub <- function(dat) {
     dat  %>%
     # janitor::clean_names()
     rename(study_identifier = 'Study Identifier',
-           comments = Comments)
+           study_title = Comments)
 
   # study id tags
   study_tags <-
   cleaned_names %>%
-    select(study_identifier, comments) %>%
+    select(study_identifier, study_title) %>%
     distinct() %>%
     group_by(study_identifier) %>%
     mutate(
@@ -22,14 +22,14 @@ preliminary_scrub <- function(dat) {
       max_tag = max(tag_n),
       study_tag = if_else(
         max_tag > 1L,
-        glue("{study_identifier} | {tag_n}"),
+        glue::glue("{study_identifier} | {tag_n}"),
         study_identifier
       )
     ) %>%
-    select(study_identifier, comments, study_tag)
+    select(study_identifier, study_title, study_tag)
 
   cleaned_names %>%
-    left_join(study_tags, by = c("study_identifier", "comments")) %>%
+    left_join(study_tags, by = c("study_identifier", "study_title")) %>%
     dplyr::mutate(
       # change study identifier
       study_identifier = study_tag,
@@ -51,7 +51,14 @@ preliminary_scrub <- function(dat) {
         }
       )
     ) %>%
-    dplyr::select(study_arm_id, everything()) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) %>% 
-    select(study_arm_id, intervention_drug, study_tag, everything())
+    select(study_arm_id, 
+           intervention_drug, 
+           study_identifier,
+           study_title,
+           intervention = Intervention, 
+           intervention_name = "Intervention Name",
+           intervention_type = "Intervention Type",
+           everything()) %>% 
+    select(-study_tag)
 }

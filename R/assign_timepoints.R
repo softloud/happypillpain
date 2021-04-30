@@ -11,7 +11,9 @@
 assign_timepoints <- function(obs_wide) {
   obs_wide %>%
     dplyr::mutate(timepoint = dplyr::case_when(
-      stringr::str_detect(measure_desc, "post_intervention") ~ "post_int",
-      TRUE ~ "not_post_int"
+      stringr::str_detect(measure_desc, "post-intervention|endpoint") ~ "post_int",
+      str_detect(measure_desc, "mid-intervention|within trial") ~ "mid_int",
+      str_detect(measure_desc, "baseline") ~ "baseline",
+      TRUE ~ "unmatched"
     ))
 }
