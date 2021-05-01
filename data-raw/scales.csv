@@ -1,0 +1,55 @@
+Outcome,Scale,Direction of improvement,Lower range,Upper range,AKA
+Mood (depression),Arthritis Impact Measurement Scale,Lower,0,10,AIMS
+Mood (depression),Beck Depression Inventory,Lower,0,63,BDI; BDI-I; BDI-II; Beck Depression Scale; BDS
+Mood (depression),Center for Epidemiological Studies Depression Scale,Lower,0,60,CES-D; CESD-10; CESD-SF
+Mood (depression),Comprehensive Psychopathological Rating Scale,Lower,0,30,CPRS
+Mood (depression),Fibromyalgia Impact Questionnaire Depression Subscale,Lower,0,10,NA
+Mood (depression),Geriatric Depression Scale,Lower,0,15,NA
+Mood (depression),Hospital Anxiety and Depression Scale,Lower,0,21,HADS; HADS-D; HAD;
+Mood (depression),Depression index (0-11),Lower,0,11,NA
+Mood (depression),Levine-Pilowsky Depression Questionnaire,Lower,0,19,NA
+Mood (depression),Montgomery-Asberg Depression Rating Scale,Lower,0,60,MADRS
+Mood (depression),Major Depression Inventory,Lower,Unsure,Unsure,MDI
+Mood (depression),Patient Health Questionnaire,Lower,0,24,PHQ-8
+Mood (depression),Hamilton Depression Rating Scale,Lower,0,52,HAMD; HAM-D; HDS; Hamilton Rating Scale; Hamilton Depression Scale; HRSD
+Mood (depression),Profile of Mood States - Brief Form,Lower,0,Unsure,BPOMS; POMS
+Mood (depression),Profile of Mood States - Brief Form Depression-Dejection Subscale,Lower,0,24,NA
+Mood (depression),Score rated by patient (scale unknown),Lower,Unsure,Unsure,NA
+Mood (depression),Symptom Checklist 92,Lower,Unsure,Unsure,SCL-92
+Mood (depression),Symptom Checklist Revised (SCL-90-R),Lower,Unsure,Unsure,NA
+Mood (depression),Visual Analogue Scale 0-10,Lower,0,10,VAS (0-10)
+Mood (depression),Zung Depression Self-Rating Scale,Lower,20,80,Zung-D; Zung Depression Questionnaire; SDS; Zung self-rating depression scale
+Mood (depression),The Quick Inventory of Depressive Symptomatology,Lower,0,27,QIDS-SR
+Mood (depression),SF-36 Mental Component Score,Higher,0,100,Mental Component Summary Score
+Mood (depression),SF-36 Mental Health Subscale,Higher,0,100,NA
+Mood (depression),"Brief Pain Inventory, Pain Interference Mood Subscale",Lower,0,10,BPI pain interference mood subscale; mood interference
+Mood (depression),"Nottingham Health Profile, Emotions Subscale",Higher,0,100,NA
+Mood (depression),Visual Analogue Scale 0-100,Lower,0,100,VAS (0-100)
+Mood (depression),"Short Form McGill Pain Questionnaire, Affective subscale",Lower,0,Unsure,NA
+Pain,0-10 scale,Lower,0,10,0-10 cm VAS; 10cm VAS; 11 point Likert scale; 10 point Likert scale; BPI-SF (item 5); (0-10); 0-10 NRS; 10 Numerical Rating Scale; 0-10 VAS; 10 point verbal scale; 10-cm; 10 cm; 10 point scale; ActiWatch; 11 point Numeric Rating Scale; 11-point NRS; Pain severity - numeric rating scale; Weekly 24-hour average pain score
+Pain,0-100 scale,Lower,0,100,100 mm; 0-100 VAS; 100-mm VAS; 100 VAS; PVAS; PED 24-hour recall pain score; PED weekly recall; PED weekly recall
+Pain,0-4 scale,Lower,0,4,0-4; 4 point scale; 5-point scale
+Pain,Australian and Canadian Hand Osteoarthritis Index,Lower,0,500,AUSCAN
+Pain,Brief Pain Inventory,Lower,0,10,BPI; Brief pain inventory; BPI-SF
+Pain,Chest pain severity symptom intensity score,Lower,0,Unsure,Chest pain severity symptom intensity score
+Pain,Composite pain scores (frequency x duration),Lower,1,9,Composite pain scores (frequency x duration)
+Pain,Visual Rating Scale 0-7,Lower,0,7,VRS 0-7
+Pain,Descriptor Differential Scale,Lower,0,20,DDS
+Pain,0-20 scale,Lower,0,20,e-diary pain scores [0-20]; neuropathy observer scale (0-20); symptom intensity scale; WOMAC pain subscale
+Pain,"Fibromyalgia Impact Questionnaire, Pain Subscale",Lower,0,10,NA
+Pain,Gracely Pain Scale,Lower,0,1.75,Gracely
+Pain,Integrated Pain Score,Lower,0,Unsure,NA
+Pain,McGill Pain Questionnaire,Lower,NA,78,McGill Inventory
+Pain,"McGill Pain Questionnaire, Present Pain Intensity",Lower,0,5,PPI; Present pain intensity score
+Pain,"McGill Pain Questionnaire, Short-Form",Lower,0,Unsure,MPQ-SF
+Pain,0-8 scale,Lower,0,8,Verbal rating scale (0-8)
+Pain,Medical Outcomes Study Pain Measures,Lower,0,100,MOSPM
+Pain,Neck Pain Disability Index,Lower,0,50,NPDI
+Pain,Neuropathic Pain Scale,Lower,0,100,NPS
+Pain,Neuropathic Pain Symptom Inventory,Lower,0,100,NPSI
+Pain,Nottingham Health Profile pain subscale,Higher,0,100,NA
+Pain,Pain Scale Rating System,Lower,Unsure,Unsure,NA
+Pain,Verbal descriptors,Lower,Unsure,Unsure,NA
+Pain,Widespread Pain Index - Wolfe 2010 criteria,Lower,0,19,NA
+Pain,Visual Analogue Scale,Lower,0,Unsure,VAS; Visual Analogue Scale
+Pain,SF-36 bodily pain subscale,Higher,0,100,NA

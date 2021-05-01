@@ -1,130 +1,18 @@
 ---
-title: "Cochrane intervention analysis"
+title: "hpp"
 description: |
-  Key information about the analysis on the use of antidepressants to treat chronic pain
+  Welcome to the website. I hope you enjoy it!
 site: distill::distill_website
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, cache=FALSE)
+knitr::opts_chunk$set(echo = FALSE)
 
 # Learn more about creating websites with Distill at:
 # https://rstudio.github.io/distill/website.html
 
 # Learn more about publishing to GitHub Pages at:
 # https://rstudio.github.io/distill/publish_website.html#github-pages
-
-```
-
-
-```{r message=FALSE,eval=TRUE}
-library(targets)
-library(tidyverse)
-library(dontpanic)
-library(happypillpain)
-library(janitor)
-library(gt)
-library(RColorBrewer)
-
-```
-
-
-```{r warning=FALSE}
-meta_var <- read_rds("data-raw/meta_var.rds")
-
-withr::with_dir(here::here(), {
-  tar_load(hpp_dat)
-  tar_load(keywords)
-})
-```
-
-```{r }
-current_n_studies <- 
-   hpp_dat %>%
-    dplyr::pull(study_identifier) %>%
-    dplyr::n_distinct()
-
-```
-
-As of `r Sys.Date() %>% title_date()`, the analysis currently includes `r current_n_studies` out of an expected `r meta_var$total_studies` studies.
-
-```{r fig.height=2}
-
-
-tribble(
-  ~stage,            ~count,
-  "analysis",  current_n_studies,
-  "extraction", meta_var$total_studies - current_n_studies
-) %>% 
-  mutate(studies = "studies",
-         stage = fct_relevel(stage, "extraction")) %>%
-  ggplot() +
-  geom_col(
-        aes(studies, y = count, fill = stage)) +
-  coord_flip() +
-  rockthemes::scale_fill_nodoubt() +
-  theme_minimal() +
-  theme(axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
-        axis.title.x = element_blank()) +
-  labs(
-    title = "Current progress of data extraction"
-  )
-
-
-```
-
-## analysis pipeline 
-
-```{r message=FALSE,warning=FALSE,include=FALSE}
-dev <- suppressMessages(
-  tar_glimpse()
-)
-```
-
-```{r}
-dev
-```
-
-```{r}
-# update 
-```
-
-
-```{r get data}
-withr::with_dir(here::here(), {
-  tar_load(models)
-})
-
-hpp_nma <-
-  models %>% 
-  keep(~.$outcome == params$outcome) %>% 
-  pluck(1)
-
-
-# all this plucking and whatnot stripped it of the class value
-class(hpp_nma) <- "stan_nma"
-
-```
-
-```{r generating outcomes, eval=FALSE}
-# this is for creating the markdown files
-models %>% 
-  map_chr("outcome") %>% 
-  map(
-  .f = function(outcome) {
-      file_name_outcome <- str_replace_all(outcome, " ", "-")  
-    rmarkdown::render(
-      input = "template-outcome-analysis-generator.Rmd",
-      output_file = glue("docs/outcome-analysis-{file_name_outcome}.html"),
-      params = list(
-        outcome = outcome 
-      )
-    )
-  }
-  
-  )
-
 
 ```
 

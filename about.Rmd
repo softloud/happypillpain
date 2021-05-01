@@ -1,11 +1,11 @@
 ---
-title: "Data analysis"
+title: "about this site"
 description: |
-  Cochrane intervention study
+  for researchers' internal use
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This is an website for internal use among the researchers on this study. The data are not currently provided in the codebase because I need to check with the PI about data sharing.  
+This site is intended for internal use in team meetings.

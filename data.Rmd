@@ -1,0 +1,145 @@
+---
+title: "Encoding the models"
+description: |
+  Need to ensure indexing in data is same in software, math is the bridge.
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r pkgs}
+library(targets)
+library(tidyverse)
+library(gt)
+
+
+```
+
+
+```{r load data}
+
+withr::with_dir(here::here(), {
+  
+  tar_load(metapar_consult)
+  tar_load(wo_measures)
+  
+  })
+
+```
+
+
+## general structure of the data for the model
+
+We need to have rows as arm-based observations per study, with columns that identify the statistics, the study, the treatment, and any moderators or subgroups. 
+
+## raw data
+
+Current raw data loaded into the analysis:
+
+```{r}
+list.files("data-raw")
+```
+
+Aside from the covidence `extracted_data`, these files comprise row-identifiers (`Study Identifier`, `Comments`, and `Intervention`), along with outcome-relevant columns identified by Hollie.
+
+```{r echo=TRUE}
+# confirm this assumption
+
+# count the number of unique combinations of 
+# study, title, and intervention in rows
+n_obs <- 
+metapar_consult %>% 
+  select(study, study_title, arm) %>% 
+  distinct() %>% 
+  nrow()
+
+# check this number is the same as the number of rows
+# i.e., we can uniquely identify the rows with the values in these three columns
+nrow(metapar_consult) == n_obs
+
+```
+
+
+## study-level identifier
+
+We need columns or dataframes to encode all of the indexes. Using [@white2019]'s nomenclature, we have $i = 1, \dots, n$ studies. 
+
+Since there are sometimes more than one title per study, we'll tag studies with `:n`.
+
+```{r}
+metapar_consult %>% 
+  select(study, study_title) %>% 
+  distinct() %>% 
+  filter(str_detect(study, ":"), str_length(study) < 16) %>%
+  mutate(
+    study_title = str_trunc(study_title, width = 35)
+  ) %>% 
+  head() %>% 
+  gt()
+```
+
+## treatments 
+
+We also have $k = 1, \dots, K$ treatments. But what will constitute a treatment will be different depending on the model.
+
+Best to separate drug name from dosage.
+
+We will use `Intervention Name`
+
+```{r}
+metapar_consult %>% 
+  count(name) %>% 
+  arrange(desc(n)) %>% head()
+
+
+```
+
+First we check that the `NA` values are all placebo.
+
+```{r echo=TRUE}
+metapar_consult %>% 
+  filter(is.na(name)) %>% 
+  count(type) %>% 
+  arrange(desc(n))
+
+```
+
+There is one antidepressant without a name. 
+
+```{r echo=TRUE}
+# get to that specific obs
+metapar_consult %>% 
+  filter(
+    is.na(name), 
+    type == "antidepressant") %>% 
+   select(study, study_title, arm, class)
+  
+```
+
+## measures
+
+We pivot longer and wider to get observations.
+
+```{r}
+wo_measures
+
+
+```
+
+
+## timepoints
+
+## scales
+
+There are lots of scales, so Hollie created this fab measure identification dataset.
+
+```{r}
+
+```
+

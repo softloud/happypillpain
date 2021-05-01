@@ -1,0 +1,12 @@
+name: happypillpain
+title: happypillpain
+username:
+account: softloud
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3835812
+bundleId: 4462497
+url: https://softloud.shinyapps.io/happypillpain/
+when: 1618256456.64299
+asMultiple: FALSE
+asStatic: FALSE
