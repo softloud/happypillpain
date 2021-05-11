@@ -2,10 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
-data-raw/review_*.csv
+data/review_*.csv
 data/
 outputs/
 targets/
 +_files/
 _targets/
-
+old-data/

@@ -91,8 +91,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-04-30"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-04-30"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-05-11"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-05-11"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="hpp: Encoding the models"/>
@@ -111,7 +111,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Encoding the models"]},{"type":"character","attributes":{},"value":["Need to ensure indexing in data is same in software, math is the bridge.\n"]},{"type":"character","attributes":{},"value":["2021-04-30"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["references.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output","bibliography","params"]}},"value":[{"type":"character","attributes":{},"value":["Encoding the models"]},{"type":"character","attributes":{},"value":["Need to ensure indexing in data is same in software, math is the bridge.\n"]},{"type":"character","attributes":{},"value":["2021-05-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["references.bib"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["random_rows"]}},"value":[{"type":"integer","attributes":{},"value":[3]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2040,6 +2040,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
+  <script src="site_libs/vis-4.20.1/vis.min.js"></script>
+  <script src="site_libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2059,7 +2063,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Encoding the models","description":"Need to ensure indexing in data is same in software, math is the bridge.","authors":[],"publishedDate":"2021-04-30T00:00:00.000+01:00"}
+{"title":"Encoding the models","description":"Need to ensure indexing in data is same in software, math is the bridge.","authors":[],"publishedDate":"2021-05-11T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2068,10 +2072,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
+<a href="index.html">overview</a>
+<a href="data.html">data</a>
 </div>
 <div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
+<a href="about.html">about</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2093,13 +2098,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
+<li><a href="#document-workflow">document workflow</a></li>
 <li><a href="#general-structure-of-the-data-for-the-model">general structure of the data for the model</a></li>
+<li><a href="#a-computational-lab-book-for-excel-like-data-wrangling">a computational lab-book for excel-like data wrangling</a></li>
 <li><a href="#raw-data">raw data</a></li>
 <li><a href="#study-level-identifier">study-level identifier</a></li>
 <li><a href="#treatments">treatments</a></li>
 <li><a href="#measures">measures</a></li>
 <li><a href="#timepoints">timepoints</a></li>
+<li><a href="#chronic-pain-conditions">chronic pain conditions</a>
+<ul>
+<li><a href="#random-check">random check</a></li>
+</ul></li>
 <li><a href="#scales">scales</a></li>
+<li><a href="#intervention">intervention</a></li>
 </ul>
 </nav>
 </div>
@@ -2109,15 +2121,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
+<h2 id="document-workflow">document workflow</h2>
+<p>In addition to providing a toolchain of the data cleaning process, we will need to document the process for publications generated from this research.</p>
+<p>Write this so Tamar, Gav, and the other people on the team who are not getting their hands dirty understand the algorithmic processes the data was put through.</p>
+<p>To facilitate collaboration, this project uses two <code>R</code> packages:</p>
+<ul>
+<li><code>targets::</code> for workflow inspection</li>
+<li><code>renv::</code> to avoid installation hell</li>
+</ul>
+<p><code>renv::</code> is only applicable if you intend on using <code>targets::</code> to interact with the data in RStudio.</p>
+<!-- If I had an R workflow I could put it here.  -->
 <h2 id="general-structure-of-the-data-for-the-model">general structure of the data for the model</h2>
 <p>We need to have rows as arm-based observations per study, with columns that identify the statistics, the study, the treatment, and any moderators or subgroups.</p>
+<h2 id="a-computational-lab-book-for-excel-like-data-wrangling">a computational lab-book for excel-like data wrangling</h2>
+<p>In this workflow, we create an explorable dataset for each of the indexes/variables we require for the model, as we work through cleaning and pivoting the data.</p>
+<p>In particular, we also create a dataset for problematic elements for each variable, so they can be inspected by Charles and Hollie together.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div id="htmlwidget-2faf70d2ec9fb397a4b6" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2faf70d2ec9fb397a4b6">{"x":{"nodes":{"name":["raw_pain","outcomes","obs_post_int","wo_time","wo_long","raw_mood","obs","raw_adverse","wo_scale_multiple_matches","wo_wide","scales","metapar_consult","export_chronic","obs_ad_post_int","scale_match_test","model_key","metapar","raw_outcome_dat","wo_time_unmatched","wo_scale_matches","wo_scale","raw_covidence_export","classifiers","wo_study","drug_names_unlabelled","class_check_gs","scales_raw"],"type":["stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem"],"status":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"seconds":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["raw_pain","outcomes","obs_post_int","wo_time","wo_long","raw_mood","obs","raw_adverse","wo_scale_multiple_matches","wo_wide","scales","metapar_consult","export_chronic","obs_ad_post_int","scale_match_test","model_key","metapar","raw_outcome_dat","wo_time_unmatched","wo_scale_matches","wo_scale","raw_covidence_export","classifiers","wo_study","drug_names_unlabelled","class_check_gs","scales_raw"],"label":["raw_pain","outcomes","obs_post_int","wo_time","wo_long","raw_mood","obs","raw_adverse","wo_scale_multiple_matches","wo_wide","scales","metapar_consult","export_chronic","obs_ad_post_int","scale_match_test","model_key","metapar","raw_outcome_dat","wo_time_unmatched","wo_scale_matches","wo_scale","raw_covidence_export","classifiers","wo_study","drug_names_unlabelled","class_check_gs","scales_raw"],"level":[1,2,10,6,4,1,9,1,8,5,2,2,3,11,7,1,3,2,7,7,8,1,1,3,4,4,1],"color":["#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac"],"shape":["dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot"]},"edges":{"from":["model_key","obs","wo_wide","wo_study","wo_scale","wo_scale_matches","wo_long","scales_raw","raw_covidence_export","metapar_consult","metapar","obs_post_int","scales","wo_time","classifiers","metapar_consult","raw_adverse","raw_mood","raw_pain","wo_time","scales","wo_time","wo_scale_matches","outcomes","raw_outcome_dat","metapar","metapar"],"to":["outcomes","obs_post_int","wo_time","wo_long","obs","wo_scale_multiple_matches","wo_wide","scales","metapar_consult","export_chronic","obs_ad_post_int","obs_ad_post_int","scale_match_test","scale_match_test","metapar","metapar","raw_outcome_dat","raw_outcome_dat","raw_outcome_dat","wo_time_unmatched","wo_scale_matches","wo_scale_matches","wo_scale","wo_study","wo_study","drug_names_unlabelled","class_check_gs"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Stem","Pattern"],"shape":["dot","square"],"color":["#899DA4","#899DA4"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>The idea is to have as rigorous and documented data cleaning process as the extraction was.</p>
 <h2 id="raw-data">raw data</h2>
 <p>Current raw data loaded into the analysis:</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code>[1] &quot;adverse-events.csv&quot;                                
-[2] &quot;Mood.csv&quot;                                          
-[3] &quot;Pain intensity.csv&quot;                                
-[4] &quot;review_91309_extracted_data_csv_20210420002814.csv&quot;</code></pre>
+<pre><code> [1] &quot;adverse-events.csv&quot;                                
+ [2] &quot;chronic_condition.csv&quot;                             
+ [3] &quot;class_check_gs.csv&quot;                                
+ [4] &quot;classifiers.csv&quot;                                   
+ [5] &quot;get-classifiers.R&quot;                                 
+ [6] &quot;get-scales-dat.R&quot;                                  
+ [7] &quot;Mood.csv&quot;                                          
+ [8] &quot;Pain intensity.csv&quot;                                
+ [9] &quot;review_91309_extracted_data_csv_20210420002814.csv&quot;
+[10] &quot;scales.csv&quot;                                        </code></pre>
 </div>
 <p>Aside from the covidence <code>extracted_data</code>, these files comprise row-identifiers (<code>Study Identifier</code>, <code>Comments</code>, and <code>Intervention</code>), along with outcome-relevant columns identified by Hollie.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2128,7 +2164,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='co'># study, title, and intervention in rows</span>
 <span class='va'>n_obs</span> <span class='op'>&lt;-</span> 
 <span class='va'>metapar_consult</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>study_title</span>, <span class='va'>arm</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>title</span>, <span class='va'>arm</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>distinct</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='op'>)</span>
 
@@ -2147,7 +2183,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#koexwdlrlv .gt_table {
+#ppqsmtxewo .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2172,7 +2208,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_heading {
+#ppqsmtxewo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2184,7 +2220,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_title {
+#ppqsmtxewo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2194,7 +2230,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-width: 0;
 }
 
-#koexwdlrlv .gt_subtitle {
+#ppqsmtxewo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2204,13 +2240,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-width: 0;
 }
 
-#koexwdlrlv .gt_bottom_border {
+#ppqsmtxewo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_col_headings {
+#ppqsmtxewo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2225,7 +2261,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_col_heading {
+#ppqsmtxewo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2245,7 +2281,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#koexwdlrlv .gt_column_spanner_outer {
+#ppqsmtxewo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2257,15 +2293,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 4px;
 }
 
-#koexwdlrlv .gt_column_spanner_outer:first-child {
+#ppqsmtxewo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#koexwdlrlv .gt_column_spanner_outer:last-child {
+#ppqsmtxewo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#koexwdlrlv .gt_column_spanner {
+#ppqsmtxewo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2277,7 +2313,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   width: 100%;
 }
 
-#koexwdlrlv .gt_group_heading {
+#ppqsmtxewo .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2299,7 +2335,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#koexwdlrlv .gt_empty_group_heading {
+#ppqsmtxewo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2314,15 +2350,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#koexwdlrlv .gt_from_md > :first-child {
+#ppqsmtxewo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#koexwdlrlv .gt_from_md > :last-child {
+#ppqsmtxewo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#koexwdlrlv .gt_row {
+#ppqsmtxewo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2341,7 +2377,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#koexwdlrlv .gt_stub {
+#ppqsmtxewo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2353,7 +2389,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-left: 12px;
 }
 
-#koexwdlrlv .gt_summary_row {
+#ppqsmtxewo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2363,7 +2399,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#koexwdlrlv .gt_first_summary_row {
+#ppqsmtxewo .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2373,7 +2409,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_grand_summary_row {
+#ppqsmtxewo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2383,7 +2419,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#koexwdlrlv .gt_first_grand_summary_row {
+#ppqsmtxewo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2393,11 +2429,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_striped {
+#ppqsmtxewo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#koexwdlrlv .gt_table_body {
+#ppqsmtxewo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2406,7 +2442,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_footnotes {
+#ppqsmtxewo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2420,13 +2456,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_footnote {
+#ppqsmtxewo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#koexwdlrlv .gt_sourcenotes {
+#ppqsmtxewo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2440,79 +2476,54 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#koexwdlrlv .gt_sourcenote {
+#ppqsmtxewo .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#koexwdlrlv .gt_left {
+#ppqsmtxewo .gt_left {
   text-align: left;
 }
 
-#koexwdlrlv .gt_center {
+#ppqsmtxewo .gt_center {
   text-align: center;
 }
 
-#koexwdlrlv .gt_right {
+#ppqsmtxewo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#koexwdlrlv .gt_font_normal {
+#ppqsmtxewo .gt_font_normal {
   font-weight: normal;
 }
 
-#koexwdlrlv .gt_font_bold {
+#ppqsmtxewo .gt_font_bold {
   font-weight: bold;
 }
 
-#koexwdlrlv .gt_font_italic {
+#ppqsmtxewo .gt_font_italic {
   font-style: italic;
 }
 
-#koexwdlrlv .gt_super {
+#ppqsmtxewo .gt_super {
   font-size: 65%;
 }
 
-#koexwdlrlv .gt_footnote_marks {
+#ppqsmtxewo .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="koexwdlrlv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ppqsmtxewo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">study</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">study_title</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">title</th>
     </tr>
   </thead>
-  <tbody class="gt_table_body">
-    <tr>
-      <td class="gt_row gt_center">foster 2010 : 1</td>
-      <td class="gt_row gt_left">oral desipramine and topical lid...</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center">foster 2010 : 2</td>
-      <td class="gt_row gt_left">effect of amitriptyline on sympt...</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center">arnold 2012 : 1</td>
-      <td class="gt_row gt_left">efficacy and safety of duloxetin...</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center">arnold 2012 : 2</td>
-      <td class="gt_row gt_left">safety and efficacy of esreboxet...</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center">arnold 2010 : 1</td>
-      <td class="gt_row gt_left">efficacy and safety of milnacipr...</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center">arnold 2010 : 2</td>
-      <td class="gt_row gt_left">flexible dosed duloxetine in the...</td>
-    </tr>
-  </tbody>
+  <tbody class="gt_table_body"></tbody>
   
   
 </table></div>
@@ -2570,70 +2581,1934 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span>
     <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>name</span><span class='op'>)</span>, 
     <span class='va'>type</span> <span class='op'>==</span> <span class='st'>"antidepressant"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-   <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>study_title</span>, <span class='va'>arm</span>, <span class='va'>class</span><span class='op'>)</span>
+   <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>title</span>, <span class='va'>arm</span>, <span class='va'>class</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code># A tibble: 1 x 4
-  study     study_title                             arm          class
-  &lt;glue&gt;    &lt;chr&gt;                                   &lt;chr&gt;        &lt;chr&gt;
+  study     title                                   arm          class
+  &lt;chr&gt;     &lt;chr&gt;                                   &lt;chr&gt;        &lt;chr&gt;
 1 tasmuth … venlafaxine in neuropathic pain follow… venlafaxine… snri </code></pre>
 </div>
 <h2 id="measures">measures</h2>
 <p>We pivot longer and wider to get observations.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code>[[1]]
-# A tibble: 232 x 5
-   outcome study_arm                   measure_desc      percent n    
-   &lt;chr&gt;   &lt;chr&gt;                       &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt;
- 1 adverse Lee 2010 = Placebo          adverse_events_e… 12      &lt;NA&gt; 
- 2 adverse Lee 2010 = Venlafaxine - 7… adverse_events_e… 52      &lt;NA&gt; 
- 3 adverse Keskinbora 2006 = Gabapent… adverse_events_e… 23.1    6    
- 4 adverse Keskinbora 2006 = Amitript… adverse_events_e… 69.2    18   
- 5 adverse Cannon 1994 = Placebo       adverse_events_e… 55      11   
- 6 adverse Cannon 1994 = Clonidine     adverse_events_e… 70      14   
- 7 adverse Cannon 1994 = Imipramine 5… adverse_events_e… 75      15   
- 8 adverse Riesner 2008 = Placebo      adverse_events_e… 70      21   
- 9 adverse Riesner 2008 = Fluvoxamine… adverse_events_e… 93.3    28   
-10 adverse Watson 1998 = Amitriptylin… adverse_events_e… 93.9    31   
-# … with 222 more rows
-
-[[2]]
-# A tibble: 1,798 x 13
-   outcome study_arm measure_desc n     mean  sd    median range se   
-   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
- 1 pain    Lee 2010… pain_chest_… 21    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 2 pain    Lee 2010… pain_chest_… 21    78.2  16.2  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 3 pain    Lee 2010… sf_36_body_… 21    51.9  14.3  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 4 pain    Lee 2010… sf_36_body_… 21    52.4  14.3  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 5 pain    Lee 2010… pain_chest_… 22    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 6 pain    Lee 2010… pain_chest_… 22    36.5  20.7  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 7 pain    Lee 2010… sf_36_body_… 22    51.4  12.9  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 8 pain    Lee 2010… sf_36_body_… 22    52.7  13    &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
- 9 pain    dsrhv 20… pain_vas_0_… 21    7.62  0.86  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
-10 pain    dsrhv 20… pain_vas_0_… 21    7.48  1.29  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
-# … with 1,788 more rows, and 4 more variables: iqr &lt;chr&gt;,
-#   percent &lt;chr&gt;, ci &lt;chr&gt;, intervals &lt;chr&gt;
-
-[[3]]
-# A tibble: 1,268 x 12
-   outcome study_arm   measure_desc    mean  n     sd    percent se   
-   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;
- 1 mood    Lee 2010 =… depression_bec… 9.92  21    0.69  &lt;NA&gt;    &lt;NA&gt; 
- 2 mood    Lee 2010 =… depression_bec… &lt;NA&gt;  21    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt; 
- 3 mood    Lee 2010 =… sf_36_mental_h… 49.1  21    13.6  &lt;NA&gt;    &lt;NA&gt; 
- 4 mood    Lee 2010 =… sf_36_mental_h… 50.3  21    14.2  &lt;NA&gt;    &lt;NA&gt; 
- 5 mood    Lee 2010 =… depression_bec… 9.72  22    0.69  &lt;NA&gt;    &lt;NA&gt; 
- 6 mood    Lee 2010 =… depression_bec… &lt;NA&gt;  22    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt; 
- 7 mood    Lee 2010 =… sf_36_mental_h… 52.9  22    19.5  &lt;NA&gt;    &lt;NA&gt; 
- 8 mood    Lee 2010 =… sf_36_mental_h… 55.1  22    19.6  &lt;NA&gt;    &lt;NA&gt; 
- 9 mood    dsrhv 2018… depression_bdi… &lt;NA&gt;  5     &lt;NA&gt;  23.8    &lt;NA&gt; 
-10 mood    dsrhv 2018… depression_bdi… &lt;NA&gt;  9     &lt;NA&gt;  42.9    &lt;NA&gt; 
-# … with 1,258 more rows, and 4 more variables: range &lt;chr&gt;,
-#   median &lt;chr&gt;, ci &lt;chr&gt;, intervals &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 3,298 x 16
+   outcome study   arm     measure_desc  timepoint percent     n  mean
+   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+ 1 adverse lee 20… placebo adverse_even… post_int     12      NA    NA
+ 2 adverse lee 20… venlaf… adverse_even… post_int     52      NA    NA
+ 3 adverse keskin… gabape… adverse_even… post_int     23.1     6    NA
+ 4 adverse keskin… amitri… adverse_even… post_int     69.2    18    NA
+ 5 adverse cannon… placebo adverse_even… post_int     55      11    NA
+ 6 adverse cannon… clonid… adverse_even… post_int     70      14    NA
+ 7 adverse cannon… imipra… adverse_even… post_int     75      15    NA
+ 8 adverse riesne… placebo adverse_even… post_int     70      21    NA
+ 9 adverse riesne… fluvox… adverse_even… post_int     93.3    28    NA
+10 adverse watson… amitri… adverse_even… post_int     93.9    31    NA
+# … with 3,288 more rows, and 8 more variables: sd &lt;dbl&gt;,
+#   median &lt;dbl&gt;, range &lt;chr&gt;, se &lt;dbl&gt;, iqr &lt;chr&gt;, ci &lt;chr&gt;,
+#   intervals &lt;chr&gt;, matched_scales &lt;chr&gt;</code></pre>
 </div>
 <h2 id="timepoints">timepoints</h2>
+<h2 id="chronic-pain-conditions">chronic pain conditions</h2>
+<h3 id="random-check">random check</h3>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#hwpilqorbv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hwpilqorbv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hwpilqorbv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hwpilqorbv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hwpilqorbv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hwpilqorbv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hwpilqorbv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hwpilqorbv .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hwpilqorbv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hwpilqorbv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hwpilqorbv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hwpilqorbv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hwpilqorbv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#hwpilqorbv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hwpilqorbv .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hwpilqorbv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hwpilqorbv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hwpilqorbv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hwpilqorbv .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hwpilqorbv .gt_left {
+  text-align: left;
+}
+
+#hwpilqorbv .gt_center {
+  text-align: center;
+}
+
+#hwpilqorbv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hwpilqorbv .gt_font_normal {
+  font-weight: normal;
+}
+
+#hwpilqorbv .gt_font_bold {
+  font-weight: bold;
+}
+
+#hwpilqorbv .gt_font_italic {
+  font-style: italic;
+}
+
+#hwpilqorbv .gt_super {
+  font-size: 65%;
+}
+
+#hwpilqorbv .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="hwpilqorbv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">title</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">arm</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">condition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">iasp_criteria</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">yasuda 2011</td>
+      <td class="gt_row gt_left">superiority of duloxetine to placebo in improving diabetic neuropathic pain: results of a randomized controlled trial in japan</td>
+      <td class="gt_row gt_left">duloxetine - 60mg</td>
+      <td class="gt_row gt_left">painful diabetic neuropathy</td>
+      <td class="gt_row gt_left">neuropathic</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">masand 2009</td>
+      <td class="gt_row gt_left">a double-blind, randomized, placebo-controlled trial of paroxetine controlled-release in irritable bowel syndrome</td>
+      <td class="gt_row gt_left">placebo</td>
+      <td class="gt_row gt_left">irritable bowel syndrome</td>
+      <td class="gt_row gt_left">primary visceral</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">yeephu 2013</td>
+      <td class="gt_row gt_left">efficacy and safety of mirtazapine in fibromyalgia syndrome patients: a randomized placebo-controlled pilot study</td>
+      <td class="gt_row gt_left">mirtazapine 30mg</td>
+      <td class="gt_row gt_left">fibromyalgia</td>
+      <td class="gt_row gt_left">primary</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">vitton 2004</td>
+      <td class="gt_row gt_left">information from other article: gendreau 2005- reference in comments</td>
+      <td class="gt_row gt_left">milnacipran 25-200mg/day [q.d]</td>
+      <td class="gt_row gt_left">fibromyalgia</td>
+      <td class="gt_row gt_left">primary</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">skljarevski 2010</td>
+      <td class="gt_row gt_left">duloxetine versus placebo in patients with chronic low back pain: a 12-week, fixed-dose, randomized, double-blind trial. brazil listed as one of the countries with 2 sites in the protocol but not listed in the study.</td>
+      <td class="gt_row gt_left">duloxetine 60mg</td>
+      <td class="gt_row gt_left">low back pain</td>
+      <td class="gt_row gt_left">musculoskeletal</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
 <h2 id="scales">scales</h2>
-<p>There are lots of scales, so Hollie created this fab measure identification dataset.</p>
+<p>Hollie compiled</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="intervention">intervention</h2>
+<p>The arms of the studies are identified by intervention <code>name</code> and dose (not yet extracted).</p>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#sphtlageqo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sphtlageqo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sphtlageqo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sphtlageqo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sphtlageqo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sphtlageqo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sphtlageqo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sphtlageqo .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sphtlageqo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sphtlageqo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sphtlageqo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sphtlageqo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sphtlageqo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#sphtlageqo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sphtlageqo .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sphtlageqo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sphtlageqo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#sphtlageqo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sphtlageqo .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#sphtlageqo .gt_left {
+  text-align: left;
+}
+
+#sphtlageqo .gt_center {
+  text-align: center;
+}
+
+#sphtlageqo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sphtlageqo .gt_font_normal {
+  font-weight: normal;
+}
+
+#sphtlageqo .gt_font_bold {
+  font-weight: bold;
+}
+
+#sphtlageqo .gt_font_italic {
+  font-style: italic;
+}
+
+#sphtlageqo .gt_super {
+  font-size: 65%;
+}
+
+#sphtlageqo .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="sphtlageqo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="2" class="gt_heading gt_title gt_font_normal" style>Number of studies per intervention</th>
+    </tr>
+    <tr>
+      <th colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Interventions with &lt; 3 studies excluded</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Intervention</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Number of studies</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">abt-894</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline</td>
+      <td class="gt_row gt_center">50</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">benztropine mesylate</td>
+      <td class="gt_row gt_center">4</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">citalopram</td>
+      <td class="gt_row gt_center">5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">cognitive behavioural therapy</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">desipramine</td>
+      <td class="gt_row gt_center">8</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">desvenlafaxine</td>
+      <td class="gt_row gt_center">8</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">dothiepin</td>
+      <td class="gt_row gt_center">4</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">duloxetine</td>
+      <td class="gt_row gt_center">52</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">escitalopram</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">esreboxetine</td>
+      <td class="gt_row gt_center">4</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">fluoxetine</td>
+      <td class="gt_row gt_center">15</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">gabapentin</td>
+      <td class="gt_row gt_center">6</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">imipramine</td>
+      <td class="gt_row gt_center">7</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">maprotiline</td>
+      <td class="gt_row gt_center">5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">milnacipran</td>
+      <td class="gt_row gt_center">20</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">mirtazapine</td>
+      <td class="gt_row gt_center">4</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">n</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">nortriptyline</td>
+      <td class="gt_row gt_center">9</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">paroxetine</td>
+      <td class="gt_row gt_center">10</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">placebo</td>
+      <td class="gt_row gt_center">124</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">pregabalin</td>
+      <td class="gt_row gt_center">10</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">sertraline</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">trazodone</td>
+      <td class="gt_row gt_center">5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">venlafaxine</td>
+      <td class="gt_row gt_center">11</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_center">18</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+<p>Small number of intervention labels missing:</p>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#himyeyfyxy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#himyeyfyxy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#himyeyfyxy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#himyeyfyxy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#himyeyfyxy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#himyeyfyxy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#himyeyfyxy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#himyeyfyxy .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#himyeyfyxy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#himyeyfyxy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#himyeyfyxy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#himyeyfyxy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#himyeyfyxy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#himyeyfyxy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#himyeyfyxy .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#himyeyfyxy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#himyeyfyxy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#himyeyfyxy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#himyeyfyxy .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#himyeyfyxy .gt_left {
+  text-align: left;
+}
+
+#himyeyfyxy .gt_center {
+  text-align: center;
+}
+
+#himyeyfyxy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#himyeyfyxy .gt_font_normal {
+  font-weight: normal;
+}
+
+#himyeyfyxy .gt_font_bold {
+  font-weight: bold;
+}
+
+#himyeyfyxy .gt_font_italic {
+  font-style: italic;
+}
+
+#himyeyfyxy .gt_super {
+  font-size: 65%;
+}
+
+#himyeyfyxy .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="himyeyfyxy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">class</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">synthetic cannabinoid</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">active placebo</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">opioid</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">neurofeedback</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">placebo + ibuprofen 1800mg</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">placebo + ibuprofen 1800mg</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">anticonvulsant</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">epidural injection + placebo</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">cardiovascular fitness training</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">psychological therapy</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">usual care</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">active placebo</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">anticonvulsant</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">active comparator</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">painkiller</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">placebo + anticonvulsant</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">active placebo</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">NA</td>
+      <td class="gt_row gt_left">skeletal muscle relaxant</td>
+      <td class="gt_row gt_left">NA</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+<p>These are the interventions with &lt; 3 studies. Why did NICE recommend acupuncture when there are only two studies?!</p>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#vtsynncokm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vtsynncokm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vtsynncokm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vtsynncokm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vtsynncokm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vtsynncokm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vtsynncokm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vtsynncokm .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vtsynncokm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vtsynncokm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vtsynncokm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vtsynncokm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vtsynncokm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#vtsynncokm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vtsynncokm .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vtsynncokm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vtsynncokm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#vtsynncokm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vtsynncokm .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#vtsynncokm .gt_left {
+  text-align: left;
+}
+
+#vtsynncokm .gt_center {
+  text-align: center;
+}
+
+#vtsynncokm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vtsynncokm .gt_font_normal {
+  font-weight: normal;
+}
+
+#vtsynncokm .gt_font_bold {
+  font-weight: bold;
+}
+
+#vtsynncokm .gt_font_italic {
+  font-style: italic;
+}
+
+#vtsynncokm .gt_super {
+  font-size: 65%;
+}
+
+#vtsynncokm .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="vtsynncokm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="2" class="gt_heading gt_title gt_font_normal" style>Number of studies per intervention</th>
+    </tr>
+    <tr>
+      <th colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Interventions with &gt; 2 studies excluded</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Intervention</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Number of studies</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">acupuncture</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">aerobic exercise</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + fluoxetine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + fluphenazine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + naproxen</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + psychotherapy</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + riboflavin</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + splint</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">amitriptyline + support</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">benztropine + cognitive behavioural therapy</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">benztropine + disease management</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">benztropine mesylate and cognitive behavioural therapy (cbt)</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">bupropion</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">carbamazepine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">clomipramine</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">clonidine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">cognitive behavioural therapy + milnacipran</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">control</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">coping skills training + placebo</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">coping skills training + sertraline</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">crocin</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">desipramine + topical lidocaine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">desipramine hydrochloride</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">desipramine hydrochloride and cognitive behavioural therapy (cbt)</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">diphenhydramine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">doxepin</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">duloxetine
+</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">duloxetine hcl</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">educational telephone contacts + milnacipran</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">fluphenazine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">fluvoxamine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">gabapentin + nortriptyline</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">glycopyrrolate</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">imipramine + pregabalin</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">lamotrigine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">lorazepam</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">melatonin</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">melatonin and amitriptyline</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">mianserin</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">moclobemide</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">modified-attentional control sessions</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">naproxen</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">nortriptyline + cognitive behavioural therapy</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">nortriptyline + disease management</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">panax ginseng</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">paracetamol</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">paroxetine controlled release</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">physiotherapy and ultrasonography</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">pirlindole</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">placebo + psychotherapy</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">placebo + support</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">pregabalin and duloxetine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">reboxetine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">riboflavin</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">topical lidocaine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">transcutaneous electrical nerve stimulation</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">trimipramine</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">venlafaxine xr</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">zimelidine</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-white2019" class="csl-entry" role="doc-biblioentry">

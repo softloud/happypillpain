@@ -21,19 +21,19 @@ list(
   tar_target(
     raw_covidence_export,
     read_csv(
-      "/home/cantabile/Documents/gh-repos/happypillpain/data-raw/review_91309_extracted_data_csv_20210420002814.csv",
+      "/home/cantabile/Documents/gh-repos/happypillpain/data/review_91309_extracted_data_csv_20210420002814.csv",
       col_types = cols(.default = "c")
     )
   ),
   
   tar_target(raw_adverse,
-             read_csv("data-raw/adverse-events.csv")),
+             read_csv("data/adverse-events.csv")),
   
   tar_target(raw_pain,
-             read_csv("data-raw/Pain intensity.csv")),
+             read_csv("data/Pain intensity.csv")),
   
   tar_target(raw_mood,
-             read_csv("data-raw/Mood.csv")),
+             read_csv("data/Mood.csv")),
   
   tar_target(raw_outcome_dat,
              list(adverse = raw_adverse,

@@ -3,10 +3,14 @@ title: "hpp"
 description: |
   hpp
 output_dir: "docs"
+exclude: ["data", "old-data", "man", "hppshiny", "R"]
 navbar:
-  right:
-    - text: "Home"
+  left: 
+    - text: "overview"
       href: index.html
-    - text: "About"
+    - text: "data"
+      href: data.html
+  right:
+    - text: "about"
       href: about.html
 output: distill::distill_article

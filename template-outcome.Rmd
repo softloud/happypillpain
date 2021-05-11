@@ -1,0 +1,56 @@
+---
+title: "outcome analysis"
+description: |
+  Within-outcome analysis 
+date: "`r Sys.Date()`"
+output: distill::distill_article
+params: 
+  outcome: "mood"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r pkgs}
+library(tidyverse)
+library(multinma)
+library(gt)
+
+```
+
+
+```{r get model}
+
+```
+
+
+
+# nma
+
+We will provide an nma **for each outcome**, which adheres to Cochrane's MECIR [@higgins2016] standards for reporting network meta-analyses, in particular, this entails ensuring we meet the thirty-two requirements in the extended PRISMA checklist for network meta-analysis [@hutton2015]. 
+
+## parameterised report
+
+This page is a **parameterised report**. Each analysis, for each outcome, requires a number of standardised reporting procedures, that is, tables and visual summaries of statistical results and exploratory data analysis. This page is an automatically-generated report for the outcome producing standardised analyses for a specific outcomes. 
+
+When we get closer to publication, we may wish to do outcome-specific analyses in addition to the standardised analyses presented in the parameterised reports.
+
+This is the parameterised report for the outcome:
+
+***
+
+```{r }
+
+params$outcome %>% cat()
+
+```
+
+***
+
+
+###   scope of this analysis
+
+-   post-intervention
+-   antidepressant vs placebo

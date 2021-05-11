@@ -1,14 +1,14 @@
 #' Get the latest raw data
 #'
-#' Read from the data-raw file: latest version of the raw data exported from
+#' Read from the data file: latest version of the raw data exported from
 #' Covidence.
 #'
 #' @param now this is just here so I can figure out how to update data in targets.
 #'
 #' @export
 
-raw_hpp_dat_path <- function(now = lubridate::now(), datadir = "data-raw") {
-  # read in file names from data-raw
+raw_hpp_dat_path <- function(now = lubridate::now(), datadir = "data") {
+  # read in file names from data
   raw_data_files <-
     list.files(here::here(datadir), pattern = "review_91309_extracted.*csv")
   

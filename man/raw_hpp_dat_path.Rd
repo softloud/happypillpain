@@ -10,6 +10,6 @@ raw_hpp_dat_path(now = lubridate::now())
 \item{now}{this is just here so I can figure out how to update data in targets.}
 }
 \description{
-Read from the data-raw file: latest version of the raw data exported from
+Read from the data file: latest version of the raw data exported from
 Covidence.
 }

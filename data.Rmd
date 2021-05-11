@@ -7,6 +7,8 @@ output:
   distill::distill_article:
     toc: true
 bibliography: references.bib
+params:
+  random_rows: 3
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(targets)
 library(tidyverse)
 library(gt)
-
+library(happypillpain)
 
 ```
 
@@ -27,23 +29,55 @@ library(gt)
 withr::with_dir(here::here(), {
   
   tar_load(metapar_consult)
-  tar_load(wo_measures)
+  tar_load(obs)
+  tar_load(drug_names_unlabelled)
+  tar_load(metapar)
+  tar_load(outcomes)
   
   })
 
 ```
 
+## document workflow
+
+In addition to providing a toolchain of the data cleaning process, we will need to document the process for publications generated from this research. 
+
+Write this so Tamar, Gav, and the other people on the team who are not getting their hands dirty understand the algorithmic processes the data was put through. 
+
+To facilitate collaboration, this project uses two `R` packages:
+
+- `targets::` for workflow inspection
+- `renv::` to avoid installation hell
+
+`renv::` is only applicable if you intend on using `targets::` to interact with the data in RStudio.
+
+<!-- If I had an R workflow I could put it here.  -->
 
 ## general structure of the data for the model
 
 We need to have rows as arm-based observations per study, with columns that identify the statistics, the study, the treatment, and any moderators or subgroups. 
+
+## a computational lab-book for excel-like data wrangling
+
+In this workflow, we create an explorable dataset for each of the indexes/variables we require for the model, as we work through cleaning and pivoting the data. 
+
+In particular, we also create a dataset for problematic elements for each variable, so they can be inspected by Charles and Hollie together. 
+
+```{r}
+
+suppressWarnings(suppressMessages(tar_glimpse()))
+
+
+```
+
+The idea is to have as rigorous and documented data cleaning process as the extraction was. 
 
 ## raw data
 
 Current raw data loaded into the analysis:
 
 ```{r}
-list.files("data-raw")
+list.files("data")
 ```
 
 Aside from the covidence `extracted_data`, these files comprise row-identifiers (`Study Identifier`, `Comments`, and `Intervention`), along with outcome-relevant columns identified by Hollie.
@@ -55,7 +89,7 @@ Aside from the covidence `extracted_data`, these files comprise row-identifiers 
 # study, title, and intervention in rows
 n_obs <- 
 metapar_consult %>% 
-  select(study, study_title, arm) %>% 
+  select(study, title, arm) %>% 
   distinct() %>% 
   nrow()
 
@@ -74,11 +108,11 @@ Since there are sometimes more than one title per study, we'll tag studies with 
 
 ```{r}
 metapar_consult %>% 
-  select(study, study_title) %>% 
+  select(study, title) %>% 
   distinct() %>% 
   filter(str_detect(study, ":"), str_length(study) < 16) %>%
   mutate(
-    study_title = str_trunc(study_title, width = 35)
+    title = str_trunc(title, width = 35)
   ) %>% 
   head() %>% 
   gt()
@@ -118,7 +152,7 @@ metapar_consult %>%
   filter(
     is.na(name), 
     type == "antidepressant") %>% 
-   select(study, study_title, arm, class)
+   select(study, title, arm, class)
   
 ```
 
@@ -127,7 +161,7 @@ metapar_consult %>%
 We pivot longer and wider to get observations.
 
 ```{r}
-wo_measures
+obs
 
 
 ```
@@ -135,11 +169,81 @@ wo_measures
 
 ## timepoints
 
-## scales
+## chronic pain conditions
 
-There are lots of scales, so Hollie created this fab measure identification dataset.
+### random check 
 
 ```{r}
+
+  # choose five outcomes
+metapar %>% 
+  sample_n(5) %>% 
+  select(study, title, arm, condition, iasp_criteria) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = study)
+
+
+
+```
+
+
+## scales
+
+Hollie compiled 
+
+```{r}
+
+
+
+```
+
+
+## intervention
+
+The arms of the studies are identified by intervention `name` and dose (not yet extracted).
+
+```{r}
+
+metapar %>% 
+  select(study, type, name, class) %>% 
+  count(name) %>% 
+  filter(n >= 3) %>% 
+  gt(
+    # rowname_col = "name",
+    # groupname_col = "type"
+  ) %>% 
+  tab_header(title = "Number of studies per intervention",
+             subtitle = "Interventions with < 3 studies excluded") %>% 
+  cols_label(name = "Intervention", n = "Number of studies")
+
+```
+
+Small number of intervention labels missing:
+
+```{r}
+drug_names_unlabelled %>% 
+  select(name, type, class) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = study)
+
+```
+
+
+
+These are the interventions with < 3 studies. Why did NICE recommend acupuncture when there are only two studies?!  
+
+```{r}
+metapar %>% 
+  count(name) %>% 
+  filter(n < 3) %>% 
+  gt(
+    # groupname_col = "type"
+  ) %>% 
+  tab_header(title = "Number of studies per intervention",
+             subtitle = "Interventions with > 2 studies excluded") %>% 
+  cols_label(name = "Intervention", n = "Number of studies")
+
+
 
 ```
 
