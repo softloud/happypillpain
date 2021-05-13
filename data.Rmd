@@ -21,6 +21,9 @@ library(tidyverse)
 library(gt)
 library(happypillpain)
 
+# ugh whyeee
+source("R/hpp_themes.R")
+
 ```
 
 
@@ -173,12 +176,15 @@ obs
 
 ### random check 
 
-```{r}
+```{r echo=TRUE}
 
   # choose five outcomes
 metapar %>% 
-  sample_n(5) %>% 
+  # sample n rows
+  sample_n(params$random_rows) %>% 
+  # select relevant columns
   select(study, title, arm, condition, iasp_criteria) %>% 
+  # table specs
   gt() %>% 
   hpp_tab(vertical_divider = study)
 

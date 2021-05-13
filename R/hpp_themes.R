@@ -17,7 +17,7 @@ hpp_tab <- function(df, vertical_divider) {
       locations = cells_body(columns = vars({{vertical_divider}}))
     ) %>% 
     tab_style(
-      style = cell_borders(sides = "bottom", color = "#d9e6f2", weight = px(3)),
+      style = cell_borders(sides = "all", color = "#d9e6f2", weight = px(3)),
       locations = cells_column_labels(everything())
     ) 
 }

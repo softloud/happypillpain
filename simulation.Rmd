@@ -31,5 +31,30 @@ check_wd
 ```
 
 
+Our goal is to create a dataset that imitates the kind of data we will encounter in the cleaned Covidence extract. The cleaning is such a substantial job, I think it useful to simulate a manageable dataset to play around with model subgroups and visualisations. 
+
+Given the number of studies involved, and the number of treatments, it's likely we will need to create several customaised visualisations and summaries. 
+
+Off the top of my head, we have
+
+- time points: follow-ups short and long, post-intervention, 
+- comparisons: antidepressant vs placebo, etc.
+- `class` of drug
+- chronic pain `condition`
+- outcome
+
+> ugh sort out type and class, what does the protocol say? 
+
+
+```{r}
+
+
+
+
+```
+
+
+
+
 
 
