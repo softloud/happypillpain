@@ -7,7 +7,7 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, eval=FALSE)
 
 # Learn more about creating websites with Distill at:
 # https://rstudio.github.io/distill/website.html
@@ -115,7 +115,7 @@ condition_counts <-
 
 ```
 
-```{r}
+```{r error=TRUE}
 
 condition_counts  %>%  
   mutate(across(everything(), as.character)) %>% 

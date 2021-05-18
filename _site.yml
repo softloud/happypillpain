@@ -9,8 +9,14 @@ navbar:
     - text: "overview"
       href: index.html
     - text: "data"
-      href: data.html
+      menu:
+        - text: "filters"
+          href: filters.html
+        - text: "model"
+          href: model.html
+        - text: "subgroups"
+          href: subgroups.html
   right:
-    - text: "about"
+    - text: "access"
       href: about.html
 output: distill::distill_article

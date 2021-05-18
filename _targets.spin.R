@@ -67,7 +67,7 @@ list(
       clean_names() %>%
       select(
         study_identifier,
-        study_title = comments,
+        title = comments,
         intervention,
         intervention_type,
         intervention_class,
@@ -107,10 +107,10 @@ list(
     raw_outcome_dat %>%
       pluck(outcomes) %>%
       clean_names() %>% 
-      rename(study_title = comments) %>%
+      rename(title = comments) %>%
       select(-intervention_type,-intervention_name) %>%
       study_id() %>% 
-      select(-study_identifier, -study_title, -study, -intervention) %>% 
+      select(-study_identifier, -title, -study, -intervention) %>% 
       select(study_arm, everything())
     ,
     pattern = map(outcomes),

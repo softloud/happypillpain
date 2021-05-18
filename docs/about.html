@@ -85,14 +85,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>hpp: about this site</title>
+  <title>hpp: access</title>
 
   <meta property="description" itemprop="description" content="for researchers&#39; internal use"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="hpp: about this site"/>
+  <meta property="og:title" content="hpp: access"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="for researchers&#39; internal use"/>
   <meta property="og:locale" content="en_US"/>
@@ -100,14 +100,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="hpp: about this site"/>
+  <meta property="twitter:title" content="hpp: access"/>
   <meta property="twitter:description" content="for researchers&#39; internal use"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["about this site"]},{"type":"character","attributes":{},"value":["for researchers' internal use"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["access"]},{"type":"character","attributes":{},"value":["for researchers' internal use"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2036,6 +2036,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
+  <script src="site_libs/vis-4.20.1/vis.min.js"></script>
+  <script src="site_libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2055,7 +2059,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"about this site","description":"for researchers' internal use","authors":[]}
+{"title":"access","description":"for researchers' internal use","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2065,10 +2069,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
 <a href="index.html">overview</a>
-<a href="data.html">data</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+data
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="filters.html">filters</a>
+<a href="model.html">model</a>
+<a href="subgroups.html">subgroups</a>
+</div>
+</div>
 </div>
 <div class="nav-right">
-<a href="about.html">about</a>
+<a href="about.html">access</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2078,7 +2093,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>about this site</h1>
+<h1>access</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>for researchers’ internal use</p></p>
@@ -2087,7 +2102,88 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <p>This site is intended for internal use in team meetings.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Instructions for the team to access the analysis. Don’t hesitate to ask Charles for assistance.</p>
+<h2 id="raw-data">raw data</h2>
+<p>Hollie and I haven’t posted the raw data yet; email Charles to request access to current raw data.</p>
+<h2 id="rstudio-users">rstudio users</h2>
+<p>You can access past and present analyses, visualisations, datasets, etc. using a combination of <code>renv::</code> and <code>targets::</code>.</p>
+<p>Here are the instructions.</p>
+<h3 id="get-the-analysis">get the analysis</h3>
+<p>Two options: easy and hard. Alas, there is no in between.</p>
+<p>Easy is fine for one-time investigation. However code contributions (may well be unlikely) or frequent inspection (Hollie might like this) may be facillitated by the hard option.</p>
+<ol type="1">
+<li>Easy: download for one-time inspection by <a href="https://github.com/softloud/happypillpain">clicking the green code button and downloading zip</a>.</li>
+<li>Hard: The [<code>usethis::</code> pull request method](<a href="https://usethis.r-lib.org/articles/articles/pr-functions.html" class="uri">https://usethis.r-lib.org/articles/articles/pr-functions.html</a>. Note that this assumes RStudio has been configured for interfacing with GitHub; an annoying step, expect it to take a couple of hours.</li>
+</ol>
+<h3 id="get-the-data">get the data</h3>
+<p>For everyone’s peace of mind, we’re not pushing the data to an open source repository until publication.</p>
+<p>For now, Charles will email you a directory <strong>data/</strong> which you should unzip and copy into <strong>happypillpain/</strong>. So that it now exists as the directory <strong>happypillpain/data/</strong>.</p>
+<h3 id="get-the-tools">get the tools</h3>
+<p>We’ll install the <code>renv::</code> package that will match up the correct version of all the packages.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># install renv</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"renv"</span><span class='op'>)</span>
+
+<span class='co'># update packages</span>
+<span class='fu'>renv</span><span class='fu'>::</span><span class='fu'><a href='https://rstudio.github.io/renv//reference/restore.html'>restore</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h3 id="inspect-the-analysis">inspect the analysis</h3>
+<p>We use the package <code>targets::</code> to inspect the analysis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># see all the objects produced in the analysis workflow and how they feed into each other</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div id="htmlwidget-29a627d5a2369b24b96a" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29a627d5a2369b24b96a">{"x":{"nodes":{"name":["raw_adverse","wo_scale_unmatched","model_key","raw_mood","model_metapar","scales_raw","raw_pain","outcomes","wo_wide","wo_study","wo_long","study_na_inspect","wo_scale_multiple_matches","obs_ad_post_int","metapar_original_study","export_condition","scales","assert_unmatched_studies_unique","wo_scale_matches","study_key","variables","study_lab_metapar","variables_tab","metapar","wo_time_unmatched","unmatched_studies_obs","obs_post_int","wo_time","raw_covidence_export","wo_scale","classifiers","scale_match_test","raw_outcome_dat","drug_names_unlabelled","class_check_gs","study_key_assert_na","obs","metapar_consult"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"status":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"seconds":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["raw_adverse","wo_scale_unmatched","model_key","raw_mood","model_metapar","scales_raw","raw_pain","outcomes","wo_wide","wo_study","wo_long","study_na_inspect","wo_scale_multiple_matches","obs_ad_post_int","metapar_original_study","export_condition","scales","assert_unmatched_studies_unique","wo_scale_matches","study_key","variables","study_lab_metapar","variables_tab","metapar","wo_time_unmatched","unmatched_studies_obs","obs_post_int","wo_time","raw_covidence_export","wo_scale","classifiers","scale_match_test","raw_outcome_dat","drug_names_unlabelled","class_check_gs","study_key_assert_na","obs","metapar_consult"],"label":["raw_adverse","wo_scale_unmatched","model_key","raw_mood","model_metapar","scales_raw","raw_pain","outcomes","wo_wide","wo_study","wo_long","study_na_inspect","wo_scale_multiple_matches","obs_ad_post_int","metapar_original_study","export_condition","scales","assert_unmatched_studies_unique","wo_scale_matches","study_key","variables","study_lab_metapar","variables_tab","metapar","wo_time_unmatched","unmatched_studies_obs","obs_post_int","wo_time","raw_covidence_export","wo_scale","classifiers","scale_match_test","raw_outcome_dat","drug_names_unlabelled","class_check_gs","study_key_assert_na","obs","metapar_consult"],"level":[1,11,1,1,6,1,1,2,8,6,7,6,11,14,3,3,2,8,10,5,1,4,2,5,10,7,13,9,1,11,1,10,2,6,6,6,12,2],"color":["#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["wo_scale_matches","metapar","outcomes","model_key","wo_long","outcomes","raw_outcome_dat","study_key","wo_study","study_key","wo_scale_matches","metapar","obs_post_int","classifiers","metapar_consult","metapar_consult","scales_raw","unmatched_studies_obs","scales","wo_time","study_lab_metapar","metapar_original_study","variables","study_lab_metapar","wo_time","metapar_original_study","wo_study","obs","wo_wide","wo_scale_matches","scales","wo_time","raw_adverse","raw_mood","raw_pain","metapar","metapar","study_key","wo_scale","raw_covidence_export"],"to":["wo_scale_unmatched","model_metapar","model_metapar","outcomes","wo_wide","wo_study","wo_study","wo_study","wo_long","study_na_inspect","wo_scale_multiple_matches","obs_ad_post_int","obs_ad_post_int","metapar_original_study","metapar_original_study","export_condition","scales","assert_unmatched_studies_unique","wo_scale_matches","wo_scale_matches","study_key","study_lab_metapar","variables_tab","metapar","wo_time_unmatched","unmatched_studies_obs","unmatched_studies_obs","obs_post_int","wo_time","wo_scale","scale_match_test","scale_match_test","raw_outcome_dat","raw_outcome_dat","raw_outcome_dat","drug_names_unlabelled","class_check_gs","study_key_assert_na","obs","metapar_consult"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Stem","Pattern"],"shape":["dot","square"],"color":["#899DA4","#899DA4"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># see what's working and not working in the piepline</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div id="htmlwidget-b68f85a73f27761ec625" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b68f85a73f27761ec625">{"x":{"nodes":{"name":["assert_unmatched_studies_unique","class_check_gs","classifiers","drug_names_unlabelled","export_condition","metapar","metapar_consult","metapar_original_study","model_key","model_metapar","outcomes","raw_adverse","raw_covidence_export","raw_mood","raw_outcome_dat","raw_pain","scales","scales_raw","study_key","study_key_assert_na","study_lab_metapar","study_na_inspect","unmatched_studies_obs","variables","variables_tab","wo_long","wo_study","wo_wide","wo_scale","wo_scale_matches","scale_match_test","wo_scale_unmatched","obs_post_int","wo_time","obs","obs_ad_post_int","wo_scale_multiple_matches","wo_time_unmatched","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","function","function","object","function","function","function"],"status":["errored","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.01,0.006,0.072,0.002,0.012,0.003,4.157,0.011,0.02,1.363,0.002,0.073,1.206,0.895,0.075,1.998,0.083,0.059,0.006,0.008,0.122,0.003,0.056,0.028,0.122,1.161,2.397,0.056,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[0,5431,2817,1190,2241,13273,16262,15621,187,28711,81,16031,556161,68883,180221,93023,3469,1921,7430,48,21641,173,553,1124,4909,50504,134367,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["assert_unmatched_studies_unique","class_check_gs","classifiers","drug_names_unlabelled","export_condition","metapar","metapar_consult","metapar_original_study","model_key","model_metapar","outcomes","raw_adverse","raw_covidence_export","raw_mood","raw_outcome_dat","raw_pain","scales","scales_raw","study_key","study_key_assert_na","study_lab_metapar","study_na_inspect","unmatched_studies_obs","variables","variables_tab","wo_long","wo_study","wo_wide","wo_scale","wo_scale_matches","scale_match_test","wo_scale_unmatched","obs_post_int","wo_time","obs","obs_ad_post_int","wo_scale_multiple_matches","wo_time_unmatched","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"label":["assert_unmatched_studies_unique","class_check_gs","classifiers","drug_names_unlabelled","export_condition","metapar","metapar_consult","metapar_original_study","model_key","model_metapar","outcomes","raw_adverse","raw_covidence_export","raw_mood","raw_outcome_dat","raw_pain","scales","scales_raw","study_key","study_key_assert_na","study_lab_metapar","study_na_inspect","unmatched_studies_obs","variables","variables_tab","wo_long","wo_study","wo_wide","wo_scale","wo_scale_matches","scale_match_test","wo_scale_unmatched","obs_post_int","wo_time","obs","obs_ad_post_int","wo_scale_multiple_matches","wo_time_unmatched","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"level":[8,6,1,6,3,5,2,3,1,6,2,1,1,1,2,1,2,1,5,6,4,6,7,1,2,7,6,8,11,10,10,11,13,9,12,14,11,10,1,1,0,0,1,1],"color":["#C93312","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","triangle","triangle","triangleDown","triangle","triangle","triangle"]},"edges":{"from":["scale_match","scales","wo_time","raw_covidence_export","wo_scale_matches","raw_adverse","raw_mood","raw_pain","study_key","metapar","metapar_original_study","wo_study","obs","study_lab_metapar","metapar_original_study","study_id","metapar","obs_post_int","model_key","wo_scale","wo_wide","classifiers","metapar_consult","wo_time","study_lab_metapar","study_key","clean_colvals","scales_raw","outcomes","raw_outcome_dat","study_key","wo_scale_matches","metapar","outcomes","metapar_consult","wo_study","scale_match","scales","wo_time","hpp_tab","variables","metapar","unmatched_studies_obs","wo_long","wo_scale_matches"],"to":["wo_scale_matches","wo_scale_matches","wo_scale_matches","metapar_consult","wo_scale","raw_outcome_dat","raw_outcome_dat","raw_outcome_dat","study_na_inspect","drug_names_unlabelled","unmatched_studies_obs","unmatched_studies_obs","obs_post_int","study_key","study_lab_metapar","study_lab_metapar","obs_ad_post_int","obs_ad_post_int","outcomes","obs","wo_time","metapar_original_study","metapar_original_study","wo_time_unmatched","metapar","study_key_assert_na","scales","scales","wo_study","wo_study","wo_study","wo_scale_multiple_matches","model_metapar","model_metapar","export_condition","wo_long","scale_match_test","scale_match_test","scale_match_test","variables_tab","variables_tab","class_check_gs","assert_unmatched_studies_unique","wo_wide","wo_scale_unmatched"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Errored","Up to date","Outdated","Stem","Pattern","Function","Object"],"color":["#C93312","#354823","#78B7C5","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># inspect an element called metapar</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>metapar</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 459 x 10
+   study  arm    type  class name  main_aim condition general_grouping
+   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;           
+ 1 keski… gabap… anti… &lt;NA&gt;  gaba… pain     neuropat… neuropathic     
+ 2 keski… amitr… anti… tca   amit… pain     neuropat… neuropathic     
+ 3 nct 2… benzt… acti… &lt;NA&gt;  benz… pain     temporom… orofacial pain  
+ 4 nct 2… nortr… anti… tca   nort… pain     temporom… orofacial pain  
+ 5 nct 2… benzt… acti… &lt;NA&gt;  benz… pain     temporom… orofacial pain  
+ 6 nct 2… nortr… anti… tca   nort… pain     temporom… orofacial pain  
+ 7 lee 2… place… plac… &lt;NA&gt;  plac… pain     chest pa… other           
+ 8 lee 2… venla… anti… snri  venl… pain     chest pa… other           
+ 9 dsrhv… contr… wait… &lt;NA&gt;  cont… pain     temporom… orofacial pain  
+10 dsrhv… amitr… anti… tca   amit… pain     temporom… orofacial pain  
+# … with 449 more rows, and 2 more variables:
+#   iasp_classification &lt;chr&gt;, study_arm &lt;glue&gt;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># load metapar into the environment</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_load.html'>tar_load</a></span><span class='op'>(</span><span class='va'>metapar</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

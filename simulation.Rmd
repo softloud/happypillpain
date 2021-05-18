@@ -5,23 +5,40 @@ output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE)
 
 
 ```
 
 ```{r}
 library(targets)
+library(tidyverse)
+library(glue)
+library(gt)
+library(googlesheets4)
+
+
+library(happypillpain)
+
+# ugh whyeee
+source("R/hpp_themes.R")
+
+
 ```
 
 
-```{r output=FALSE}
+```{r output=FALSE, message=FALSE}
 # run simulation pipeline
 withr::with_dir(here::here("simulation"), {
   tar_make()
   
   tar_load(check_wd)
+  tar_load(sim_pairwise)
 })
+
+# and from the general
+tar_load(variables_tab)
+
 
 ```
 
@@ -46,15 +63,95 @@ Off the top of my head, we have
 > ugh sort out type and class, what does the protocol say? 
 
 
-```{r}
+For now, I will use this table as my guide. 
 
+```{r variables table}
+variables_tab
+```
+
+
+
+## filters
+
+We will assume
+
+- `timepoint` is post intervention
+- `scale` filters have not been applied (because Charles need to think about how to code this) 
+- `type` of interventions considered are antidepressants vs placebo
+
+So, we will need to add these as columns to the observations. Some outcomes are measured dichotomously and some outcomes are measured continuously. So, for one outcome, for the filters above, we have:
+
+```{r set up basic model input}
+n_obs <- 5
+
+# need to create a few set up tables
+
+# scale is associated with drug
+drugs <- 
+  tibble(
+    drug = 1:3,
+    scale = sample(1:2, 3, replace = TRUE)
+  ) 
+
+study <- 
+  tibble(
+    study = sample(1:3, )
+  )
+
+# 
+
+# study and name of drug
+  tibble(
+  drug = sample(drugs$drug, n_obs, replace = TRUE)
+) %>% 
+    left_join(drugs, by = "drug") %>% 
+  mutate(
+      name = glue("drug_{drug}"),
+    row = row_number(),
+  study = glue("study_{row}")
+  ) %>% 
+  select(-drug, -row) %>% 
+    mutate(
+      timepoint = "post_int",
+      type = "antidepressant"
+    )
+ 
+
+```
+
+
+
+## model 
+
+### pairwise
+
+In pairwise, we model, for the $i$th study, we assume the observed difference between placebo and intervention $d_i$ can be thought of in terms of some true difference $\delta$ and a random effect $\delta_i \sim \text{normal}(0, \tau)$ associated with the specific conditions of the difference $d_i$ in the $i$th study,
+
+$$
+d_i = \delta + \delta_i + \varepsilon_i, 
+$$
+with $\varepsilon_i \sim \text{normal}(0, \sigma_i^2)$, some sampling error.
+
+So, then
+
+$$
+\begin{cases}
+
+d_i \sim \text{normal}(\delta_i, \sigma_i^2)\\
+\delta_i \sim \text{normal}(\delta, \tau) 
+
+\end{cases}
+$$
+(I think, I'm still getting my head around this notation.)
+
+
+```{r}
 
 
 
 ```
 
 
+### network meta-analysis model
 
-
-
-
+One of the questions I'm trying to answer is _which_ model `multinma::` uses. 

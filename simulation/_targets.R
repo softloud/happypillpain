@@ -19,9 +19,14 @@ list(
     tibble(
       outcome = character(),
       condition = character(),
-      class = characters(),
+      class = character(),
       type = character()
     )
+  ),
+  
+  tar_target(
+    sim_pairwise,
+    "not done yet"
   ),
   
   # this is here so I don't have to worry about trailing commas

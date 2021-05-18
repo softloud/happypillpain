@@ -1,11 +1,91 @@
 ---
-title: "about this site"
+title: "access"
 description: |
   for researchers' internal use
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 This site is intended for internal use in team meetings.
+
+Instructions for the team to access the analysis. Don't hesitate to ask Charles for assistance. 
+
+## raw data
+
+Hollie and I haven't posted the raw data yet; email Charles to request access to current raw data.
+
+## rstudio users
+
+You can access past and present analyses, visualisations, datasets, etc. using a combination of `renv::` and `targets::`. 
+
+Here are the instructions. 
+
+### get the analysis
+
+Two options: easy and hard. Alas, there is no in between. 
+
+Easy is fine for one-time investigation. However code contributions (may well be unlikely) or frequent inspection (Hollie might like this) may be facillitated by the hard option. 
+
+1. Easy: download for one-time inspection by [clicking the green code button and downloading zip](https://github.com/softloud/happypillpain).
+2. Hard: The [`usethis::` pull request method](https://usethis.r-lib.org/articles/articles/pr-functions.html. Note that this assumes RStudio has been configured for interfacing with GitHub; an annoying step, expect it to take a couple of hours. 
+
+### get the data
+
+For everyone's peace of mind, we're not pushing the data to an open source repository until publication. 
+
+For now, Charles will email you a directory **data/** which you should unzip and copy into **happypillpain/**. So that it now exists as the directory **happypillpain/data/**.
+
+### get the tools
+
+We'll install the `renv::` package that will match up the correct version of all the packages.
+
+```{r eval=FALSE, echo=TRUE}
+
+# install renv
+install.packages("renv")
+
+# update packages
+renv::restore()
+
+```
+
+### inspect the analysis 
+
+We use the package `targets::` to inspect the analysis.
+
+```{r echo=TRUE}
+library(targets)
+
+
+
+
+```
+
+```{r}
+# see all the objects produced in the analysis workflow and how they feed into each other
+tar_glimpse()
+
+# see what's working and not working in the piepline
+tar_visnetwork()
+
+
+```
+
+```{r}
+# inspect an element called metapar
+tar_read(metapar)
+
+
+
+```
+
+```{r eval=FALSE}
+
+# load metapar into the environment
+tar_load(metapar)
+
+
+```
+

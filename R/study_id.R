@@ -4,7 +4,7 @@
 
 study_id <- function(df) {
   df %>%
-    select(study_identifier, study_title) %>% 
+    select(study_identifier, title) %>% 
     distinct() %>% 
     group_by(study_identifier) %>% 
     mutate(
@@ -17,12 +17,12 @@ study_id <- function(df) {
       )
     ) %>% 
     select(-tag, -max_tag) %>% 
-    right_join(df, by = c("study_identifier", "study_title")) %>% 
+    right_join(df, by = c("study_identifier", "title")) %>% 
     select(-study_identifier) %>% 
     ungroup() %>% 
     mutate(
-      study_title = str_remove(study_title, "Title: "),
-      study_arm = glue("{study} = {intervention}")
+      title = str_remove(title, "Title: "),
+      study_arm = glue("{study} = {arm}")
     ) 
 }
 
