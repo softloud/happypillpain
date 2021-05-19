@@ -3,7 +3,7 @@ title: "hpp"
 description: |
   hpp
 output_dir: "docs"
-exclude: ["data", "old-data", "man", "hppshiny", "R"]
+exclude: ["data", "old-data", "man", "hppshiny", "R", "*.zip"]
 navbar:
   left: 
     - text: "overview"
@@ -16,6 +16,14 @@ navbar:
           href: model.html
         - text: "subgroups"
           href: subgroups.html
+    - text: "outcomes"
+      menu:
+        - text: "adverse"
+          href: outcome-adverse.html
+        - text: "pain"
+          href: outcome-pain.html
+        - text: "mood (depression)"
+          href: outcome-mood_depression.html  
   right:
     - text: "access"
       href: about.html

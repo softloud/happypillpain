@@ -8,6 +8,7 @@ suppressMessages({
   library(dontpanic)
   library(gt)
   library(assertthat)
+  library(rmarkdown)
   
   conflicted::conflict_prefer("filter", "dplyr")
   
@@ -154,7 +155,7 @@ list(
           TRUE ~ name
         )
       ) %>%
-      select(-chronic_condition,-condition_no_chronic)
+      select(-chronic_condition, -condition_no_chronic)
   ),
   
   tar_target(drug_names_unlabelled,
@@ -217,12 +218,12 @@ list(
   
   
   tar_target(
-    wo_study,
+    wo_study_with_unmatched,
     raw_outcome_dat %>%
       pluck(outcomes) %>%
       clean_names() %>%
       mutate(across(everything(), tolower)) %>%
-      select(-intervention_type,-intervention_name) %>%
+      select(-intervention_type, -intervention_name) %>%
       rename(title = comments, arm = intervention) %>%
       left_join(study_key, by = c("study_identifier", "title")) %>%
       # select(-study_identifier, -title) %>%
@@ -234,7 +235,7 @@ list(
   
   tar_target(
     unmatched_studies_obs,
-    wo_study %>%
+    wo_study_with_unmatched %>%
       map_df(select, study, study_identifier, title) %>%
       filter(is.na(study)) %>%
       left_join(metapar_original_study, by = c("study_identifier")) %>%
@@ -265,7 +266,18 @@ list(
   tar_target(
     metapar,
     study_lab_metapar %>%
-      select(-title, -study_identifier)
+      select(-title,-study_identifier)
+  ),
+  
+  tar_target(
+    wo_study,
+    wo_study_with_unmatched %>%
+      filter(
+        !is.na(study),
+        !any(study %in% unmatched_studies_obs$study_identifier)
+      ),
+    pattern = map(wo_study_with_unmatched)
+    
   ),
   
   # wrangle outcomes --------------------------------------------------------
@@ -274,7 +286,7 @@ list(
   tar_target(
     wo_long,
     wo_study %>%
-      select(-study_identifier,-title) %>%
+      select(-study_identifier, -title) %>%
       mutate(across(everything(), as.character)) %>%
       pivot_longer(
         cols = -c(outcome, study, arm),
@@ -287,7 +299,7 @@ list(
         measure_type = map_chr(measure_matches, 3),
         measure_desc = map_chr(measure_matches, 2)
       ) %>%
-      select(-measure_matches, -covidence_colname)
+      select(-measure_matches,-covidence_colname)
     ,
     pattern = map(wo_study)
   ),
@@ -312,7 +324,14 @@ list(
     wo_time,
     wo_wide %>%
       dplyr::mutate(
+        # specific study changes
         timepoint = dplyr::case_when(
+          
+          # see issue # 26
+          str_detect(study, "pirbudak 2003") & 
+            str_detect(measure_desc, "9_months") ~ 'post_int',
+          str_detect(study, "pirbudak 2003") & 
+            str_detect(measure_desc, "2_weeks|6_weeks|3_months|6_month") ~ 'mid_int',
           str_detect(study, "engel 1998") ~ "post_int",
           str_detect(study, "johansson") ~ "post_int",
           str_detect(study, "ginsberg") &
@@ -331,6 +350,8 @@ list(
             str_detect(measure_desc, "8_weeks|week_8") ~ "post_int",
           str_detect(study, "nct 2003") &
             str_detect(measure_desc, "months") ~ "follow_up",
+          
+          # general labels
           str_detect(measure_desc, "follow_up") ~ "follow_up",
           stringr::str_detect(
             measure_desc,
@@ -480,12 +501,23 @@ list(
   ),
   
   
-  # update site -------------------------------------------------------------
+  
+  # parameterised reports ---------------------------------------------------
   
   # tar_target(
-  #   update_site,
-  #   rmarkdown::render_site(preview = FALSE)
+  #   render_outcome_reports,
+  #   
+  #   render(
+  #     input = "template-outcome.Rmd",
+  #     params = list(outcome = outcomes),
+  #     output_file = glue("outcome-{outcomes}.html"),
+  #     output_dir = "docs"
+  #   ),
+  #   pattern = map(outcomes)
   # ),
+  # 
+  # tar_target(render_hpp,
+  #            render_site()),
   
   # this is just here so I don't have to worry about final commas
   # when testing

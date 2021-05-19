@@ -77,6 +77,9 @@ tar_visnetwork()
 # inspect an element called metapar
 tar_read(metapar)
 
+# inspect an element called variables_tab
+tar_read(variables_tab)
+
 
 
 ```
