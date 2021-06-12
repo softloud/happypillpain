@@ -23,6 +23,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -2035,7 +2036,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.8.6/header-attrs.js"></script>
   <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
   <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
   <script src="site_libs/vis-4.20.1/vis.min.js"></script>
@@ -2069,18 +2070,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
 <a href="index.html">overview</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-data
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="filters.html">filters</a>
-<a href="model.html">model</a>
-<a href="subgroups.html">subgroups</a>
-</div>
-</div>
+<a href="pipeline.html">pipeline</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 outcomes
@@ -2156,65 +2146,15 @@ outcomes
 <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>
--
-
-\
-
-|
-
-/
-
--
-
-\
-
-|
-
-/
-
--
-
-\
-
-|
-
- </code></pre>
-<div id="htmlwidget-7cfba4b8f46aa23ce5ad" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7cfba4b8f46aa23ce5ad">{"x":{"nodes":{"name":["wo_wide","raw_mood","wo_study_with_unmatched","scales","study_key","scales_raw","variables","obs","render_outcome_reports","metapar_original_study","metapar","scale_match_test","obs_post_int","assert_unmatched_studies_unique","study_na_inspect","raw_adverse","raw_covidence_export","obs_ad_post_int","wo_time_unmatched","wo_scale_matches","unmatched_studies_obs","classifiers","outcomes","wo_scale_unmatched","raw_outcome_dat","render_hpp","wo_time","wo_study","model_metapar","study_key_assert_na","wo_scale","model_key","study_lab_metapar","raw_pain","metapar_consult","export_condition","variables_tab","wo_long","wo_scale_multiple_matches","class_check_gs","drug_names_unlabelled"],"type":["stem","stem","pattern","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem"],"status":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"seconds":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["wo_wide","raw_mood","wo_study_with_unmatched","scales","study_key","scales_raw","variables","obs","render_outcome_reports","metapar_original_study","metapar","scale_match_test","obs_post_int","assert_unmatched_studies_unique","study_na_inspect","raw_adverse","raw_covidence_export","obs_ad_post_int","wo_time_unmatched","wo_scale_matches","unmatched_studies_obs","classifiers","outcomes","wo_scale_unmatched","raw_outcome_dat","render_hpp","wo_time","wo_study","model_metapar","study_key_assert_na","wo_scale","model_key","study_lab_metapar","raw_pain","metapar_consult","export_condition","variables_tab","wo_long","wo_scale_multiple_matches","class_check_gs","drug_names_unlabelled"],"label":["wo_wide","raw_mood","wo_study_with_unmatched","scales","study_key","scales_raw","variables","obs","render_outcome_reports","metapar_original_study","metapar","scale_match_test","obs_post_int","assert_unmatched_studies_unique","study_na_inspect","raw_adverse","raw_covidence_export","obs_ad_post_int","wo_time_unmatched","wo_scale_matches","unmatched_studies_obs","classifiers","outcomes","wo_scale_unmatched","raw_outcome_dat","render_hpp","wo_time","wo_study","model_metapar","study_key_assert_na","wo_scale","model_key","study_lab_metapar","raw_pain","metapar_consult","export_condition","variables_tab","wo_long","wo_scale_multiple_matches","class_check_gs","drug_names_unlabelled"],"level":[10,1,6,2,5,1,1,14,3,3,5,12,15,8,6,1,1,16,12,12,7,1,2,13,2,0,11,8,6,6,13,1,4,1,2,3,2,9,13,6,6],"color":["#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac"],"shape":["dot","dot","square","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot"]},"edges":{"from":["wo_long","outcomes","raw_outcome_dat","study_key","scales_raw","study_lab_metapar","wo_scale","outcomes","classifiers","metapar_consult","study_lab_metapar","scales","wo_time","obs","unmatched_studies_obs","study_key","metapar","obs_post_int","wo_time","scales","wo_time","metapar_original_study","wo_study_with_unmatched","model_key","wo_scale_matches","raw_adverse","raw_mood","raw_pain","wo_wide","unmatched_studies_obs","wo_study_with_unmatched","metapar","outcomes","study_key","wo_scale_matches","metapar_original_study","raw_covidence_export","metapar_consult","variables","wo_study","wo_scale_matches","metapar","metapar"],"to":["wo_wide","wo_study_with_unmatched","wo_study_with_unmatched","wo_study_with_unmatched","scales","study_key","obs","render_outcome_reports","metapar_original_study","metapar_original_study","metapar","scale_match_test","scale_match_test","obs_post_int","assert_unmatched_studies_unique","study_na_inspect","obs_ad_post_int","obs_ad_post_int","wo_time_unmatched","wo_scale_matches","wo_scale_matches","unmatched_studies_obs","unmatched_studies_obs","outcomes","wo_scale_unmatched","raw_outcome_dat","raw_outcome_dat","raw_outcome_dat","wo_time","wo_study","wo_study","model_metapar","model_metapar","study_key_assert_na","wo_scale","study_lab_metapar","metapar_consult","export_condition","variables_tab","wo_long","wo_scale_multiple_matches","class_check_gs","drug_names_unlabelled"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Stem","Pattern"],"shape":["dot","square"],"color":["#899DA4","#899DA4"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-51dc5a75d5527a8908ea" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-51dc5a75d5527a8908ea">{"x":{"nodes":{"name":["study_key_assert_na","variables_tab","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","r_pain","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","r_variables","wo_s_with_unmatched","r_scales","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","wo_s","r_model_key","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","r_classifiers","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","r_adverse","r_mood","r_covidence","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","wo_long"],"type":["stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern"],"status":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"seconds":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["study_key_assert_na","variables_tab","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","r_pain","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","r_variables","wo_s_with_unmatched","r_scales","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","wo_s","r_model_key","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","r_classifiers","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","r_adverse","r_mood","r_covidence","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","wo_long"],"label":["study_key_assert_na","variables_tab","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","r_pain","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","r_variables","wo_s_with_unmatched","r_scales","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","wo_s","r_model_key","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","r_classifiers","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","r_adverse","r_mood","r_covidence","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","wo_long"],"level":[6,0,8,4,6,1,4,6,5,3,0,6,1,3,8,6,2,3,2,1,1,6,6,5,7,2,6,0,5,5,8,9,1,1,1,2,4,5,5,6,7,2],"color":["#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac"],"shape":["dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square"]},"edges":{"from":["study_key","m_metapar","obs","w_metapar_original_s","metapar","w_metapar_original_s","metapar","s_lab_metapar","w_metapar_consult","study_key","w_metapar_consult","obs","metapar","r_scales","wo_long","r_adverse","r_mood","r_pain","wo_scale_matches","wo_scale_matches","s_lab_metapar","wo_scale_unmatched","r_model_key","study_key","wo_time","unmatched_s_obs","obs","s_multiple_outcomes","r_covidence","wo_wide","wo_time","wo_time","wo_scale_matches","metapar","wo_scale","wo_s"],"to":["study_key_assert_na","m_all_in","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","wo_s_with_unmatched","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","r_obs","r_obs","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","obs","wo_long"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Stem","Pattern"],"shape":["dot","square"],"color":["#899DA4","#899DA4"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># see what's working and not working in the piepline</span>
 <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>
--
-
-\
-
-|
-
-/
-
--
-
-\
-
-|
-
-/
-
--
-
-\
-
-|
-
-/
-
- </code></pre>
-<div id="htmlwidget-e95ccbd896a78e7f20bf" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e95ccbd896a78e7f20bf">{"x":{"nodes":{"name":["assert_unmatched_studies_unique","class_check_gs","classifiers","drug_names_unlabelled","export_condition","metapar","metapar_consult","metapar_original_study","model_key","model_metapar","obs","outcomes","raw_adverse","raw_covidence_export","raw_mood","raw_outcome_dat","raw_pain","render_outcome_reports","scale_match_test","scales","scales_raw","study_key","study_key_assert_na","study_lab_metapar","study_na_inspect","unmatched_studies_obs","variables","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_study","wo_study_with_unmatched","wo_time","wo_time_unmatched","wo_wide","obs_post_int","render_hpp","obs_ad_post_int","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","pattern","pattern","stem","stem","stem","stem","stem","stem","function","function","object","function","function","function"],"status":["outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.008,0.006,0.072,0.002,0.012,0.003,4.157,0.011,0.02,1.363,0.021,0.002,0.073,1.206,0.895,0.075,1.998,0.006,0.01,0.083,0.059,0.006,0.008,0.122,0.003,0.042,0.028,0.122,1.248,0.004,29.662,0.002,0.004,0.052,2.39,0.152,0.008,0.021,null,null,null,null,null,null,null,null,null],"bytes":[0,5431,2817,1190,2241,13273,16262,15621,187,28711,0,81,16031,556161,68883,180221,93023,313,63,3469,1921,7430,48,21641,173,553,1124,4909,48414,13085,39672,235,28628,131040,134367,38484,312,37631,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,null,null,null,null,null,null,null,null,null,null,3,null,null,null,null,3,3,null,null,null,null,null,null,null,null,null,null,null,null],"id":["assert_unmatched_studies_unique","class_check_gs","classifiers","drug_names_unlabelled","export_condition","metapar","metapar_consult","metapar_original_study","model_key","model_metapar","obs","outcomes","raw_adverse","raw_covidence_export","raw_mood","raw_outcome_dat","raw_pain","render_outcome_reports","scale_match_test","scales","scales_raw","study_key","study_key_assert_na","study_lab_metapar","study_na_inspect","unmatched_studies_obs","variables","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_study","wo_study_with_unmatched","wo_time","wo_time_unmatched","wo_wide","obs_post_int","render_hpp","obs_ad_post_int","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"label":["assert_unmatched_studies_unique","class_check_gs","classifiers","drug_names_unlabelled","export_condition","metapar","metapar_consult","metapar_original_study","model_key","model_metapar","obs","outcomes","raw_adverse","raw_covidence_export","raw_mood","raw_outcome_dat","raw_pain","render_outcome_reports","scale_match_test","scales","scales_raw","study_key","study_key_assert_na","study_lab_metapar","study_na_inspect","unmatched_studies_obs","variables","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_study","wo_study_with_unmatched","wo_time","wo_time_unmatched","wo_wide","obs_post_int","render_hpp","obs_ad_post_int","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"level":[8,6,1,6,3,5,2,3,1,6,14,2,1,1,1,2,1,3,12,2,1,5,6,4,6,7,1,2,9,13,12,13,13,8,6,11,12,10,15,0,16,1,1,0,0,1,1],"color":["#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","square","square","dot","dot","dot","dot","dot","dot","triangle","triangle","triangleDown","triangle","triangle","triangle"]},"edges":{"from":["outcomes","clean_colvals","scales_raw","metapar_consult","scale_match","scales","wo_time","study_lab_metapar","wo_study","metapar","obs_post_int","study_key","study_key","scale_match","scales","wo_time","metapar_original_study","study_id","wo_time","metapar","raw_adverse","raw_mood","raw_pain","outcomes","raw_outcome_dat","study_key","model_key","metapar","outcomes","hpp_tab","variables","study_lab_metapar","unmatched_studies_obs","wo_study_with_unmatched","classifiers","metapar_consult","metapar_original_study","wo_study_with_unmatched","wo_long","raw_covidence_export","metapar","wo_scale_matches","wo_scale_matches","unmatched_studies_obs","wo_scale_matches","wo_wide","obs","wo_scale"],"to":["render_outcome_reports","scales","scales","export_condition","wo_scale_matches","wo_scale_matches","wo_scale_matches","study_key","wo_long","obs_ad_post_int","obs_ad_post_int","study_na_inspect","study_key_assert_na","scale_match_test","scale_match_test","scale_match_test","study_lab_metapar","study_lab_metapar","wo_time_unmatched","drug_names_unlabelled","raw_outcome_dat","raw_outcome_dat","raw_outcome_dat","wo_study_with_unmatched","wo_study_with_unmatched","wo_study_with_unmatched","outcomes","model_metapar","model_metapar","variables_tab","variables_tab","metapar","wo_study","wo_study","metapar_original_study","metapar_original_study","unmatched_studies_obs","unmatched_studies_obs","wo_wide","metapar_consult","class_check_gs","wo_scale_multiple_matches","wo_scale","assert_unmatched_studies_unique","wo_scale_unmatched","wo_time","obs_post_int","obs"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Up to date","Stem","Pattern","Function","Object"],"color":["#78B7C5","#354823","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b85c76c585fe1013a24b" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b85c76c585fe1013a24b">{"x":{"nodes":{"name":["assert_unmatched_studies_unique","class_check_gs","m_all_in","m_metapar","metapar","obs","r_adverse","r_classifiers","r_covidence","r_model_key","r_mood","r_obs","r_outcomes","r_pain","r_scales","r_variables","s_multiple_outcomes","s_multiple_scales","scale_match_test","study_key","study_key_assert_na","study_na_inspect","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_time","wo_time_unmatched","wo_wide","tab_s_multiple_outcomes","c_drug_names_unlabelled","c_export_condition","c_scales","w_metapar_original_s","w_scales","s_lab_metapar","wo_s","wo_s_with_unmatched","unmatched_s_obs","w_metapar_consult","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"type":["stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","stem","stem","function","function","object","function","function","function"],"status":["outdated","outdated","outdated","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.002,0.003,0.051,1.233,0.003,0.013,0.045,0.012,0.536,0.017,1.005,0.054,0.003,1.348,0.047,0.027,0.167,0.01,0.01,0.004,0.001,0.002,0.134,1.085,0.003,26.735,0.004,0.002,0.041,0.006,0.017,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[46,5412,25196,30113,15686,33188,16198,2817,556016,187,69206,180850,81,93302,1307,1123,3805,0,62,7426,46,173,4949,48994,17566,40518,234,25406,39056,167,38167,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["assert_unmatched_studies_unique","class_check_gs","m_all_in","m_metapar","metapar","obs","r_adverse","r_classifiers","r_covidence","r_model_key","r_mood","r_obs","r_outcomes","r_pain","r_scales","r_variables","s_multiple_outcomes","s_multiple_scales","scale_match_test","study_key","study_key_assert_na","study_na_inspect","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_time","wo_time_unmatched","wo_wide","tab_s_multiple_outcomes","c_drug_names_unlabelled","c_export_condition","c_scales","w_metapar_original_s","w_scales","s_lab_metapar","wo_s","wo_s_with_unmatched","unmatched_s_obs","w_metapar_consult","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"label":["assert_unmatched_studies_unique","class_check_gs","m_all_in","m_metapar","metapar","obs","r_adverse","r_classifiers","r_covidence","r_model_key","r_mood","r_obs","r_outcomes","r_pain","r_scales","r_variables","s_multiple_outcomes","s_multiple_scales","scale_match_test","study_key","study_key_assert_na","study_na_inspect","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_time","wo_time_unmatched","wo_wide","tab_s_multiple_outcomes","c_drug_names_unlabelled","c_export_condition","c_scales","w_metapar_original_s","w_scales","s_lab_metapar","wo_s","wo_s_with_unmatched","unmatched_s_obs","w_metapar_consult","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"level":[5,6,8,6,5,7,1,0,1,1,1,2,2,1,1,0,8,8,5,5,6,6,2,2,6,5,6,6,4,5,3,9,6,3,7,3,2,4,1,6,4,2,1,1,0,0,1,1],"color":["#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","dot","dot","triangle","triangle","triangleDown","triangle","triangle","triangle"]},"edges":{"from":["study_key","hpp_tab","m_metapar","obs","w_metapar_original_s","metapar","study_id","w_metapar_original_s","metapar","s_lab_metapar","w_metapar_consult","study_key","w_metapar_consult","obs","metapar","clean_colvals","r_scales","wo_long","r_adverse","r_mood","r_pain","wo_scale_matches","wo_scale_matches","s_lab_metapar","wo_scale_unmatched","r_model_key","study_key","scale_match","wo_time","unmatched_s_obs","obs","hpp_tab","s_multiple_outcomes","r_covidence","wo_wide","wo_time","scale_match","wo_time","wo_scale_matches","metapar","wo_scale","wo_s"],"to":["study_key_assert_na","variables_tab","m_all_in","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","s_lab_metapar","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","wo_s_with_unmatched","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","w_scales","wo_wide","r_obs","r_obs","r_obs","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","wo_scale_matches","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","tab_s_multiple_outcomes","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","scale_match_test","wo_scale_unmatched","obs","obs","wo_long"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Up to date","Stem","Pattern","Function","Object"],"color":["#78B7C5","#354823","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2222,31 +2162,32 @@ outcomes
 <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>metapar</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 459 x 10
-   study  arm    type  class name  main_aim condition general_grouping
-   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;           
- 1 keski… gabap… anti… &lt;NA&gt;  gaba… pain     neuropat… neuropathic     
- 2 keski… amitr… anti… tca   amit… pain     neuropat… neuropathic     
- 3 nct 2… benzt… acti… &lt;NA&gt;  benz… pain     temporom… orofacial pain  
- 4 nct 2… nortr… anti… tca   nort… pain     temporom… orofacial pain  
- 5 nct 2… benzt… acti… &lt;NA&gt;  benz… pain     temporom… orofacial pain  
- 6 nct 2… nortr… anti… tca   nort… pain     temporom… orofacial pain  
- 7 lee 2… place… plac… &lt;NA&gt;  plac… pain     chest pa… other           
- 8 lee 2… venla… anti… snri  venl… pain     chest pa… other           
- 9 dsrhv… contr… wait… &lt;NA&gt;  cont… pain     temporom… orofacial pain  
-10 dsrhv… amitr… anti… tca   amit… pain     temporom… orofacial pain  
-# … with 449 more rows, and 2 more variables:
-#   iasp_classification &lt;chr&gt;, study_arm &lt;glue&gt;</code></pre>
+<pre><code># A tibble: 459 x 11
+   title   study  arm    type   class name   main_aim design condition
+   &lt;chr&gt;   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    
+ 1 compar… caret… place… place… &lt;NA&gt;  place… pain an… paral… fibromya…
+ 2 compar… caret… amitr… antid… tca   amitr… pain an… paral… fibromya…
+ 3 compar… caret… cyclo… skele… &lt;NA&gt;  &lt;NA&gt;   pain an… paral… fibromya…
+ 4 trimip… macfa… place… place… &lt;NA&gt;  place… pain an… paral… rheumato…
+ 5 trimip… macfa… place… place… &lt;NA&gt;  place… pain an… paral… rheumato…
+ 6 trimip… macfa… trimi… antid… tca   trimi… pain an… paral… rheumato…
+ 7 trimip… macfa… trimi… antid… tca   trimi… pain an… paral… rheumato…
+ 8 compar… keski… gabap… antic… &lt;NA&gt;  gabap… pain     paral… neuropat…
+ 9 compar… keski… amitr… antid… tca   amitr… pain     paral… neuropat…
+10 compar… nct 2… benzt… activ… &lt;NA&gt;  benzt… pain     paral… temporom…
+# … with 449 more rows, and 2 more variables: general_grouping &lt;chr&gt;,
+#   iasp_classification &lt;chr&gt;</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># inspect an element called variables_tab</span>
 <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>variables_tab</span><span class='op'>)</span>
 </code></pre>
 </div>
+<div id="qtcloiadye" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#unncvbaipe .gt_table {
+#qtcloiadye .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2271,7 +2212,7 @@ outcomes
   border-left-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_heading {
+#qtcloiadye .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2283,7 +2224,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_title {
+#qtcloiadye .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2293,7 +2234,7 @@ outcomes
   border-bottom-width: 0;
 }
 
-#unncvbaipe .gt_subtitle {
+#qtcloiadye .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2303,13 +2244,13 @@ outcomes
   border-top-width: 0;
 }
 
-#unncvbaipe .gt_bottom_border {
+#qtcloiadye .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_col_headings {
+#qtcloiadye .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2324,7 +2265,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_col_heading {
+#qtcloiadye .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2344,7 +2285,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#unncvbaipe .gt_column_spanner_outer {
+#qtcloiadye .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2356,15 +2297,15 @@ outcomes
   padding-right: 4px;
 }
 
-#unncvbaipe .gt_column_spanner_outer:first-child {
+#qtcloiadye .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#unncvbaipe .gt_column_spanner_outer:last-child {
+#qtcloiadye .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#unncvbaipe .gt_column_spanner {
+#qtcloiadye .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2376,7 +2317,7 @@ outcomes
   width: 100%;
 }
 
-#unncvbaipe .gt_group_heading {
+#qtcloiadye .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2398,7 +2339,7 @@ outcomes
   vertical-align: middle;
 }
 
-#unncvbaipe .gt_empty_group_heading {
+#qtcloiadye .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2413,15 +2354,15 @@ outcomes
   vertical-align: middle;
 }
 
-#unncvbaipe .gt_from_md > :first-child {
+#qtcloiadye .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#unncvbaipe .gt_from_md > :last-child {
+#qtcloiadye .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#unncvbaipe .gt_row {
+#qtcloiadye .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2440,7 +2381,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#unncvbaipe .gt_stub {
+#qtcloiadye .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2452,7 +2393,7 @@ outcomes
   padding-left: 12px;
 }
 
-#unncvbaipe .gt_summary_row {
+#qtcloiadye .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2462,7 +2403,7 @@ outcomes
   padding-right: 5px;
 }
 
-#unncvbaipe .gt_first_summary_row {
+#qtcloiadye .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2472,7 +2413,7 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_grand_summary_row {
+#qtcloiadye .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2482,7 +2423,7 @@ outcomes
   padding-right: 5px;
 }
 
-#unncvbaipe .gt_first_grand_summary_row {
+#qtcloiadye .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2492,11 +2433,11 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_striped {
+#qtcloiadye .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#unncvbaipe .gt_table_body {
+#qtcloiadye .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2505,7 +2446,7 @@ outcomes
   border-bottom-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_footnotes {
+#qtcloiadye .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2519,13 +2460,13 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_footnote {
+#qtcloiadye .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#unncvbaipe .gt_sourcenotes {
+#qtcloiadye .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2539,46 +2480,47 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#unncvbaipe .gt_sourcenote {
+#qtcloiadye .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#unncvbaipe .gt_left {
+#qtcloiadye .gt_left {
   text-align: left;
 }
 
-#unncvbaipe .gt_center {
+#qtcloiadye .gt_center {
   text-align: center;
 }
 
-#unncvbaipe .gt_right {
+#qtcloiadye .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#unncvbaipe .gt_font_normal {
+#qtcloiadye .gt_font_normal {
   font-weight: normal;
 }
 
-#unncvbaipe .gt_font_bold {
+#qtcloiadye .gt_font_bold {
   font-weight: bold;
 }
 
-#unncvbaipe .gt_font_italic {
+#qtcloiadye .gt_font_italic {
   font-style: italic;
 }
 
-#unncvbaipe .gt_super {
+#qtcloiadye .gt_super {
   font-size: 65%;
 }
 
-#unncvbaipe .gt_footnote_marks {
+#qtcloiadye .gt_footnote_marks {
   font-style: italic;
+  font-weight: normal;
   font-size: 65%;
 }
 </style>
-<div id="unncvbaipe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2591,80 +2533,63 @@ outcomes
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">model</td>
     </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>study</code></p>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>study</code></p>
 </div></td>
-      <td class="gt_row gt_left">Unique identifier for study; comments contains title, study identifier is first author and year</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Study Identifier + Comments</code></p>
+<td class="gt_row gt_left">Unique identifier for study; comments contains title, study identifier is first author and year</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Study Identifier + Comments</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>name</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>name</code></p>
-</div></td>
-      <td class="gt_row gt_left gt_striped">Name of intervention drug: e.g., Desvenlafaxin</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Name</code></p>
-</div></td>
-    </tr>
+<td class="gt_row gt_left gt_striped">Name of intervention drug: e.g., Desvenlafaxin</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Name</code></p>
+</div></td></tr>
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">filter</td>
     </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>timepoint</code></p>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>timepoint</code></p>
 </div></td>
-      <td class="gt_row gt_left">Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p>obs header</p>
+<td class="gt_row gt_left">Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p>obs header</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>scale</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>scale</code></p>
+<td class="gt_row gt_left gt_striped">We searched the column headers for names of scales (such as vas)</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p>obs header</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>type</code></p>
 </div></td>
-      <td class="gt_row gt_left gt_striped">We searched the column headers for names of scales (such as vas)</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p>obs header</p>
+<td class="gt_row gt_left">Type of intervention: e.g., antidepressant, placebo, CBT</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Intervention Type</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>design</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>type</code></p>
-</div></td>
-      <td class="gt_row gt_left">Type of intervention: e.g., antidepressant, placebo, CBT</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Intervention Type</code></p>
-</div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>design</code></p>
-</div></td>
-      <td class="gt_row gt_left gt_striped">crossover or parallel; for now we filter parallel not crossover</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Group</code></p>
-</div></td>
-    </tr>
+<td class="gt_row gt_left gt_striped">crossover or parallel; for now we filter parallel not crossover</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Group</code></p>
+</div></td></tr>
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">subgroup</td>
     </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>condition</code></p>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>condition</code></p>
 </div></td>
-      <td class="gt_row gt_left">Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
+<td class="gt_row gt_left">Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
 temporomandibular disorder</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Chronic pain condition(s)</code></p>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Chronic pain condition(s)</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>class</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>class</code></p>
+<td class="gt_row gt_left gt_striped">Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Class</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>main_aim</code></p>
 </div></td>
-      <td class="gt_row gt_left gt_striped">Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Class</code></p>
-</div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>main_aim</code></p>
-</div></td>
-      <td class="gt_row gt_left">Primary aim of the original study: e.g., pain, mood, etc.</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Main aim (Pain, mood, quality of life etc)</code></p>
-</div></td>
-    </tr>
+<td class="gt_row gt_left">Primary aim of the original study: e.g., pain, mood, etc.</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Main aim (Pain, mood, quality of life etc)</code></p>
+</div></td></tr>
   </tbody>
   
   
-</table></div>
+</table>
+</div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2673,7 +2598,7 @@ temporomandibular disorder</td>
 </code></pre>
 </div>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

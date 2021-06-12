@@ -3,19 +3,13 @@ title: "hpp"
 description: |
   hpp
 output_dir: "docs"
-exclude: ["data", "old-data", "man", "hppshiny", "R", "*.zip"]
+exclude: ["data", "old-data", "man", "hppshiny", "R", "*.zip", "data.Rmd"]
 navbar:
   left: 
     - text: "overview"
       href: index.html
-    - text: "data"
-      menu:
-        - text: "filters"
-          href: filters.html
-        - text: "model"
-          href: model.html
-        - text: "subgroups"
-          href: subgroups.html
+    - text: "pipeline"
+      href: pipeline.html
     - text: "outcomes"
       menu:
         - text: "adverse"
@@ -25,6 +19,6 @@ navbar:
         - text: "mood (depression)"
           href: outcome-mood_depression.html  
   right:
-    - text: "access"
+    - text: "access data"
       href: about.html
 output: distill::distill_article

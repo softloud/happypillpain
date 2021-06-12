@@ -1,0 +1,459 @@
+---
+title: "Encoding the models"
+description: |
+  Need to ensure indexing in data is same in software, math is the bridge.
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+bibliography: references.bib
+params:
+  random_rows: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r pkgs}
+library(targets)
+library(tidyverse)
+library(gt)
+library(googlesheets4)
+
+# ugh whyeee
+source("R/hpp_themes.R")
+
+
+```
+
+# Get data
+
+
+```{r eval_false, load indexes sheet}
+
+# should move this to raw data at some point?
+
+hpp_indexes_url <- "https://docs.google.com/spreadsheets/d/1nCusPKeikU8oU-8yp1T503AayTDA1mssAGKvi-96lsY/edit#gid=1391233626"
+
+hpp_indexes <- read_sheet(hpp_indexes_url)
+
+
+
+```
+
+
+```{r load targets data, echo=TRUE}
+
+
+withr::with_dir(here::here(), {
+  
+  tar_load(metapar_consult)
+  tar_load(obs)
+  tar_load(drug_names_unlabelled)
+  tar_load(metapar)
+  tar_load(outcomes)
+  tar_load(raw_covidence_export)
+  tar_load(unmatched_studies)
+  tar_load(scales)
+  tar_load(wo_scale)
+  tar_load(wo_scale_multiple_matches)
+  tar_load(wo_scale_unmatched)
+  
+  })
+
+```
+
+# document workflow
+
+In addition to providing a toolchain of the data cleaning process, we will need to document the process for publications generated from this research.
+
+Write this so Tamar, Gav, and the other people on the team who are not getting their hands dirty understand the algorithmic processes the data was put through.
+
+To facilitate collaboration, this project uses two `R` packages:
+
+-   `targets::` for workflow inspection
+-   `renv::` to avoid installation hell
+
+`renv::` is only applicable if you intend on using `targets::` to interact with the data in RStudio.
+
+<!-- If I had an R workflow I could put it here.  -->
+
+# general structure of the data for the model
+
+We need to have rows as arm-based observations per study, with columns that identify the statistics, the study, the treatment, and any moderators or subgroups. We need to ensure the columns we assign from the Covidence export correspond to our assumptions about the model software. 
+
+```{r variable table}
+hpp_indexes %>% 
+  select(variable, role, description, covidence) %>%
+  arrange(role) %>% 
+  gt(groupname_col = "role") %>% 
+  hpp_tab(vertical_divider = variable)
+# %>% 
+#   cols_label(
+#     variable = "Variables",
+#     role = "Role",
+#     description = "Description",
+#     covidence = "Covidence"
+#   )
+  
+  
+```
+
+- [ ] examples
+
+
+## a computational lab-book for excel-like data wrangling
+
+In this workflow, we create an explorable dataset for each of the indexes/variables we require for the model, as we work through cleaning and pivoting the data.
+
+In particular, we also create a dataset for problematic elements for each variable, so they can be inspected by Charles and Hollie together.
+
+```{r}
+
+suppressWarnings(suppressMessages(tar_glimpse()))
+
+
+```
+
+The idea is to have as rigorous and documented data cleaning process as the extraction was.
+
+# raw data
+
+Current raw data loaded into the analysis:
+
+```{r}
+list.files("data")
+```
+
+Aside from the covidence `extracted_data`, these files comprise row-identifiers (`Study Identifier`, `Comments`, and `Intervention`), along with outcome-relevant columns identified by Hollie.
+
+```{r echo=TRUE}
+# confirm this assumption
+
+# count the number of unique combinations of 
+# study, title, and intervention in rows
+n_obs <- 
+metapar_consult %>% 
+  select(study, title, arm) %>% 
+  distinct() %>% 
+  nrow()
+
+# check this number is the same as the number of rows
+# i.e., we can uniquely identify the rows with the values in these three columns
+nrow(metapar_consult) == n_obs
+
+```
+
+# filters
+
+## timepoint
+
+## scale
+
+## type 
+
+```{r type as filter}
+
+```
+
+
+# subgroups
+
+## condition
+
+```{r}
+
+```
+
+
+## class
+
+## main aim
+
+# indexes
+
+## study-level identifier
+
+We need columns or dataframes to encode all of the indexes. Using [@white2019]'s nomenclature, we have $i = 1, \dots, n$ studies.
+
+```{r study counts, echo = TRUE}
+# how many studies total?
+
+# in the raw data
+raw_covidence_export %>% 
+  # select columns that we're identifying the study with
+  select("Study Identifier", "Comments") %>% 
+  distinct() %>% 
+  nrow()
+
+# in metapar
+metapar %>% 
+  select(study) %>% 
+  distinct() %>% 
+  nrow()
+  
+```
+
+Hunch: study identifiers with multiple titles.
+
+```{r}
+raw_covidence_export %>% 
+  janitor::clean_names() %>% 
+  select(study_identifier, comments) %>% 
+  distinct() %>% 
+  count(study_identifier) %>% 
+  filter(n > 1)
+
+
+```
+
+So, does this add up to the discrepency in metapar? Yes. But this shows that targets lost the study tagging.
+
+Since there are sometimes more than one title per study, we'll tag studies with `:n`.
+
+```{r}
+metapar_consult %>% 
+  select(study, title) %>% 
+  distinct() %>% 
+  filter(str_detect(study, ":"), str_length(study) < 16) %>%
+  mutate(
+    title = str_trunc(title, width = 35)
+  ) %>% 
+  head() %>% 
+  gt()
+```
+
+## timepoints
+
+> We will compare antidepressants to the comparators immediately post‐treatment, at short‐term follow‐up (12 weeks or less) and long‐term follow up (over 12 weeks). Where studies include multiple follow‐up time points, we will take the most recent time point within each period. If multiple measures are used, then we will extract from the most valid, reliable and widely used measure in the field.
+
+However, at the moment, we are restricting ourselves to **post-intervention** and each group will be considered as a separate subgroup at the moment, so we don't need to assign an index to it yet.
+
+```{r echo=TRUE}
+# count how many time points
+# and by outcome?
+# whichever is easier
+
+obs %>% 
+  select(outcome, study, timepoint) %>% 
+  distinct() %>% 
+  group_by(outcome) %>%
+  count(timepoint) %>% 
+  pivot_wider(
+    id_cols = outcome,
+    values_from = n,
+    names_from = timepoint,
+    values_fill = 0
+  ) %>% 
+  select(outcome, baseline, mid_int, post_int, follow_up,  unmatched) %>% 
+  ungroup() %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = outcome)
+
+```
+
+```{r random timepoints}
+
+obs %>% 
+  select(study, timepoint) %>% 
+  distinct() %>% 
+  sample_n(size = params$random_rows) %>% 
+  left_join(metapar) %>% 
+  select(study, title, timepoint) %>%
+  distinct() %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = title)
+
+```
+
+## treatments
+
+We also have $k = 1, \dots, K$ treatments. But what will constitute a treatment will be different depending on the model.
+
+Best to separate drug name from dosage.
+
+We will use `Intervention Name`
+
+```{r}
+metapar_consult %>% 
+  count(name) %>% 
+  arrange(desc(n)) %>% head()
+
+
+```
+
+First we check that the `NA` values are all placebo.
+
+```{r echo=TRUE}
+metapar_consult %>% 
+  filter(is.na(name)) %>% 
+  count(type) %>% 
+  arrange(desc(n))
+
+```
+
+There is one antidepressant without a name.
+
+```{r echo=TRUE}
+# get to that specific obs
+metapar_consult %>% 
+  filter(
+    is.na(name), 
+    type == "antidepressant") %>% 
+   select(study, title, arm, class)
+  
+```
+
+## measures
+
+We pivot longer and wider to get observations.
+
+```{r}
+obs
+
+
+```
+
+## chronic pain conditions
+
+For now we will do subgroup analysis with chronic pain conditions. Down the track we consider this as a moderator. Anyways, for now, not assigning an algebraic signifier.
+
+
+### random check
+
+```{r echo=TRUE, eval=FALSE}
+
+  # choose five outcomes
+metapar %>% 
+  # sample n rows
+  sample_n(params$random_rows) %>% 
+  # select relevant columns
+  select(study, title, arm, condition, iasp_criteria) %>% 
+  # table specs
+  gt() %>% 
+  hpp_tab(vertical_divider = study)
+
+
+
+```
+
+## scales
+
+Scales will not be compared, but filtered, so we don't need to assign a formal index to them.
+
+We used this [googlesheet](https://docs.google.com/spreadsheets/d/1Q8QuZ9avto7TlBvHMpcPyX0NFI3R9nLevVjqBXDlHGg/edit#gid=0) to...
+
+```{r random scales, echo=TRUE}
+
+# random selection from scales
+scales %>%
+  mutate(row = row_number()) %>% 
+  sample_n(5) %>% 
+  select(row, 1:4) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = outcome)
+
+# why are there more rows in scales than in the gs?
+
+# aha! because I pivoted long by aka! 
+
+
+```
+
+
+-   more deets about workflow
+
+```{r scale counts}
+
+
+# counts of the scales we've matched
+wo_scale %>% 
+  select(outcome, measure_desc, matched_scales) %>% 
+  distinct() %>% 
+  count(outcome, matched_scales) %>% 
+  pivot_wider(
+    id_cols = matched_scales,
+    names_from = outcome,
+    values_from = n,
+    values_fill = 0
+  ) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = matched_scales)
+
+
+```
+
+> **Measures of treatment effect:** We anticipate most studies will report continuous data for our outcomes, which we will extract and convert into standardised mean difference (SMD) with 95% confidence intervals. We will convert all data into SMD as we anticipate that there will be a broad range of outcome measures used across studies. We will interpret SMD as small (0.2), moderate (0.5) and large (0.8), in line with Cohen 1988 and the Cochrane Handbook (Higgins 2020). We will also present results for the primary outcomes on a zero‐to‐100 scale. For dichotomous data, we will use summary odds ratio (OR) with 95% confidence intervals (CIs). To rank the treatments for each outcome by probability of best treatment, we will use the surface under the cumulative ranking curve (SUCRA) and the mean ranks. [@birkinshaw2021]
+
+```{r scales unmatched, echo=TRUE}
+# unmatched
+wo_scale_unmatched
+
+
+
+```
+
+```{r scales multiple matches, echo=TRUE}
+# multiple matches
+wo_scale_multiple_matches
+
+
+```
+
+```{r random scales matchings}
+wo_scale %>% 
+  sample_n(params$random_rows) %>% 
+  select(outcome, study_arm, matched_scales)
+
+```
+
+
+
+
+## intervention
+
+The arms of the studies are identified by intervention `name` and dose (not yet extracted).
+
+```{r eval=FALSE}
+
+metapar %>% 
+  select(study, type, name, class) %>% 
+  count(name) %>% 
+  filter(n >= 3) %>% 
+  gt(
+    # rowname_col = "name",
+    # groupname_col = "type"
+  ) %>% 
+  tab_header(title = "Number of studies per intervention",
+             subtitle = "Interventions with < 3 studies excluded") %>% 
+  cols_label(name = "Intervention", n = "Number of studies")
+
+```
+
+Small number of intervention labels missing:
+
+```{r eval=FALSE}
+drug_names_unlabelled %>% 
+  select(name, type, class) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = study)
+
+```
+
+These are the interventions with \< 3 studies. Why did NICE recommend acupuncture when there are only two studies?!
+
+```{r eval=FALSE}
+metapar %>% 
+  count(name) %>% 
+  filter(n < 3) %>% 
+  gt(
+    # groupname_col = "type"
+  ) %>% 
+  tab_header(title = "Number of studies per intervention",
+             subtitle = "Interventions with > 2 studies excluded") %>% 
+  cols_label(name = "Intervention", n = "Number of studies")
+
+```
+
+

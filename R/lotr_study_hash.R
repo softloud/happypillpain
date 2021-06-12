@@ -77,9 +77,6 @@ lotr_study_hash <-
     # join fake id to existing dataset
     dat %>%
       dplyr::left_join(key_trt) %>%
-      dplyr::mutate(
-        original_study_arm = str_c(study, arm, sep = sep)
-      ) %>% 
       dplyr::select(-{
         {
           trt_col

@@ -19,10 +19,6 @@ study_id <- function(df) {
     select(-tag, -max_tag) %>% 
     right_join(df, by = c("study_identifier", "title")) %>% 
     select(-study_identifier) %>% 
-    ungroup() %>% 
-    mutate(
-      title = str_remove(title, "Title: "),
-      study_arm = glue("{study} = {arm}")
-    ) 
+    ungroup() 
 }
 
