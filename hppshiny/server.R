@@ -55,7 +55,7 @@ function(input, output) {
   })
   
   output$forest_dat <- renderTable({
-    rel_effects() %>% as_tibble() %>% select(1:4) %>% 
+    rel_effects() %>% as_tibble() %>% select(1:5) %>% 
       mutate(
         parameter = str_replace(parameter, "d\\[", "") %>% 
           str_replace("\\]", "")
@@ -68,7 +68,9 @@ function(input, output) {
   output$dat <- renderTable({
     
     this_model() %>% pluck("network", "agd_arm") %>% 
-      select(-contains("criteria")) %>% 
+      select(-contains("criteria"), 
+             -contains("sponsorship"), 
+             -contains("total_number")) %>% 
       gt() %>% 
       hpp_tab()
   },

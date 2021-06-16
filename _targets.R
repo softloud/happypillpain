@@ -587,38 +587,41 @@ list(
    iteration = "list"
  ),
   
- # tar_target(m_class,
- #            w_obs %>% 
- #              mutate(
- #                class = if_else(
- #                  type == "placebo",
- #                  "placebo",
- #                  class
- #                )
- #              ) %>% 
- #              select(outcome, class) %>% 
- #              distinct()
- # ), 
- 
- # tar_target(m_classes,
- #            m_class %>% filter(class != "placebo") %>% pull(class)
- #            ),
- 
- # tar_target(
- #   m_dat_class,
- #   m_class %>% 
- #    filter(class %in% c(m_classes, "placebo")) %>% 
- #   right_join(w_obs),
- #   pattern = map(m_classes),
- #   iteration = "list"
- # ),
+ tar_target(m_class,
+            w_obs %>%
+              mutate(
+                class = if_else(
+                  type == "placebo",
+                  "placebo",
+                  class
+                )
+              ) %>%
+              select(outcome, class) %>%
+              distinct() %>% 
+              filter(class != "placebo")
+ ),
+
+ tar_target(
+   m_dat_class,
+   {
+     binding_dat <-
+       m_class %>% 
+       bind_rows(m_class)
+     
+     binding_dat[2,2] <- "placebo"
+     
+     binding_dat %>% left_join(w_obs)
+   },
+   pattern = map(m_class),
+   iteration = "list"
+ ),
  
   tar_target(
     m_dat,
     m_dat_outcome %>% 
       append(m_dat_condition_general) %>% 
       append(m_dat_condition_iasp) %>% 
-      # append(m_dat_class) %>% 
+      append(m_dat_class) %>% 
       map(.f = function(df){
         df %>% 
           group_by(study) %>%
@@ -641,10 +644,10 @@ list(
                bind_rows(m_condition_iasp %>% 
                            rename(subgroup_value = condition_iasp) %>% 
                            mutate(subgroup = "condition_iasp")) %>%
-               # bind_rows(m_class %>%
-               #             filter(class != "placebo") %>% 
-               #             rename(subgroup_value = class) %>% 
-               #             mutate(subgroup = "class")) %>%
+               bind_rows(m_class %>%
+                           filter(class != "placebo") %>%
+                           rename(subgroup_value = class) %>%
+                           mutate(subgroup = "class")) %>%
                left_join(m_key, by = "outcome") %>% 
                mutate(
                  dat = m_dat,
@@ -679,7 +682,6 @@ m_nma %>% str(1)
 tar_target(
   m_nma_key_all,
   m_subgroups %>% 
-    select(-dat) %>% 
     mutate(no_fail = m_nma_all %>% map(1) %>% map(length) != 1)
 ),
 
@@ -823,11 +825,13 @@ tar_target(
 
 tar_target(
   shiny_nma,
-  write_rds(m_nma, "hppshiny/nma.rds")
+  write_rds(m_nma, "hppshiny/nma-1.rds")
 ),
   
-tar_target(shiny_key,
-           write_rds(m_nma_key, "hppshiny/key.rds")),
+tar_target(shiny_key %>% select(-dat),
+           write_rds(m_nma_key, "hppshiny/key-1.rds")),
+
+
 
 
 # null --------------------------------------------------------------------
