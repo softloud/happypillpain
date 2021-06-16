@@ -20,8 +20,6 @@ library(targets)
 
 source("R/hpp_themes.R")
 
-obs <- tar_read(w_obs)
-
 ```
 
 ## participants and conditions

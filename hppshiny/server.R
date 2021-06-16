@@ -37,6 +37,33 @@ function(input, output) {
   output$net <- renderPlot({
     this_model() %>% pluck("network") %>% plot()
   })
+  
+  rel_effects <- reactive({
+    effects <- this_model()$network$treatments
+    
+    ref <- if ("placebo" %in% effects ) "placebo" else NULL
+    
+    this_model() %>% 
+      relative_effects(trt_ref = ref, probs = c(0.025, 0.975))
+  })
+  
+  output$forest <- renderPlot(
+    height = 600,
+    {
+    rel_effects() %>% plot(ref_line = 0) +
+        theme(axis.text = element_text(size = 20))
+  })
+  
+  output$forest_dat <- renderTable({
+    rel_effects() %>% as_tibble() %>% select(1:4) %>% 
+      mutate(
+        parameter = str_replace(parameter, "d\\[", "") %>% 
+          str_replace("\\]", "")
+      )
+  }, 
+  striped = TRUE,
+  hover = TRUE
+  ) 
 
   output$dat <- renderTable({
     
@@ -44,6 +71,9 @@ function(input, output) {
       select(-contains("criteria")) %>% 
       gt() %>% 
       hpp_tab()
-  })
+  },
+  striped = TRUE,
+  hover = TRUE
+  )
   
 }

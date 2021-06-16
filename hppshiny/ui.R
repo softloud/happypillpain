@@ -9,15 +9,18 @@ fluidPage(
   theme = shinytheme("flatly"),
   h1("Treating chronic pain with antidepressants"),
   h2(
-    "Outcome-specific random-effects network meta-analysis preliminary results 
-    for parallel post-intervention studies"
+    "Outcome-specific random-effects network meta-analysis"
   ),
+  h3("Preliminary results")
+  
+  ,
 
   
   sidebarLayout(
     # sidebar -----------------------------------------------------------------
     
     sidebarPanel(
+      width = 2,
       selectInput(
         inputId = "outcome",
         label = "Select an outcome:",
@@ -40,7 +43,7 @@ fluidPage(
       ),
       
       
-      h2("Scope of preliminary results"),
+      h3("Scope of preliminary results"),
       p("- post-intervention"),
       p("- random-effects model"),
       p("- parallel design"),
@@ -72,11 +75,25 @@ fluidPage(
                ),
                column(width = 6,
                       p("net"),
-                      plotOutput("net", width = "150%"),
+                      plotOutput("net"),
                       NULL
                       )
                )),
       
+tabPanel("effects",
+         fluidRow(
+           column(
+           width = 8,
+           plotOutput("forest")
+         ),
+         column(
+           width = 4,
+           tableOutput("forest_dat")
+         )
+         
+         )),
+
+
       
       tabPanel("data",
                fluidRow(column(
