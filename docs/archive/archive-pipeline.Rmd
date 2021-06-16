@@ -1,0 +1,147 @@
+---
+title: "data cleaning pipeline"
+description: |
+  Documentation of how data is cleaned and prepared.
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+
+```
+
+```{r pkgs, message=FALSE}
+
+library(targets)
+library(tidyverse)
+library(gt)
+library(glue)
+
+source("R/hpp_themes.R")
+
+```
+
+In this document, I'll step through how the data was labelled so Hollie and others can check the assumptions and labelling.
+
+```{r}
+# overview of entire pipeline
+
+tar_visnetwork()
+```
+
+We need to ensure that the following variables and filteres are labelled and indexed correctly for the models. 
+
+```{r warning=FALSE}
+tar_read(e_variables)
+```
+
+
+# raw data
+
+The inputs to the analysis are from a number of different raw data files.
+
+```{r}
+tar_visnetwork(allow = starts_with("r_"))
+```
+
+# raw outcome-level data
+
+Hollie identified the columns in the raw Covidence export that pertained to each outcome and exported them as a separate .csv file. These were loaded into a list of dataframes to be fed into the pipeline for cleaning.
+
+In theory, the pipeline is built such that new outcome-level observations can be dropped in.
+
+```{r}
+# pipeline of raw observations
+
+tar_visnetwork(allow = starts_with("r_outcome_"))
+```
+
+## other raw inputs
+
+# studies
+
+The current dimensions of the covidence export are
+
+```{r dim cov}
+tar_read(r_covidence) %>% 
+  dim()
+```
+
+where each row denotes an arm of a study and the columns are sparsely-filled observational data, as well as study-level information. As we have the observational data from Hollie's extractions for each outcome, these data are only used for study-level information. 
+
+Number of studies in raw covidence , for comparison with cleaned observations.
+
+```{r studies in cov}
+tar_read(r_covidence) %>% 
+  janitor::clean_names() %>% 
+  select(study_identifier, comments) %>% 
+  distinct() %>% 
+  nrow()
+
+
+```
+
+Some of the studies have the same label (first author and year), as the first author published more than one study in a year. 
+
+```{r}
+tar_read(r_covidence) %>% 
+  janitor::clean_names() %>% 
+  select(study_identifier, comments) %>% 
+  distinct() %>% 
+  group_by(study_identifier) %>% 
+  mutate(n_per_author = 1:n(),
+         max_n = max(n_per_author)) %>% 
+  filter(max_n > 1) %>% 
+  ungroup() %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = "study_identifier")
+
+
+```
+
+For short-hand labelling on the forest plots, we append a number to the author-year shorthand study identifier. 
+
+```{r}
+source("R/study_id.R")
+
+tibble(
+  study_identifier = c(rep("birkinshaw 2019", 3), "gray 2014", "pincus 2018"),
+  title = letters[1:5]
+) %>% 
+  study_id()
+
+```
+
+
+
+
+## study-level data
+
+Metaparameters for each study were drawn from the raw covidence export. These comprise the study and intervention data, such as class, type of trial, etc.
+
+```{r}
+tar_read(metapar) %>% gt()
+
+```
+
+## outcome data
+
+```{r}
+tar_read(r_obs) %>% map(select, 1:5)
+```
+
+# wrangling
+
+```{r}
+tar_visnetwork(allow = starts_with("w_"))
+```

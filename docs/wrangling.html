@@ -86,29 +86,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>hpp: simulations</title>
+  <title>hpp: wrangling</title>
 
+  <meta property="description" itemprop="description" content="Data cleaning of observations and study-level information."/>
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-06-11"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-06-11"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-06-16"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-16"/>
+  <meta name="article:author" content="Nora Jones"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="hpp: simulations"/>
+  <meta property="og:title" content="hpp: wrangling"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Data cleaning of observations and study-level information."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="hpp"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="hpp: simulations"/>
+  <meta property="twitter:title" content="hpp: wrangling"/>
+  <meta property="twitter:description" content="Data cleaning of observations and study-level information."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","date","output"]}},"value":[{"type":"character","attributes":{},"value":["simulations"]},{"type":"character","attributes":{},"value":["2021-06-11"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["wrangling"]},{"type":"character","attributes":{},"value":["Data cleaning of observations and study-level information.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Nora Jones"]},{"type":"character","attributes":{},"value":["https://example.com/norajones"]},{"type":"character","attributes":{},"value":["Spacely Sprockets"]},{"type":"character","attributes":{},"value":["https://example.com/spacelysprokets"]}]}]},{"type":"character","attributes":{},"value":["2021-06-16"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2036,7 +2040,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.8.6/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
+  <script src="site_libs/vis-4.20.1/vis.min.js"></script>
+  <script src="site_libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2056,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"simulations","authors":[],"publishedDate":"2021-06-11T00:00:00.000+01:00"}
+{"title":"wrangling","description":"Data cleaning of observations and study-level information.","authors":[{"author":"Nora Jones","authorURL":"https://example.com/norajones","affiliation":"Spacely Sprockets","affiliationURL":"https://example.com/spacelysprokets","orcidID":""}],"publishedDate":"2021-06-16T00:00:00.000+01:00","citationText":"Jones, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2065,8 +2073,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
-<a href="index.html">overview</a>
-<a href="pipeline.html">pipeline</a>
+<a href="overview.html">overview</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 outcomes
@@ -2081,7 +2088,18 @@ outcomes
 </div>
 </div>
 <div class="nav-right">
-<a href="about.html">access</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+pipeline
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="pipeline.html">pipeline design</a>
+<a href="wrangling.html">wrangling</a>
+</div>
+</div>
+<a href="about.html">access data</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2091,84 +2109,47 @@ outcomes
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>simulations</h1>
+<h1>wrangling</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-
+<p><p>Data cleaning of observations and study-level information.</p></p>
 </div>
 
+<div class="d-byline">
+  Nora Jones <a href="https://example.com/norajones" class="uri">https://example.com/norajones</a> (Spacely Sprockets)<a href="https://example.com/spacelysprokets" class="uri">https://example.com/spacelysprokets</a>
+  
+<br/>2021-06-16
+</div>
 
 <div class="d-article">
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidyverse/glue'>glue</a></span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidyverse/googlesheets4'>googlesheets4</a></span><span class='op'>)</span>
 
-
-
-<span class='co'># ugh whyeee</span>
 <span class='kw'><a href='https://rdrr.io/r/base/source.html'>source</a></span><span class='op'>(</span><span class='st'>"R/hpp_themes.R"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
+<h1 id="study">study</h1>
+<p>There’s a shorthand tag for study (first author and year) that we’ll use for the labelling in the forest plots and joining the different datasets, however, this tag is not unique.</p>
+<p>So, the <code>study</code> tag appends with a number <em>if</em> there is more than one study by that author in a year.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># run simulation pipeline</span>
-<span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_dir.html'>with_dir</a></span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"simulation"</span><span class='op'>)</span>, <span class='op'>{</span>
-  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_make.html'>tar_make</a></span><span class='op'>(</span><span class='op'>)</span>
-  
-  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_load.html'>tar_load</a></span><span class='op'>(</span><span class='va'>check_wd</span><span class='op'>)</span>
-  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_load.html'>tar_load</a></span><span class='op'>(</span><span class='va'>sim_pairwise</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_study_key</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>study</span>, <span class='st'>"Arnold"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'>str_trunc</span><span class='op'>(</span><span class='va'>title</span>, width <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>hpp_tab</span><span class='op'>(</span>vertical_divider <span class='op'>=</span> <span class='st'>"study"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>✓ skip target set_var
-✓ skip target sim_pairwise
-✓ skip target check_wd
-✓ skip target n_obs
-✓ skip pipeline</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># and from the general</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_load.html'>tar_load</a></span><span class='op'>(</span><span class='va'>variables_tab</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># check we're in the simulations directory</span>
-<span class='va'>check_wd</span>
-</code></pre>
-</div>
-<pre><code>[1] TRUE</code></pre>
-</div>
-<p>Our goal is to create a dataset that imitates the kind of data we will encounter in the cleaned Covidence extract. The cleaning is such a substantial job, I think it useful to simulate a manageable dataset to play around with model subgroups and visualisations.</p>
-<p>Given the number of studies involved, and the number of treatments, it’s likely we will need to create several customaised visualisations and summaries.</p>
-<p>Off the top of my head, we have</p>
-<ul>
-<li>time points: follow-ups short and long, post-intervention,</li>
-<li>comparisons: antidepressant vs placebo, etc.</li>
-<li><code>class</code> of drug</li>
-<li>chronic pain <code>condition</code></li>
-<li>outcome</li>
-</ul>
-<blockquote>
-<p>ugh sort out type and class, what does the protocol say?</p>
-</blockquote>
-<p>For now, I will use this table as my guide.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>variables_tab</span>
-</code></pre>
-</div>
-<div id="knqznxlvex" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ceozlzydqi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#knqznxlvex .gt_table {
+#ceozlzydqi .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2193,7 +2174,7 @@ outcomes
   border-left-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_heading {
+#ceozlzydqi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2205,7 +2186,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_title {
+#ceozlzydqi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2215,7 +2196,7 @@ outcomes
   border-bottom-width: 0;
 }
 
-#knqznxlvex .gt_subtitle {
+#ceozlzydqi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2225,13 +2206,13 @@ outcomes
   border-top-width: 0;
 }
 
-#knqznxlvex .gt_bottom_border {
+#ceozlzydqi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_col_headings {
+#ceozlzydqi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2246,7 +2227,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_col_heading {
+#ceozlzydqi .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2266,7 +2247,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#knqznxlvex .gt_column_spanner_outer {
+#ceozlzydqi .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2278,15 +2259,15 @@ outcomes
   padding-right: 4px;
 }
 
-#knqznxlvex .gt_column_spanner_outer:first-child {
+#ceozlzydqi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#knqznxlvex .gt_column_spanner_outer:last-child {
+#ceozlzydqi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#knqznxlvex .gt_column_spanner {
+#ceozlzydqi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2298,7 +2279,7 @@ outcomes
   width: 100%;
 }
 
-#knqznxlvex .gt_group_heading {
+#ceozlzydqi .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2320,7 +2301,7 @@ outcomes
   vertical-align: middle;
 }
 
-#knqznxlvex .gt_empty_group_heading {
+#ceozlzydqi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2335,15 +2316,15 @@ outcomes
   vertical-align: middle;
 }
 
-#knqznxlvex .gt_from_md > :first-child {
+#ceozlzydqi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#knqznxlvex .gt_from_md > :last-child {
+#ceozlzydqi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#knqznxlvex .gt_row {
+#ceozlzydqi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2362,7 +2343,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#knqznxlvex .gt_stub {
+#ceozlzydqi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2374,7 +2355,7 @@ outcomes
   padding-left: 12px;
 }
 
-#knqznxlvex .gt_summary_row {
+#ceozlzydqi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2384,7 +2365,7 @@ outcomes
   padding-right: 5px;
 }
 
-#knqznxlvex .gt_first_summary_row {
+#ceozlzydqi .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2394,7 +2375,7 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_grand_summary_row {
+#ceozlzydqi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2404,7 +2385,7 @@ outcomes
   padding-right: 5px;
 }
 
-#knqznxlvex .gt_first_grand_summary_row {
+#ceozlzydqi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2414,11 +2395,11 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_striped {
+#ceozlzydqi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#knqznxlvex .gt_table_body {
+#ceozlzydqi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2427,7 +2408,7 @@ outcomes
   border-bottom-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_footnotes {
+#ceozlzydqi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2441,13 +2422,13 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_footnote {
+#ceozlzydqi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#knqznxlvex .gt_sourcenotes {
+#ceozlzydqi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2461,41 +2442,41 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#knqznxlvex .gt_sourcenote {
+#ceozlzydqi .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#knqznxlvex .gt_left {
+#ceozlzydqi .gt_left {
   text-align: left;
 }
 
-#knqznxlvex .gt_center {
+#ceozlzydqi .gt_center {
   text-align: center;
 }
 
-#knqznxlvex .gt_right {
+#ceozlzydqi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#knqznxlvex .gt_font_normal {
+#ceozlzydqi .gt_font_normal {
   font-weight: normal;
 }
 
-#knqznxlvex .gt_font_bold {
+#ceozlzydqi .gt_font_bold {
   font-weight: bold;
 }
 
-#knqznxlvex .gt_font_italic {
+#ceozlzydqi .gt_font_italic {
   font-style: italic;
 }
 
-#knqznxlvex .gt_super {
+#ceozlzydqi .gt_super {
   font-size: 65%;
 }
 
-#knqznxlvex .gt_footnote_marks {
+#ceozlzydqi .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2505,148 +2486,683 @@ outcomes
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">Description</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">Covidence</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study_identifier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">comments</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">title</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr class="gt_group_heading_row">
-      <td colspan="3" class="gt_group_heading">model</td>
-    </tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>study</code></p>
-</div></td>
-<td class="gt_row gt_left">Unique identifier for study; comments contains title, study identifier is first author and year</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Study Identifier + Comments</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>name</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">Name of intervention drug: e.g., Desvenlafaxin</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Name</code></p>
-</div></td></tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="3" class="gt_group_heading">filter</td>
-    </tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>timepoint</code></p>
-</div></td>
-<td class="gt_row gt_left">Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p>obs header</p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>scale</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">We searched the column headers for names of scales (such as vas)</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p>obs header</p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>type</code></p>
-</div></td>
-<td class="gt_row gt_left">Type of intervention: e.g., antidepressant, placebo, CBT</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Intervention Type</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>design</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">crossover or parallel; for now we filter parallel not crossover</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Group</code></p>
-</div></td></tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="3" class="gt_group_heading">subgroup</td>
-    </tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>condition</code></p>
-</div></td>
-<td class="gt_row gt_left">Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
-temporomandibular disorder</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Chronic pain condition(s)</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>class</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Class</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>main_aim</code></p>
-</div></td>
-<td class="gt_row gt_left">Primary aim of the original study: e.g., pain, mood, etc.</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Main aim (Pain, mood, quality of life etc)</code></p>
-</div></td></tr>
+    <tr><td class="gt_row gt_left">Arnold 2002</td>
+<td class="gt_row gt_left">Title: A randomized, placebo-controlled, double-blind, flexible-dose study of fluoxetine in the treatment of women with fibromyalgia</td>
+<td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2002</td>
+<td class="gt_row gt_left">A randomized, placebo-contr...</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Arnold 2004</td>
+<td class="gt_row gt_left gt_striped">Title: A double-blind, multicenter trial comparing duloxetine with placebo in the treatment of fibromyalgia patients with or without major depressive disorder</td>
+<td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2004</td>
+<td class="gt_row gt_left gt_striped">A double-blind, multicenter...</td></tr>
+    <tr><td class="gt_row gt_left">Arnold 2005</td>
+<td class="gt_row gt_left">Title: A randomized, double-blind, placebo-controlled trial of duloxetine in the treatment of women with fibromyalgia with or without major depressive disorder</td>
+<td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2005</td>
+<td class="gt_row gt_left">A randomized, double-blind,...</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Arnold 2010</td>
+<td class="gt_row gt_left gt_striped">Title: Safety and efficacy of esreboxetine in patients with fibromyalgia: An 8-week, multicenter, randomized, double-blind, placebo-controlled study</td>
+<td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2010 : 1</td>
+<td class="gt_row gt_left gt_striped">Safety and efficacy of esre...</td></tr>
+    <tr><td class="gt_row gt_left">Arnold 2010</td>
+<td class="gt_row gt_left">Title: Efficacy and safety of milnacipran 100 mg/day in patients with fibromyalgia: results of a randomized, double-blind, placebo-controlled trial</td>
+<td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2010 : 2</td>
+<td class="gt_row gt_left">Efficacy and safety of miln...</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Arnold 2010</td>
+<td class="gt_row gt_left gt_striped">Title: Flexible dosed duloxetine in the treatment of fibromyalgia: a randomized, double-blind, placebo-controlled trial</td>
+<td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2010 : 3</td>
+<td class="gt_row gt_left gt_striped">Flexible dosed duloxetine i...</td></tr>
+    <tr><td class="gt_row gt_left">Arnold 2012</td>
+<td class="gt_row gt_left">Title: Efficacy and safety of duloxetine 30 mg/d in patients with fibromyalgia: a randomized, double-blind, placebo-controlled study</td>
+<td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2012 : 1</td>
+<td class="gt_row gt_left">Efficacy and safety of dulo...</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Arnold 2012</td>
+<td class="gt_row gt_left gt_striped">Title: Safety and efficacy of esreboxetine in patients with fibromyalgia: A fourteen-week, randomized, double-blind, placebo-controlled, multicenter clinical trial</td>
+<td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">Arnold 2012 : 2</td>
+<td class="gt_row gt_left gt_striped">Safety and efficacy of esre...</td></tr>
   </tbody>
   
   
 </table>
 </div>
 </div>
-<h2 id="filters">filters</h2>
-<p>We will assume</p>
-<ul>
-<li><code>timepoint</code> is post intervention</li>
-<li><code>scale</code> filters have not been applied (because Charles need to think about how to code this)</li>
-<li><code>type</code> of interventions considered are antidepressants vs placebo</li>
-</ul>
-<p>So, we will need to add these as columns to the observations. Some outcomes are measured dichotomously and some outcomes are measured continuously. So, for one outcome, for the filters above, we have:</p>
+<p>This function is used to construct a study key, and variables are relabelled in the study-level data extracted from Covidence, and the outcome observations extracted by Hollie.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>n_obs</span> <span class='op'>&lt;-</span> <span class='fl'>5</span>
-
-<span class='co'># need to create a few set up tables</span>
-
-<span class='co'># scale is associated with drug</span>
-<span class='va'>drugs</span> <span class='op'>&lt;-</span> 
-  <span class='fu'>tibble</span><span class='op'>(</span>
-    drug <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-    scale <span class='op'>=</span> <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, <span class='fl'>3</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='op'>)</span> 
-
-<span class='va'>study</span> <span class='op'>&lt;-</span> 
-  <span class='fu'>tibble</span><span class='op'>(</span>
-    study <span class='op'>=</span> <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='op'>)</span>
-  <span class='op'>)</span>
-
-<span class='co'># </span>
-
-<span class='co'># study and name of drug</span>
-  <span class='fu'>tibble</span><span class='op'>(</span>
-  drug <span class='op'>=</span> <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>sample</a></span><span class='op'>(</span><span class='va'>drugs</span><span class='op'>$</span><span class='va'>drug</span>, <span class='va'>n_obs</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>)</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>left_join</span><span class='op'>(</span><span class='va'>drugs</span>, by <span class='op'>=</span> <span class='st'>"drug"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>
-      name <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"drug_{drug}"</span><span class='op'>)</span>,
-    row <span class='op'>=</span> <span class='fu'>row_number</span><span class='op'>(</span><span class='op'>)</span>,
-  study <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"study_{row}"</span><span class='op'>)</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>drug</span>, <span class='op'>-</span><span class='va'>row</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>mutate</span><span class='op'>(</span>
-      timepoint <span class='op'>=</span> <span class='st'>"post_int"</span>,
-      type <span class='op'>=</span> <span class='st'>"antidepressant"</span>
-    <span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_h_"</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"covidence"</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"w_study_"</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"outcome"</span><span class='op'>)</span>
+<span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 5 x 5
-  scale name   study   timepoint type          
-  &lt;int&gt; &lt;glue&gt; &lt;glue&gt;  &lt;chr&gt;     &lt;chr&gt;         
-1     1 drug_3 study_1 post_int  antidepressant
-2     2 drug_2 study_2 post_int  antidepressant
-3     2 drug_2 study_3 post_int  antidepressant
-4     1 drug_1 study_4 post_int  antidepressant
-5     2 drug_2 study_5 post_int  antidepressant</code></pre>
+<pre><code>
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+Loading required package: dontpanic
+
+/
+
+-
+
+\
+
+|
+
+/
+
+ </code></pre>
+<div id="htmlwidget-d4f76dae51fbe7b18827" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d4f76dae51fbe7b18827">{"x":{"nodes":{"name":["e_outcome_condition","e_outcome_condition_all_types","e_outcome_condition_counts","e_outcome_condition_intervention","e_outcome_condition_placebo","e_outcome_condition_tab","m_dat_outcome","r_covidence","r_h_outcome_adverse","r_h_outcome_mood","r_h_outcome_obs","r_h_outcome_pain","w_covidence","w_outcome_obs","w_outcomes","w_study_arm_par","w_study_key","w_study_label_obs","w_study_label_study_arm_par"],"type":["stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","pattern","stem"],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.005,0.011,0.022,0.006,0.011,0.158,0.026,4.623,0.057,0.814,0,1.194,5.335,2.39,0.001,0.049,0.085,0.153,0.015],"bytes":[1164,666,1186,995,439,6890,125394,568809,16198,69206,174779,93302,131014,138708,80,129117,9049,114196,131261],"branches":[null,null,null,null,null,null,3,null,null,null,null,null,null,3,null,null,null,3,null],"id":["e_outcome_condition","e_outcome_condition_all_types","e_outcome_condition_counts","e_outcome_condition_intervention","e_outcome_condition_placebo","e_outcome_condition_tab","m_dat_outcome","r_covidence","r_h_outcome_adverse","r_h_outcome_mood","r_h_outcome_obs","r_h_outcome_pain","w_covidence","w_outcome_obs","w_outcomes","w_study_arm_par","w_study_key","w_study_label_obs","w_study_label_study_arm_par"],"label":["e_outcome_condition","e_outcome_condition_all_types","e_outcome_condition_counts","e_outcome_condition_intervention","e_outcome_condition_placebo","e_outcome_condition_tab","m_dat_outcome","r_covidence","r_h_outcome_adverse","r_h_outcome_mood","r_h_outcome_obs","r_h_outcome_pain","w_covidence","w_outcome_obs","w_outcomes","w_study_arm_par","w_study_key","w_study_label_obs","w_study_label_study_arm_par"],"level":[3,1,1,2,2,4,4,1,1,1,2,1,2,4,3,5,3,5,4],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","square","dot"]},"edges":{"from":["w_study_label_study_arm_par","r_covidence","r_h_outcome_adverse","r_h_outcome_mood","r_h_outcome_pain","w_covidence","w_study_key","e_outcome_condition_counts","e_outcome_condition_counts","r_h_outcome_obs","r_h_outcome_obs","w_outcomes","w_covidence","w_outcomes","w_outcome_obs","w_study_key","e_outcome_condition_all_types","e_outcome_condition_intervention","e_outcome_condition_placebo","e_outcome_condition"],"to":["w_study_arm_par","w_covidence","r_h_outcome_obs","r_h_outcome_obs","r_h_outcome_obs","w_study_label_study_arm_par","w_study_label_study_arm_par","e_outcome_condition_placebo","e_outcome_condition_intervention","w_outcomes","w_outcome_obs","w_outcome_obs","w_study_key","m_dat_outcome","w_study_label_obs","w_study_label_obs","e_outcome_condition","e_outcome_condition","e_outcome_condition","e_outcome_condition_tab"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Stem","Pattern"],"color":["#354823","#899DA4","#899DA4"],"shape":["dot","dot","square"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
 </div>
-<h2 id="model">model</h2>
-<h3 id="pairwise">pairwise</h3>
-<p>In pairwise, we model, for the <span class="math inline">\(i\)</span>th study, we assume the observed difference between placebo and intervention <span class="math inline">\(d_i\)</span> can be thought of in terms of some true difference <span class="math inline">\(\delta\)</span> and a random effect <span class="math inline">\(\delta_i \sim \text{normal}(0, \tau)\)</span> associated with the specific conditions of the difference <span class="math inline">\(d_i\)</span> in the <span class="math inline">\(i\)</span>th study,</p>
-<p><span class="math display">\[
-d_i = \delta + \delta_i + \varepsilon_i, 
-\]</span> with <span class="math inline">\(\varepsilon_i \sim \text{normal}(0, \sigma_i^2)\)</span>, some sampling error.</p>
-<p>So, then</p>
-$$
-<span class="math display">\[\begin{cases}
+<p>We now have two datasets each with <code>study</code> and <code>arm</code>, so we can join them together later.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># table of study/arm level information</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_study_label_study_arm_par</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 451 x 25
+   study  arm    intervention   type   class condition main_aim design
+   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; 
+ 1 Arnol… Place… &lt;NA&gt;           Place… &lt;NA&gt;  Fibromya… Pain     Paral…
+ 2 Arnol… Esreb… Esreboxetine   Antid… SNRI  Fibromya… Pain     Paral…
+ 3 Gonza… Physi… Physiotherapy… Ultra… &lt;NA&gt;  Fibromya… Pain     Paral…
+ 4 Gonza… Sertr… Sertraline     Antid… SSRI  Fibromya… Pain     Paral…
+ 5 Hammo… Prega… Pregabalin     Antic… &lt;NA&gt;  Fibromya… Pain     Paral…
+ 6 Hammo… Amitr… Amitriptyline  Antid… TCA   Fibromya… Pain     Paral…
+ 7 Carde… Benzo… Benztropine m… Activ… &lt;NA&gt;  Spinal c… Pain     Paral…
+ 8 Carde… Amitr… Amitriptyline  Antid… TCA   Spinal c… Pain     Paral…
+ 9 Gould… Benzo… Benztropine m… Activ… &lt;NA&gt;  Chronic … Pain     Paral…
+10 Gould… Desip… Desipramine h… Antid… TCA   Chronic … Pain     Paral…
+# … with 441 more rows, and 17 more variables:
+#   sponsorship_source &lt;chr&gt;, authors_name &lt;chr&gt;,
+#   duration_weeks &lt;chr&gt;, pain_duration &lt;chr&gt;,
+#   inclusion_criteria &lt;chr&gt;, exclusion_criteria &lt;chr&gt;,
+#   total_number_of_participants_randomised &lt;chr&gt;,
+#   number_in_each_arm_comparators_treatments &lt;chr&gt;,
+#   number_in_each_arm_intervention_comparators &lt;chr&gt;,
+#   type_of_participant_e_g_people_with_cancer &lt;chr&gt;,
+#   type_of_participant_e_g_people_with_cancer_2 &lt;chr&gt;,
+#   intervention_adverse_events &lt;chr&gt;,
+#   intervention_adverse_events_n_percent &lt;chr&gt;,
+#   withdrawal_total_per_arm_n_percent &lt;chr&gt;,
+#   withdrawal_total_percent &lt;dbl&gt;, withdrawal_total_n &lt;dbl&gt;,
+#   title &lt;chr&gt;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># list of outcome tables with observations extracted by Hollie</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_study_label_obs</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='co'># select first 10 columns bc space</span>
+  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>map</a></span><span class='op'>(</span><span class='va'>select</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[[1]]
+# A tibble: 451 x 10
+   outcome   study   arm      anxiety_1_item_pati… anxiety_1_item_pat…
+   &lt;chr&gt;     &lt;glue&gt;  &lt;chr&gt;    &lt;lgl&gt;                &lt;lgl&gt;              
+ 1 mood_dep… Lee 20… Placebo  NA                   NA                 
+ 2 mood_dep… Lee 20… Venlafa… NA                   NA                 
+ 3 mood_dep… dsrhv … Control  NA                   NA                 
+ 4 mood_dep… dsrhv … Amitrip… NA                   NA                 
+ 5 mood_dep… dsrhv … Amitrip… NA                   NA                 
+ 6 mood_dep… dsrhv … Acupunc… NA                   NA                 
+ 7 mood_dep… Keskin… Gabapen… NA                   NA                 
+ 8 mood_dep… Keskin… Amitrip… NA                   NA                 
+ 9 mood_dep… Cannon… Placebo  NA                   NA                 
+10 mood_dep… Cannon… Clonidi… NA                   NA                 
+# … with 441 more rows, and 5 more variables:
+#   anxiety_1_item_patient_rated_ni_baseline_se &lt;lgl&gt;,
+#   anxiety_4_point_nrs_from_0_no_anxiety_to_3_severe_anxiety_baseline_mean &lt;dbl&gt;,
+#   anxiety_4_point_nrs_from_0_no_anxiety_to_3_severe_anxiety_baseline_n &lt;dbl&gt;,
+#   anxiety_4_point_nrs_from_0_no_anxiety_to_3_severe_anxiety_baseline_sd &lt;dbl&gt;,
+#   anxiety_4_point_nrs_from_0_no_anxiety_to_3_severe_anxiety_mid_intervention_week_3_mean &lt;dbl&gt;
 
-d_i \sim \text{normal}(\delta_i, \sigma_i^2)\\
-\delta_i \sim \text{normal}(\delta, \tau) 
+[[2]]
+# A tibble: 451 x 10
+   outcome study   arm     american_college_of_… american_college_of_…
+   &lt;chr&gt;   &lt;glue&gt;  &lt;chr&gt;                   &lt;dbl&gt;                 &lt;dbl&gt;
+ 1 pain    Lee 20… Placebo                    NA                    NA
+ 2 pain    Lee 20… Venlaf…                    NA                    NA
+ 3 pain    dsrhv … Control                    NA                    NA
+ 4 pain    dsrhv … Amitri…                    NA                    NA
+ 5 pain    dsrhv … Amitri…                    NA                    NA
+ 6 pain    dsrhv … Acupun…                    NA                    NA
+ 7 pain    Keskin… Gabape…                    NA                    NA
+ 8 pain    Keskin… Amitri…                    NA                    NA
+ 9 pain    Cannon… Placebo                    NA                    NA
+10 pain    Cannon… Clonid…                    NA                    NA
+# … with 441 more rows, and 5 more variables:
+#   american_college_of_rheumatology_acr_fibromyalgia_widespread_pain_index_wpi_baseline_sd &lt;dbl&gt;,
+#   american_college_of_rheumatology_acr_fibromyalgia_widespread_pain_index_wpi_post_intervention_ls_mean_se_change_from_baseline_mean &lt;dbl&gt;,
+#   american_college_of_rheumatology_acr_fibromyalgia_widespread_pain_index_wpi_post_intervention_ls_mean_se_change_from_baseline_n &lt;dbl&gt;,
+#   american_college_of_rheumatology_acr_fibromyalgia_widespread_pain_index_wpi_post_intervention_ls_mean_se_change_from_baseline_sd &lt;dbl&gt;,
+#   average_of_pain_rating_index_mc_gill_pain_questionnaire_itt_sample_baseline_mean &lt;dbl&gt;
 
-\end{cases}\]</span>
-<p>$$ (I think, I’m still getting my head around this notation.)</p>
+[[3]]
+# A tibble: 451 x 10
+   outcome study   arm        adverse_drug_reacti… adverse_drug_react…
+   &lt;chr&gt;   &lt;glue&gt;  &lt;chr&gt;                     &lt;dbl&gt;               &lt;dbl&gt;
+ 1 adverse Lee 20… Placebo                      NA                  NA
+ 2 adverse Lee 20… Venlafaxi…                   NA                  NA
+ 3 adverse dsrhv … Control                      NA                  NA
+ 4 adverse dsrhv … Amitripty…                   NA                  NA
+ 5 adverse dsrhv … Amitripty…                   NA                  NA
+ 6 adverse dsrhv … Acupunctu…                   NA                  NA
+ 7 adverse Keskin… Gabapenti…                   NA                  NA
+ 8 adverse Keskin… Amitripty…                   NA                  NA
+ 9 adverse Cannon… Placebo                      NA                  NA
+10 adverse Cannon… Clonidine                    NA                  NA
+# … with 441 more rows, and 5 more variables:
+#   adverse_effects_physician_rated_with_the_dotes_endpoint_percent &lt;dbl&gt;,
+#   adverse_effects_physician_rated_with_the_dotes_endpoint_n &lt;dbl&gt;,
+#   adverse_events_endpoint_percent &lt;dbl&gt;,
+#   adverse_events_endpoint_n &lt;dbl&gt;,
+#   adverse_events_3_months_acute_phase_post_intervention_percent &lt;dbl&gt;</code></pre>
+</div>
+<h1 id="study-level-information">study-level information</h1>
+<h1 id="observations-and-observation-level-information">observations and observation-level information</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># desired output structure</span>
+
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>p_obs</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div id="uxnorhrihu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#uxnorhrihu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uxnorhrihu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uxnorhrihu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_col_heading {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uxnorhrihu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uxnorhrihu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uxnorhrihu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uxnorhrihu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uxnorhrihu .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uxnorhrihu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uxnorhrihu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uxnorhrihu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uxnorhrihu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uxnorhrihu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#uxnorhrihu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uxnorhrihu .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uxnorhrihu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uxnorhrihu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#uxnorhrihu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uxnorhrihu .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#uxnorhrihu .gt_left {
+  text-align: left;
+}
+
+#uxnorhrihu .gt_center {
+  text-align: center;
+}
+
+#uxnorhrihu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uxnorhrihu .gt_font_normal {
+  font-weight: normal;
+}
+
+#uxnorhrihu .gt_font_bold {
+  font-weight: bold;
+}
+
+#uxnorhrihu .gt_font_italic {
+  font-style: italic;
+}
+
+#uxnorhrihu .gt_super {
+  font-size: 65%;
+}
+
+#uxnorhrihu .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Outcome-level observational from data extracted by Hollie</th>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">arm</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">obs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">obs_info</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">mood, pain, etc.</td>
+<td class="gt_row gt_left">unique study identifier</td>
+<td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">unique arm identifier</td>
+<td class="gt_row gt_left">columns with mean, sd, counts, sample size, etc.</td>
+<td class="gt_row gt_left">information extracted from column headers:
+      timepoint, scale, etc.</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># pipeline overview</span>
+
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>w_study_label_obs</span>, <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"w_obs_"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+Loading required package: dontpanic
+
+/
+
+-
+
+\
+
+|
+
+/
+
+ </code></pre>
+<div id="htmlwidget-74ab5b848cb9b7b6fc03" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74ab5b848cb9b7b6fc03">{"x":{"nodes":{"name":["w_obs_calc","w_obs_higher_to_filter","w_obs_investigate","w_obs_long","w_obs_scale_lower","w_obs_scale_matches","w_obs_scales","w_obs_time","w_obs_viable","w_obs_wide","w_study_label_obs"],"type":["stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","pattern"],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.02,0.002,0.012,1.385,0.015,36.174,0.013,0.042,0.031,0.016,0.153],"bytes":[51514,392,20083,50577,37403,41066,40777,40415,33596,39480,114196],"branches":[null,null,null,3,null,null,null,null,null,null,3],"id":["w_obs_calc","w_obs_higher_to_filter","w_obs_investigate","w_obs_long","w_obs_scale_lower","w_obs_scale_matches","w_obs_scales","w_obs_time","w_obs_viable","w_obs_wide","w_study_label_obs"],"label":["w_obs_calc","w_obs_higher_to_filter","w_obs_investigate","w_obs_long","w_obs_scale_lower","w_obs_scale_matches","w_obs_scales","w_obs_time","w_obs_viable","w_obs_wide","w_study_label_obs"],"level":[6,0,8,2,5,5,6,4,7,3,1],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","square","dot","dot","dot","dot","dot","dot","square"]},"edges":{"from":["w_obs_wide","w_obs_time","w_study_label_obs","w_obs_scale_lower","w_obs_long","w_obs_scale_matches","w_obs_calc","w_obs_calc","w_obs_viable","w_obs_time"],"to":["w_obs_time","w_obs_scale_matches","w_obs_long","w_obs_calc","w_obs_wide","w_obs_scales","w_obs_viable","w_obs_investigate","w_obs_investigate","w_obs_scale_lower"],"arrows":["to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Stem","Pattern"],"color":["#354823","#899DA4","#899DA4"],"shape":["dot","dot","square"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>Before we identify timepoints and other observation-level variables, we check that the data are in the correct format. The <code>measure_desc</code> column is the orgiinal column header from Covidence prefix for the measure. We’ll extract the observation-level variables (timepoint and scale) from this column.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_wide</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 3,298 x 14
+   outcome  study arm   measure_desc    mean     n    sd percent    se
+   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 mood_de… lee … plac… depression_be…  9.92    21  0.69    NA      NA
+ 2 mood_de… lee … plac… depression_be… NA       21 NA       NA      NA
+ 3 mood_de… lee … plac… sf_36_mental_… 49.1     21 13.6     NA      NA
+ 4 mood_de… lee … plac… sf_36_mental_… 50.3     21 14.2     NA      NA
+ 5 mood_de… lee … venl… depression_be…  9.72    22  0.69    NA      NA
+ 6 mood_de… lee … venl… depression_be… NA       22 NA       NA      NA
+ 7 mood_de… lee … venl… sf_36_mental_… 52.9     22 19.5     NA      NA
+ 8 mood_de… lee … venl… sf_36_mental_… 55.1     22 19.6     NA      NA
+ 9 mood_de… dsrh… cont… depression_bd… NA        5 NA       23.8    NA
+10 mood_de… dsrh… cont… depression_bd… NA        9 NA       42.9    NA
+# … with 3,288 more rows, and 5 more variables: range &lt;chr&gt;,
+#   median &lt;dbl&gt;, ci &lt;chr&gt;, intervals &lt;chr&gt;, iqr &lt;chr&gt;</code></pre>
+</div>
+<h2 id="timepoints">timepoints</h2>
+<p>We are interested in classifying timepoints as post-intervention, short-term follow up, and long-term follow up.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># get counts for timepoints, particularly interested in checking there are no unmatched timepoints</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_time</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>timepoint</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 4 x 2
+  timepoint     n
+  &lt;chr&gt;     &lt;int&gt;
+1 baseline   1234
+2 follow_up    73
+3 mid_int     295
+4 post_int   1696</code></pre>
+</div>
+<h2 id="scales">scales</h2>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h3 id="network-meta-analysis-model">network meta-analysis model</h3>
-<p>One of the questions I’m trying to answer is <em>which</em> model <code>multinma::</code> uses.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2654,15 +3170,6 @@ d_i \sim \text{normal}(\delta_i, \sigma_i^2)\\
 <div class="d-appendix">
 </div>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

@@ -1,0 +1,36 @@
+---
+title: "overview"
+description: |
+  Exploratory data analysis on across all outcomes.
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r}
+library(tidyverse)
+library(gt)
+library(targets)
+
+source("R/hpp_themes.R")
+
+obs <- tar_read(w_obs)
+
+```
+
+## participants and conditions
+
+```{r layout="l-page"}
+
+tar_read(e_outcome_condition_tab)
+
+```
+
+
+

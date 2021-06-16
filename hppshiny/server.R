@@ -1,41 +1,49 @@
-library(tidyverse)
-library(multinma)
-conflicted::conflict_prefer("filter", "dplyr")
-library(targets)
-
-# pretty sure I can do some static stuff that doesn't run
-# every time someone changes something in the app
-# I think this runs when the app is first spun up
-
-# get data
-withr::with_dir(here::here(), {
-  tar_load(models)
-})
-
 function(input, output) {
-  outcome_nma <- reactive({
-    models %>%
-      keep(~ .$outcome == input$outcome) %>%
-      pluck(1)
+  output$subgroup <- reactive({
+    key %>% 
+      filter(outcome == input$outcome) %>% 
+      pull(subgroup) %>% 
+      unique()
   })
   
-  output$choices <- reactive({
-    models %>% 
-      map_chr("outcome")
+  observeEvent(input$outcome, {
+    subgroup_choices <- key %>% 
+      filter(outcome == input$outcome) %>% 
+      pull(subgroup) %>% 
+      unique()
+    updateSelectInput(inputId = "subgroup", choices = subgroup_choices)
+  })
+  
+  observeEvent(input$subgroup, {
+    values <- key %>% 
+      filter(outcome == input$outcome, subgroup == input$subgroup) %>% 
+      pull(subgroup_value) %>% 
+      unique()
+    updateSelectInput(inputId = "subgroup_value", choices = values)
+  })
+  
+  this_model <- reactive({
+  
+    key %>% 
+      filter(
+        outcome == input$outcome,
+        subgroup == input$subgroup,
+        subgroup_value == input$subgroup_value
+      ) %>% pluck("model_index") %>% 
+      models[.] %>% pluck(1, 'result')
+  
+  })
+  
+  output$net <- renderPlot({
+    this_model() %>% pluck("network") %>% plot()
   })
 
-  output$network <- renderPlot({
-    plot(outcome_nma()$network)
+  output$dat <- renderTable({
+    
+    this_model() %>% pluck("network", "agd_arm") %>% 
+      select(-contains("criteria")) %>% 
+      gt() %>% 
+      hpp_tab()
   })
-
-  output$estimates <- renderPlot({
-    plot_input <- outcome_nma()
-
-    plot(plot_input)
-  })
-
-  output$prior_post <- renderPlot({
-    plot_prior_posterior(outcome_nma())
-  })
-
+  
 }

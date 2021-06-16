@@ -7,9 +7,7 @@ exclude: ["data", "old-data", "man", "hppshiny", "R", "*.zip", "data.Rmd"]
 navbar:
   left: 
     - text: "overview"
-      href: index.html
-    - text: "pipeline"
-      href: pipeline.html
+      href: overview.html
     - text: "outcomes"
       menu:
         - text: "adverse"
@@ -19,6 +17,14 @@ navbar:
         - text: "mood (depression)"
           href: outcome-mood_depression.html  
   right:
+    - text: "pipeline"
+      menu: 
+        - text: "pipeline design"
+          href: pipeline.html
+        - text: "wrangling"
+          href: wrangling.html
+        # - text: "model parameters"
+        #   href: model-par.html
     - text: "access data"
       href: about.html
 output: distill::distill_article

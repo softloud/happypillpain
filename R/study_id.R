@@ -4,7 +4,7 @@
 
 study_id <- function(df) {
   df %>%
-    select(study_identifier, title) %>% 
+    select(study_identifier, comments) %>% 
     distinct() %>% 
     group_by(study_identifier) %>% 
     mutate(
@@ -17,8 +17,7 @@ study_id <- function(df) {
       )
     ) %>% 
     select(-tag, -max_tag) %>% 
-    right_join(df, by = c("study_identifier", "title")) %>% 
-    select(-study_identifier) %>% 
+    right_join(df, by = c("study_identifier", "comments")) %>% 
     ungroup() 
 }
 

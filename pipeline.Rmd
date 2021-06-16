@@ -1,0 +1,71 @@
+---
+title: "pipeline design"
+description: |
+  Overview of pipeline from raw data to models.
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkgs}
+library(tidyverse)
+library(targets)
+library(gt)
+
+source("R/hpp_themes.R")
+
+```
+
+
+# objective
+
+Goal is to produce a table in the format:
+
+study | arm | observations | observation info | study-level descriptors
+-|-|-|-|-
+unique identifier for study | unique identifier for arm | mean, sd, counts, etc. | timepoint, scale, etc.| condition, study design (parallel/crossover), antyhing we need to filter by, subgroups, etc.
+
+Column names need to be interpretable by everyone in the group.
+
+In some cases, there is a column or columns that uniquely identify/provide the required data. In other, more challenging cases, we need to extract information from a substring of the observation header (column header). 
+
+```{r}
+tar_read(e_variables)
+```
+
+# raw data
+
+```{r}
+
+tar_manifest(names = starts_with("r_"), fields = c(name, command)) %>%
+  gt() %>% hpp_tab(vertical_divider = "name")
+
+
+```
+
+
+# model input data
+
+Observations are drawn from the raw files provided by Hollie, and study-level information from the raw Covidence export, as well as column headers in the observations. 
+
+To do this we will join by matching the study and arm columns in two tables. 
+
+```{r}
+tar_read(p_metapar)
+
+```
+
+With outcome-level observational data:
+
+```{r}
+tar_read(p_obs)
+```
+
+# model parameters
+
+We'll construct a dataframe to run models over that contains all combinations of unique subgroups we wish to run network meta-analyses over.
+
+Ideally this will be implemented in a shiny app.

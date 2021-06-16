@@ -1,12 +1,13 @@
 ---
-title: "hpp"
+title: "Antidepressants for pain management in adults with chronic pain"
 description: |
-  overview
+  A network meta-analysis
 site: distill::distill_website
-bibliography: references.bib
+# bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
+`
 

@@ -86,33 +86,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>hpp: data cleaning pipeline</title>
+  <title>hpp: pipeline design</title>
 
-  <meta property="description" itemprop="description" content="Documentation of how data is cleaned and prepared."/>
+  <meta property="description" itemprop="description" content="Overview of pipeline from raw data to models."/>
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-06-12"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-06-12"/>
-  <meta name="article:author" content="Nora Jones"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-06-16"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-16"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="hpp: data cleaning pipeline"/>
+  <meta property="og:title" content="hpp: pipeline design"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Documentation of how data is cleaned and prepared."/>
+  <meta property="og:description" content="Overview of pipeline from raw data to models."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="hpp"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="hpp: data cleaning pipeline"/>
-  <meta property="twitter:description" content="Documentation of how data is cleaned and prepared."/>
+  <meta property="twitter:title" content="hpp: pipeline design"/>
+  <meta property="twitter:description" content="Overview of pipeline from raw data to models."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["data cleaning pipeline"]},{"type":"character","attributes":{},"value":["Documentation of how data is cleaned and prepared.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Nora Jones"]},{"type":"character","attributes":{},"value":["https://example.com/norajones"]},{"type":"character","attributes":{},"value":["Spacely Sprockets"]},{"type":"character","attributes":{},"value":["https://example.com/spacelysprokets"]}]}]},{"type":"character","attributes":{},"value":["2021-06-12"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["pipeline design"]},{"type":"character","attributes":{},"value":["Overview of pipeline from raw data to models.\n"]},{"type":"character","attributes":{},"value":["2021-06-16"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2040,11 +2039,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-  <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
-  <script src="site_libs/vis-4.20.1/vis.min.js"></script>
-  <script src="site_libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+  <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2064,7 +2059,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"data cleaning pipeline","description":"Documentation of how data is cleaned and prepared.","authors":[{"author":"Nora Jones","authorURL":"https://example.com/norajones","affiliation":"Spacely Sprockets","affiliationURL":"https://example.com/spacelysprokets","orcidID":""}],"publishedDate":"2021-06-12T00:00:00.000+01:00","citationText":"Jones, 2021"}
+{"title":"pipeline design","description":"Overview of pipeline from raw data to models.","authors":[],"publishedDate":"2021-06-16T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2073,8 +2068,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
-<a href="index.html">overview</a>
-<a href="pipeline.html">pipeline</a>
+<a href="overview.html">overview</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 outcomes
@@ -2089,6 +2083,17 @@ outcomes
 </div>
 </div>
 <div class="nav-right">
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+pipeline
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="pipeline.html">pipeline design</a>
+<a href="wrangling.html">wrangling</a>
+</div>
+</div>
 <a href="about.html">access data</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
@@ -2099,63 +2104,66 @@ outcomes
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>data cleaning pipeline</h1>
+<h1>pipeline design</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Documentation of how data is cleaned and prepared.</p></p>
+<p><p>Overview of pipeline from raw data to models.</p></p>
 </div>
 
-<div class="d-byline">
-  Nora Jones <a href="https://example.com/norajones" class="uri">https://example.com/norajones</a> (Spacely Sprockets)<a href="https://example.com/spacelysprokets" class="uri">https://example.com/spacelysprokets</a>
-  
-<br/>2021-06-12
-</div>
 
 <div class="d-article">
-<div class="d-contents d-contents-float">
-<nav class="l-text toc figcaption" id="TOC">
-<h3>Contents</h3>
-<ul>
-<li><a href="#raw-data">raw data</a></li>
-<li><a href="#raw-outcome-level-data">raw outcome-level data</a></li>
-<li><a href="#studies">studies</a>
-<ul>
-<li><a href="#metaparameters">metaparameters</a></li>
-<li><a href="#outcome-data">outcome data</a></li>
-</ul></li>
-<li><a href="#wrangling">wrangling</a></li>
-</ul>
-</nav>
-</div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>In this document, I’ll step through how the data was labelled so Hollie and others can check the assumptions and labelling.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># overview of entire pipeline</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
 
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/source.html'>source</a></span><span class='op'>(</span><span class='st'>"R/hpp_themes.R"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="htmlwidget-a1d1ddc50624acf4492d" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a1d1ddc50624acf4492d">{"x":{"nodes":{"name":["c_assert_unmatched_s_unique","c_drug_names_unlabelled","c_export_condition","class_check_gs","e_variables","m_all_in","m_metapar","metapar","r_classifiers","r_covidence","r_model_key","r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain","r_outcomes","r_scales","r_variables","w_label_s","w_metapar_consult","w_metapar_original_s","w_scales","w_long","w_wide","w_s_with_unmatched","c_s_na","c_unmatched_s_obs","w_s_key_assert_na","obs","w_scale","s_multiple_outcomes","s_multiple_scales","w_scale_multiple_matches","tab_s_multiple_outcomes","w_time","w_time_unmatched","scale_match_test","w_s","w_s_key","w_scale_unmatched","w_scale_matches","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"type":["stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","function","function","object","function","function","function"],"status":["outdated","uptodate","uptodate","uptodate","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.004,0.006,0.015,0.007,0.125,0.027,1.206,0.011,0.057,0.619,0.017,0.049,0.947,0.062,1.335,0.002,0.042,0.025,0.116,3.496,0.011,0.113,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[0,1689,2240,5412,4906,552,27048,15686,2817,556016,187,16198,69206,180850,93302,81,1307,1121,17541,16423,15797,2107,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["c_assert_unmatched_s_unique","c_drug_names_unlabelled","c_export_condition","class_check_gs","e_variables","m_all_in","m_metapar","metapar","r_classifiers","r_covidence","r_model_key","r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain","r_outcomes","r_scales","r_variables","w_label_s","w_metapar_consult","w_metapar_original_s","w_scales","w_long","w_wide","w_s_with_unmatched","c_s_na","c_unmatched_s_obs","w_s_key_assert_na","obs","w_scale","s_multiple_outcomes","s_multiple_scales","w_scale_multiple_matches","tab_s_multiple_outcomes","w_time","w_time_unmatched","scale_match_test","w_s","w_s_key","w_scale_unmatched","w_scale_matches","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"label":["c_assert_unmatched_s_unique","c_drug_names_unlabelled","c_export_condition","class_check_gs","e_variables","m_all_in","m_metapar","metapar","r_classifiers","r_covidence","r_model_key","r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain","r_outcomes","r_scales","r_variables","w_label_s","w_metapar_consult","w_metapar_original_s","w_scales","w_long","w_wide","w_s_with_unmatched","c_s_na","c_unmatched_s_obs","w_s_key_assert_na","obs","w_scale","s_multiple_outcomes","s_multiple_scales","w_scale_multiple_matches","tab_s_multiple_outcomes","w_time","w_time_unmatched","scale_match_test","w_s","w_s_key","w_scale_unmatched","w_scale_matches","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"level":[0,6,3,6,2,8,6,5,1,1,1,1,1,2,1,2,1,1,4,2,3,2,2,3,6,6,7,6,7,6,8,8,6,9,4,5,5,1,5,6,5,1,1,0,0,1,1],"color":["#78B7C5","#354823","#354823","#354823","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","triangle","triangle","triangleDown","triangle","triangle","triangle"]},"edges":{"from":["w_long","clean_colvals","r_scales","r_classifiers","w_metapar_consult","w_time","obs","hpp_tab","s_multiple_outcomes","m_metapar","obs","r_outcomes","w_s","w_scale_matches","w_wide","scale_match","w_time","r_outcome_adverse","r_outcome_mood","r_outcome_pain","w_s_key","w_scale_matches","metapar","w_scale","w_scale_matches","study_id","w_metapar_original_s","w_label_s","scale_match","w_time","metapar","w_s_key","w_metapar_consult","r_outcome_obs","r_outcomes","w_s_key","r_model_key","metapar","r_outcomes","hpp_tab","r_variables","r_covidence","w_metapar_original_s","w_s_with_unmatched","metapar","w_label_s","obs"],"to":["w_wide","w_scales","w_scales","w_metapar_original_s","w_metapar_original_s","w_time_unmatched","s_multiple_scales","tab_s_multiple_outcomes","tab_s_multiple_outcomes","m_all_in","m_all_in","m_all_in","w_long","w_scale_multiple_matches","w_time","w_scale_matches","w_scale_matches","r_outcome_obs","r_outcome_obs","r_outcome_obs","w_s_key_assert_na","w_scale","obs","obs","w_scale_unmatched","w_label_s","w_label_s","metapar","scale_match_test","scale_match_test","c_drug_names_unlabelled","c_s_na","c_export_condition","w_s_with_unmatched","w_s_with_unmatched","w_s_with_unmatched","r_outcomes","m_metapar","m_metapar","e_variables","e_variables","w_metapar_consult","c_unmatched_s_obs","c_unmatched_s_obs","class_check_gs","w_s_key","s_multiple_outcomes"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Up to date","Stem","Pattern","Function","Object"],"color":["#78B7C5","#354823","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
 </div>
-<p>We need to ensure that the following variables and filteres are labelled and indexed correctly for the models.</p>
+<h1 id="objective">objective</h1>
+<p>Goal is to produce a table in the format:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>study</th>
+<th>arm</th>
+<th>observations</th>
+<th>observation info</th>
+<th>study-level descriptors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>unique identifier for study</td>
+<td>unique identifier for arm</td>
+<td>mean, sd, counts, etc.</td>
+<td>timepoint, scale, etc.</td>
+<td>condition, study design (parallel/crossover), antyhing we need to filter by, subgroups, etc.</td>
+</tr>
+</tbody>
+</table>
+<p>Column names need to be interpretable by everyone in the group.</p>
+<p>In some cases, there is a column or columns that uniquely identify/provide the required data. In other, more challenging cases, we need to extract information from a substring of the observation header (column header).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>e_variables</span><span class='op'>)</span>
 </code></pre>
 </div>
+<div id="nlyksptdsg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#brfgemujnz .gt_table {
+#nlyksptdsg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2180,7 +2188,7 @@ outcomes
   border-left-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_heading {
+#nlyksptdsg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2192,7 +2200,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_title {
+#nlyksptdsg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2202,7 +2210,7 @@ outcomes
   border-bottom-width: 0;
 }
 
-#brfgemujnz .gt_subtitle {
+#nlyksptdsg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2212,13 +2220,13 @@ outcomes
   border-top-width: 0;
 }
 
-#brfgemujnz .gt_bottom_border {
+#nlyksptdsg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_col_headings {
+#nlyksptdsg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2233,7 +2241,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_col_heading {
+#nlyksptdsg .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2253,7 +2261,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#brfgemujnz .gt_column_spanner_outer {
+#nlyksptdsg .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2265,15 +2273,15 @@ outcomes
   padding-right: 4px;
 }
 
-#brfgemujnz .gt_column_spanner_outer:first-child {
+#nlyksptdsg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#brfgemujnz .gt_column_spanner_outer:last-child {
+#nlyksptdsg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#brfgemujnz .gt_column_spanner {
+#nlyksptdsg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2285,7 +2293,7 @@ outcomes
   width: 100%;
 }
 
-#brfgemujnz .gt_group_heading {
+#nlyksptdsg .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2307,7 +2315,7 @@ outcomes
   vertical-align: middle;
 }
 
-#brfgemujnz .gt_empty_group_heading {
+#nlyksptdsg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2322,15 +2330,15 @@ outcomes
   vertical-align: middle;
 }
 
-#brfgemujnz .gt_from_md > :first-child {
+#nlyksptdsg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#brfgemujnz .gt_from_md > :last-child {
+#nlyksptdsg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#brfgemujnz .gt_row {
+#nlyksptdsg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2349,7 +2357,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#brfgemujnz .gt_stub {
+#nlyksptdsg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2361,7 +2369,7 @@ outcomes
   padding-left: 12px;
 }
 
-#brfgemujnz .gt_summary_row {
+#nlyksptdsg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2371,7 +2379,7 @@ outcomes
   padding-right: 5px;
 }
 
-#brfgemujnz .gt_first_summary_row {
+#nlyksptdsg .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2381,7 +2389,7 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_grand_summary_row {
+#nlyksptdsg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2391,7 +2399,7 @@ outcomes
   padding-right: 5px;
 }
 
-#brfgemujnz .gt_first_grand_summary_row {
+#nlyksptdsg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2401,11 +2409,11 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_striped {
+#nlyksptdsg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#brfgemujnz .gt_table_body {
+#nlyksptdsg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2414,7 +2422,7 @@ outcomes
   border-bottom-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_footnotes {
+#nlyksptdsg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2428,13 +2436,13 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_footnote {
+#nlyksptdsg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#brfgemujnz .gt_sourcenotes {
+#nlyksptdsg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2448,46 +2456,47 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#brfgemujnz .gt_sourcenote {
+#nlyksptdsg .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#brfgemujnz .gt_left {
+#nlyksptdsg .gt_left {
   text-align: left;
 }
 
-#brfgemujnz .gt_center {
+#nlyksptdsg .gt_center {
   text-align: center;
 }
 
-#brfgemujnz .gt_right {
+#nlyksptdsg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#brfgemujnz .gt_font_normal {
+#nlyksptdsg .gt_font_normal {
   font-weight: normal;
 }
 
-#brfgemujnz .gt_font_bold {
+#nlyksptdsg .gt_font_bold {
   font-weight: bold;
 }
 
-#brfgemujnz .gt_font_italic {
+#nlyksptdsg .gt_font_italic {
   font-style: italic;
 }
 
-#brfgemujnz .gt_super {
+#nlyksptdsg .gt_super {
   font-size: 65%;
 }
 
-#brfgemujnz .gt_footnote_marks {
+#nlyksptdsg .gt_footnote_marks {
   font-style: italic;
+  font-weight: normal;
   font-size: 65%;
 }
 </style>
-<div id="brfgemujnz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2500,213 +2509,1240 @@ outcomes
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">model</td>
     </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>study</code></p>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>study</code></p>
 </div></td>
-      <td class="gt_row gt_left">Unique identifier for study; comments contains title, study identifier is first author and year</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Study Identifier + Comments</code></p>
+<td class="gt_row gt_left">Unique identifier for study; comments contains title, study identifier is first author and year</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Study Identifier + Comments</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>intervention</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>name</code></p>
-</div></td>
-      <td class="gt_row gt_left gt_striped">Name of intervention drug: e.g., Desvenlafaxin</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Name</code></p>
-</div></td>
-    </tr>
+<td class="gt_row gt_left gt_striped">Name of intervention drug: e.g., Desvenlafaxin</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Name</code></p>
+</div></td></tr>
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">filter</td>
     </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>timepoint</code></p>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>timepoint</code></p>
 </div></td>
-      <td class="gt_row gt_left">Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p>obs header</p>
+<td class="gt_row gt_left">Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p>obs header</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>scale</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>scale</code></p>
+<td class="gt_row gt_left gt_striped">We searched the column headers for names of scales (such as vas)</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p>obs header</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>type</code></p>
 </div></td>
-      <td class="gt_row gt_left gt_striped">We searched the column headers for names of scales (such as vas)</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p>obs header</p>
+<td class="gt_row gt_left">Type of intervention: e.g., antidepressant, placebo, CBT</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Intervention Type</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>design</code></p>
 </div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>type</code></p>
-</div></td>
-      <td class="gt_row gt_left">Type of intervention: e.g., antidepressant, placebo, CBT</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Intervention Type</code></p>
-</div></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>design</code></p>
-</div></td>
-      <td class="gt_row gt_left gt_striped">crossover or parallel; for now we filter parallel not crossover</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Group</code></p>
-</div></td>
-    </tr>
+<td class="gt_row gt_left gt_striped">crossover or parallel; for now we filter parallel not crossover</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Group</code></p>
+</div></td></tr>
     <tr class="gt_group_heading_row">
       <td colspan="3" class="gt_group_heading">subgroup</td>
     </tr>
-    <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>condition</code></p>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>condition</code></p>
 </div></td>
-      <td class="gt_row gt_left">Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
+<td class="gt_row gt_left">Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
 temporomandibular disorder</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Chronic pain condition(s)</code></p>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Chronic pain condition(s)</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>class</code></p>
 </div></td>
-    </tr>
+<td class="gt_row gt_left gt_striped">Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant</td>
+<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Class</code></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>main_aim</code></p>
+</div></td>
+<td class="gt_row gt_left">Primary aim of the original study: e.g., pain, mood, etc.</td>
+<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Main aim (Pain, mood, quality of life etc)</code></p>
+</div></td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>class</code></p>
-</div></td>
-      <td class="gt_row gt_left gt_striped">Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant</td>
-      <td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Class</code></p>
-</div></td>
+      <td class="gt_sourcenote" colspan="3">Variable column indicates what the cleaned output data
+                   column headers are, the Covidence column indicates what the
+                   column is labelled as in the raw export.</td>
     </tr>
+  </tfoot>
+  
+</table>
+</div>
+</div>
+<h1 id="raw-data">raw data</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_manifest.html'>tar_manifest</a></span><span class='op'>(</span>names <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_"</span><span class='op'>)</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>command</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>hpp_tab</span><span class='op'>(</span>vertical_divider <span class='op'>=</span> <span class='st'>"name"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+Loading required package: dontpanic
+
+/
+
+-
+
+\
+
+ </code></pre>
+<div id="guuutjnhsk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#guuutjnhsk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#guuutjnhsk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#guuutjnhsk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_col_heading {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#guuutjnhsk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#guuutjnhsk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#guuutjnhsk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#guuutjnhsk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#guuutjnhsk .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#guuutjnhsk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#guuutjnhsk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#guuutjnhsk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#guuutjnhsk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#guuutjnhsk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#guuutjnhsk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#guuutjnhsk .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#guuutjnhsk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#guuutjnhsk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#guuutjnhsk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#guuutjnhsk .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#guuutjnhsk .gt_left {
+  text-align: left;
+}
+
+#guuutjnhsk .gt_center {
+  text-align: center;
+}
+
+#guuutjnhsk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#guuutjnhsk .gt_font_normal {
+  font-weight: normal;
+}
+
+#guuutjnhsk .gt_font_bold {
+  font-weight: bold;
+}
+
+#guuutjnhsk .gt_font_italic {
+  font-style: italic;
+}
+
+#guuutjnhsk .gt_super {
+  font-size: 65%;
+}
+
+#guuutjnhsk .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
     <tr>
-      <td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>main_aim</code></p>
-</div></td>
-      <td class="gt_row gt_left">Primary aim of the original study: e.g., pain, mood, etc.</td>
-      <td class="gt_row gt_center"><div class='gt_from_md'><p><code>Main aim (Pain, mood, quality of life etc)</code></p>
-</div></td>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">command</th>
     </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_adverse</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcome-adverse-2021-05-19.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_mood</td>
+<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcome-mood-2021-05-19.csv")))</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_pain</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcome-pain-2021-05-19.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_variables</td>
+<td class="gt_row gt_left gt_striped">read_csv("data/variables-2021-06-12 23:01:37.csv")</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_scales</td>
+<td class="gt_row gt_left">read_csv("data/scales-2021-06-12.csv")</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_covidence</td>
+<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/review_91309_extracted_data_csv_20210614040732.csv")))</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_condition</td>
+<td class="gt_row gt_left">read_csv("data/condition-2021-06-12.csv")</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_obs</td>
+<td class="gt_row gt_left gt_striped">list(mood_depression = r_h_outcome_mood, pain = r_h_outcome_pain,  \n     adverse = r_h_outcome_adverse)</td></tr>
   </tbody>
   
   
-</table></div>
+</table>
 </div>
-<h1 id="raw-data">raw data</h1>
-<p>The inputs to the analysis are from a number of different raw data files.</p>
+</div>
+<h1 id="model-input-data">model input data</h1>
+<p>Observations are drawn from the raw files provided by Hollie, and study-level information from the raw Covidence export, as well as column headers in the observations.</p>
+<p>To do this we will join by matching the study and arm columns in two tables.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>p_metapar</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="htmlwidget-99bbbae31165ee8a5d63" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-99bbbae31165ee8a5d63">{"x":{"nodes":{"name":["r_classifiers","r_covidence","r_model_key","r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain","r_outcomes","r_scales","r_variables"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.057,0.619,0.017,0.049,0.947,0.062,1.335,0.002,0.042,0.025],"bytes":[2817,556016,187,16198,69206,180850,93302,81,1307,1121],"branches":[null,null,null,null,null,null,null,null,null,null],"id":["r_classifiers","r_covidence","r_model_key","r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain","r_outcomes","r_scales","r_variables"],"label":["r_classifiers","r_covidence","r_model_key","r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain","r_outcomes","r_scales","r_variables"],"level":[0,0,1,1,1,2,1,2,0,0],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["r_outcome_adverse","r_outcome_mood","r_outcome_pain","r_model_key"],"to":["r_outcome_obs","r_outcome_obs","r_outcome_obs","r_outcomes"],"arrows":["to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Stem"],"color":["#354823","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
-</div>
-<h1 id="raw-outcome-level-data">raw outcome-level data</h1>
-<p>Hollie identified the columns in the raw Covidence export that pertained to each outcome and exported them as a separate .csv file. These were loaded into a list of dataframes to be fed into the pipeline for cleaning.</p>
-<p>In theory, the pipeline is built such that new outcome-level observations can be dropped in.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># pipeline of raw observations</span>
+<div id="hbdojktvox" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
 
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_outcome_"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div id="htmlwidget-5dfb0837d6b3a07deae5" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5dfb0837d6b3a07deae5">{"x":{"nodes":{"name":["r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain"],"type":["stem","stem","stem","stem"],"status":["uptodate","uptodate","uptodate","uptodate"],"seconds":[0.049,0.947,0.062,1.335],"bytes":[16198,69206,180850,93302],"branches":[null,null,null,null],"id":["r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain"],"label":["r_outcome_adverse","r_outcome_mood","r_outcome_obs","r_outcome_pain"],"level":[1,1,2,1],"color":["#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot"]},"edges":{"from":["r_outcome_adverse","r_outcome_mood","r_outcome_pain"],"to":["r_outcome_obs","r_outcome_obs","r_outcome_obs"],"arrows":["to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Stem"],"color":["#354823","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
-</div>
-<h1 id="studies">studies</h1>
-<p>The current dimensions of the covidence export are:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>r_covidence</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>[1]  451 7501</code></pre>
-</div>
-<p>Number of studies in raw covidence , for comparison with cleaned observations.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>r_covidence</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>janitor</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>select</span><span class='op'>(</span><span class='va'>study_identifier</span>, <span class='va'>comments</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>distinct</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>[1] 177</code></pre>
-</div>
-<h2 id="metaparameters">metaparameters</h2>
-<p>Metaparameters for each study were drawn from the raw covidence export. These comprise the study and intervention data, such as class, type of trial, etc.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>metapar</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code># A tibble: 459 x 11
-   title   study  arm    type   class name   main_aim design condition
-   &lt;chr&gt;   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    
- 1 compar… caret… place… place… &lt;NA&gt;  place… pain an… paral… fibromya…
- 2 compar… caret… amitr… antid… tca   amitr… pain an… paral… fibromya…
- 3 compar… caret… cyclo… skele… &lt;NA&gt;  &lt;NA&gt;   pain an… paral… fibromya…
- 4 trimip… macfa… place… place… &lt;NA&gt;  place… pain an… paral… rheumato…
- 5 trimip… macfa… place… place… &lt;NA&gt;  place… pain an… paral… rheumato…
- 6 trimip… macfa… trimi… antid… tca   trimi… pain an… paral… rheumato…
- 7 trimip… macfa… trimi… antid… tca   trimi… pain an… paral… rheumato…
- 8 compar… keski… gabap… antic… &lt;NA&gt;  gabap… pain     paral… neuropat…
- 9 compar… keski… amitr… antid… tca   amitr… pain     paral… neuropat…
-10 compar… nct 2… benzt… activ… &lt;NA&gt;  benzt… pain     paral… temporom…
-# … with 449 more rows, and 2 more variables: general_grouping &lt;chr&gt;,
-#   iasp_classification &lt;chr&gt;</code></pre>
-</div>
-<h2 id="outcome-data">outcome data</h2>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>r_obs</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>map</a></span><span class='op'>(</span><span class='va'>select</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>$adverse
-# A tibble: 451 x 5
-   `Study Identifie… Comments          Intervention   `Intervention N…
-   &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;          &lt;chr&gt;           
- 1 Lee 2010          Title: Efficacy … Placebo        &lt;NA&gt;            
- 2 Lee 2010          Title: Efficacy … Venlafaxine -… Venlafaxine     
- 3 dsrhv 2018        Title: Comparati… Control        Control         
- 4 dsrhv 2018        Title: Comparati… Amitriptyline… Amitriptyline   
- 5 dsrhv 2018        Title: Comparati… Amitriptyline… Amitriptyline +…
- 6 dsrhv 2018        Title: Comparati… Acupuncture    Acupuncture     
- 7 Keskinbora 2006   Title: Compariso… Gabapentin 90… Gabapentin      
- 8 Keskinbora 2006   Title: Compariso… Amitriptyline… Amitriptyline   
- 9 Cannon 1994       Title: Imipramin… Placebo        Placebo         
-10 Cannon 1994       Title: Imipramin… Clonidine      Clonidine       
-# … with 441 more rows, and 1 more variable: Intervention Type &lt;chr&gt;
+#hbdojktvox .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
 
-$pain
-# A tibble: 451 x 5
-   `Study Identifie… Intervention    Comments         `Intervention N…
-   &lt;chr&gt;             &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;           
- 1 Lee 2010          Placebo         Title: Efficacy… &lt;NA&gt;            
- 2 Lee 2010          Venlafaxine - … Title: Efficacy… Venlafaxine     
- 3 dsrhv 2018        Control         Title: Comparat… Control         
- 4 dsrhv 2018        Amitriptyline … Title: Comparat… Amitriptyline   
- 5 dsrhv 2018        Amitriptyline … Title: Comparat… Amitriptyline +…
- 6 dsrhv 2018        Acupuncture     Title: Comparat… Acupuncture     
- 7 Keskinbora 2006   Gabapentin 900… Title: Comparis… Gabapentin      
- 8 Keskinbora 2006   Amitriptyline … Title: Comparis… Amitriptyline   
- 9 Cannon 1994       Placebo         Title: Imiprami… Placebo         
-10 Cannon 1994       Clonidine       Title: Imiprami… Clonidine       
-# … with 441 more rows, and 1 more variable: Intervention Type &lt;chr&gt;
+#hbdojktvox .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
-$mood_depression
-# A tibble: 451 x 5
-   `Study Identifie… Intervention    Comments         `Intervention N…
-   &lt;chr&gt;             &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;           
- 1 Lee 2010          Placebo         Title: Efficacy… &lt;NA&gt;            
- 2 Lee 2010          Venlafaxine - … Title: Efficacy… Venlafaxine     
- 3 dsrhv 2018        Control         Title: Comparat… Control         
- 4 dsrhv 2018        Amitriptyline … Title: Comparat… Amitriptyline   
- 5 dsrhv 2018        Amitriptyline … Title: Comparat… Amitriptyline +…
- 6 dsrhv 2018        Acupuncture     Title: Comparat… Acupuncture     
- 7 Keskinbora 2006   Gabapentin 900… Title: Comparis… Gabapentin      
- 8 Keskinbora 2006   Amitriptyline … Title: Comparis… Amitriptyline   
- 9 Cannon 1994       Placebo         Title: Imiprami… Placebo         
-10 Cannon 1994       Clonidine       Title: Imiprami… Clonidine       
-# … with 441 more rows, and 1 more variable: Intervention Type &lt;chr&gt;</code></pre>
+#hbdojktvox .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hbdojktvox .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hbdojktvox .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_col_heading {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hbdojktvox .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hbdojktvox .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hbdojktvox .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hbdojktvox .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hbdojktvox .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hbdojktvox .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hbdojktvox .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hbdojktvox .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hbdojktvox .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hbdojktvox .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#hbdojktvox .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hbdojktvox .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hbdojktvox .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hbdojktvox .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hbdojktvox .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hbdojktvox .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hbdojktvox .gt_left {
+  text-align: left;
+}
+
+#hbdojktvox .gt_center {
+  text-align: center;
+}
+
+#hbdojktvox .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hbdojktvox .gt_font_normal {
+  font-weight: normal;
+}
+
+#hbdojktvox .gt_font_bold {
+  font-weight: bold;
+}
+
+#hbdojktvox .gt_font_italic {
+  font-style: italic;
+}
+
+#hbdojktvox .gt_super {
+  font-size: 65%;
+}
+
+#hbdojktvox .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Study-level information drawn from Covidence</th>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">arm</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">design</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">condition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">class</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">main_aim</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">unique study identifier</td>
+<td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">unique arm identifier</td>
+<td class="gt_row gt_left">Intervention Type</td>
+<td class="gt_row gt_left">Group</td>
+<td class="gt_row gt_left">Chronic pain conditions(s)</td>
+<td class="gt_row gt_left">Intervention Class</td>
+<td class="gt_row gt_left">Main aim (Pain...</td></tr>
+  </tbody>
+  
+  
+</table>
 </div>
-<h1 id="wrangling">wrangling</h1>
+</div>
+<p>With outcome-level observational data:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"w_"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>p_obs</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="htmlwidget-e38a49bdfac24d4dadd6" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e38a49bdfac24d4dadd6">{"x":{"nodes":{"name":["w_label_s","w_metapar_consult","w_metapar_original_s","w_scales","w_long","w_wide","w_s_with_unmatched","w_s_key_assert_na","w_scale","w_scale_multiple_matches","w_time","w_time_unmatched","w_s","w_s_key","w_scale_unmatched","w_scale_matches"],"type":["stem","stem","stem","stem","pattern","stem","pattern","stem","stem","stem","stem","stem","pattern","stem","stem","stem"],"status":["uptodate","uptodate","uptodate","uptodate","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated"],"seconds":[0.116,3.496,0.011,0.113,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[17541,16423,15797,2107,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["w_label_s","w_metapar_consult","w_metapar_original_s","w_scales","w_long","w_wide","w_s_with_unmatched","w_s_key_assert_na","w_scale","w_scale_multiple_matches","w_time","w_time_unmatched","w_s","w_s_key","w_scale_unmatched","w_scale_matches"],"label":["w_label_s","w_metapar_consult","w_metapar_original_s","w_scales","w_long","w_wide","w_s_with_unmatched","w_s_key_assert_na","w_scale","w_scale_multiple_matches","w_time","w_time_unmatched","w_s","w_s_key","w_scale_unmatched","w_scale_matches"],"level":[3,1,2,0,2,3,5,5,6,6,4,5,1,4,6,5],"color":["#354823","#354823","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5"],"shape":["dot","dot","dot","dot","square","dot","square","dot","dot","dot","dot","dot","square","dot","dot","dot"]},"edges":{"from":["w_long","w_metapar_consult","w_time","w_s","w_scale_matches","w_wide","w_time","w_s_key","w_scale_matches","w_scale_matches","w_metapar_original_s","w_s_key","w_label_s"],"to":["w_wide","w_metapar_original_s","w_time_unmatched","w_long","w_scale_multiple_matches","w_time","w_scale_matches","w_s_key_assert_na","w_scale","w_scale_unmatched","w_label_s","w_s_with_unmatched","w_s_key"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","Stem","Pattern"],"color":["#354823","#78B7C5","#899DA4","#899DA4"],"shape":["dot","dot","dot","square"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<div id="wdlsllxaqx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#wdlsllxaqx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wdlsllxaqx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wdlsllxaqx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_col_heading {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wdlsllxaqx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wdlsllxaqx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wdlsllxaqx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wdlsllxaqx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wdlsllxaqx .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wdlsllxaqx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wdlsllxaqx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wdlsllxaqx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wdlsllxaqx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wdlsllxaqx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#wdlsllxaqx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdlsllxaqx .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdlsllxaqx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wdlsllxaqx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wdlsllxaqx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wdlsllxaqx .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wdlsllxaqx .gt_left {
+  text-align: left;
+}
+
+#wdlsllxaqx .gt_center {
+  text-align: center;
+}
+
+#wdlsllxaqx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wdlsllxaqx .gt_font_normal {
+  font-weight: normal;
+}
+
+#wdlsllxaqx .gt_font_bold {
+  font-weight: bold;
+}
+
+#wdlsllxaqx .gt_font_italic {
+  font-style: italic;
+}
+
+#wdlsllxaqx .gt_super {
+  font-size: 65%;
+}
+
+#wdlsllxaqx .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Outcome-level observational from data extracted by Hollie</th>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">arm</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">obs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">obs_info</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">mood, pain, etc.</td>
+<td class="gt_row gt_left">unique study identifier</td>
+<td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">unique arm identifier</td>
+<td class="gt_row gt_left">columns with mean, sd, counts, sample size, etc.</td>
+<td class="gt_row gt_left">information extracted from column headers:
+      timepoint, scale, etc.</td></tr>
+  </tbody>
+  
+  
+</table>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+</div>
+<h1 id="model-parameters">model parameters</h1>
+<p>We’ll construct a dataframe to run models over that contains all combinations of unique subgroups we wish to run network meta-analyses over.</p>
+<p>Ideally this will be implemented in a shiny app.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

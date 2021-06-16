@@ -1,0 +1,109 @@
+---
+title: "wrangling"
+description: |
+  Data cleaning of observations and study-level information.
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r pkgs}
+library(tidyverse)
+library(targets)
+library(gt)
+
+source("R/hpp_themes.R")
+
+```
+
+# study
+
+There's a shorthand tag for study (first author and year) that we'll use for the labelling in the forest plots and joining the different datasets, however, this tag is not unique.
+
+So, the `study` tag appends with a number _if_ there is more than one study by that author in a year. 
+
+```{r}
+tar_read(w_study_key) %>% 
+  filter(str_detect(study, "Arnold")) %>%
+  mutate(title = str_trunc(title, width = 30)) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = "study")
+  
+```
+
+This function is used to construct a study key, and variables are relabelled in the study-level data extracted from Covidence, and the outcome observations extracted by Hollie. 
+
+```{r}
+tar_visnetwork(allow = c(
+  starts_with("r_h_"),
+  contains("covidence"),
+  starts_with("w_study_"),
+  contains("outcome")
+))
+
+```
+
+We now have two datasets each with `study` and `arm`, so we can join them together later. 
+
+```{r}
+# table of study/arm level information
+tar_read(w_study_label_study_arm_par)
+
+# list of outcome tables with observations extracted by Hollie
+tar_read(w_study_label_obs) %>% 
+  # select first 10 columns bc space
+  map(select, c(1:10))
+
+```
+
+# study-level information 
+
+
+
+
+# observations and observation-level information
+
+```{r}
+# desired output structure
+
+tar_read(p_obs)
+
+# pipeline overview
+
+tar_visnetwork(allow = c(w_study_label_obs, starts_with("w_obs_")))
+
+```
+
+Before we identify timepoints and other observation-level variables, we check that the data are in the correct format. The `measure_desc` column is the orgiinal column header from Covidence prefix for the measure. We'll extract the observation-level variables (timepoint and scale) from this column.
+
+```{r}
+tar_read(w_obs_wide)
+
+```
+
+## timepoints
+
+We are interested in classifying timepoints as post-intervention, short-term follow up, and long-term follow up. 
+
+```{r}
+# get counts for timepoints, particularly interested in checking there are no unmatched timepoints
+tar_read(w_obs_time) %>% 
+  count(timepoint)
+
+```
+
+## scales
+
+```{r}
+
+```
+

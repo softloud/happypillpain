@@ -86,29 +86,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>hpp: access</title>
+  <title>hpp: overview</title>
 
-  <meta property="description" itemprop="description" content="for researchers&#39; internal use"/>
+  <meta property="description" itemprop="description" content="Exploratory data analysis on across all outcomes."/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-06-16"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-16"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="hpp: access"/>
+  <meta property="og:title" content="hpp: overview"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="for researchers&#39; internal use"/>
+  <meta property="og:description" content="Exploratory data analysis on across all outcomes."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="hpp"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="hpp: access"/>
-  <meta property="twitter:description" content="for researchers&#39; internal use"/>
+  <meta property="twitter:title" content="hpp: overview"/>
+  <meta property="twitter:description" content="Exploratory data analysis on across all outcomes."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["access"]},{"type":"character","attributes":{},"value":["for researchers' internal use"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["overview"]},{"type":"character","attributes":{},"value":["Exploratory data analysis on across all outcomes.\n"]},{"type":"character","attributes":{},"value":["2021-06-16"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2036,11 +2039,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.8.6/header-attrs.js"></script>
-  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-  <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
-  <script src="site_libs/vis-4.20.1/vis.min.js"></script>
-  <script src="site_libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+  <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2060,7 +2059,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"access","description":"for researchers' internal use","authors":[]}
+{"title":"overview","description":"Exploratory data analysis on across all outcomes.","authors":[],"publishedDate":"2021-06-16T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2069,8 +2068,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
-<a href="index.html">overview</a>
-<a href="pipeline.html">pipeline</a>
+<a href="overview.html">overview</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 outcomes
@@ -2085,7 +2083,18 @@ outcomes
 </div>
 </div>
 <div class="nav-right">
-<a href="about.html">access</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+pipeline
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="pipeline.html">pipeline design</a>
+<a href="wrangling.html">wrangling</a>
+</div>
+</div>
+<a href="about.html">access data</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2095,99 +2104,33 @@ outcomes
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>access</h1>
+<h1>overview</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>for researchers’ internal use</p></p>
+<p><p>Exploratory data analysis on across all outcomes.</p></p>
 </div>
 
 
 <div class="d-article">
-<p>This site is intended for internal use in team meetings.</p>
-<p>Instructions for the team to access the analysis. Don’t hesitate to ask Charles for assistance.</p>
-<h2 id="raw-data">raw data</h2>
-<p>Hollie and I haven’t posted the raw data yet; email Charles to request access to current raw data.</p>
-<h2 id="rstudio-users">rstudio users</h2>
-<p>You can access past and present analyses, visualisations, datasets, etc. using a combination of <code>renv::</code> and <code>targets::</code>.</p>
-<p>Here are the instructions.</p>
-<h3 id="get-the-analysis">get the analysis</h3>
-<p>Two options: easy and hard. Alas, there is no in between.</p>
-<p>Easy is fine for one-time investigation. However code contributions (may well be unlikely) or frequent inspection (Hollie might like this) may be facillitated by the hard option.</p>
-<ol type="1">
-<li>Easy: download for one-time inspection by <a href="https://github.com/softloud/happypillpain">clicking the green code button and downloading zip</a>.</li>
-<li>Hard: The [<code>usethis::</code> pull request method](<a href="https://usethis.r-lib.org/articles/articles/pr-functions.html" class="uri">https://usethis.r-lib.org/articles/articles/pr-functions.html</a>. Note that this assumes RStudio has been configured for interfacing with GitHub; an annoying step, expect it to take a couple of hours.</li>
-</ol>
-<h3 id="get-the-data">get the data</h3>
-<p>For everyone’s peace of mind, we’re not pushing the data to an open source repository until publication.</p>
-<p>For now, Charles will email you a directory <strong>data/</strong> which you should unzip and copy into <strong>happypillpain/</strong>. So that it now exists as the directory <strong>happypillpain/data/</strong>.</p>
-<h3 id="get-the-tools">get the tools</h3>
-<p>We’ll install the <code>renv::</code> package that will match up the correct version of all the packages.</p>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#participants-and-conditions">participants and conditions</a></li>
+</ul>
+</nav>
+</div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># install renv</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"renv"</span><span class='op'>)</span>
 
-<span class='co'># update packages</span>
-<span class='fu'>renv</span><span class='fu'>::</span><span class='fu'><a href='https://rstudio.github.io/renv//reference/restore.html'>restore</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
 </div>
-</div>
-<h3 id="inspect-the-analysis">inspect the analysis</h3>
-<p>We use the package <code>targets::</code> to inspect the analysis.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># see all the objects produced in the analysis workflow and how they feed into each other</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div id="htmlwidget-51dc5a75d5527a8908ea" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-51dc5a75d5527a8908ea">{"x":{"nodes":{"name":["study_key_assert_na","variables_tab","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","r_pain","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","r_variables","wo_s_with_unmatched","r_scales","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","wo_s","r_model_key","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","r_classifiers","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","r_adverse","r_mood","r_covidence","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","wo_long"],"type":["stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern"],"status":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"seconds":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["study_key_assert_na","variables_tab","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","r_pain","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","r_variables","wo_s_with_unmatched","r_scales","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","wo_s","r_model_key","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","r_classifiers","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","r_adverse","r_mood","r_covidence","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","wo_long"],"label":["study_key_assert_na","variables_tab","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","r_pain","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","r_variables","wo_s_with_unmatched","r_scales","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","wo_s","r_model_key","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","r_classifiers","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","r_adverse","r_mood","r_covidence","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","wo_long"],"level":[6,0,8,4,6,1,4,6,5,3,0,6,1,3,8,6,2,3,2,1,1,6,6,5,7,2,6,0,5,5,8,9,1,1,1,2,4,5,5,6,7,2],"color":["#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac","#94a4ac"],"shape":["dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square"]},"edges":{"from":["study_key","m_metapar","obs","w_metapar_original_s","metapar","w_metapar_original_s","metapar","s_lab_metapar","w_metapar_consult","study_key","w_metapar_consult","obs","metapar","r_scales","wo_long","r_adverse","r_mood","r_pain","wo_scale_matches","wo_scale_matches","s_lab_metapar","wo_scale_unmatched","r_model_key","study_key","wo_time","unmatched_s_obs","obs","s_multiple_outcomes","r_covidence","wo_wide","wo_time","wo_time","wo_scale_matches","metapar","wo_scale","wo_s"],"to":["study_key_assert_na","m_all_in","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","wo_s_with_unmatched","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","wo_wide","r_obs","r_obs","r_obs","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","wo_scale_unmatched","obs","obs","wo_long"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Stem","Pattern"],"shape":["dot","square"],"color":["#899DA4","#899DA4"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># see what's working and not working in the piepline</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div id="htmlwidget-b85c76c585fe1013a24b" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b85c76c585fe1013a24b">{"x":{"nodes":{"name":["assert_unmatched_studies_unique","class_check_gs","m_all_in","m_metapar","metapar","obs","r_adverse","r_classifiers","r_covidence","r_model_key","r_mood","r_obs","r_outcomes","r_pain","r_scales","r_variables","s_multiple_outcomes","s_multiple_scales","scale_match_test","study_key","study_key_assert_na","study_na_inspect","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_time","wo_time_unmatched","wo_wide","tab_s_multiple_outcomes","c_drug_names_unlabelled","c_export_condition","c_scales","w_metapar_original_s","w_scales","s_lab_metapar","wo_s","wo_s_with_unmatched","unmatched_s_obs","w_metapar_consult","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"type":["stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","stem","stem","function","function","object","function","function","function"],"status":["outdated","outdated","outdated","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.002,0.003,0.051,1.233,0.003,0.013,0.045,0.012,0.536,0.017,1.005,0.054,0.003,1.348,0.047,0.027,0.167,0.01,0.01,0.004,0.001,0.002,0.134,1.085,0.003,26.735,0.004,0.002,0.041,0.006,0.017,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[46,5412,25196,30113,15686,33188,16198,2817,556016,187,69206,180850,81,93302,1307,1123,3805,0,62,7426,46,173,4949,48994,17566,40518,234,25406,39056,167,38167,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["assert_unmatched_studies_unique","class_check_gs","m_all_in","m_metapar","metapar","obs","r_adverse","r_classifiers","r_covidence","r_model_key","r_mood","r_obs","r_outcomes","r_pain","r_scales","r_variables","s_multiple_outcomes","s_multiple_scales","scale_match_test","study_key","study_key_assert_na","study_na_inspect","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_time","wo_time_unmatched","wo_wide","tab_s_multiple_outcomes","c_drug_names_unlabelled","c_export_condition","c_scales","w_metapar_original_s","w_scales","s_lab_metapar","wo_s","wo_s_with_unmatched","unmatched_s_obs","w_metapar_consult","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"label":["assert_unmatched_studies_unique","class_check_gs","m_all_in","m_metapar","metapar","obs","r_adverse","r_classifiers","r_covidence","r_model_key","r_mood","r_obs","r_outcomes","r_pain","r_scales","r_variables","s_multiple_outcomes","s_multiple_scales","scale_match_test","study_key","study_key_assert_na","study_na_inspect","variables_tab","wo_long","wo_scale","wo_scale_matches","wo_scale_multiple_matches","wo_scale_unmatched","wo_time","wo_time_unmatched","wo_wide","tab_s_multiple_outcomes","c_drug_names_unlabelled","c_export_condition","c_scales","w_metapar_original_s","w_scales","s_lab_metapar","wo_s","wo_s_with_unmatched","unmatched_s_obs","w_metapar_consult","clean_colvals","hpp_tab","installed_pkg","lotr_study_hash","scale_match","study_id"],"level":[5,6,8,6,5,7,1,0,1,1,1,2,2,1,1,0,8,8,5,5,6,6,2,2,6,5,6,6,4,5,3,9,6,3,7,3,2,4,1,6,4,2,1,1,0,0,1,1],"color":["#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","dot","dot","triangle","triangle","triangleDown","triangle","triangle","triangle"]},"edges":{"from":["study_key","hpp_tab","m_metapar","obs","w_metapar_original_s","metapar","study_id","w_metapar_original_s","metapar","s_lab_metapar","w_metapar_consult","study_key","w_metapar_consult","obs","metapar","clean_colvals","r_scales","wo_long","r_adverse","r_mood","r_pain","wo_scale_matches","wo_scale_matches","s_lab_metapar","wo_scale_unmatched","r_model_key","study_key","scale_match","wo_time","unmatched_s_obs","obs","hpp_tab","s_multiple_outcomes","r_covidence","wo_wide","wo_time","scale_match","wo_time","wo_scale_matches","metapar","wo_scale","wo_s"],"to":["study_key_assert_na","variables_tab","m_all_in","m_all_in","unmatched_s_obs","c_drug_names_unlabelled","s_lab_metapar","s_lab_metapar","m_metapar","metapar","w_metapar_original_s","wo_s_with_unmatched","c_export_condition","s_multiple_outcomes","class_check_gs","w_scales","w_scales","wo_wide","r_obs","r_obs","r_obs","wo_scale_multiple_matches","wo_scale","study_key","c_scales","r_outcomes","study_na_inspect","wo_scale_matches","wo_scale_matches","assert_unmatched_studies_unique","s_multiple_scales","tab_s_multiple_outcomes","tab_s_multiple_outcomes","w_metapar_consult","wo_time","wo_time_unmatched","scale_match_test","scale_match_test","wo_scale_unmatched","obs","obs","wo_long"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Up to date","Stem","Pattern","Function","Object"],"color":["#78B7C5","#354823","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># inspect an element called metapar</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>metapar</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code># A tibble: 459 x 11
-   title   study  arm    type   class name   main_aim design condition
-   &lt;chr&gt;   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    
- 1 compar… caret… place… place… &lt;NA&gt;  place… pain an… paral… fibromya…
- 2 compar… caret… amitr… antid… tca   amitr… pain an… paral… fibromya…
- 3 compar… caret… cyclo… skele… &lt;NA&gt;  &lt;NA&gt;   pain an… paral… fibromya…
- 4 trimip… macfa… place… place… &lt;NA&gt;  place… pain an… paral… rheumato…
- 5 trimip… macfa… place… place… &lt;NA&gt;  place… pain an… paral… rheumato…
- 6 trimip… macfa… trimi… antid… tca   trimi… pain an… paral… rheumato…
- 7 trimip… macfa… trimi… antid… tca   trimi… pain an… paral… rheumato…
- 8 compar… keski… gabap… antic… &lt;NA&gt;  gabap… pain     paral… neuropat…
- 9 compar… keski… amitr… antid… tca   amitr… pain     paral… neuropat…
-10 compar… nct 2… benzt… activ… &lt;NA&gt;  benzt… pain     paral… temporom…
-# … with 449 more rows, and 2 more variables: general_grouping &lt;chr&gt;,
-#   iasp_classification &lt;chr&gt;</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># inspect an element called variables_tab</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>variables_tab</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div id="qtcloiadye" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<h2 id="participants-and-conditions">participants and conditions</h2>
+<div class="layout-chunk" data-layout="l-page">
+<div id="neajjwnifd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qtcloiadye .gt_table {
+#neajjwnifd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2212,7 +2155,7 @@ outcomes
   border-left-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_heading {
+#neajjwnifd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2224,7 +2167,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_title {
+#neajjwnifd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2234,7 +2177,7 @@ outcomes
   border-bottom-width: 0;
 }
 
-#qtcloiadye .gt_subtitle {
+#neajjwnifd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2244,13 +2187,13 @@ outcomes
   border-top-width: 0;
 }
 
-#qtcloiadye .gt_bottom_border {
+#neajjwnifd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_col_headings {
+#neajjwnifd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2265,7 +2208,7 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_col_heading {
+#neajjwnifd .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2285,7 +2228,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#qtcloiadye .gt_column_spanner_outer {
+#neajjwnifd .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2297,15 +2240,15 @@ outcomes
   padding-right: 4px;
 }
 
-#qtcloiadye .gt_column_spanner_outer:first-child {
+#neajjwnifd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qtcloiadye .gt_column_spanner_outer:last-child {
+#neajjwnifd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qtcloiadye .gt_column_spanner {
+#neajjwnifd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2317,7 +2260,7 @@ outcomes
   width: 100%;
 }
 
-#qtcloiadye .gt_group_heading {
+#neajjwnifd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2339,7 +2282,7 @@ outcomes
   vertical-align: middle;
 }
 
-#qtcloiadye .gt_empty_group_heading {
+#neajjwnifd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2354,15 +2297,15 @@ outcomes
   vertical-align: middle;
 }
 
-#qtcloiadye .gt_from_md > :first-child {
+#neajjwnifd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qtcloiadye .gt_from_md > :last-child {
+#neajjwnifd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qtcloiadye .gt_row {
+#neajjwnifd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2381,7 +2324,7 @@ outcomes
   overflow-x: hidden;
 }
 
-#qtcloiadye .gt_stub {
+#neajjwnifd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2393,7 +2336,7 @@ outcomes
   padding-left: 12px;
 }
 
-#qtcloiadye .gt_summary_row {
+#neajjwnifd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2403,7 +2346,7 @@ outcomes
   padding-right: 5px;
 }
 
-#qtcloiadye .gt_first_summary_row {
+#neajjwnifd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2413,7 +2356,7 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_grand_summary_row {
+#neajjwnifd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2423,7 +2366,7 @@ outcomes
   padding-right: 5px;
 }
 
-#qtcloiadye .gt_first_grand_summary_row {
+#neajjwnifd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2433,11 +2376,11 @@ outcomes
   border-top-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_striped {
+#neajjwnifd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qtcloiadye .gt_table_body {
+#neajjwnifd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2446,7 +2389,7 @@ outcomes
   border-bottom-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_footnotes {
+#neajjwnifd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2460,13 +2403,13 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_footnote {
+#neajjwnifd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qtcloiadye .gt_sourcenotes {
+#neajjwnifd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2480,125 +2423,419 @@ outcomes
   border-right-color: #D3D3D3;
 }
 
-#qtcloiadye .gt_sourcenote {
+#neajjwnifd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qtcloiadye .gt_left {
+#neajjwnifd .gt_left {
   text-align: left;
 }
 
-#qtcloiadye .gt_center {
+#neajjwnifd .gt_center {
   text-align: center;
 }
 
-#qtcloiadye .gt_right {
+#neajjwnifd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qtcloiadye .gt_font_normal {
+#neajjwnifd .gt_font_normal {
   font-weight: normal;
 }
 
-#qtcloiadye .gt_font_bold {
+#neajjwnifd .gt_font_bold {
   font-weight: bold;
 }
 
-#qtcloiadye .gt_font_italic {
+#neajjwnifd .gt_font_italic {
   font-style: italic;
 }
 
-#qtcloiadye .gt_super {
+#neajjwnifd .gt_super {
   font-size: 65%;
 }
 
-#qtcloiadye .gt_footnote_marks {
+#neajjwnifd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
 }
 </style>
 <table class="gt_table">
-  
+  <thead class="gt_header">
+    <tr>
+      <th colspan="12" class="gt_heading gt_title gt_font_normal" style>Outcomes and conditions</th>
+    </tr>
+    <tr>
+      <th colspan="12" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Number of participants, studies, and interventions in for each
+        condition in each outcome</th>
+    </tr>
+  </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">Description</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">Covidence</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner">placebo</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner">intervention</span>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">interventions</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">classes</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner">total</span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">participants</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">studies</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">interventions</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">participants</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">studies</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">interventions</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">participants</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">studies</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2; font-size: x-small;">interventions</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
     <tr class="gt_group_heading_row">
-      <td colspan="3" class="gt_group_heading">model</td>
+      <td colspan="12" class="gt_group_heading">adverse</td>
     </tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>study</code></p>
-</div></td>
-<td class="gt_row gt_left">Unique identifier for study; comments contains title, study identifier is first author and year</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Study Identifier + Comments</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>name</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">Name of intervention drug: e.g., Desvenlafaxin</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Name</code></p>
-</div></td></tr>
+    <tr><td class="gt_row gt_left gt_stub">chest pain</td>
+<td class="gt_row gt_right">20</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">20</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">imipramine</td>
+<td class="gt_row gt_left">tca</td>
+<td class="gt_row gt_right">40</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">fibromyalgia</td>
+<td class="gt_row gt_right gt_striped">3488</td>
+<td class="gt_row gt_right gt_striped">20</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">5858</td>
+<td class="gt_row gt_right gt_striped">23</td>
+<td class="gt_row gt_right gt_striped">10</td>
+<td class="gt_row gt_left gt_striped">dothiepin; milnacipran; desvenlafaxine; amitriptyline; duloxetine; mirtazapine; n; paroxetine; esreboxetine; pirlindole</td>
+<td class="gt_row gt_left gt_striped">tca; snri; nassa; ssri; reversible maoi</td>
+<td class="gt_row gt_right gt_striped">9346</td>
+<td class="gt_row gt_right gt_striped">23</td>
+<td class="gt_row gt_right gt_striped">11</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">musculoskeletal</td>
+<td class="gt_row gt_right">1820</td>
+<td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2606</td>
+<td class="gt_row gt_right">19</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">fluvoxamine; duloxetine; milnacipran; amitriptyline; desipramine hydrochloride; paroxetine; maprotiline; nortriptyline</td>
+<td class="gt_row gt_left">ssri; snri; tca; tetracylic antidepressant (teca)</td>
+<td class="gt_row gt_right">4426</td>
+<td class="gt_row gt_right">19</td>
+<td class="gt_row gt_right">9</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">neuropathic</td>
+<td class="gt_row gt_right gt_striped">809</td>
+<td class="gt_row gt_right gt_striped">7</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">2221</td>
+<td class="gt_row gt_right gt_striped">15</td>
+<td class="gt_row gt_right gt_striped">4</td>
+<td class="gt_row gt_left gt_striped">amitriptyline; duloxetine; venlafaxine; desvenlafaxine</td>
+<td class="gt_row gt_left gt_striped">tca; snri</td>
+<td class="gt_row gt_right gt_striped">3030</td>
+<td class="gt_row gt_right gt_striped">15</td>
+<td class="gt_row gt_right gt_striped">5</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">primary</td>
+<td class="gt_row gt_right">180</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">223</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_left">citalopram; reboxetine; imipramine</td>
+<td class="gt_row gt_left">ssri; nari; tca</td>
+<td class="gt_row gt_right">403</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">4</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">visceral</td>
+<td class="gt_row gt_right gt_striped">136</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">135</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_left gt_striped">amitriptyline</td>
+<td class="gt_row gt_left gt_striped">tca</td>
+<td class="gt_row gt_right gt_striped">271</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">2</td></tr>
+    <tr>
+      <td class="gt_row gt_stub gt_right gt_summary_row gt_first_summary_row">Total</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">6,453</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">43</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">7</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">11,063</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">61</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">27</td>
+      <td class="gt_row gt_left gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">&mdash;</td>
+      <td class="gt_row gt_left gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">&mdash;</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">17,516</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">61</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">33</td>
+    </tr>
     <tr class="gt_group_heading_row">
-      <td colspan="3" class="gt_group_heading">filter</td>
+      <td colspan="12" class="gt_group_heading">mood_depression</td>
     </tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>timepoint</code></p>
-</div></td>
-<td class="gt_row gt_left">Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p>obs header</p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>scale</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">We searched the column headers for names of scales (such as vas)</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p>obs header</p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>type</code></p>
-</div></td>
-<td class="gt_row gt_left">Type of intervention: e.g., antidepressant, placebo, CBT</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Intervention Type</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>design</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">crossover or parallel; for now we filter parallel not crossover</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Group</code></p>
-</div></td></tr>
+    <tr><td class="gt_row gt_left gt_stub">abdominal</td>
+<td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">52</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">imipramine; citalopram</td>
+<td class="gt_row gt_left">tca; ssri</td>
+<td class="gt_row gt_right">68</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">chest pain</td>
+<td class="gt_row gt_right gt_striped">130</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">136</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_left gt_striped">paroxetine; sertraline</td>
+<td class="gt_row gt_left gt_striped">ssri</td>
+<td class="gt_row gt_right gt_striped">266</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">3</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">fibromyalgia</td>
+<td class="gt_row gt_right">717</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">846</td>
+<td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_left">paroxetine; escitalopram; fluoxetine; citalopram; duloxetine; milnacipran; amitriptyline; pirlindole</td>
+<td class="gt_row gt_left">ssri; snri; tca; reversible maoi</td>
+<td class="gt_row gt_right">1563</td>
+<td class="gt_row gt_right">12</td>
+<td class="gt_row gt_right">9</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">musculoskeletal</td>
+<td class="gt_row gt_right gt_striped">861</td>
+<td class="gt_row gt_right gt_striped">8</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">804</td>
+<td class="gt_row gt_right gt_striped">9</td>
+<td class="gt_row gt_right gt_striped">7</td>
+<td class="gt_row gt_left gt_striped">duloxetine; milnacipran; amitriptyline; paroxetine; nortriptyline; duloxetine hcl; trazodone</td>
+<td class="gt_row gt_left gt_striped">snri; tca; ssri; sari</td>
+<td class="gt_row gt_right gt_striped">1665</td>
+<td class="gt_row gt_right gt_striped">10</td>
+<td class="gt_row gt_right gt_striped">8</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">post-traumatic pain</td>
+<td class="gt_row gt_right">59</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">126</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">venlafaxine xr; amitriptyline</td>
+<td class="gt_row gt_left">snri; tca</td>
+<td class="gt_row gt_right">185</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">primary</td>
+<td class="gt_row gt_right gt_striped">78</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">158</td>
+<td class="gt_row gt_right gt_striped">3</td>
+<td class="gt_row gt_right gt_striped">5</td>
+<td class="gt_row gt_left gt_striped">escitalopram; citalopram; reboxetine; maprotiline; clomipramine</td>
+<td class="gt_row gt_left gt_striped">ssri; nari; tetracyclic antidepressant (teca); tca</td>
+<td class="gt_row gt_right gt_striped">236</td>
+<td class="gt_row gt_right gt_striped">3</td>
+<td class="gt_row gt_right gt_striped">6</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">NA</td>
+<td class="gt_row gt_right">59</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">59</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">amitriptyline</td>
+<td class="gt_row gt_left">tca</td>
+<td class="gt_row gt_right">118</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr>
+      <td class="gt_row gt_stub gt_right gt_summary_row gt_first_summary_row">Total</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">1,920</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">21</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">7</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">2,181</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">30</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">27</td>
+      <td class="gt_row gt_left gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">&mdash;</td>
+      <td class="gt_row gt_left gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">&mdash;</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">4,101</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">32</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row" style="background-color: #ECF2F8;">34</td>
+    </tr>
     <tr class="gt_group_heading_row">
-      <td colspan="3" class="gt_group_heading">subgroup</td>
+      <td colspan="12" class="gt_group_heading">pain</td>
     </tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>condition</code></p>
-</div></td>
-<td class="gt_row gt_left">Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
-temporomandibular disorder</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Chronic pain condition(s)</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>class</code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped">Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant</td>
-<td class="gt_row gt_center gt_striped"><div class='gt_from_md'><p><code>Intervention Class</code></p>
-</div></td></tr>
-    <tr><td class="gt_row gt_center" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;"><div class='gt_from_md'><p><code>main_aim</code></p>
-</div></td>
-<td class="gt_row gt_left">Primary aim of the original study: e.g., pain, mood, etc.</td>
-<td class="gt_row gt_center"><div class='gt_from_md'><p><code>Main aim (Pain, mood, quality of life etc)</code></p>
-</div></td></tr>
+    <tr><td class="gt_row gt_left gt_stub">abdominal</td>
+<td class="gt_row gt_right gt_striped">22</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">25</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_left gt_striped">mianserin</td>
+<td class="gt_row gt_left gt_striped">tetracyclic antidepressant (teca)</td>
+<td class="gt_row gt_right gt_striped">47</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">2</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">abdominal pain</td>
+<td class="gt_row gt_right">66</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">135</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">desipramine</td>
+<td class="gt_row gt_left">tca</td>
+<td class="gt_row gt_right">201</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">chest pain</td>
+<td class="gt_row gt_right gt_striped">107</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">113</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_left gt_striped">paroxetine; sertraline</td>
+<td class="gt_row gt_left gt_striped">ssri</td>
+<td class="gt_row gt_right gt_striped">220</td>
+<td class="gt_row gt_right gt_striped">2</td>
+<td class="gt_row gt_right gt_striped">3</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">fibromyalgia</td>
+<td class="gt_row gt_right">1184</td>
+<td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2904</td>
+<td class="gt_row gt_right">18</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_left">sertraline; milnacipran; paroxetine; escitalopram; amitriptyline; fluoxetine; moclobemide; duloxetine; esreboxetine; pirlindole</td>
+<td class="gt_row gt_left">ssri; snri; tca; reversible maoi. rima.; reversible maoi</td>
+<td class="gt_row gt_right">4088</td>
+<td class="gt_row gt_right">18</td>
+<td class="gt_row gt_right">11</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">musculoskeletal</td>
+<td class="gt_row gt_right gt_striped">875</td>
+<td class="gt_row gt_right gt_striped">8</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1089</td>
+<td class="gt_row gt_right gt_striped">11</td>
+<td class="gt_row gt_right gt_striped">9</td>
+<td class="gt_row gt_left gt_striped">duloxetine; amitriptyline; milnacipran; desipramine hydrochloride; maprotiline; paroxetine; nortriptyline; duloxetine hcl; trazodone</td>
+<td class="gt_row gt_left gt_striped">snri; tca; tetracylic antidepressant (teca); ssri; sari</td>
+<td class="gt_row gt_right gt_striped">1964</td>
+<td class="gt_row gt_right gt_striped">11</td>
+<td class="gt_row gt_right gt_striped">10</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">neuropathic</td>
+<td class="gt_row gt_right">23</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">434</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_left">amitriptyline; citalopram; nortriptyline; duloxetine; duloxetine
+</td>
+<td class="gt_row gt_left">tca; ssri; snri</td>
+<td class="gt_row gt_right">457</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">6</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">primary</td>
+<td class="gt_row gt_right gt_striped">100</td>
+<td class="gt_row gt_right gt_striped">3</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">207</td>
+<td class="gt_row gt_right gt_striped">5</td>
+<td class="gt_row gt_right gt_striped">7</td>
+<td class="gt_row gt_left gt_striped">escitalopram; citalopram; reboxetine; fluoxetine; zimelidine; maprotiline; clomipramine</td>
+<td class="gt_row gt_left gt_striped">ssri; nari; tetracyclic antidepressant (teca); tca</td>
+<td class="gt_row gt_right gt_striped">307</td>
+<td class="gt_row gt_right gt_striped">5</td>
+<td class="gt_row gt_right gt_striped">8</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">unable to be classified</td>
+<td class="gt_row gt_right">18</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">41</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_left">fluoxetine; amitriptyline</td>
+<td class="gt_row gt_left">ssri; tca</td>
+<td class="gt_row gt_right">59</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">visceral</td>
+<td class="gt_row gt_right gt_striped">24</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">NA</td>
+<td class="gt_row gt_right gt_striped">NA</td>
+<td class="gt_row gt_right gt_striped">NA</td>
+<td class="gt_row gt_left gt_striped">NA</td>
+<td class="gt_row gt_left gt_striped">NA</td>
+<td class="gt_row gt_right gt_striped">24</td>
+<td class="gt_row gt_right gt_striped">1</td>
+<td class="gt_row gt_right gt_striped">1</td></tr>
+    <tr><td class="gt_row gt_left gt_stub">NA</td>
+<td class="gt_row gt_right">59</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">59</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">amitriptyline</td>
+<td class="gt_row gt_left">tca</td>
+<td class="gt_row gt_right">118</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr>
+      <td class="gt_row gt_stub gt_right gt_summary_row gt_first_summary_row">Total</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">2,478</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">30</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">10</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">5,007</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">46</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">38</td>
+      <td class="gt_row gt_left gt_summary_row gt_first_summary_row">&mdash;</td>
+      <td class="gt_row gt_left gt_summary_row gt_first_summary_row">&mdash;</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">7,485</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">47</td>
+      <td class="gt_row gt_right gt_summary_row gt_first_summary_row">48</td>
+    </tr>
   </tbody>
   
   
 </table>
 </div>
 </div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># load metapar into the environment</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_load.html'>tar_load</a></span><span class='op'>(</span><span class='va'>metapar</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
