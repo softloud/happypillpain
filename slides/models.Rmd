@@ -1,0 +1,169 @@
+---
+title: "models to answer questions"
+subtitle: "in what terms might we think of the observed effects?"
+# description: |
+#   Statistical methods for answering questions in the protocol.
+# author:
+#   - name: Nora Jones 
+#     url: https://example.com/norajones
+#     affiliation: Spacely Sprockets
+#     affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+# output: distill::distill_article
+output: 
+  ioslides_presentation:
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r packages}
+library(tidyverse)
+library(gt)
+```
+
+
+```{r targets}
+withr::with_dir(
+  here::here(), {
+    tar_load(w_obs)
+    
+    source("R/hpp_themes.R")
+  }
+)
+
+
+```
+
+## in terms of {.smaller} 
+
+### How we might we think of an **outcome** associated with pain in terms of **condition**, **class** of antidepressant, **antidepressant**, **dosage**? 
+
+**outcome**: `r w_obs %>% pull(outcome) %>% unique()` ... [or]
+
+[_and_?]
+
+### in terms of 
+
+**condition**: `r w_obs %>% pull(condition_general) %>% unique() %>% head()` ... 
+
+**class**: `r w_obs %>% filter(str_length(class) > 2) %>% pull(class) %>% unique()`
+
+**antidepressant** `r w_obs %>% pull(intervention) %>% unique() %>% head()` ...
+
+**dosage**: `r w_obs %>% pull(arm) %>% unique() %>% head()` ... 
+
+## network meta-analysis | on subgroups
+
+For each **outcome**, **condition**, and **class**, we can run a separate nma that asks: how well does the treatment work compared to placebo?
+
+That is we can estimate:  
+
+outcome = placebo + intervention
+
+for each condition and class. 
+
+[NB: Charles is confident with this]
+
+[Next approach is a work in progress]
+
+
+## network meta-analysis | is _fancy_ but still just **regression to the mean** {.smaller}
+
+We assume we can think of an outcome in terms of adding _in terms of_ together.
+
+Network meta-analysis assumes each observation has some error associated with the **study**, **intervention**, and **sampling** to produce an estimate _in terms of_:
+
+### how might we define _in terms of_?  "average" estimates + together
+
+outcome = placebo + intervention
+
+outcome = placebo + class + class (intervention)
+
+outcome = placebo + condition + class (condition) + class (condition, intervention)
+
+outcome = placebo + condition + class (condition) + class(condition, intervention) + class(condition, intervention, dosage)
+
+[Charles knows how to do this in MA but is still learning in NMA.] 
+
+
+## in terms of | outcome = placebo + intervention
+
+```{r}
+outcome_obs <- 
+  w_obs %>% 
+  filter(outcome == "mood_depression")
+
+classes <- 
+  outcome_obs %>%
+  filter(intervention != "placebo") %>% 
+  select(class, intervention) %>% 
+  distinct()
+
+interventions <- 
+  classes %>% 
+  pull(intervention) %>% 
+  unique()
+
+```
+
+Let's make some numbers up! 
+
+Assume mood is reported on a numerical rating scale of 0 to 10.
+
+```{r}
+tibble(
+  outcome = rep("mood", 3),
+  placebo = rep(6, 3),
+  intervention_effect = c(0, -4, -3)
+) %>%
+  mutate(
+    intervention = c(NA, interventions[1:2]),
+    outcome_effect = placebo + intervention_effect
+  ) %>% 
+  select(contains("outcome"), placebo, contains("intervention")) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = "outcome_effect")
+
+
+```
+
+
+## in terms of | outcome = placebo + class + class (intervention)
+
+```{r}
+tibble(
+  class = NA,
+  intervention = "placebo",
+) %>% 
+bind_rows(classes[c(1:2, 6), ]) %>% 
+  mutate(
+    outcome = rep("mood", 4),
+      placebo = rep(6, 4),
+    class_effect = c(0, -1, rep(-2, 2)),
+    intervention_effect = c(0, -1, -2, -3),
+    outcome_effect = placebo + class_effect + intervention_effect
+  )  %>% 
+    select(contains("outcome"), placebo, contains("class"), contains("intervention")) %>%
+  relocate(class_effect, .before = class) %>% 
+  relocate(intervention_effect, .before = intervention) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = "outcome_effect")
+
+```
+
+## nma | Making sense of it all
+
+Presumably network meta-analysis is really just a random-effects model. 
+
+For a meta-analysis to run we need estimates of each effect. 
+
+However, in NMA some observations are missing. 
+
+So, if the models are too complex (or annoying) to work in `multinma::` 
+
+1. Estimate effects
+2. Construct model 

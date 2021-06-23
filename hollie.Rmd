@@ -1,0 +1,96 @@
+---
+title: "Hollie"
+description: |
+  For exploration
+author:
+  - name: Hollie
+date: "updated `r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages}
+
+# if it says package not installed:
+# run renv::restore() in the console to install all packages
+
+library(tidyverse) # vis and wrangling
+library(targets) # pipeline
+library(gt) # tables
+
+
+```
+
+# Hollie writes here:
+
+
+
+# Tutorial stuff from Charles
+
+NB: only edit this file
+
+## targets
+
+The pipeline is managed by the `targets::` package. 
+
+A few key commmands.
+
+NB: we've turned off this "code chunk" because it takes ages to render
+
+You can run single lines of code by hitting `cmd + enter` or the whole chunk by clicking the green play button.  
+
+```{r eval = FALSE}
+# inspect the pipeline
+
+tar_glimpse()
+
+# inspect a subset of the pipeline
+
+# run specific parts of the pipeline: starts_with *_
+
+# starts_with labels
+
+# r := raw
+# w := wrangling
+# m := model
+# c := check, for exporting checks and asserts
+# e := exploratory data analysis table or vis
+# p := pipeline design
+
+# secondary signifiers ^_*_
+
+# h := prepared by hollie
+
+# targets that contains
+tar_glimpse(allow = contains("_h_"))
+
+# targets that start with
+tar_glimpse(allow = starts_with("r_"))
+
+```
+
+Accessing data from targets.
+
+Desired table output of all observations.
+
+outcome | study | arm | observations | observation info | study-level descriptors
+- |-|-|-|-|-
+outcome label | unique identifier for study | unique identifier for arm | mean, sd, counts, etc. | timepoint, scale, etc.| condition, study design (parallel/crossover), antyhing we need to filter by, subgroups, etc.
+
+
+```{r}
+# inspect the data at a point in the pipeline with 
+
+# this is the output table described as the desired output at the top
+# of the pipeline (copied in above)
+tar_read(w_obs)
+
+```
+
+

@@ -186,7 +186,10 @@ list(
   
   tar_target(r_h_outcome_adverse,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcome-adverse-2021-05-19.csv")
+               read_csv(
+                 # "data/outcomes-2021-06-21/Adverse Events.csv"
+                 "data/outcome-adverse-2021-05-19.csv"
+                 )
              ))),
   
   tar_target(r_h_outcome_mood,
@@ -199,12 +202,65 @@ list(
                read_csv("data/outcome-pain-2021-05-19.csv")
              ))),
   
+  # bring in the new stuff
+  # the 2021-06-21 h_ exports have the same number of rows 
+  tar_target(
+    r_h_outcome_pain_mod,
+    suppressWarnings(suppressMessages(
+      read_csv("data/outcomes-2021-06-21/Moderate pain relief.csv")
+    ))),
+  
+  tar_target(
+    r_h_outcome_pain_intensity,
+    suppressWarnings(suppressMessages(
+      read_csv("data/outcomes-2021-06-21/Pain intensity.csv")
+    ))),
+  
+  tar_target(
+    r_h_outcome_physical,
+    suppressWarnings(suppressMessages(
+      read_csv("data/outcomes-2021-06-21/Physical function.csv")
+    ))),
+  
+  tar_target(
+    r_h_outcome_qol,
+    suppressWarnings(suppressMessages(
+      read_csv("data/outcomes-2021-06-21/Quality of life.csv")
+    ))),
+  
+  tar_target(
+    r_h_outcome_sleep,
+    suppressWarnings(suppressMessages(
+      read_csv("data/outcomes-2021-06-21/Sleep.csv")
+    ))),
+  
+  tar_target(
+    r_h_outcome_withdrawal,
+    suppressWarnings(suppressMessages(
+      read_csv("data/outcomes-2021-06-21/Withdrawal.csv")
+    ))),
+  
+  # pain mod doesn't have comments column
+  # has the same number of rows, will just cbind it
+  tar_target(
+    w_h_outcome_pain_mod,
+    r_h_outcome_withdrawal %>% select(Comments) %>% 
+      cbind(r_h_outcome_pain_mod)
+  ),
+  
+  # put all observations in one list
   tar_target(
     r_h_outcome_obs,
     list(
       mood_depression = r_h_outcome_mood,
       pain = r_h_outcome_pain,
-      adverse = r_h_outcome_adverse
+      adverse = r_h_outcome_adverse,
+      physical = r_h_outcome_physical,
+      qol = r_h_outcome_qol,
+      sleep = r_h_outcome_sleep,
+      pain_intensity = r_h_outcome_pain_intensity,
+      pain_mod = w_h_outcome_pain_mod,
+      withdrawal = r_h_outcome_withdrawal
     )
     
   ),
@@ -219,7 +275,7 @@ list(
       # tidy up column names
       clean_names %>%
       # remove columns we'll pull from the study_arm df
-      select(-c(intervention_name, intervention_type)) %>%
+      select(-any_of(c("intervention_name", "intervention_type"))) %>%
       rename(arm = intervention) %>%
       # add outcome
       mutate(outcome = w_outcomes) %>%
@@ -238,6 +294,8 @@ list(
     pattern = map(w_outcomes),
     iteration = "list"
   ),
+  
+
   
   # study labels ------------------------------------------------------------
   
@@ -274,7 +332,6 @@ list(
     iteration = "list"
   ),
   
-  
   # wrangle study-arm labels ------------------------------------------------
   
   tar_target(r_condition,
@@ -288,6 +345,7 @@ list(
              condition_iasp = iasp_classification)
   ),
   
+  
   tar_target(
     w_study_arm_par,
     w_study_label_study_arm_par  %>%
@@ -295,9 +353,22 @@ list(
       rename(chronic_condition = condition) %>%
       left_join(w_condition, by = "chronic_condition") %>%
       mutate(
+        # label placebo interventions
         intervention = if_else(is.na(intervention) & type == "placebo",
                                "placebo",
-                               intervention)
+                               intervention),
+        # classes
+        
+        # fix a spelling mistake in classes
+        class = if_else(str_detect(class, "tetra"),
+                        "tetracyclic (teca)",
+                        class
+                        ),
+        
+        # one of the placebo classes is labelled "n"
+        class = ifelse(
+          class == "n", NA, class
+        )
       )
     
   ),
@@ -547,6 +618,7 @@ list(
                  mutate(
                    model_type = case_when(
                      outcome == "adverse" ~ "binomial",
+                     outcome == "pain_mod" ~ "binomial",
                      TRUE ~ "smd"
                        
                  )
@@ -825,13 +897,32 @@ tar_target(
 
 tar_target(
   shiny_nma,
-  write_rds(m_nma, "hppshiny/nma-1.rds")
+  write_rds(m_nma, "hppshiny/nma-2.rds")
 ),
   
-tar_target(shiny_key %>% select(-dat),
-           write_rds(m_nma_key, "hppshiny/key-1.rds")),
+tar_target(shiny_key ,
+           write_rds(m_nma_key %>% select(-dat), "hppshiny/key-2.rds")),
 
 
+
+# export data -------------------------------------------------------------
+tar_target(
+  export_dat_files,
+  m_nma_key %>%
+    select(-nrow, -model_type) %>% 
+    mutate(
+      file_name = glue("exports/hppdat/{outcome}-{subgroup}-{subgroup_value}.csv")
+    )  
+),
+
+tar_target(
+  export_data,
+  map2(
+    export_dat_files %>% pull(dat),
+    export_dat_files %>% pull(file_name),
+    write_csv
+  )
+),
 
 
 # null --------------------------------------------------------------------

@@ -1,0 +1,15 @@
+---
+title: "Neuropathic pain"
+description: |
+  Comparison and analysis of the treatment of neuropathic pain with antidepressants
+date: "updated: `r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+

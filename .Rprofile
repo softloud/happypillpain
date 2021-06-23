@@ -18,6 +18,9 @@ if (interactive()) {
     require(targets)
   }
   
+  library(tidyverse)
+  library(gt)
+  
 }
 
 options(

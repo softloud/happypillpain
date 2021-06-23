@@ -8,14 +8,16 @@ navbar:
   left: 
     - text: "overview"
       href: overview.html
-    - text: "outcomes"
-      menu:
-        - text: "adverse"
-          href: outcome-adverse.html
-        - text: "pain"
-          href: outcome-pain.html
-        - text: "mood (depression)"
-          href: outcome-mood_depression.html  
+    - text: "neuropathic"
+      href: neuropathic.html
+    # - text: "outcomes"
+    #   menu:
+    #     - text: "adverse"
+    #       href: outcome-adverse.html
+    #     - text: "pain"
+    #       href: outcome-pain.html
+    #     - text: "mood (depression)"
+    #       href: outcome-mood_depression.html  
   right:
     - text: "pipeline"
       menu: 
