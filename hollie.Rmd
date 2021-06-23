@@ -102,7 +102,7 @@ See [this](https://usethis.r-lib.org/articles/articles/pr-functions.html) page f
 ```{r eval=FALSE}
 
 # grab latest changes from Charles
-pr_pull() 
+pr_merge_main()
 
 # make changes
 # commit in the git pane
