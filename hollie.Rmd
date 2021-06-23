@@ -93,4 +93,24 @@ tar_read(w_obs)
 
 ```
 
+## syncing with Charles
+
+NB: Charles is learning, too! 
+
+See [this](https://usethis.r-lib.org/articles/articles/pr-functions.html) page for more details:
+
+```{r eval=FALSE}
+
+# grab latest changes from Charles
+pr_pull() 
+
+# make changes
+# commit in the git pane
+
+# send changes to Charles
+pr_push()
+
+```
+
+
 
