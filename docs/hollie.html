@@ -2115,17 +2115,19 @@ pipeline
 <li><a href="#tutorial-stuff-from-charles">Tutorial stuff from Charles</a>
 <ul>
 <li><a href="#targets">targets</a></li>
+<li><a href="#syncing-with-charles">syncing with Charles</a></li>
 </ul></li>
 </ul>
 </nav>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span> <span class='co'># vis and wrangling</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># if it says package not installed:</span>
+<span class='co'># run renv::restore() in the console to install all packages</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span> <span class='co'># vis and wrangling</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span> <span class='co'># pipeline</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span> <span class='co'># tables</span>
-
-<span class='co'># run renv::restore() in the console to install all packages</span>
 </code></pre>
 </div>
 </div>
@@ -2239,6 +2241,22 @@ pipeline
 #   withdrawal_total_percent &lt;chr&gt;, withdrawal_total_n &lt;chr&gt;,
 #   title &lt;chr&gt;, condition &lt;chr&gt;, condition_general &lt;chr&gt;,
 #   condition_iasp &lt;chr&gt;</code></pre>
+</div>
+<h2 id="syncing-with-charles">syncing with Charles</h2>
+<p>NB: Charles is learning, too!</p>
+<p>See <a href="https://usethis.r-lib.org/articles/articles/pr-functions.html">this</a> page for more details:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># grab latest changes from Charles</span>
+<span class='fu'>pr_merge_main</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># make changes</span>
+<span class='co'># commit in the git pane</span>
+
+<span class='co'># send changes to Charles</span>
+<span class='fu'>pr_push</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

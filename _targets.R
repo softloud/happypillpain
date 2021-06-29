@@ -58,6 +58,11 @@ list(
   # pipeline design ---------------------------------------------------------
   
   tar_target(
+    test_empty_tar,
+    NULL
+  ),
+  
+  tar_target(
     p_metapar,
     tibble(
       study = "unique study identifier",
