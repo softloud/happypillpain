@@ -3,7 +3,7 @@ title: "Hollie"
 description: |
   For exploration
 author:
-  - name: Hollie
+  - name: Hollie and Charles
 date: "updated `r Sys.Date()`"
 output: 
   distill::distill_article:
@@ -24,6 +24,7 @@ library(tidyverse) # vis and wrangling
 library(targets) # pipeline
 library(gt) # tables
 
+source("R/hpp_themes.R")
 
 ```
 
@@ -67,7 +68,7 @@ tar_glimpse()
 
 # h := prepared by hollie
 
-# targets that contains
+# targets that contain
 tar_glimpse(allow = contains("_h_"))
 
 # targets that start with
@@ -112,5 +113,76 @@ pr_push()
 
 ```
 
+# scales
 
+```{r}
+tar_visnetwork(allow = c(contains("scale"), w_obs_long))
+
+tar_read(w_obs_scale_counts)
+
+tar_read(w_obs_scale_snapshot)
+
+
+
+
+
+```
+
+
+
+## investigate unmatched scales
+
+```{r}
+
+# look at the first 0 matches
+tar_read(w_obs_scale_counts) %>% 
+  filter(cat_n == 0,
+         # fix in Covidence bansal 2009 add in 0-4 
+         study != "bansal 2009",
+         # change kayiran vas 0-10 
+         study != "kayiran 2010",
+         # change extractions
+         !str_detect(covidence_desc, "catastrophising") 
+         )
+
+```
+
+## notes
+
+- only need range of scale if direction is higher not lower
+
+## assumptions about scales
+
+- kayiran 2010 lowest is ~1 and highest ~9, so we assumed it is 0-10 vas scale
+
+## changes to make outcome extractions
+
+- [x]  exclude tetreault 2018 catatrosphising columns
+
+## scales to discuss further/investigate
+
+- chest_pain_pain_index_duration_of_chest_pain_weighed_by_the_intensity_of_chest_pain_baseline in spinhoven 2010 
+- tetreault 2018 - detect questionnaire scales 
+
+# using `gt::`
+
+`gt::` is an R package for creating tables
+
+- [cookbook](https://themockup.blog/static/gt-cookbook.html#Introduction)
+- [pkg site](https://gt.rstudio.com/)
+
+```{r}
+# example of using gt
+
+tar_read(w_obs) %>%
+  # select first 10 columns
+  select(1:5) %>% 
+  select(-covidence) %>% 
+  # first 10 rows
+  head(3) %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = "outcome")
+  
+  
+```
 

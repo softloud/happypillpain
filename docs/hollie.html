@@ -92,9 +92,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-06-23"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-06-23"/>
-  <meta name="article:author" content="Hollie"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-07-02"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-07-02"/>
+  <meta name="article:author" content="Hollie and Charles"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="hpp: Hollie"/>
@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-06-23"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie and Charles"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-07-02"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2040,7 +2040,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <link href="site_libs/vis-4.20.1/vis.css" rel="stylesheet" />
+  <script src="site_libs/vis-4.20.1/vis.min.js"></script>
+  <script src="site_libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2060,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-23T00:00:00.000+01:00","citationText":"Hollie, 2021"}
+{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie and Charles","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-07-02T00:00:00.000+01:00","citationText":"Charles, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2101,9 +2105,9 @@ pipeline
 </div>
 
 <div class="d-byline">
-  Hollie  
+  Hollie and Charles  
   
-<br/>updated 2021-06-23
+<br/>updated 2021-07-02
 </div>
 
 <div class="d-article">
@@ -2117,6 +2121,15 @@ pipeline
 <li><a href="#targets">targets</a></li>
 <li><a href="#syncing-with-charles">syncing with Charles</a></li>
 </ul></li>
+<li><a href="#scales">scales</a>
+<ul>
+<li><a href="#investigate-unmatched-scales">investigate unmatched scales</a></li>
+<li><a href="#notes">notes</a></li>
+<li><a href="#assumptions-about-scales">assumptions about scales</a></li>
+<li><a href="#changes-to-make-outcome-extractions">changes to make outcome extractions</a></li>
+<li><a href="#scales-to-discuss-furtherinvestigate">scales to discuss further/investigate</a></li>
+</ul></li>
+<li><a href="#using-gt">using <code>gt::</code></a></li>
 </ul>
 </nav>
 </div>
@@ -2128,6 +2141,8 @@ pipeline
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span> <span class='co'># vis and wrangling</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span> <span class='co'># pipeline</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span> <span class='co'># tables</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/source.html'>source</a></span><span class='op'>(</span><span class='st'>"R/hpp_themes.R"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2162,7 +2177,7 @@ pipeline
 
 <span class='co'># h := prepared by hollie</span>
 
-<span class='co'># targets that contains</span>
+<span class='co'># targets that contain</span>
 <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"_h_"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># targets that start with</span>
@@ -2258,7 +2273,479 @@ pipeline
 </code></pre>
 </div>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h1 id="scales">scales</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"scale"</span><span class='op'>)</span>, <span class='va'>w_obs_long</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Loading required package: dontpanic</code></pre>
+<div id="htmlwidget-1ac416a48d5ff815d80d" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ac416a48d5ff815d80d">{"x":{"nodes":{"name":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_scales","w_obs_scales_viable"],"type":["stem","pattern","stem","stem","stem","stem","stem","stem","stem"],"status":["uptodate","uptodate","uptodate","outdated","uptodate","uptodate","outdated","uptodate","outdated"],"seconds":[0.094,2.479,51.43,0.004,309.284,0.014,0.012,0.127,null],"bytes":[3843,82762,101896,0,141270,158,149060,5959,null],"branches":[null,8,null,null,null,null,null,null,null],"id":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_scales","w_obs_scales_viable"],"label":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_scales","w_obs_scales_viable"],"level":[1,1,4,5,3,5,2,2,5],"color":["#354823","#354823","#354823","#78B7C5","#354823","#354823","#78B7C5","#354823","#78B7C5"],"shape":["dot","square","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["w_obs_scale_counts","w_obs_long","w_scales","r_scales","w_obs_scale_counts","w_obs_scale_counts","w_obs_long","w_obs_scale_matches"],"to":["w_obs_scales_viable","w_obs_scale_matches","w_obs_scale_matches","w_scales","w_obs_scale_excluded","w_obs_scale_snapshot","w_obs_scales","w_obs_scale_counts"],"arrows":["to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","Stem","Pattern"],"color":["#354823","#78B7C5","#899DA4","#899DA4"],"shape":["dot","dot","dot","square"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 12,275 x 5
+   study   outcome covidence_desc                  scale_match   cat_n
+   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                           &lt;list&gt;        &lt;int&gt;
+ 1 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
+ 2 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
+ 3 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
+ 4 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
+ 5 lee 20… mood    sf_36_mental_health_subscale_b… &lt;tibble [1 ×…     1
+ 6 lee 20… mood    sf_36_mental_health_subscale_b… &lt;tibble [1 ×…     1
+ 7 lee 20… mood    sf_36_mental_health_subscale_b… &lt;tibble [1 ×…     1
+ 8 lee 20… mood    sf_36_mental_health_subscale_p… &lt;tibble [1 ×…     1
+ 9 lee 20… mood    sf_36_mental_health_subscale_p… &lt;tibble [1 ×…     1
+10 lee 20… mood    sf_36_mental_health_subscale_p… &lt;tibble [1 ×…     1
+# … with 12,265 more rows</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_snapshot</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 4 x 2
+  cat_n     n
+  &lt;int&gt; &lt;int&gt;
+1     0  2054
+2     1  9263
+3     2   847
+4     3   111</code></pre>
+</div>
+<h2 id="investigate-unmatched-scales">investigate unmatched scales</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># look at the first 0 matches</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cat_n</span> <span class='op'>==</span> <span class='fl'>0</span>,
+         <span class='co'># fix in Covidence bansal 2009 add in 0-4 </span>
+         <span class='va'>study</span> <span class='op'>!=</span> <span class='st'>"bansal 2009"</span>,
+         <span class='co'># change kayiran vas 0-10 </span>
+         <span class='va'>study</span> <span class='op'>!=</span> <span class='st'>"kayiran 2010"</span>,
+         <span class='co'># change extractions</span>
+         <span class='op'>!</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>covidence_desc</span>, <span class='st'>"catastrophising"</span><span class='op'>)</span> 
+         <span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 1,737 x 5
+   study    outcome  covidence_desc                 scale_match  cat_n
+   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                          &lt;list&gt;       &lt;int&gt;
+ 1 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
+ 2 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
+ 3 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
+ 4 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
+ 5 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
+ 6 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
+ 7 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
+ 8 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
+ 9 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
+10 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
+# … with 1,727 more rows</code></pre>
+</div>
+<h2 id="notes">notes</h2>
+<ul>
+<li>only need range of scale if direction is higher not lower</li>
+</ul>
+<h2 id="assumptions-about-scales">assumptions about scales</h2>
+<ul>
+<li>kayiran 2010 lowest is ~1 and highest ~9, so we assumed it is 0-10 vas scale</li>
+</ul>
+<h2 id="changes-to-make-outcome-extractions">changes to make outcome extractions</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+exclude tetreault 2018 catatrosphising columns</li>
+</ul>
+<h2 id="scales-to-discuss-furtherinvestigate">scales to discuss further/investigate</h2>
+<ul>
+<li>chest_pain_pain_index_duration_of_chest_pain_weighed_by_the_intensity_of_chest_pain_baseline in spinhoven 2010</li>
+<li>tetreault 2018 - detect questionnaire scales</li>
+</ul>
+<h1 id="using-gt">using <code>gt::</code></h1>
+<p><code>gt::</code> is an R package for creating tables</p>
+<ul>
+<li><a href="https://themockup.blog/static/gt-cookbook.html#Introduction">cookbook</a></li>
+<li><a href="https://gt.rstudio.com/">pkg site</a></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='co'># select first 10 columns</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>covidence</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='co'># first 10 rows</span>
+  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>head</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>hpp_tab</span><span class='op'>(</span>vertical_divider <span class='op'>=</span> <span class='st'>"outcome"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div id="ewenyvynkr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ewenyvynkr .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ewenyvynkr .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ewenyvynkr .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_col_heading {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ewenyvynkr .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #ecf2f8;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ewenyvynkr .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ewenyvynkr .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ewenyvynkr .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ewenyvynkr .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ewenyvynkr .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #d9e6f2;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ewenyvynkr .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ewenyvynkr .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ewenyvynkr .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ewenyvynkr .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ewenyvynkr .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewenyvynkr .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewenyvynkr .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ewenyvynkr .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ewenyvynkr .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ewenyvynkr .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ewenyvynkr .gt_left {
+  text-align: left;
+}
+
+#ewenyvynkr .gt_center {
+  text-align: center;
+}
+
+#ewenyvynkr .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ewenyvynkr .gt_font_normal {
+  font-weight: normal;
+}
+
+#ewenyvynkr .gt_font_bold {
+  font-weight: bold;
+}
+
+#ewenyvynkr .gt_font_italic {
+  font-style: italic;
+}
+
+#ewenyvynkr .gt_super {
+  font-size: 65%;
+}
+
+#ewenyvynkr .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">arm</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">timepoint</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood_depression</td>
+<td class="gt_row gt_center">dsrhv 2018</td>
+<td class="gt_row gt_left">amitriptyline 10mg</td>
+<td class="gt_row gt_left">post_int</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood_depression</td>
+<td class="gt_row gt_center gt_striped">richards 2015</td>
+<td class="gt_row gt_left gt_striped">placebo</td>
+<td class="gt_row gt_left gt_striped">post_int</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood_depression</td>
+<td class="gt_row gt_center">richards 2015</td>
+<td class="gt_row gt_left">venlafaxine 37.5 - 225mg</td>
+<td class="gt_row gt_left">post_int</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

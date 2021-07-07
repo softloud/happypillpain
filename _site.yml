@@ -23,10 +23,12 @@ navbar:
       menu: 
         - text: "pipeline design"
           href: pipeline.html
-        - text: "wrangling"
+        - text: "covidence extractions"
+          href: covidence.html
+        - text: "observations"
           href: wrangling.html
-        # - text: "model parameters"
-        #   href: model-par.html
+        - text: "study-level parameters"
+          href: study-level.html
     - text: "access data"
       href: about.html
 output: distill::distill_article

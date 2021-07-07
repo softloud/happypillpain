@@ -20,6 +20,7 @@ if (interactive()) {
   
   library(tidyverse)
   library(gt)
+  conflicted::conflict_prefer("filter", "dplyr")
   
 }
 

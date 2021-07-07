@@ -24,11 +24,15 @@ source("R/hpp_themes.R")
 
 Goal is to produce a table in the format:
 
-study | arm | observations | observation info | study-level descriptors
--|-|-|-|-
-unique identifier for study | unique identifier for arm | mean, sd, counts, etc. | timepoint, scale, etc.| condition, study design (parallel/crossover), antyhing we need to filter by, subgroups, etc.
+outcome | study | arm | observations | observation info | study-level descriptors
+-|-|-|-|-|-
+outcome | unique identifier for study | unique identifier for arm | mean, sd, counts, etc. | timepoint, scale, etc.| condition, study design (parallel/crossover), antyhing we need to filter by, subgroups, etc.
 
-Column names need to be interpretable by everyone in the group.
+These data will contain everything that is included _and_ excluded from the model, so that we may report on the systematic review overall, as well as the model results. 
+
+Column names need to be interpretable by everyone in the group, so that others can explore the data.
+
+## Information required for the review
 
 In some cases, there is a column or columns that uniquely identify/provide the required data. In other, more challenging cases, we need to extract information from a substring of the observation header (column header). 
 
@@ -40,11 +44,14 @@ tar_read(e_variables)
 
 ```{r}
 
+# all current raw files read into the pipeline 
 tar_manifest(names = starts_with("r_"), fields = c(name, command)) %>%
   gt() %>% hpp_tab(vertical_divider = "name")
 
 
 ```
+s
+
 
 
 # model input data
