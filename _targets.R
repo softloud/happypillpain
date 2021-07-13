@@ -74,7 +74,7 @@ list(
   
   tar_target(
     p_metapar_tab,
-    p_metapar %>% 
+    p_metapar %>%
       gt() %>%
       hpp_tab(vertical_divider = "arm") %>%
       tab_header("Study-level information drawn from Covidence")
@@ -103,9 +103,9 @@ list(
   
   tar_target(
     p_output,
-    p_obs %>% 
-      left_join(p_metapar, by = c("study", "arm")) %>% 
-    gt() %>%
+    p_obs %>%
+      left_join(p_metapar, by = c("study", "arm")) %>%
+      gt() %>%
       hpp_tab(vertical_divider = "arm") %>%
       tab_header("Each row provides observations for one arm of one study",
                  subtitle = "Study-level and observational variables included")
@@ -117,7 +117,7 @@ list(
   # table with covidence column names and preferred column names
   tar_target(
     r_variables,
-    read_csv("data/variables-2021-06-12\ 23:01:37.csv")
+    read_csv("data/variables-2021-07-12_16:37:56.csv")
   ),
   
   # output table of variables
@@ -158,7 +158,7 @@ list(
   
   tar_target(r_covidence,
              suppressWarnings(suppressMessages(
-               read_csv("data/review_91309_extracted_data_csv_20210614040732.csv")
+               read_csv("data/review_91309_extracted_data_csv_20210712234312.csv")
              ))),
   
   tar_target(
@@ -206,49 +206,49 @@ list(
   
   tar_target(r_h_outcome_adverse,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Adverse Events.csv")
+               read_csv("data/outcomes-2021-07-12/Adverse Events.csv")
              ))),
   
   tar_target(r_h_outcome_mood,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Mood.csv"),
+               read_csv("data/outcomes-2021-07-12/Mood.csv"),
              ))),
   
   tar_target(r_h_outcome_pain_int,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Pain intensity.csv")
+               read_csv("data/outcomes-2021-07-12/Pain intensity.csv")
              ))),
   
   # bring in the new stuff
   # the 2021-07-07 h_ exports have the same number of rows
   tar_target(r_h_outcome_pain_mod,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Moderate pain relief.csv")
+               read_csv("data/outcomes-2021-07-12/Moderate pain relief.csv")
              ))),
   
   tar_target(r_h_outcome_physical,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Physical function.csv")
+               read_csv("data/outcomes-2021-07-12/Physical function.csv")
              ))),
   
   tar_target(r_h_outcome_qol,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Quality of life.csv")
+               read_csv("data/outcomes-2021-07-12/Quality of life.csv")
              ))),
   
   tar_target(r_h_outcome_sleep,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Sleep.csv")
+               read_csv("data/outcomes-2021-07-12/Sleep.csv")
              ))),
   
   tar_target(r_h_outcome_withdrawal,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Withdrawal.csv")
+               read_csv("data/outcomes-2021-07-12/Withdrawal.csv")
              ))),
-
+  
   tar_target(r_h_outcome_pain_sub,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-07/Substantial pain relief.csv")
+               read_csv("data/outcomes-2021-07-12/Substantial pain relief.csv")
              ))),
   
   
@@ -272,8 +272,8 @@ list(
       sleep = r_h_outcome_sleep,
       pain_mod = w_h_outcome_pain_mod,
       withdrawal = r_h_outcome_withdrawal,
-      pain_sub = r_h_outcome_pain_sub     
-        )
+      pain_sub = r_h_outcome_pain_sub
+    )
     
   ),
   
@@ -345,7 +345,7 @@ list(
     w_covidence %>%
       # apply study labels
       left_join(w_study_key, by = c("study_identifier", "comments")) %>%
-      select(-study_identifier, -comments) %>%
+      select(-study_identifier,-comments) %>%
       select(study, everything())
   ),
   
@@ -362,8 +362,10 @@ list(
   
   # wrangle study-arm labels ------------------------------------------------
   
-  tar_target(r_condition,
-             read_csv("data/condition-2021-06-12.csv")),
+  tar_target(
+    r_condition,
+    read_csv("data/conditions-2021-07-12_16:37:56.csv")
+  ),
   
   tar_target(
     w_condition,
@@ -404,7 +406,7 @@ list(
   # wrangle scales ----------------------------------------------------------
   
   tar_target(r_scales,
-             read_csv("data/scales-2021-07-02 15:09:36.csv")),
+             read_rds("data/scales-2021-07-12_16:37:56.rds")),
   
   tar_target(
     w_scales,
@@ -425,7 +427,7 @@ list(
             str_detect(outcome, "quality") ~ "qol",
             TRUE ~ outcome
           )
-      ) %>% 
+      ) %>%
       mutate(aka = strsplit(aka, split = "\\s*;\\s*"))  %>%
       unnest(aka) %>%
       # clean the aka column so it's the same as the cleaned janitor names
@@ -469,18 +471,36 @@ list(
         measure_type = map_chr(measure_matches, 3),
         covidence_desc = map_chr(measure_matches, 2)
       ) %>%
-      select(-measure_matches, -covidence_colname) %>%
+      select(-measure_matches,-covidence_colname) %>%
       mutate(across(everything(), tolower)) %>%
       left_join(m_key, by = "outcome")
     ,
     pattern = map(w_study_label_obs)
   ),
   
+  # filters -----------------------------------------------------------------
+  
+  # currently filtering to neuropathic and scales categorised to 1
+  # in order to filter, need study-level things
+  
+  tar_target(
+    w_obs_long_filtered,
+    w_obs_long %>%
+      left_join(
+        w_study_arm_par %>%
+          select(study, arm, condition_general, design)
+        ,
+        by = c("study", "arm")
+      ) %>%
+      # filter by condition & design
+      filter(condition_general == "neuropathic") %>% 
+      select(-condition_general, -design)
+  ),
   
   # scales ------------------------------------------------------------------
   
   tar_target(w_obs_scale_matches,
-             w_obs_long %>%
+             w_obs_long_filtered %>%
                mutate(
                  scale_match = map2(
                    outcome,
@@ -489,38 +509,41 @@ list(
                      matches <-
                        w_scales %>%
                        filter(outcome == o) %>%
+                       mutate() %>%
                        mutate(
-                         
-                       ) %>% 
-                       mutate(
-                         aka_det = map_lgl(aka, 
-                                           .f = function(a) {
-                           str_detect(desc, a)
-                         }),
-                         cat_det = map_lgl(scale_category, 
-                                           .f = function(c) {
-                           str_detect(desc, c)
-                         })
-                       ) %>% 
-                       mutate(aka_det = 
-                                if_else(is.na(aka_det), FALSE, aka_det))  %>% 
+                         aka_det = map_lgl(
+                           aka,
+                           .f = function(a) {
+                             str_detect(desc, a)
+                           }
+                         ),
+                         cat_det = map_lgl(
+                           scale_category,
+                           .f = function(c) {
+                             str_detect(desc, c)
+                           }
+                         )
+                       ) %>%
+                       mutate(aka_det =
+                                if_else(is.na(aka_det), FALSE, aka_det))  %>%
                        filter(aka_det | cat_det)
-
+                     
                      # filter out the sleep disturbance when rows > 2
                      matches <-
-                       if ((nrow(matches) > 1) & str_detect(desc, "sleep_disturbance")) {
+                       if ((nrow(matches) > 1) &
+                           str_detect(desc, "sleep_disturbance")) {
                          matches %>%
                            filter(scale_category != "sleep_disturbance")
                        } else
                          matches
-
+                     
                      # deal with vas_0_100
                      matches <-
                        if (str_detect(desc, "vas_0_100")) {
                          matches %>% filter(aka == "vas_0_100")
                        } else
                          matches
-
+                     
                      # anxiety & depression
                      matches <-
                        if (str_starts(desc, "anxiety")) {
@@ -529,8 +552,9 @@ list(
                        } else if (o == "mood") {
                          matches %>%
                            filter(str_detect(outcome_label, "depression"))
-                       } else matches
-
+                       } else
+                         matches
+                     
                      # score rated by patient
                      matches <-
                        if (str_detect(desc,
@@ -540,16 +564,26 @@ list(
                        } else
                          matches
                      
+                     # nrs 0-10
+                     # matches <-
+                     #   if (nrow(matches > 1) &
+                     #       o == "pain_int" &
+                     #       str_detect(desc, "nrs")) {
+                     #     matches %>%
+                     #       filter(str_detect(scale_category, "numerical_rating"))
+                     #   } else matches
+                     
                      # choose scale category if only one matches the scale cat
                      matches <-
                        if (sum(matches$cat_det) == 1) {
-                         matches %>% 
+                         matches %>%
                            filter(cat_det)
                        } else if (n_distinct(matches$scale_category) == 1) {
-                         matches %>% 
+                         matches %>%
                            head(1)
-                       } else matches
-
+                       } else
+                         matches
+                     
                      return(matches)
                      
                    }
@@ -559,7 +593,7 @@ list(
   tar_target(
     w_obs_scale_counts,
     w_obs_scale_matches %>%
-      select(study, outcome, covidence_desc, scale_match) %>%
+      # select(study, outcome, covidence_desc, scale_match) %>%
       mutate(cat_n = map_int(
         scale_match,
         .f = function(df) {
@@ -571,10 +605,9 @@ list(
       ))
   ),
   
-  tar_target(w_obs_scale_snapshot, 
-             w_obs_scale_counts %>% 
-               count(cat_n)
-             ),
+  tar_target(w_obs_scale_snapshot,
+             w_obs_scale_counts %>%
+               count(cat_n)),
   
   tar_target(w_obs_scale_excluded,
              w_obs_scale_counts %>%
@@ -591,14 +624,14 @@ list(
             distinct() %>% pull(scale_category)
         }
       )) %>%
-      select(-scale_match, -cat_n)
+      select(-scale_match,-cat_n)
   ),
   
-  tar_target(
-    w_obs_scales,
-    w_obs_long %>%
-      left_join(w_obs_scales_smd, by = c("outcome", "covidence_desc"))
-  ),
+  tar_target(w_obs_scales,
+             w_obs_scales_viable),
+  
+  
+  
   
   # go wide -----------------------------------------------------------------
   
@@ -606,9 +639,16 @@ list(
   
   tar_target(
     w_obs_wide,
-    w_obs_scales %>%
+    w_obs_scales_viable %>%
       pivot_wider(
-        id_cols = c(outcome, study, arm, covidence_desc, scale, model_type),
+        id_cols = c(
+          outcome,
+          study,
+          arm,
+          covidence_desc,
+          scale,
+          model_type
+        ),
         names_from = measure_type,
         values_from = covidence_value
       ) %>%
@@ -665,16 +705,24 @@ list(
       select(outcome, study, arm, covidence_desc, timepoint, everything())
   ),
   
+  tar_target(
+    w_obs_fake_percent,
+    w_obs_time %>% 
+      mutate(
+        percent = NA
+      )
+  ),
   
   
   # bundle everything together ----------------------------------------------
   
   # get sds
   tar_target(w_obs_calc,
-             w_obs_wide %>%
+             w_obs_fake_percent %>% 
+             # w_obs_time %>%
                mutate(
                  # fix this later
-                 r = n,
+                 r = ifelse(is.na(percent), n, NA),
                  se = if_else(sd > 0 & is.na(se) & n > 0,
                               sd / sqrt(n),
                               se),
@@ -718,7 +766,7 @@ list(
       ) %>%
       rename(covidence = covidence_desc) %>%
       select(everything(), covidence) %>%
-      select(-range,-median,-ci,-iqr,-percent,-intervals,-model_type) %>%
+      # select(-range, -median, -ci, -iqr, -percent, -intervals, -model_type) %>%
       relocate(r, .before = n) %>%
       ungroup()
   ),
@@ -904,7 +952,7 @@ list(
         interventions_n_p  = interventions_n,
         participants_p = participants
       ) %>%
-      select(-interventions, -type, -classes)
+      select(-interventions,-type,-classes)
   ),
   
   tar_target(
@@ -1016,7 +1064,7 @@ list(
   tar_target(
     export_dat_files,
     m_nma_key %>%
-      select(-nrow, -model_type) %>%
+      select(-nrow,-model_type) %>%
       mutate(
         file_name = glue("exports/hppdat/{outcome}-{subgroup}-{subgroup_value}.csv")
       )

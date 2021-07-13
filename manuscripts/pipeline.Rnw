@@ -1,0 +1,8 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+Hello, world.
+
+\end{document}
