@@ -406,7 +406,7 @@ list(
   # wrangle scales ----------------------------------------------------------
   
   tar_target(r_scales,
-             read_rds("data/scales-2021-07-12_16:37:56.rds")),
+             read_rds("data/scales-2021-07-14_00:04:08.rds")),
   
   tar_target(
     w_scales,
@@ -493,106 +493,159 @@ list(
         by = c("study", "arm")
       ) %>%
       # filter by condition & design
-      filter(condition_general == "neuropathic") %>% 
+      filter(condition_general == "neuropathic") %>%
       select(-condition_general, -design)
   ),
   
   # scales ------------------------------------------------------------------
   
-  tar_target(w_obs_scale_matches,
-             w_obs_long_filtered %>%
-               mutate(
-                 scale_match = map2(
-                   outcome,
-                   covidence_desc,
-                   .f = function(o, desc) {
-                     matches <-
-                       w_scales %>%
-                       filter(outcome == o) %>%
-                       mutate() %>%
-                       mutate(
-                         aka_det = map_lgl(
-                           aka,
-                           .f = function(a) {
-                             str_detect(desc, a)
-                           }
-                         ),
-                         cat_det = map_lgl(
-                           scale_category,
-                           .f = function(c) {
-                             str_detect(desc, c)
-                           }
-                         )
-                       ) %>%
-                       mutate(aka_det =
-                                if_else(is.na(aka_det), FALSE, aka_det))  %>%
-                       filter(aka_det | cat_det)
-                     
-                     # filter out the sleep disturbance when rows > 2
-                     matches <-
-                       if ((nrow(matches) > 1) &
-                           str_detect(desc, "sleep_disturbance")) {
-                         matches %>%
-                           filter(scale_category != "sleep_disturbance")
-                       } else
-                         matches
-                     
-                     # deal with vas_0_100
-                     matches <-
-                       if (str_detect(desc, "vas_0_100")) {
-                         matches %>% filter(aka == "vas_0_100")
-                       } else
-                         matches
-                     
-                     # anxiety & depression
-                     matches <-
-                       if (str_starts(desc, "anxiety")) {
-                         matches %>%
-                           filter(str_detect(outcome_label, "anxiety"))
-                       } else if (o == "mood") {
-                         matches %>%
-                           filter(str_detect(outcome_label, "depression"))
-                       } else
-                         matches
-                     
-                     # score rated by patient
-                     matches <-
-                       if (str_detect(desc,
-                                      "depression_score_rated_by_patient")) {
-                         matches %>%
-                           filter(scale_category != "scale_unknown")
-                       } else
-                         matches
-                     
-                     # nrs 0-10
-                     # matches <-
-                     #   if (nrow(matches > 1) &
-                     #       o == "pain_int" &
-                     #       str_detect(desc, "nrs")) {
-                     #     matches %>%
-                     #       filter(str_detect(scale_category, "numerical_rating"))
-                     #   } else matches
-                     
-                     # choose scale category if only one matches the scale cat
-                     matches <-
-                       if (sum(matches$cat_det) == 1) {
-                         matches %>%
-                           filter(cat_det)
-                       } else if (n_distinct(matches$scale_category) == 1) {
-                         matches %>%
-                           head(1)
-                       } else
-                         matches
-                     
-                     return(matches)
-                     
-                   }
-                 )
-               )),
+  tar_target(
+    w_obs_scale_matches,
+    w_obs_long_filtered %>%
+      mutate(scale_match = pmap(
+        list(
+        outcome,
+        covidence_desc,
+        model_type
+        ),
+        .f = function(o, desc, m) {
+          matches <-
+            w_scales %>%
+            filter(outcome == o) %>%
+            mutate() %>%
+            mutate(
+              aka_det = map_lgl(
+                aka,
+                .f = function(a) {
+                  str_detect(desc, a)
+                }
+              ),
+              cat_det = map_lgl(
+                scale_category,
+                .f = function(c) {
+                  str_detect(desc, c)
+                }
+              )
+            ) %>%
+            mutate(aka_det =
+                     if_else(is.na(aka_det), FALSE, aka_det))  %>%
+            filter(aka_det | cat_det)
+          
+          # filter out the sleep disturbance when rows > 2
+          matches <-
+            if ((nrow(matches) > 1) &
+                str_detect(desc, "sleep_disturbance")) {
+              matches %>%
+                filter(scale_category != "sleep_disturbance")
+            } else
+              matches
+          
+          # deal with vas_0_100
+          matches <-
+            if (str_detect(desc, "vas_0_100|0_100_vas|100_mm_vas")) {
+              matches %>% filter(str_detect(scale_category, "0_100"))
+            } else
+              matches
+          
+          # anxiety & depression
+          matches <-
+            if (str_starts(desc, "anxiety")) {
+              matches %>%
+                filter(str_detect(outcome_label, "anxiety"))
+            } else if (o == "mood") {
+              matches %>%
+                filter(str_detect(outcome_label, "depression"))
+            } else
+              matches
+          
+          # score rated by patient
+          matches <-
+            if (str_detect(desc,
+                           "depression_score_rated_by_patient")) {
+              matches %>%
+                filter(scale_category != "scale_unknown")
+            } else
+              matches
+          
+          # nrs 0-10
+          matches <-
+            if (nrow(matches) > 1 &
+                o == "pain_int" &
+                str_detect(desc, "nrs|numerical_rating_scale")) {
+              matches %>%
+                filter(str_detect(scale_category, "numerical_rating"))
+            } else
+              matches
+          
+          # mcgill short form
+          matches <-
+            if (nrow(matches) > 1 &
+                str_detect(desc, "short_form_mc_gill")) {
+              matches %>%
+                filter(str_detect(scale_category, "short_form"))
+            } else
+              matches
+          
+          # present pain intensity
+          matches <-
+            if (nrow(matches) > 1 &
+                str_detect(desc, "present_pain_intensity")) {
+              matches %>%
+                filter(str_detect(scale_category, "present_pain_intensity"))
+            } else
+              matches
+          
+          # brief pain short form item 5
+          matches <- 
+            if (nrow(matches) > 1 & str_detect(desc, "bpi_sf_item_5")) {
+              matches %>% 
+                filter(str_detect(scale_category, 
+                                  "brief_pain_short_form_inventory_item_5"))
+            } else matches
+          
+          # eq vas
+          matches <- 
+            if (nrow(matches) > 1 & str_detect(desc, "eq_5d_vas")) {
+              matches %>% 
+                filter(str_detect(scale_category, "vas"))
+            } else matches
+          
+          # differentiate the unspecified
+          matches <-
+            if (nrow(matches) > 1 & 
+                str_detect(desc, 
+                           "\\d+.*likert|likert.*\\d+|\\d+.*vas|vas.*\\d+|\\d+.*nrs|nrs.*\\d+")) {
+              matches %>% 
+                filter(!str_detect(scale_category, "unspecified"))
+            } else matches 
+          
+          # choose scale category if only one matches the scale cat
+          matches <-
+            if (sum(matches$cat_det) == 1) {
+              matches %>%
+                filter(cat_det)
+            } else if (n_distinct(matches$scale_category) == 1) {
+              matches %>%
+                head(1)
+            } else
+              matches
+          
+          matches <-
+            if (m == "lor") {
+              tibble(scale_category = "count")
+            } else matches
+          
+          return(matches)
+          
+        }
+      ))
+  ),
+
+  
   
   tar_target(
     w_obs_scale_counts,
-    w_obs_scale_matches %>%
+    w_obs_scale_matches %>% 
       # select(study, outcome, covidence_desc, scale_match) %>%
       mutate(cat_n = map_int(
         scale_match,
@@ -611,7 +664,18 @@ list(
   
   tar_target(w_obs_scale_excluded,
              w_obs_scale_counts %>%
-               cat_n > 1),
+               filter(cat_n != 1)),
+  
+  tar_target(
+    w_obs_scale_excluded_next,
+    w_obs_scale_excluded %>%
+      filter(cat_n != 1) %>%
+      filter(!str_detect(covidence_desc, "0_10_cm_vas")) %>%
+      head(1) %>%
+      select(outcome, covidence_desc, scale_match)
+  ),
+  
+  
   
   tar_target(
     w_obs_scales_viable,
@@ -635,20 +699,16 @@ list(
   
   # go wide -----------------------------------------------------------------
   
-  
-  
   tar_target(
     w_obs_wide,
     w_obs_scales_viable %>%
       pivot_wider(
-        id_cols = c(
-          outcome,
-          study,
-          arm,
-          covidence_desc,
-          scale,
-          model_type
-        ),
+        id_cols = c(outcome,
+                    study,
+                    arm,
+                    covidence_desc,
+                    scale,
+                    model_type),
         names_from = measure_type,
         values_from = covidence_value
       ) %>%
@@ -705,31 +765,24 @@ list(
       select(outcome, study, arm, covidence_desc, timepoint, everything())
   ),
   
-  tar_target(
-    w_obs_fake_percent,
-    w_obs_time %>% 
-      mutate(
-        percent = NA
-      )
-  ),
-  
-  
+
   # bundle everything together ----------------------------------------------
   
   # get sds
-  tar_target(w_obs_calc,
-             w_obs_fake_percent %>% 
-             # w_obs_time %>%
-               mutate(
-                 # fix this later
-                 r = ifelse(is.na(percent), n, NA),
-                 se = if_else(sd > 0 & is.na(se) & n > 0,
-                              sd / sqrt(n),
-                              se),
-                 n = if_else(model_type == "lor" & percent > 0,
-                             as.integer(r * 100 / percent),
-                             n)
-               )),
+  tar_target(
+    w_obs_calc,
+      w_obs_time %>%
+      mutate(
+        # fix this later
+        r = ifelse(!is.na(percent), n, NA),
+        se = if_else(sd > 0 & is.na(se) & n > 0,
+                     sd / sqrt(n),
+                     se),
+        n = if_else(model_type == "lor" & percent > 0,
+                    as.integer(r * 100 / percent),
+                    n)
+      )
+  ),
   
   # todo: target for rows not used
   tar_target(
