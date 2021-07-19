@@ -3,13 +3,125 @@ title: "Neuropathic pain"
 description: |
   Comparison and analysis of the treatment of neuropathic pain with antidepressants
 date: "updated: `r Sys.Date()`"
-output: distill::distill_article
+output: 
+  distill::distill_article:
+    toc: true
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkgs}
+library(meta)
+library(gt)
+library(tidyverse)
+library(skimr)
+library(metafor)
+
+source("R/hpp_themes.R")
+
 ```
 
 
+# replication
+
+In this section I replicate the findings of Moore _et al._ [@moore_2015].
+
+## import data from revman format
+
+```{r import moore data}
+fib_ami_dat_raw <- read.rm5("data/fibromyalgia-amitriptyline.rm5") %>% 
+    janitor::clean_names() 
 
 
+# tidy it up a bit
+fib_ami_dat <-
+  fib_ami_dat_raw %>% 
+  rename(study = studlab, outcome =  outclab) %>% 
+  select(study, event_c, event_e, n_c, n_e, outcome)   
+
+```
+
+```{r look at moore data, layout = "l-page"}
+fib_ami_dat %>% 
+  gt(groupname_col = "outcome") %>% 
+  hpp_tab(vertical_divider = "study")
+
+```
+
+And in the entire dataset, we have the columns.
+
+```{r}
+fib_ami_dat %>% 
+  skim()
+```
+
+We'll need these data in long format. 
+
+```{r}
+fib_ami_long <-
+  fib_ami_dat %>% 
+  select(-c(ends_with("_e"))) %>% 
+  rename(event = event_c, n = n_c) %>% 
+  mutate(arm = "c") %>% 
+  bind_rows(
+      fib_ami_dat %>% 
+  select(-c(ends_with("_c"))) %>% 
+  rename(event = event_e, n = n_e) %>% 
+  mutate(arm = "e")
+  )
+
+```
+
+
+## third-tier efficacy
+
+```{r}
+third_tier_dat <- 
+  fib_ami_dat %>% 
+  filter(str_detect(outcome, "Third-tier efficacy"))
+  
+third_tier_dat %>% 
+  gt(groupname_col = "outcome") %>% 
+  hpp_tab(vertical_divider = "study") %>% 
+  tab_header("Studies included in third-tier efficacy analysis")
+  
+```
+
+```{r}
+third_tier_rma <-
+  third_tier_dat %>%
+  # does adding the complement help?
+  mutate(comp_c = n_c - event_c, comp_e = n_e - event_e) %>%
+  escalc(
+    measure = "RR",
+    ai = event_c,
+    bi = comp_c,
+    n1i = n_c,
+    ci = event_e,
+    di = comp_e,
+    n2i = n_e,
+    dat = .
+  ) %>%
+  rma(
+    yi = yi,
+    vi = vi,
+    slab = study,
+    data = .,
+    method = "FE"
+  )
+
+```
+
+> Gavin, this doesn't match the results in the paper at all. WHYEEEE?!!
+
+```{r}
+forest(third_tier_rma)
+
+```
+
+# reproduction
+
+# extension

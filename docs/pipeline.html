@@ -92,8 +92,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-07-07"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-07-07"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-07-19"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-07-19"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="hpp: pipeline design"/>
@@ -111,7 +111,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["pipeline design"]},{"type":"character","attributes":{},"value":["Overview of pipeline from raw data to models.\n"]},{"type":"character","attributes":{},"value":["2021-07-07"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output"]}},"value":[{"type":"character","attributes":{},"value":["pipeline design"]},{"type":"character","attributes":{},"value":["Overview of pipeline from raw data to models.\n"]},{"type":"character","attributes":{},"value":["2021-07-19"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2059,7 +2059,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"pipeline design","description":"Overview of pipeline from raw data to models.","authors":[],"publishedDate":"2021-07-07T00:00:00.000+01:00"}
+{"title":"pipeline design","description":"Overview of pipeline from raw data to models.","authors":[],"publishedDate":"2021-07-19T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2080,7 +2080,9 @@ pipeline
 </button>
 <div class="nav-dropdown-content">
 <a href="pipeline.html">pipeline design</a>
-<a href="wrangling.html">wrangling</a>
+<a href="covidence.html">covidence extractions</a>
+<a href="wrangling.html">observations</a>
+<a href="study-level.html">study-level parameters</a>
 </div>
 </div>
 <a href="about.html">access data</a>
@@ -2113,16 +2115,18 @@ pipeline
 </div>
 <h1 id="objective">objective</h1>
 <p>Goal is to produce a table in the format:</p>
-<table>
+<table style="width:100%;">
 <colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
 </colgroup>
 <thead>
 <tr class="header">
+<th>outcome</th>
 <th>study</th>
 <th>arm</th>
 <th>observations</th>
@@ -2132,6 +2136,7 @@ pipeline
 </thead>
 <tbody>
 <tr class="odd">
+<td>outcome</td>
 <td>unique identifier for study</td>
 <td>unique identifier for arm</td>
 <td>mean, sd, counts, etc.</td>
@@ -2140,19 +2145,21 @@ pipeline
 </tr>
 </tbody>
 </table>
-<p>Column names need to be interpretable by everyone in the group.</p>
+<p>These data will contain everything that is included <em>and</em> excluded from the model, so that we may report on the systematic review overall, as well as the model results.</p>
+<p>Column names need to be interpretable by everyone in the group, so that others can explore the data.</p>
+<h2 id="information-required-for-the-review">Information required for the review</h2>
 <p>In some cases, there is a column or columns that uniquely identify/provide the required data. In other, more challenging cases, we need to extract information from a substring of the observation header (column header).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>e_variables</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="vxylrttpwb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pzktdsouha" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vxylrttpwb .gt_table {
+#pzktdsouha .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2177,7 +2184,7 @@ pipeline
   border-left-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_heading {
+#pzktdsouha .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2189,7 +2196,7 @@ pipeline
   border-right-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_title {
+#pzktdsouha .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2199,7 +2206,7 @@ pipeline
   border-bottom-width: 0;
 }
 
-#vxylrttpwb .gt_subtitle {
+#pzktdsouha .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2209,13 +2216,13 @@ pipeline
   border-top-width: 0;
 }
 
-#vxylrttpwb .gt_bottom_border {
+#pzktdsouha .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_col_headings {
+#pzktdsouha .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2230,7 +2237,7 @@ pipeline
   border-right-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_col_heading {
+#pzktdsouha .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2250,7 +2257,7 @@ pipeline
   overflow-x: hidden;
 }
 
-#vxylrttpwb .gt_column_spanner_outer {
+#pzktdsouha .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2262,15 +2269,15 @@ pipeline
   padding-right: 4px;
 }
 
-#vxylrttpwb .gt_column_spanner_outer:first-child {
+#pzktdsouha .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vxylrttpwb .gt_column_spanner_outer:last-child {
+#pzktdsouha .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vxylrttpwb .gt_column_spanner {
+#pzktdsouha .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2282,7 +2289,7 @@ pipeline
   width: 100%;
 }
 
-#vxylrttpwb .gt_group_heading {
+#pzktdsouha .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2304,7 +2311,7 @@ pipeline
   vertical-align: middle;
 }
 
-#vxylrttpwb .gt_empty_group_heading {
+#pzktdsouha .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2319,15 +2326,15 @@ pipeline
   vertical-align: middle;
 }
 
-#vxylrttpwb .gt_from_md > :first-child {
+#pzktdsouha .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vxylrttpwb .gt_from_md > :last-child {
+#pzktdsouha .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vxylrttpwb .gt_row {
+#pzktdsouha .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2346,7 +2353,7 @@ pipeline
   overflow-x: hidden;
 }
 
-#vxylrttpwb .gt_stub {
+#pzktdsouha .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2358,7 +2365,7 @@ pipeline
   padding-left: 12px;
 }
 
-#vxylrttpwb .gt_summary_row {
+#pzktdsouha .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2368,7 +2375,7 @@ pipeline
   padding-right: 5px;
 }
 
-#vxylrttpwb .gt_first_summary_row {
+#pzktdsouha .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2378,7 +2385,7 @@ pipeline
   border-top-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_grand_summary_row {
+#pzktdsouha .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2388,7 +2395,7 @@ pipeline
   padding-right: 5px;
 }
 
-#vxylrttpwb .gt_first_grand_summary_row {
+#pzktdsouha .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2398,11 +2405,11 @@ pipeline
   border-top-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_striped {
+#pzktdsouha .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vxylrttpwb .gt_table_body {
+#pzktdsouha .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2411,7 +2418,7 @@ pipeline
   border-bottom-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_footnotes {
+#pzktdsouha .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2425,13 +2432,13 @@ pipeline
   border-right-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_footnote {
+#pzktdsouha .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#vxylrttpwb .gt_sourcenotes {
+#pzktdsouha .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2445,41 +2452,41 @@ pipeline
   border-right-color: #D3D3D3;
 }
 
-#vxylrttpwb .gt_sourcenote {
+#pzktdsouha .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#vxylrttpwb .gt_left {
+#pzktdsouha .gt_left {
   text-align: left;
 }
 
-#vxylrttpwb .gt_center {
+#pzktdsouha .gt_center {
   text-align: center;
 }
 
-#vxylrttpwb .gt_right {
+#pzktdsouha .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vxylrttpwb .gt_font_normal {
+#pzktdsouha .gt_font_normal {
   font-weight: normal;
 }
 
-#vxylrttpwb .gt_font_bold {
+#pzktdsouha .gt_font_bold {
   font-weight: bold;
 }
 
-#vxylrttpwb .gt_font_italic {
+#pzktdsouha .gt_font_italic {
   font-style: italic;
 }
 
-#vxylrttpwb .gt_super {
+#pzktdsouha .gt_super {
   font-size: 65%;
 }
 
-#vxylrttpwb .gt_footnote_marks {
+#pzktdsouha .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2565,17 +2572,58 @@ temporomandibular disorder</td>
 <h1 id="raw-data">raw data</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_manifest.html'>tar_manifest</a></span><span class='op'>(</span>names <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_"</span><span class='op'>)</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>command</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># all current raw files read into the pipeline </span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_manifest.html'>tar_manifest</a></span><span class='op'>(</span>names <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_"</span><span class='op'>)</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>command</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>hpp_tab</span><span class='op'>(</span>vertical_divider <span class='op'>=</span> <span class='st'>"name"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>Loading required package: dontpanic</code></pre>
-<div id="zswhuuzhhw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<pre><code>
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+Loading required package: dontpanic
+
+-
+
+\
+
+|
+
+ </code></pre>
+<div id="trjgbijaqp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zswhuuzhhw .gt_table {
+#trjgbijaqp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2600,7 +2648,7 @@ temporomandibular disorder</td>
   border-left-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_heading {
+#trjgbijaqp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2612,7 +2660,7 @@ temporomandibular disorder</td>
   border-right-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_title {
+#trjgbijaqp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2622,7 +2670,7 @@ temporomandibular disorder</td>
   border-bottom-width: 0;
 }
 
-#zswhuuzhhw .gt_subtitle {
+#trjgbijaqp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2632,13 +2680,13 @@ temporomandibular disorder</td>
   border-top-width: 0;
 }
 
-#zswhuuzhhw .gt_bottom_border {
+#trjgbijaqp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_col_headings {
+#trjgbijaqp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2653,7 +2701,7 @@ temporomandibular disorder</td>
   border-right-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_col_heading {
+#trjgbijaqp .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2673,7 +2721,7 @@ temporomandibular disorder</td>
   overflow-x: hidden;
 }
 
-#zswhuuzhhw .gt_column_spanner_outer {
+#trjgbijaqp .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2685,15 +2733,15 @@ temporomandibular disorder</td>
   padding-right: 4px;
 }
 
-#zswhuuzhhw .gt_column_spanner_outer:first-child {
+#trjgbijaqp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zswhuuzhhw .gt_column_spanner_outer:last-child {
+#trjgbijaqp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zswhuuzhhw .gt_column_spanner {
+#trjgbijaqp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2705,7 +2753,7 @@ temporomandibular disorder</td>
   width: 100%;
 }
 
-#zswhuuzhhw .gt_group_heading {
+#trjgbijaqp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2727,7 +2775,7 @@ temporomandibular disorder</td>
   vertical-align: middle;
 }
 
-#zswhuuzhhw .gt_empty_group_heading {
+#trjgbijaqp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2742,15 +2790,15 @@ temporomandibular disorder</td>
   vertical-align: middle;
 }
 
-#zswhuuzhhw .gt_from_md > :first-child {
+#trjgbijaqp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zswhuuzhhw .gt_from_md > :last-child {
+#trjgbijaqp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zswhuuzhhw .gt_row {
+#trjgbijaqp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2769,7 +2817,7 @@ temporomandibular disorder</td>
   overflow-x: hidden;
 }
 
-#zswhuuzhhw .gt_stub {
+#trjgbijaqp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2781,7 +2829,7 @@ temporomandibular disorder</td>
   padding-left: 12px;
 }
 
-#zswhuuzhhw .gt_summary_row {
+#trjgbijaqp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2791,7 +2839,7 @@ temporomandibular disorder</td>
   padding-right: 5px;
 }
 
-#zswhuuzhhw .gt_first_summary_row {
+#trjgbijaqp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2801,7 +2849,7 @@ temporomandibular disorder</td>
   border-top-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_grand_summary_row {
+#trjgbijaqp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2811,7 +2859,7 @@ temporomandibular disorder</td>
   padding-right: 5px;
 }
 
-#zswhuuzhhw .gt_first_grand_summary_row {
+#trjgbijaqp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2821,11 +2869,11 @@ temporomandibular disorder</td>
   border-top-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_striped {
+#trjgbijaqp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zswhuuzhhw .gt_table_body {
+#trjgbijaqp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2834,7 +2882,7 @@ temporomandibular disorder</td>
   border-bottom-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_footnotes {
+#trjgbijaqp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2848,13 +2896,13 @@ temporomandibular disorder</td>
   border-right-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_footnote {
+#trjgbijaqp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#zswhuuzhhw .gt_sourcenotes {
+#trjgbijaqp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2868,41 +2916,41 @@ temporomandibular disorder</td>
   border-right-color: #D3D3D3;
 }
 
-#zswhuuzhhw .gt_sourcenote {
+#trjgbijaqp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zswhuuzhhw .gt_left {
+#trjgbijaqp .gt_left {
   text-align: left;
 }
 
-#zswhuuzhhw .gt_center {
+#trjgbijaqp .gt_center {
   text-align: center;
 }
 
-#zswhuuzhhw .gt_right {
+#trjgbijaqp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zswhuuzhhw .gt_font_normal {
+#trjgbijaqp .gt_font_normal {
   font-weight: normal;
 }
 
-#zswhuuzhhw .gt_font_bold {
+#trjgbijaqp .gt_font_bold {
   font-weight: bold;
 }
 
-#zswhuuzhhw .gt_font_italic {
+#trjgbijaqp .gt_font_italic {
   font-style: italic;
 }
 
-#zswhuuzhhw .gt_super {
+#trjgbijaqp .gt_super {
   font-size: 65%;
 }
 
-#zswhuuzhhw .gt_footnote_marks {
+#trjgbijaqp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2917,38 +2965,41 @@ temporomandibular disorder</td>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_qol</td>
-<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Quality of life.csv")))</td></tr>
-    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_physical</td>
-<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Physical function.csv")))</td></tr>
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_adverse</td>
-<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Adverse Events.csv")))</td></tr>
-    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_mood</td>
-<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Mood.csv"),  \n     ))</td></tr>
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_pain_int</td>
-<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Pain intensity.csv")))</td></tr>
-    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_sleep</td>
-<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Sleep.csv")))</td></tr>
     <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_withdrawal</td>
-<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Withdrawal.csv")))</td></tr>
-    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_covidence</td>
-<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/review_91309_extracted_data_csv_20210614040732.csv")))</td></tr>
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_pain_mod</td>
-<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-06-21/Moderate pain relief.csv")))</td></tr>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Withdrawal.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_physical</td>
+<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Physical function.csv")))</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_covidence</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/review_91309_extracted_data_csv_20210712234312.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_adverse</td>
+<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Adverse Events.csv")))</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_mood</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Mood.csv"),  \n     ))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_pain_int</td>
+<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Pain intensity.csv")))</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_pain_sub</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Substantial pain relief.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_qol</td>
+<td class="gt_row gt_left gt_striped">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Quality of life.csv")))</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_sleep</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Sleep.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_scales</td>
+<td class="gt_row gt_left gt_striped">read_rds("data/scales-2021-07-14_00:04:08.rds")</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_variables</td>
+<td class="gt_row gt_left">read_csv("data/variables-2021-07-12_16:37:56.csv")</td></tr>
     <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_condition</td>
-<td class="gt_row gt_left gt_striped">read_csv("data/condition-2021-06-12.csv")</td></tr>
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_scales</td>
-<td class="gt_row gt_left">read_csv("data/scales-2021-07-02 15:09:36.csv")</td></tr>
-    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_variables</td>
-<td class="gt_row gt_left gt_striped">read_csv("data/variables-2021-06-12 23:01:37.csv")</td></tr>
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_obs</td>
-<td class="gt_row gt_left">list(mood = r_h_outcome_mood, pain_int = r_h_outcome_pain_int,  \n     adverse = r_h_outcome_adverse, physical = r_h_outcome_physical,  \n     qol = r_h_outcome_qol, sleep = r_h_outcome_sleep, pain_mod = w_h_outcome_pain_mod,  \n     withdrawal = r_h_outcome_withdrawal)</td></tr>
+<td class="gt_row gt_left gt_striped">read_csv("data/conditions-2021-07-12_16:37:56.csv")</td></tr>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_pain_mod</td>
+<td class="gt_row gt_left">suppressWarnings(suppressMessages(read_csv("data/outcomes-2021-07-12/Moderate pain relief.csv")))</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">r_h_outcome_obs</td>
+<td class="gt_row gt_left gt_striped">list(mood = r_h_outcome_mood, pain_int = r_h_outcome_pain_int,  \n     adverse = r_h_outcome_adverse, physical = r_h_outcome_physical,  \n     qol = r_h_outcome_qol, sleep = r_h_outcome_sleep, pain_mod = w_h_outcome_pain_mod,  \n     withdrawal = r_h_outcome_withdrawal, pain_sub = r_h_outcome_pain_sub)</td></tr>
   </tbody>
   
   
 </table>
 </div>
 </div>
+<p>s</p>
 <h1 id="model-input-data">model input data</h1>
 <p>Observations are drawn from the raw files provided by Hollie, and study-level information from the raw Covidence export, as well as column headers in the observations.</p>
 <p>To do this we will join by matching the study and arm columns in two tables.</p>
@@ -2957,375 +3008,10 @@ temporomandibular disorder</td>
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>p_metapar</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="hkbqrgbvvp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#hkbqrgbvvp .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#hkbqrgbvvp .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 4px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#hkbqrgbvvp .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_col_heading {
-  color: #333333;
-  background-color: #ecf2f8;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#hkbqrgbvvp .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #ecf2f8;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#hkbqrgbvvp .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#hkbqrgbvvp .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#hkbqrgbvvp .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#hkbqrgbvvp .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #d9e6f2;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#hkbqrgbvvp .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #d9e6f2;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#hkbqrgbvvp .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#hkbqrgbvvp .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#hkbqrgbvvp .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#hkbqrgbvvp .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#hkbqrgbvvp .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hkbqrgbvvp .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hkbqrgbvvp .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#hkbqrgbvvp .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#hkbqrgbvvp .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#hkbqrgbvvp .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#hkbqrgbvvp .gt_left {
-  text-align: left;
-}
-
-#hkbqrgbvvp .gt_center {
-  text-align: center;
-}
-
-#hkbqrgbvvp .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#hkbqrgbvvp .gt_font_normal {
-  font-weight: normal;
-}
-
-#hkbqrgbvvp .gt_font_bold {
-  font-weight: bold;
-}
-
-#hkbqrgbvvp .gt_font_italic {
-  font-style: italic;
-}
-
-#hkbqrgbvvp .gt_super {
-  font-size: 65%;
-}
-
-#hkbqrgbvvp .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Study-level information drawn from Covidence</th>
-    </tr>
-    
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">arm</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">design</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">condition</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">class</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">main_aim</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">unique study identifier</td>
-<td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">unique arm identifier</td>
-<td class="gt_row gt_left">Intervention Type</td>
-<td class="gt_row gt_left">Group</td>
-<td class="gt_row gt_left">Chronic pain conditions(s)</td>
-<td class="gt_row gt_left">Intervention Class</td>
-<td class="gt_row gt_left">Main aim (Pain...</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
+<pre><code># A tibble: 1 x 7
+  study      arm       type     design condition    class   main_aim  
+  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;     
+1 unique st… unique a… Interve… Group  Chronic pai… Interv… Main aim …</code></pre>
 </div>
 <p>With outcome-level observational data:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3333,377 +3019,15 @@ temporomandibular disorder</td>
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>p_obs</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="ojthcbunvt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#ojthcbunvt .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#ojthcbunvt .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 4px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#ojthcbunvt .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_col_heading {
-  color: #333333;
-  background-color: #ecf2f8;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#ojthcbunvt .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #ecf2f8;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#ojthcbunvt .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#ojthcbunvt .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#ojthcbunvt .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#ojthcbunvt .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #d9e6f2;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#ojthcbunvt .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #d9e6f2;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#ojthcbunvt .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#ojthcbunvt .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#ojthcbunvt .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#ojthcbunvt .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#ojthcbunvt .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ojthcbunvt .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ojthcbunvt .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#ojthcbunvt .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#ojthcbunvt .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ojthcbunvt .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#ojthcbunvt .gt_left {
-  text-align: left;
-}
-
-#ojthcbunvt .gt_center {
-  text-align: center;
-}
-
-#ojthcbunvt .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#ojthcbunvt .gt_font_normal {
-  font-weight: normal;
-}
-
-#ojthcbunvt .gt_font_bold {
-  font-weight: bold;
-}
-
-#ojthcbunvt .gt_font_italic {
-  font-style: italic;
-}
-
-#ojthcbunvt .gt_super {
-  font-size: 65%;
-}
-
-#ojthcbunvt .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Outcome-level observational from data extracted by Hollie</th>
-    </tr>
-    
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">outcome</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">study</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">arm</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">obs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-left-width: 3px; border-left-style: solid; border-left-color: #d9e6f2; border-right-width: 3px; border-right-style: solid; border-right-color: #d9e6f2; border-top-width: 3px; border-top-style: solid; border-top-color: #d9e6f2; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #d9e6f2;">obs_info</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">mood, pain, etc.</td>
-<td class="gt_row gt_left">unique study identifier</td>
-<td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">unique arm identifier</td>
-<td class="gt_row gt_left">columns with mean, sd, counts, sample size, etc.</td>
-<td class="gt_row gt_left">information extracted from column headers:
-      timepoint, scale, etc.</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
+<pre><code># A tibble: 1 x 5
+  outcome    study      arm      obs             obs_info             
+  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;                
+1 mood, pai… unique st… unique … columns with m… &quot;information extract…</code></pre>
 </div>
 <h1 id="model-parameters">model parameters</h1>
 <p>We’ll construct a dataframe to run models over that contains all combinations of unique subgroups we wish to run network meta-analyses over.</p>
 <p>Ideally this will be implemented in a shiny app.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -70,8 +70,8 @@ fluidPage(
                  )
                ),
                column(width = 6,
-                      p("net"),
-                      plotOutput("net"),
+                      # p("net"),
+                      # plotOutput("net"),
                       NULL
                       )
                )),
@@ -80,11 +80,11 @@ tabPanel("effects",
          fluidRow(
            column(
            width = 8,
-           plotOutput("forest")
+           # plotOutput("forest")
          ),
          column(
            width = 4,
-           tableOutput("forest_dat")
+           # tableOutput("forest_dat")
          )
          
          )),
@@ -94,43 +94,12 @@ tabPanel("effects",
       tabPanel("data",
                fluidRow(column(
                  width = 6,
-                 tableOutput("dat")
+                 # tableOutput("dat")
                )))
     ))
     
   )) # close fluid page
   
   
-  #   # column(width = 12,
-  #   #        plotOutput("network"))
-  #   NULL
-  #
-  #   )
-  # )#,
-  #   tabPanel("estimated difference from placebo",
-  #            fluidRow(
-  #              column(
-  #                width = 4,
-  #                p(
-  #                  "This provides estimates of the variations between the studies (upper segment) and
-  #                       the contrasts (lower segment)."
-  #                )
-  #              ),
-  #              column(width = 5,
-  #                     plotOutput("estimates"))
-  #            )),
-  #   tabPanel(
-  #     "plausible values, before and after",
-  #     p(
-  #       "This is a comparative way of inspecting the results shown in the estimated
-  #                         difference from placebo tab. This shows the difference of the model's estimation (filled) of
-  #                         the treatment's effect in comparison with placebo with our prior expectations (lines)."
-  #     )
-  #     ,
-  #     plotOutput("prior_post")
-  #   )
-  # )),
-  # NULL))
-  # )
-  # )
+
   

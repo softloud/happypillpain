@@ -67,10 +67,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.6",
+      "Version": "1.0.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "dbb5e436998a7eba5a9d682060533338"
+      "Hash": "dab19adae4440ae55aa8a9d238b246bb"
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
@@ -235,10 +235,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "2.5.0",
+      "Version": "3.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a94ba44cee3ea571e813721e64184172"
+      "Hash": "096829b701eec2d2b4538be63de97e75"
     },
     "clipr": {
       "Package": "clipr",
@@ -856,8 +856,8 @@
       "Package": "pandan",
       "Version": "0.0.0.9000",
       "Source": "GitHub",
-      "Remotes": "johnmackintosh/rockthemes, softloud/dontpanic",
       "RemoteType": "github",
+      "Remotes": "johnmackintosh/rockthemes, softloud/dontpanic",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "pandan",
       "RemoteUsername": "softloud",
@@ -1236,10 +1236,15 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "349b40a9f144516d537c875e786ec8b8"
+      "Version": "3.1.2.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "tibble",
+      "RemoteUsername": "tidyverse",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "516449bbb0c76925b93b703b68d7979a53d7cdee",
+      "Hash": "64e02b4cd66f7ce9a353ee690ecf440c"
     },
     "tidygraph": {
       "Package": "tidygraph",

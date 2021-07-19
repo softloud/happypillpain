@@ -92,8 +92,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-07-02"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-07-02"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-07-19"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-07-19"/>
   <meta name="article:author" content="Hollie and Charles"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie and Charles"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-07-02"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie and Charles"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-07-19"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2064,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie and Charles","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-07-02T00:00:00.000+01:00","citationText":"Charles, 2021"}
+{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie and Charles","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-07-19T00:00:00.000+01:00","citationText":"Charles, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2085,7 +2085,9 @@ pipeline
 </button>
 <div class="nav-dropdown-content">
 <a href="pipeline.html">pipeline design</a>
-<a href="wrangling.html">wrangling</a>
+<a href="covidence.html">covidence extractions</a>
+<a href="wrangling.html">observations</a>
+<a href="study-level.html">study-level parameters</a>
 </div>
 </div>
 <a href="about.html">access data</a>
@@ -2107,7 +2109,7 @@ pipeline
 <div class="d-byline">
   Hollie and Charles  
   
-<br/>updated 2021-07-02
+<br/>updated 2021-07-19
 </div>
 
 <div class="d-article">
@@ -2147,6 +2149,7 @@ pipeline
 </div>
 </div>
 <h1 id="hollie-writes-here">Hollie writes here:</h1>
+<p>This is a test</p>
 <h1 id="tutorial-stuff-from-charles">Tutorial stuff from Charles</h1>
 <p>NB: only edit this file</p>
 <h2 id="targets">targets</h2>
@@ -2226,23 +2229,24 @@ pipeline
 <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 389 x 36
-   outcome  study  arm   covidence   timepoint  mean     r     n    sd
-   &lt;chr&gt;    &lt;glue&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
- 1 mood_de… dsrhv… amit… depression… post_int   11.9    21    21  9.24
- 2 mood_de… richa… plac… depression… post_int    9.5    59    59  7.3 
- 3 mood_de… richa… venl… depression… post_int    9.5    64    64  6.5 
- 4 mood_de… graff… amit… anxiety_st… post_int   65.8    11    11 36.1 
- 5 mood_de… graff… amit… anxiety_st… post_int   84.7    11    11 19.7 
- 6 mood_de… graff… amit… depression… post_int   11.1    11    11  7.5 
- 7 mood_de… senca… paro… depression… post_int    9.9    20    20  2.11
- 8 mood_de… talle… plac… anxiety_ho… post_int    0.6    16    16  1.3 
- 9 mood_de… talle… imip… anxiety_ho… post_int    2      18    18  1.7 
-10 mood_de… talle… cita… anxiety_ho… post_int    1.1    17    17  2   
-# … with 379 more rows, and 27 more variables: se &lt;dbl&gt;,
-#   intervention &lt;chr&gt;, type &lt;chr&gt;, class &lt;chr&gt;,
-#   chronic_condition &lt;chr&gt;, main_aim &lt;chr&gt;, design &lt;chr&gt;,
-#   sponsorship_source &lt;chr&gt;, authors_name &lt;chr&gt;,
+<pre><code># A tibble: 169 x 43
+   outcome study  arm    covidence   timepoint scale  model_type  mean
+   &lt;chr&gt;   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;
+ 1 mood    graff… amitr… anxiety_st… post_int  state… smd        65.8 
+ 2 mood    graff… amitr… anxiety_st… post_int  state… smd        84.7 
+ 3 mood    graff… amitr… depression… post_int  beck_… smd        11.1 
+ 4 mood    vollm… place… qo_l_menta… post_int  menta… smd         4.6 
+ 5 mood    vollm… dulox… qo_l_menta… post_int  menta… smd         5.8 
+ 6 mood    pakfe… cital… anxiety_ha… post_int  hamil… smd        18.6 
+ 7 mood    pakfe… cital… depression… post_int  hamil… smd        19.4 
+ 8 mood    werni… dulox… mental_com… post_int  sf_36… smd         0.77
+ 9 mood    werni… dulox… depression… post_int  hamil… smd         0.19
+10 mood    werni… dulox… mental_com… post_int  sf_36… smd         1.09
+# … with 159 more rows, and 35 more variables: r &lt;int&gt;, n &lt;int&gt;,
+#   sd &lt;dbl&gt;, range &lt;chr&gt;, se &lt;dbl&gt;, median &lt;dbl&gt;, ci &lt;chr&gt;,
+#   iqr &lt;chr&gt;, percent &lt;dbl&gt;, intervention &lt;chr&gt;, type &lt;chr&gt;,
+#   class &lt;chr&gt;, chronic_condition &lt;chr&gt;, main_aim &lt;chr&gt;,
+#   design &lt;chr&gt;, sponsorship_source &lt;chr&gt;, authors_name &lt;chr&gt;,
 #   duration_weeks &lt;chr&gt;, pain_duration &lt;chr&gt;,
 #   inclusion_criteria &lt;chr&gt;, exclusion_criteria &lt;chr&gt;,
 #   total_number_of_participants_randomised &lt;chr&gt;,
@@ -2279,38 +2283,84 @@ pipeline
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"scale"</span><span class='op'>)</span>, <span class='va'>w_obs_long</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>Loading required package: dontpanic</code></pre>
-<div id="htmlwidget-1ac416a48d5ff815d80d" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1ac416a48d5ff815d80d">{"x":{"nodes":{"name":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_scales","w_obs_scales_viable"],"type":["stem","pattern","stem","stem","stem","stem","stem","stem","stem"],"status":["uptodate","uptodate","uptodate","outdated","uptodate","uptodate","outdated","uptodate","outdated"],"seconds":[0.094,2.479,51.43,0.004,309.284,0.014,0.012,0.127,null],"bytes":[3843,82762,101896,0,141270,158,149060,5959,null],"branches":[null,8,null,null,null,null,null,null,null],"id":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_scales","w_obs_scales_viable"],"label":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_scales","w_obs_scales_viable"],"level":[1,1,4,5,3,5,2,2,5],"color":["#354823","#354823","#354823","#78B7C5","#354823","#354823","#78B7C5","#354823","#78B7C5"],"shape":["dot","square","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["w_obs_scale_counts","w_obs_long","w_scales","r_scales","w_obs_scale_counts","w_obs_scale_counts","w_obs_long","w_obs_scale_matches"],"to":["w_obs_scales_viable","w_obs_scale_matches","w_obs_scale_matches","w_scales","w_obs_scale_excluded","w_obs_scale_snapshot","w_obs_scales","w_obs_scale_counts"],"arrows":["to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","Stem","Pattern"],"color":["#354823","#78B7C5","#899DA4","#899DA4"],"shape":["dot","dot","dot","square"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<pre><code>
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+
+\
+
+|
+
+/
+
+-
+Loading required package: dontpanic
+
+\
+
+|
+
+/
+
+-
+
+\
+
+ </code></pre>
+<div id="htmlwidget-51a7ea5c31df9d259500" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-51a7ea5c31df9d259500">{"x":{"nodes":{"name":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_excluded_next","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_obs_scales_viable","w_scales"],"type":["stem","pattern","stem","stem","stem","stem","stem","stem","stem","stem"],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.002,2.295,5.626,0.011,0.015,47.276,0.007,0.001,6.815,0.086],"bytes":[3846,85723,36770,2212,359,36651,151,20648,20648,6178],"branches":[null,9,null,null,null,null,null,null,null,null],"id":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_excluded_next","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_obs_scales_viable","w_scales"],"label":["r_scales","w_obs_long","w_obs_scale_counts","w_obs_scale_excluded","w_obs_scale_excluded_next","w_obs_scale_matches","w_obs_scale_snapshot","w_obs_scales","w_obs_scales_viable","w_scales"],"level":[1,0,4,5,6,3,5,6,5,2],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","square","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["r_scales","w_obs_scales_viable","w_obs_scale_counts","w_obs_scale_counts","w_obs_scale_matches","w_obs_scale_excluded","w_scales","w_obs_scale_counts"],"to":["w_scales","w_obs_scales","w_obs_scale_snapshot","w_obs_scales_viable","w_obs_scale_counts","w_obs_scale_excluded_next","w_obs_scale_matches","w_obs_scale_excluded"],"arrows":["to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Stem","Pattern"],"color":["#354823","#899DA4","#899DA4"],"shape":["dot","dot","square"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 12,275 x 5
-   study   outcome covidence_desc                  scale_match   cat_n
-   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                           &lt;list&gt;        &lt;int&gt;
- 1 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
- 2 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
- 3 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
- 4 lee 20… mood    depression_beck_depression_inv… &lt;tibble [1 ×…     1
- 5 lee 20… mood    sf_36_mental_health_subscale_b… &lt;tibble [1 ×…     1
- 6 lee 20… mood    sf_36_mental_health_subscale_b… &lt;tibble [1 ×…     1
- 7 lee 20… mood    sf_36_mental_health_subscale_b… &lt;tibble [1 ×…     1
- 8 lee 20… mood    sf_36_mental_health_subscale_p… &lt;tibble [1 ×…     1
- 9 lee 20… mood    sf_36_mental_health_subscale_p… &lt;tibble [1 ×…     1
-10 lee 20… mood    sf_36_mental_health_subscale_p… &lt;tibble [1 ×…     1
-# … with 12,265 more rows</code></pre>
+<pre><code># A tibble: 3,358 x 9
+   outcome study  arm    covidence_value measure_type covidence_desc  
+   &lt;chr&gt;   &lt;glue&gt; &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;           
+ 1 mood    rinta… gabap… 7.2             mean         depression_cent…
+ 2 mood    rinta… gabap… 22              n            depression_cent…
+ 3 mood    rinta… gabap… 6.2             sd           depression_cent…
+ 4 mood    rinta… amitr… 7.2             mean         depression_cent…
+ 5 mood    rinta… amitr… 22              n            depression_cent…
+ 6 mood    rinta… amitr… 6.2             sd           depression_cent…
+ 7 mood    rinta… diphe… 7.2             mean         depression_cent…
+ 8 mood    rinta… diphe… 22              n            depression_cent…
+ 9 mood    rinta… diphe… 6.2             sd           depression_cent…
+10 mood    graff… amitr… 80.3            mean         anxiety_state_t…
+# … with 3,348 more rows, and 3 more variables: model_type &lt;chr&gt;,
+#   scale_match &lt;list&gt;, cat_n &lt;int&gt;</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_snapshot</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 4 x 2
+<pre><code># A tibble: 3 x 2
   cat_n     n
   &lt;int&gt; &lt;int&gt;
-1     0  2054
-2     1  9263
-3     2   847
-4     3   111</code></pre>
+1     0   113
+2     1  3227
+3     2    18</code></pre>
 </div>
 <h2 id="investigate-unmatched-scales">investigate unmatched scales</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -2327,20 +2377,21 @@ pipeline
          <span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 1,737 x 5
-   study    outcome  covidence_desc                 scale_match  cat_n
-   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                          &lt;list&gt;       &lt;int&gt;
- 1 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
- 2 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
- 3 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
- 4 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
- 5 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
- 6 rowboth… pain_int pain_pain_relief_category_sco… &lt;tibble [0 …     0
- 7 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
- 8 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
- 9 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
-10 smith 2… pain_int change_in_average_pain_from_w… &lt;tibble [0 …     0
-# … with 1,727 more rows</code></pre>
+<pre><code># A tibble: 113 x 9
+   outcome  study arm   covidence_value measure_type covidence_desc   
+   &lt;chr&gt;    &lt;glu&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;            
+ 1 physical kals… plac… 12              n            daily_activities…
+ 2 physical kals… plac… 2               median       daily_activities…
+ 3 physical kals… plac… 3               range        daily_activities…
+ 4 physical kals… plac… 0               range        daily_activities…
+ 5 physical kals… plac… 10              n            daily_activities…
+ 6 physical kals… plac… 1.4             median       daily_activities…
+ 7 physical kals… plac… 4               range        daily_activities…
+ 8 physical kals… plac… 0               range        daily_activities…
+ 9 physical kals… plac… 13              n            daily_activities…
+10 physical kals… plac… 3               median       daily_activities…
+# … with 103 more rows, and 3 more variables: model_type &lt;chr&gt;,
+#   scale_match &lt;list&gt;, cat_n &lt;int&gt;</code></pre>
 </div>
 <h2 id="notes">notes</h2>
 <ul>
@@ -2368,7 +2419,9 @@ exclude tetreault 2018 catatrosphising columns</li>
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># example of using gt</span>
+
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='co'># select first 10 columns</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>covidence</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
@@ -2378,12 +2431,12 @@ exclude tetreault 2018 catatrosphising columns</li>
   <span class='fu'>hpp_tab</span><span class='op'>(</span>vertical_divider <span class='op'>=</span> <span class='st'>"outcome"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="ewenyvynkr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qzayjjpesh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ewenyvynkr .gt_table {
+#qzayjjpesh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2408,7 +2461,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-left-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_heading {
+#qzayjjpesh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2420,7 +2473,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-right-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_title {
+#qzayjjpesh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2430,7 +2483,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-bottom-width: 0;
 }
 
-#ewenyvynkr .gt_subtitle {
+#qzayjjpesh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2440,13 +2493,13 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-top-width: 0;
 }
 
-#ewenyvynkr .gt_bottom_border {
+#qzayjjpesh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_col_headings {
+#qzayjjpesh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2461,7 +2514,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-right-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_col_heading {
+#qzayjjpesh .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2481,7 +2534,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   overflow-x: hidden;
 }
 
-#ewenyvynkr .gt_column_spanner_outer {
+#qzayjjpesh .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2493,15 +2546,15 @@ exclude tetreault 2018 catatrosphising columns</li>
   padding-right: 4px;
 }
 
-#ewenyvynkr .gt_column_spanner_outer:first-child {
+#qzayjjpesh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ewenyvynkr .gt_column_spanner_outer:last-child {
+#qzayjjpesh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ewenyvynkr .gt_column_spanner {
+#qzayjjpesh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2513,7 +2566,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   width: 100%;
 }
 
-#ewenyvynkr .gt_group_heading {
+#qzayjjpesh .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2535,7 +2588,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   vertical-align: middle;
 }
 
-#ewenyvynkr .gt_empty_group_heading {
+#qzayjjpesh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2550,15 +2603,15 @@ exclude tetreault 2018 catatrosphising columns</li>
   vertical-align: middle;
 }
 
-#ewenyvynkr .gt_from_md > :first-child {
+#qzayjjpesh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ewenyvynkr .gt_from_md > :last-child {
+#qzayjjpesh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ewenyvynkr .gt_row {
+#qzayjjpesh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2577,7 +2630,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   overflow-x: hidden;
 }
 
-#ewenyvynkr .gt_stub {
+#qzayjjpesh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2589,7 +2642,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   padding-left: 12px;
 }
 
-#ewenyvynkr .gt_summary_row {
+#qzayjjpesh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2599,7 +2652,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   padding-right: 5px;
 }
 
-#ewenyvynkr .gt_first_summary_row {
+#qzayjjpesh .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2609,7 +2662,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-top-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_grand_summary_row {
+#qzayjjpesh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2619,7 +2672,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   padding-right: 5px;
 }
 
-#ewenyvynkr .gt_first_grand_summary_row {
+#qzayjjpesh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2629,11 +2682,11 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-top-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_striped {
+#qzayjjpesh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ewenyvynkr .gt_table_body {
+#qzayjjpesh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2642,7 +2695,7 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-bottom-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_footnotes {
+#qzayjjpesh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2656,13 +2709,13 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-right-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_footnote {
+#qzayjjpesh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ewenyvynkr .gt_sourcenotes {
+#qzayjjpesh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2676,41 +2729,41 @@ exclude tetreault 2018 catatrosphising columns</li>
   border-right-color: #D3D3D3;
 }
 
-#ewenyvynkr .gt_sourcenote {
+#qzayjjpesh .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ewenyvynkr .gt_left {
+#qzayjjpesh .gt_left {
   text-align: left;
 }
 
-#ewenyvynkr .gt_center {
+#qzayjjpesh .gt_center {
   text-align: center;
 }
 
-#ewenyvynkr .gt_right {
+#qzayjjpesh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ewenyvynkr .gt_font_normal {
+#qzayjjpesh .gt_font_normal {
   font-weight: normal;
 }
 
-#ewenyvynkr .gt_font_bold {
+#qzayjjpesh .gt_font_bold {
   font-weight: bold;
 }
 
-#ewenyvynkr .gt_font_italic {
+#qzayjjpesh .gt_font_italic {
   font-style: italic;
 }
 
-#ewenyvynkr .gt_super {
+#qzayjjpesh .gt_super {
   font-size: 65%;
 }
 
-#ewenyvynkr .gt_footnote_marks {
+#qzayjjpesh .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2727,17 +2780,17 @@ exclude tetreault 2018 catatrosphising columns</li>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood_depression</td>
-<td class="gt_row gt_center">dsrhv 2018</td>
-<td class="gt_row gt_left">amitriptyline 10mg</td>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood</td>
+<td class="gt_row gt_center">graff-radford 2000</td>
+<td class="gt_row gt_left">amitriptyline (group 1)</td>
 <td class="gt_row gt_left">post_int</td></tr>
-    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood_depression</td>
-<td class="gt_row gt_center gt_striped">richards 2015</td>
-<td class="gt_row gt_left gt_striped">placebo</td>
+    <tr><td class="gt_row gt_left gt_striped" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood</td>
+<td class="gt_row gt_center gt_striped">graff-radford 2000</td>
+<td class="gt_row gt_left gt_striped">amitriptyline (group 1)</td>
 <td class="gt_row gt_left gt_striped">post_int</td></tr>
-    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood_depression</td>
-<td class="gt_row gt_center">richards 2015</td>
-<td class="gt_row gt_left">venlafaxine 37.5 - 225mg</td>
+    <tr><td class="gt_row gt_left" style="border-right-width: 3px; border-right-style: dashed; border-right-color: #d9e6f2;">mood</td>
+<td class="gt_row gt_center">graff-radford 2000</td>
+<td class="gt_row gt_left">amitriptyline (group 1)</td>
 <td class="gt_row gt_left">post_int</td></tr>
   </tbody>
   
