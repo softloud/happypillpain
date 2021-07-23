@@ -162,42 +162,9 @@ list(
              ))),
   
   tar_target(
-    w_covidence,
+    w_covidence_cleaned,
     r_covidence %>%
-      clean_names() %>%
-      select(
-        study_identifier,
-        intervention,
-        comments,
-        intervention_type,
-        intervention_class,
-        intervention_name,
-        group,
-        sponsorship_source,
-        authors_name,
-        duration_weeks,
-        pain_duration,
-        inclusion_criteria,
-        exclusion_criteria,
-        starts_with("main_aim"),
-        starts_with("chronic_pain"),
-        starts_with("total_number_of_participants"),
-        starts_with("number_in_each_arm"),
-        starts_with("type_of_participant"),
-        starts_with("intervention_adverse"),
-        starts_with("withdrawal_total")
-      ) %>%
-      # rename variables
-      select(
-        arm = intervention,
-        intervention = intervention_name,
-        type = intervention_type,
-        class = intervention_class,
-        condition = chronic_pain_condition_s,
-        main_aim = main_aim_pain_mood_quality_of_life_etc,
-        design = group,
-        everything()
-      )
+      clean_names() 
   ),
   
   
@@ -331,7 +298,7 @@ list(
   
   tar_target(
     w_study_key,
-    w_covidence %>%
+    w_covidence_cleaned %>%
       select(study_identifier, comments) %>%
       distinct() %>%
       arrange(study_identifier) %>%
@@ -341,10 +308,11 @@ list(
   
   # now we have a study key we can instantiate study_arm info
   tar_target(
-    w_study_label_study_arm_par,
-    w_covidence %>%
+    w_covidence,
+    w_covidence_cleaned %>%
       # apply study labels
       left_join(w_study_key, by = c("study_identifier", "comments")) %>%
+      mutate(across(everything(), tolower)) %>%
       select(-study_identifier,-comments) %>%
       select(study, everything())
   ),
@@ -378,8 +346,40 @@ list(
   
   tar_target(
     w_study_arm_par,
-    w_study_label_study_arm_par  %>%
-      mutate(across(everything(), tolower)) %>%
+    w_covidence  %>%
+      select(
+        study,
+        intervention,
+        title,
+        intervention_type,
+        intervention_class,
+        intervention_name,
+        group,
+        sponsorship_source,
+        authors_name,
+        duration_weeks,
+        pain_duration,
+        inclusion_criteria,
+        exclusion_criteria,
+        starts_with("main_aim"),
+        starts_with("chronic_pain"),
+        starts_with("total_number_of_participants"),
+        starts_with("number_in_each_arm"),
+        starts_with("type_of_participant"),
+        starts_with("intervention_adverse"),
+        starts_with("withdrawal_total")
+      ) %>%
+      # rename variables
+      select(
+        arm = intervention,
+        intervention = intervention_name,
+        type = intervention_type,
+        class = intervention_class,
+        condition = chronic_pain_condition_s,
+        main_aim = main_aim_pain_mood_quality_of_life_etc,
+        design = group,
+        everything()
+      ) %>% 
       rename(chronic_condition = condition) %>%
       left_join(w_condition, by = "chronic_condition") %>%
       mutate(
@@ -493,7 +493,7 @@ list(
         by = c("study", "arm")
       ) %>%
       # filter by condition & design
-      filter(condition_general == "neuropathic") %>%
+      filter(condition_general %in% c("neuropathic", "fibromyalgia")) %>%
       select(-condition_general, -design)
   ),
   

@@ -6,13 +6,11 @@
 \author[1]{Charles T. Gray}
 \author[2]{Hollie Birkinshaw}
 \author[3]{Matthew Grainger}
-\author[4]{Charles A. Robinson}
 \author[2]{Tamar Pincus}
 \author[1]{Gavin Stewart}
 \affil[1]{Newcastle University}
 \affil[2]{Royal Holloway}
 \affil[3]{NINA}
-\affil[4]{CA}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
@@ -29,6 +27,12 @@ Proponents of open science commendably underscore reuse and extensibility of
 scientific research components, such as data and code; techniques that facilitate the incorporation of these components into future analyses~\cite{laine_2018, peng_reproducible_2011-1, wilkinson_2016}. Less explicit attention, however, is given to the benefits of reproducible workflows, where results can be readily calculated by another researcher, and computational transparency \emph{during} the research project, as opposed to beyond publication. Of course, we can appeal to an analyst's commitment to scientific civic duty, but by explicitly examining how reproducible workflows can facilitate collaboration with domain-knowledge experts we begin to answer the arguably more pertinent question, \emph{What's in reproducibility for me}?      
 
 \subsection{Benefits of reproducibility and open science}
+
+Much has been said about the benefits of reproducibility, wherein precisely the same computational results are readily produced by another analyst, and open science. We differentiate between explicit replication of results, where the same scientific conclusion is drawn from a repeated experiment, as was the focus of the  semantically confusing Reproducibility Project~\cite{collaboration_2015}.  However, it is worth emphasising that reproducibility in and of itself does not necessarily further the `process of scientific discovery'~\cite{devezer_2019}. And in the context of open science, preregistratation, where a clear outline of a scientific methodology is published prior to embarking on the work, does not protect against poor conclusions~\cite{szollosi_2019b}. These discussions are central and ongoing in the meta-research community; a weighing of merits of pathways to scientific discovery, how to find truths or draw conclusions.
+
+In this manuscript, we do not seek to contribute to these worthy discussions. Instead, our focus is on scientific computational \emph{practice}, as opposed to conclusion. Setting aside which path leads us best to a result, let us instead focus on an aspect of computational reproducibility that provides utility for the analyst in avoiding pitfalls and foibles of answering scientific questions. For science has necessarily become ever more collaborative, as the demand for more complex algorithms rises. 
+
+In the example discussed in this manuscript, we examine the implementation of a network meta-analysis in a Cochrane review of the treatment of chronic pain with antidepressants~\cite{birkinshaw_2021}. A project such as this is necessarily collaborative; it is unrealistic to expect a single academic to provide expert-level data science, statistical analysis, and domain-knowledge insights. Scientific fraud is, of course, something we seek to guard against, but here we are more concerned with garden-variety errors the data-analyst and statistician, who by nature are discipline agnostic, make in absence of a genuine understanding of the domain. 
 
 \subsection{The problem of black box analysis: pitfalls, foibles, and outright fraud}
 

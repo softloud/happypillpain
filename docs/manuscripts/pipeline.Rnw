@@ -6,13 +6,11 @@
 \author[1]{Charles T. Gray}
 \author[2]{Hollie Birkinshaw}
 \author[3]{Matthew Grainger}
-\author[4]{Charles A. Robinson}
 \author[2]{Tamar Pincus}
 \author[1]{Gavin Stewart}
 \affil[1]{Newcastle University}
 \affil[2]{Royal Holloway}
 \affil[3]{NINA}
-\affil[4]{CA}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}

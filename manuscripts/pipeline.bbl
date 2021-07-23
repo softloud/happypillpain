@@ -1,5 +1,23 @@
 \begin{thebibliography}{1}
 
+\bibitem{birkinshaw_2021}
+Hollie Birkinshaw, Claire Friedrich, Peter Cole, Christopher Eccleston, Marc
+  Serfaty, Gavin Stewart, Simon White, R.~Andrew Moore, and Tamar Pincus.
+\newblock Antidepressants for pain management in adults with chronic pain: A
+  network meta‐analysis.
+\newblock (4).
+
+\bibitem{collaboration_2015}
+Open~Science Collaboration.
+\newblock Estimating the reproducibility of psychological science.
+\newblock 349(6251).
+
+\bibitem{devezer_2019}
+Berna Devezer, Luis~G. Nardin, Bert Baumgaertner, and Erkan~Ozge Buzbas.
+\newblock Scientific discovery in a model-centric framework:
+  {{Reproducibility}}, innovation, and epistemic diversity.
+\newblock 14(5):e0216125.
+
 \bibitem{laine_2018}
 Heidi Laine.
 \newblock Open science and codes of conduct on research integrity.
@@ -9,6 +27,11 @@ Heidi Laine.
 R.~D. Peng.
 \newblock Reproducible {{Research}} in {{Computational Science}}.
 \newblock 334(6060):1226--1227.
+
+\bibitem{szollosi_2019b}
+Aba Szollosi, David Kellen, Danielle Navarro, Richard Shiffrin, Iris van Rooij,
+  Trisha~Van Zandt, and Chris Donkin.
+\newblock Is preregistration worthwhile?
 
 \bibitem{wilkinson_2016}
 Mark~D. Wilkinson, Michel Dumontier, IJsbrand~Jan Aalbersberg, Gabrielle
