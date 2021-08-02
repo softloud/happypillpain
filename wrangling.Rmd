@@ -65,6 +65,8 @@ tar_read(w_study_label_obs) %>%
 
 ```
 
+> ensure we have the same number of observations before and after study labelling
+
 # study-level information 
 
 
@@ -82,6 +84,46 @@ tar_read(p_obs)
 tar_visnetwork(allow = c(w_study_label_obs, starts_with("w_obs_")))
 
 ```
+
+## Ensure we capture everything 
+
+The first step in the pipeline is to take the list of dataset and convert them into a single long dataset. 
+
+```{r}
+# ensure we have the right number of observations
+obs_dim <-
+tar_read(w_study_label_obs) %>% 
+  map_df(.f = function(df){
+    tibble(
+      rows = nrow(df),
+      cols = ncol(df)
+    )
+  }) %>% 
+  mutate(
+    outcome = tar_read(w_outcomes)
+  ) %>% 
+  select(outcome, everything())
+
+obs_dim %>% 
+  gt() %>% 
+  hpp_tab(vertical_divider = "outcome")
+```
+
+The first three columns are identification columns in each dataset.
+
+```{r}
+# eventually need to get here
+obs_dim %>% pull(cols) %>% sum() - (3 * nrow(obs_dim))
+
+# compare with long, this should be greater
+tar_read(w_obs_long) %>% dim()
+
+# how to count the number of non-nas?
+
+```
+
+
+## 
 
 Before we identify timepoints and other observation-level variables, we check that the data are in the correct format. The `measure_desc` column is the orgiinal column header from Covidence prefix for the measure. We'll extract the observation-level variables (timepoint and scale) from this column.
 

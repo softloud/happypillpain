@@ -1,0 +1,70 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: pipeline.aux
+White space in argument---line 12 of file pipeline.aux
+ : \citation{baggerly_2009;
+ :                          schleunes_2020}
+I'm skipping whatever remains of this command
+The style file: plain.bst
+Database file #1: references.bib
+Warning--empty journal in birkinshaw_2021
+Warning--there's a number but no volume in birkinshaw_2021
+Warning--empty year in birkinshaw_2021
+Warning--empty journal in collaboration_2015
+Warning--empty year in collaboration_2015
+Warning--empty journal in devezer_2019
+Warning--empty year in devezer_2019
+Warning--empty journal in fraser_questionable_2018
+Warning--empty year in fraser_questionable_2018
+Warning--empty journal in laine_2018
+Warning--empty year in laine_2018
+Warning--empty journal in markowetz_2015
+Warning--empty year in markowetz_2015
+Warning--empty journal in peng_reproducible_2011-1
+Warning--empty year in peng_reproducible_2011-1
+Warning--empty journal in szollosi_2019b
+Warning--empty year in szollosi_2019b
+Warning--empty journal in wilkinson_2016
+Warning--empty year in wilkinson_2016
+You've used 9 entries,
+            2118 wiz_defined-function locations,
+            542 strings with 6477 characters,
+and the built_in function-call counts, 4574 in all, are:
+= -- 358
+> -- 433
+< -- 0
++ -- 174
+- -- 164
+* -- 468
+:= -- 827
+add.period$ -- 26
+call.type$ -- 9
+change.case$ -- 109
+chr.to.int$ -- 0
+cite$ -- 28
+duplicate$ -- 95
+empty$ -- 206
+format.name$ -- 164
+if$ -- 822
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 9
+newline$ -- 47
+num.names$ -- 18
+pop$ -- 130
+preamble$ -- 1
+purify$ -- 100
+quote$ -- 0
+skip$ -- 55
+stack$ -- 0
+substring$ -- 152
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 36
+warning$ -- 19
+while$ -- 24
+width$ -- 10
+write$ -- 81
+(There was 1 error message)

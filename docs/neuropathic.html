@@ -92,8 +92,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-07-23"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-07-23"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-07-27"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-07-27"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="hpp: Neuropathic pain"/>
@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Neuropathic pain"]},{"type":"character","attributes":{},"value":["Comparison and analysis of the treatment of fibromyalgia with antidepressants\n"]},{"type":"character","attributes":{},"value":["updated: 2021-07-23"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["references.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","output","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Neuropathic pain"]},{"type":"character","attributes":{},"value":["Comparison and analysis of the treatment of fibromyalgia with antidepressants\n"]},{"type":"character","attributes":{},"value":["updated: 2021-07-27"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["references.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2060,7 +2060,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Neuropathic pain","description":"Comparison and analysis of the treatment of fibromyalgia with antidepressants","authors":[],"publishedDate":"2021-07-23T00:00:00.000+01:00"}
+{"title":"Neuropathic pain","description":"Comparison and analysis of the treatment of fibromyalgia with antidepressants","authors":[],"publishedDate":"2021-07-27T00:00:00.000+01:00"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2108,7 +2108,8 @@ pipeline
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#replication">replication</a>
+<li><a href="#packages">packages</a></li>
+<li><a href="#replication-of-amitriptyline-and-fibromyalgia">replication of amitriptyline and fibromyalgia</a>
 <ul>
 <li><a href="#notes">notes</a>
 <ul>
@@ -2120,11 +2121,25 @@ pipeline
 <li><a href="#import-data-from-revman-format">import data from revman format</a></li>
 <li><a href="#third-tier-efficacy">third-tier efficacy</a></li>
 </ul></li>
-<li><a href="#reproduction">reproduction</a></li>
-<li><a href="#extension">extension</a></li>
+<li><a href="#reproduction-of-amitriptyline-and-fibromyalgia">reproduction of amitriptyline and fibromyalgia</a>
+<ul>
+<li><a href="#reproduction-of-third-tier-analysis">reproduction of third-tier analysis</a></li>
+<li><a href="#reproduction-with-all-studies">reproduction with all studies</a></li>
+</ul></li>
+<li><a href="#extension">extension</a>
+<ul>
+<li><a href="#nma-of-fibromyalgia">nma of fibromyalgia</a>
+<ul>
+<li><a href="#pain-nma">pain nma</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
 </div>
+<blockquote>
+<p>Current draft for discussion with Tamar, Gav, and Hollie. Will cut down for presentation to whole group.</p>
+</blockquote>
+<h2 id="packages">packages</h2>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2137,19 +2152,20 @@ Show code
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/skimr/'>skimr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://www.metafor-project.org'>metafor</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dmphillippo.github.io/multinma/'>multinma</a></span><span class='op'>)</span>
 
 <span class='kw'><a href='https://rdrr.io/r/base/source.html'>source</a></span><span class='op'>(</span><span class='st'>"R/hpp_themes.R"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
 </div>
-<h1 id="replication">replication</h1>
-<p>In this section I replicate the findings of Moore <em>et al.</em> <span class="citation" data-cites="moore_2015">(<a href="#ref-moore_2015" role="doc-biblioref"><strong>moore_2015?</strong></a>)</span>.</p>
+<h1 id="replication-of-amitriptyline-and-fibromyalgia">replication of amitriptyline and fibromyalgia</h1>
+<p>In this section I replicate the substantial pain reduction findings of Moore <em>et al.</em> <span class="citation" data-cites="moore_2015">(<a href="#ref-moore_2015" role="doc-biblioref">Moore et al. 2015</a>)</span>.</p>
 <h2 id="notes">notes</h2>
 <p>Objective: measure efficacy of analgesic efficacy and adverse events of amitriptyline on pain in fibromyalgia patients.</p>
 <h3 id="three-tiers-of-evidence">Three tiers of evidence</h3>
 <blockquote>
-<p>Probably should incorporate these as variables into our analysis.</p>
+<p>Possibly should incorporate these as variables into our analysis.</p>
 </blockquote>
 <h4 id="first-tier">First tier</h4>
 <ul>
@@ -2167,6 +2183,7 @@ Show code
 <li>At risk of bias</li>
 </ul>
 <h4 id="third-tier">Third tier</h4>
+<p>Only third-tier studies were found in the review</p>
 <ul>
 <li>Small number of participants</li>
 <li>Likely to be biased</li>
@@ -2176,7 +2193,7 @@ Show code
 <p>Analgesic efficacy: NNT (number needed to treat)</p>
 <p>Harm: NNH number heeded to treat to harm</p>
 <blockquote>
-<p>This is only important for transformation in the summary of findings, that is, after the model’s log risk ratios have been calculated. Not important for model.</p>
+<p>This is only important for transformation in the summary of findings, that is, after the model’s log risk ratios have been calculated. Not important for model. Importantly, to calculate NNT and NNH, we require a something somehting.</p>
 </blockquote>
 <h2 id="model-notes">Model notes</h2>
 <p>Risk ratio of 50% pain relief using a fixed-effect meta-analysis</p>
@@ -2237,12 +2254,12 @@ Show code
 </code></pre>
 </div>
 </details>
-<div id="xjzblpawuh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kzeevnpcwc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xjzblpawuh .gt_table {
+#kzeevnpcwc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2267,7 +2284,7 @@ Show code
   border-left-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_heading {
+#kzeevnpcwc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2279,7 +2296,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_title {
+#kzeevnpcwc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2289,7 +2306,7 @@ Show code
   border-bottom-width: 0;
 }
 
-#xjzblpawuh .gt_subtitle {
+#kzeevnpcwc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2299,13 +2316,13 @@ Show code
   border-top-width: 0;
 }
 
-#xjzblpawuh .gt_bottom_border {
+#kzeevnpcwc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_col_headings {
+#kzeevnpcwc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2320,7 +2337,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_col_heading {
+#kzeevnpcwc .gt_col_heading {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2340,7 +2357,7 @@ Show code
   overflow-x: hidden;
 }
 
-#xjzblpawuh .gt_column_spanner_outer {
+#kzeevnpcwc .gt_column_spanner_outer {
   color: #333333;
   background-color: #ecf2f8;
   font-size: 100%;
@@ -2352,15 +2369,15 @@ Show code
   padding-right: 4px;
 }
 
-#xjzblpawuh .gt_column_spanner_outer:first-child {
+#kzeevnpcwc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xjzblpawuh .gt_column_spanner_outer:last-child {
+#kzeevnpcwc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xjzblpawuh .gt_column_spanner {
+#kzeevnpcwc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2372,7 +2389,7 @@ Show code
   width: 100%;
 }
 
-#xjzblpawuh .gt_group_heading {
+#kzeevnpcwc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2394,7 +2411,7 @@ Show code
   vertical-align: middle;
 }
 
-#xjzblpawuh .gt_empty_group_heading {
+#kzeevnpcwc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #d9e6f2;
@@ -2409,15 +2426,15 @@ Show code
   vertical-align: middle;
 }
 
-#xjzblpawuh .gt_from_md > :first-child {
+#kzeevnpcwc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xjzblpawuh .gt_from_md > :last-child {
+#kzeevnpcwc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xjzblpawuh .gt_row {
+#kzeevnpcwc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2436,7 +2453,7 @@ Show code
   overflow-x: hidden;
 }
 
-#xjzblpawuh .gt_stub {
+#kzeevnpcwc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2448,7 +2465,7 @@ Show code
   padding-left: 12px;
 }
 
-#xjzblpawuh .gt_summary_row {
+#kzeevnpcwc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2458,7 +2475,7 @@ Show code
   padding-right: 5px;
 }
 
-#xjzblpawuh .gt_first_summary_row {
+#kzeevnpcwc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2468,7 +2485,7 @@ Show code
   border-top-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_grand_summary_row {
+#kzeevnpcwc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2478,7 +2495,7 @@ Show code
   padding-right: 5px;
 }
 
-#xjzblpawuh .gt_first_grand_summary_row {
+#kzeevnpcwc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2488,11 +2505,11 @@ Show code
   border-top-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_striped {
+#kzeevnpcwc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xjzblpawuh .gt_table_body {
+#kzeevnpcwc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2501,7 +2518,7 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_footnotes {
+#kzeevnpcwc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2515,13 +2532,13 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_footnote {
+#kzeevnpcwc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#xjzblpawuh .gt_sourcenotes {
+#kzeevnpcwc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2535,41 +2552,41 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#xjzblpawuh .gt_sourcenote {
+#kzeevnpcwc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#xjzblpawuh .gt_left {
+#kzeevnpcwc .gt_left {
   text-align: left;
 }
 
-#xjzblpawuh .gt_center {
+#kzeevnpcwc .gt_center {
   text-align: center;
 }
 
-#xjzblpawuh .gt_right {
+#kzeevnpcwc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xjzblpawuh .gt_font_normal {
+#kzeevnpcwc .gt_font_normal {
   font-weight: normal;
 }
 
-#xjzblpawuh .gt_font_bold {
+#kzeevnpcwc .gt_font_bold {
   font-weight: bold;
 }
 
-#xjzblpawuh .gt_font_italic {
+#kzeevnpcwc .gt_font_italic {
   font-style: italic;
 }
 
-#xjzblpawuh .gt_super {
+#kzeevnpcwc .gt_super {
   font-size: 65%;
 }
 
-#xjzblpawuh .gt_footnote_marks {
+#kzeevnpcwc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2627,31 +2644,6 @@ Show code
 Show code
 </summary>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>moore_escalc</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='co'># does adding the complement help?</span>
-  <span class='fu'>mutate</span><span class='op'>(</span>comp_c <span class='op'>=</span> <span class='va'>n_c</span> <span class='op'>-</span> <span class='va'>event_c</span>, comp_e <span class='op'>=</span> <span class='va'>n_e</span> <span class='op'>-</span> <span class='va'>event_e</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/escalc.html'>escalc</a></span><span class='op'>(</span>
-    measure <span class='op'>=</span> <span class='st'>"RR"</span>,
-    ai <span class='op'>=</span> <span class='va'>event_e</span>,
-    <span class='co'># bi = comp_e,</span>
-    n1i <span class='op'>=</span> <span class='va'>n_e</span>,
-    ci <span class='op'>=</span> <span class='va'>event_c</span>,
-    <span class='co'># di = comp_c,</span>
-    n2i <span class='op'>=</span> <span class='va'>n_c</span>,
-    dat <span class='op'>=</span> <span class='va'>.</span>
-  <span class='op'>)</span> 
-  
-<span class='op'>}</span>
-</code></pre>
-</div>
-</details>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<details>
-<summary>
-Show code
-</summary>
-<div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>third_tier_escalc</span> <span class='op'>&lt;-</span>
   <span class='va'>third_tier_dat</span> <span class='op'>%&gt;%</span>
   <span class='co'># does adding the complement help?</span>
@@ -2699,9 +2691,22 @@ Show code
 </code></pre>
 </div>
 </details>
+<p><img src="neuropathic_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>Of course, Gav and I would likely do a random-effects model for this analysis, the results of which will likely adhere better to the NMA.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/meta/man/forest.meta.html'>forest</a></span><span class='op'>(</span><span class='va'>third_tier_rma</span>, transf <span class='op'>=</span> <span class='va'>exp</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="neuropathic_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<h1 id="reproduction">reproduction</h1>
+<h1 id="reproduction-of-amitriptyline-and-fibromyalgia">reproduction of amitriptyline and fibromyalgia</h1>
 <blockquote>
 <p>Discuss with Hollie why Carette 1995 is omitted from the review.</p>
 </blockquote>
@@ -2717,7 +2722,7 @@ Show code
 </code></pre>
 </div>
 </details>
-<pre><code># A tibble: 4 x 2
+<pre><code># A tibble: 4 × 2
   study             n
   &lt;glue&gt;        &lt;int&gt;
 1 carette 1986      2
@@ -2736,6 +2741,10 @@ Show code
 </div>
 </details>
 </div>
+<h2 id="reproduction-of-third-tier-analysis">reproduction of third-tier analysis</h2>
+<blockquote>
+<p>Discuss with Hollie scale labelling of Carette 1986; is analog scale 1-10 the same as vas?</p>
+</blockquote>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2755,8 +2764,726 @@ Show code
 </div>
 </details>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># look for studies</span>
+<span class='va'>neuropathic_dat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>study</span>, <span class='st'>"care|gins"</span><span class='op'>)</span>, <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>outcome</span>, <span class='st'>"pain"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>outcome</span>, <span class='va'>study</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>distinct</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code># A tibble: 3 × 2
+  outcome  study        
+  &lt;chr&gt;    &lt;glue&gt;       
+1 pain_int ginsberg 1996
+2 pain_int carette 1986 
+3 pain_int carette 1994 </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>three_studies_dat</span> <span class='op'>&lt;-</span> 
+<span class='va'>neuropathic_dat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>study</span>, <span class='st'>"care|gins"</span><span class='op'>)</span>, <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>outcome</span>, <span class='st'>"pain"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>arm</span>, <span class='va'>covidence</span>, <span class='va'>scale</span>, <span class='va'>mean</span>, <span class='va'>n</span>, <span class='va'>sd</span>, <span class='va'>intervention</span>, <span class='va'>type</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<blockquote>
+<p>Look into multilevel variance-covariance matrix structure</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>three_studies_dat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>type</span> <span class='op'>!=</span> <span class='st'>"placebo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>left_join</span><span class='op'>(</span>
+    <span class='va'>three_studies_dat</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>type</span> <span class='op'>==</span> <span class='st'>"placebo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>covidence</span>, mean_p <span class='op'>=</span> <span class='va'>mean</span>, n_p <span class='op'>=</span> <span class='va'>n</span>, sd_p <span class='op'>=</span> <span class='va'>sd</span><span class='op'>)</span>,
+    by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"study"</span>, <span class='st'>"covidence"</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/escalc.html'>escalc</a></span><span class='op'>(</span>
+    m1i <span class='op'>=</span> <span class='va'>mean</span>,
+    sd1i <span class='op'>=</span> <span class='va'>sd</span>,
+    n1i <span class='op'>=</span> <span class='va'>n</span>,
+    m2i <span class='op'>=</span> <span class='va'>mean_p</span>,
+    sd2i <span class='op'>=</span> <span class='va'>sd_p</span>,
+    n2i <span class='op'>=</span> <span class='va'>n_p</span>,
+    measure <span class='op'>=</span> <span class='st'>"SMD"</span>,
+    data <span class='op'>=</span> <span class='va'>.</span>,
+    slab <span class='op'>=</span> <span class='va'>study</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/rma.mv.html'>rma.mv</a></span><span class='op'>(</span>
+    <span class='va'>yi</span>,
+    <span class='va'>vi</span>,
+    random <span class='op'>=</span> <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>|</span> <span class='va'>study</span><span class='op'>/</span><span class='va'>covidence</span>,
+    data <span class='op'>=</span> <span class='va'>.</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/meta/man/forest.meta.html'>forest</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="neuropathic_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<h2 id="reproduction-with-all-studies">reproduction with all studies</h2>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>all_dat</span> <span class='op'>&lt;-</span> <span class='va'>neuropathic_dat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>outcome</span>, <span class='st'>"pain"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>arm</span>, <span class='va'>covidence</span>, <span class='va'>scale</span>, <span class='va'>mean</span>, <span class='va'>n</span>, <span class='va'>sd</span>, <span class='va'>intervention</span>, <span class='va'>type</span><span class='op'>)</span> 
+
+<span class='va'>all_dat_rma</span> <span class='op'>&lt;-</span> 
+<span class='va'>all_dat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>type</span> <span class='op'>!=</span> <span class='st'>"placebo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>left_join</span><span class='op'>(</span>
+    <span class='va'>all_dat</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>type</span> <span class='op'>==</span> <span class='st'>"placebo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>covidence</span>, mean_p <span class='op'>=</span> <span class='va'>mean</span>, n_p <span class='op'>=</span> <span class='va'>n</span>, sd_p <span class='op'>=</span> <span class='va'>sd</span><span class='op'>)</span>,
+    by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"study"</span>, <span class='st'>"covidence"</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/escalc.html'>escalc</a></span><span class='op'>(</span>
+    m1i <span class='op'>=</span> <span class='va'>mean</span>,
+    sd1i <span class='op'>=</span> <span class='va'>sd</span>,
+    n1i <span class='op'>=</span> <span class='va'>n</span>,
+    m2i <span class='op'>=</span> <span class='va'>mean_p</span>,
+    sd2i <span class='op'>=</span> <span class='va'>sd_p</span>,
+    n2i <span class='op'>=</span> <span class='va'>n_p</span>,
+    measure <span class='op'>=</span> <span class='st'>"SMD"</span>,
+    data <span class='op'>=</span> <span class='va'>.</span>,
+    slab <span class='op'>=</span> <span class='va'>study</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/rma.mv.html'>rma.mv</a></span><span class='op'>(</span>
+    yi <span class='op'>=</span> <span class='va'>yi</span>,
+    V <span class='op'>=</span> <span class='va'>vi</span>,
+    random <span class='op'>=</span> <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>|</span><span class='va'>study</span><span class='op'>/</span> <span class='va'>covidence</span>,
+    data <span class='op'>=</span> <span class='va'>.</span>
+  <span class='op'>)</span> 
+
+
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>all_dat_rma</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Multivariate Meta-Analysis Model (k = 6; method: REML)
+
+  logLik  Deviance       AIC       BIC      AICc 
+ -2.3853    4.7707   10.7707    9.5990   34.7707   
+
+Variance Components:
+
+            estim    sqrt  nlvls  fixed           factor 
+sigma^2.1  0.3159  0.5621      4     no            study 
+sigma^2.2  0.0000  0.0000      6     no  study/covidence 
+
+Test for Heterogeneity:
+Q(df = 5) = 15.2416, p-val = 0.0094
+
+Model Results:
+
+estimate      se     zval    pval    ci.lb   ci.ub 
+ -0.5499  0.3037  -1.8104  0.0702  -1.1452  0.0454  . 
+
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/meta/man/forest.meta.html'>forest</a></span><span class='op'>(</span><span class='va'>all_dat_rma</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="neuropathic_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+</div>
 <h1 id="extension">extension</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Now we’ll try network meta-analysis. Again, we have to solve the multi-level thing.</p>
+<h2 id="nma-of-fibromyalgia">nma of fibromyalgia</h2>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># get fibromyalgia data</span>
+<span class='va'>fibro_dat</span> <span class='op'>&lt;-</span> 
+<span class='va'>w_obs</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>condition_general</span> <span class='op'>==</span> <span class='st'>"fibromyalgia"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>outcome</span>, <span class='va'>study</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>arms_per_study <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'>n</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>arms_per_study</span><span class='op'>)</span> <span class='op'>&gt;</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='co'># select(-arms_per_study) %&gt;% </span>
+  <span class='fu'>ungroup</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># outcomes</span>
+<span class='va'>fibro_dat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>outcome</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div id="genwohqdwe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#genwohqdwe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#genwohqdwe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#genwohqdwe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#genwohqdwe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#genwohqdwe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#genwohqdwe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#genwohqdwe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#genwohqdwe .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#genwohqdwe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#genwohqdwe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#genwohqdwe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#genwohqdwe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#genwohqdwe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#genwohqdwe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#genwohqdwe .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#genwohqdwe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#genwohqdwe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#genwohqdwe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#genwohqdwe .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#genwohqdwe .gt_left {
+  text-align: left;
+}
+
+#genwohqdwe .gt_center {
+  text-align: center;
+}
+
+#genwohqdwe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#genwohqdwe .gt_font_normal {
+  font-weight: normal;
+}
+
+#genwohqdwe .gt_font_bold {
+  font-weight: bold;
+}
+
+#genwohqdwe .gt_font_italic {
+  font-style: italic;
+}
+
+#genwohqdwe .gt_super {
+  font-size: 65%;
+}
+
+#genwohqdwe .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">n</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">adverse</td>
+<td class="gt_row gt_right">56</td></tr>
+    <tr><td class="gt_row gt_left">mood</td>
+<td class="gt_row gt_right">73</td></tr>
+    <tr><td class="gt_row gt_left">pain_int</td>
+<td class="gt_row gt_right">45</td></tr>
+    <tr><td class="gt_row gt_left">pain_sub</td>
+<td class="gt_row gt_right">19</td></tr>
+    <tr><td class="gt_row gt_left">physical</td>
+<td class="gt_row gt_right">50</td></tr>
+    <tr><td class="gt_row gt_left">qol</td>
+<td class="gt_row gt_right">21</td></tr>
+    <tr><td class="gt_row gt_left">sleep</td>
+<td class="gt_row gt_right">11</td></tr>
+    <tr><td class="gt_row gt_left">withdrawal</td>
+<td class="gt_row gt_right">85</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<h3 id="pain-nma">pain nma</h3>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pain_sub_net</span> <span class='op'>&lt;-</span> 
+  <span class='fu'><a href='https://dmphillippo.github.io/multinma/reference/set_agd_arm.html'>set_agd_arm</a></span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>fibro_dat</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>outcome</span> <span class='op'>==</span> <span class='st'>"pain_sub"</span><span class='op'>)</span>,
+  trt <span class='op'>=</span> <span class='va'>intervention</span>,
+  r <span class='op'>=</span> <span class='va'>r</span>,
+  n <span class='op'>=</span> <span class='va'>n</span>,
+  sample_size <span class='op'>=</span> <span class='va'>n</span>,
+  trt_ref <span class='op'>=</span> <span class='st'>"placebo"</span>,
+  study <span class='op'>=</span> <span class='va'>study</span>
+<span class='op'>)</span> 
+
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>pain_sub_net</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="neuropathic_files/figure-html5/unnamed-chunk-14-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pain_int_net</span> <span class='op'>&lt;-</span> 
+  <span class='fu'><a href='https://dmphillippo.github.io/multinma/reference/set_agd_arm.html'>set_agd_arm</a></span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>fibro_dat</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>outcome</span> <span class='op'>==</span> <span class='st'>"pain_int"</span><span class='op'>)</span>,
+  trt <span class='op'>=</span> <span class='va'>intervention</span>,
+  y <span class='op'>=</span> <span class='va'>mean</span>,
+  se <span class='op'>=</span> <span class='va'>se</span>,
+  sample_size <span class='op'>=</span> <span class='va'>n</span>,
+  trt_ref <span class='op'>=</span> <span class='st'>"placebo"</span>,
+  study <span class='op'>=</span> <span class='va'>study</span>
+<span class='op'>)</span> 
+
+<span class='va'>pain_int_net</span>
+</code></pre>
+</div>
+</details>
+<pre><code>A network with 13 AgD studies (arm-based).
+
+--------------------------------------------- AgD studies (arm-based) ---- 
+ Study          Treatments                              
+ carette 1986   2: placebo | amitriptyline              
+ carette 1994   2: placebo | amitriptyline              
+ ginsberg 1996  2: placebo | amitriptyline              
+ ginsberg 1998  2: placebo | pirlindole                 
+ hannonen 1998  3: moclobemide | amitriptyline | placebo
+ kayiran 2010   1: escitalopram                         
+ matthey 2013   2: placebo | milnacipran                
+ mease 2009     2: placebo | milnacipran                
+ pickering 2018 2: placebo | milnacipran                
+ shakiba 2018   1: duloxetine                           
+ ... plus 3 more studies
+
+ Outcome type: continuous
+--------------------------------------------------------------------------
+Total number of treatments: 9
+Total number of studies: 13
+Reference treatment is: placebo
+Network is disconnected</code></pre>
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>pain_int_net</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="neuropathic_files/figure-html5/unnamed-chunk-16-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/skimr/reference/print.html'>print</a></span><span class='op'>(</span><span class='va'>pain_int_rma</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>A random effects NMA with a normal likelihood (identity link).
+Inference for Stan model: normal.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                    mean se_mean    sd    2.5%     25%     50%
+d[amitriptyline]    3.23    0.13  4.51   -5.67    0.09    3.19
+d[duloxetine]       0.31    0.15 10.22  -19.34   -6.67    0.39
+d[escitalopram]     0.09    0.16 10.00  -19.22   -6.82    0.00
+d[fluoxetine]       0.39    0.13  7.40  -14.06   -4.60    0.58
+d[milnacipran]     -3.96    0.18  4.75  -13.08   -7.15   -4.10
+d[mirtazapine]      3.67    0.13  7.81  -11.84   -1.59    3.60
+d[moclobemide]      4.67    0.14  6.53   -8.15    0.40    4.81
+d[pirlindole]      -0.64    0.13  7.57  -15.72   -5.75   -0.50
+lp__             -135.02    0.19  5.86 -147.98 -138.72 -134.67
+tau                11.59    0.04  1.55    8.93   10.49   11.47
+                     75%   97.5% n_eff Rhat
+d[amitriptyline]    6.27   12.20  1174    1
+d[duloxetine]       7.22   20.29  4418    1
+d[escitalopram]     6.76   20.09  4134    1
+d[fluoxetine]       5.34   14.96  3175    1
+d[milnacipran]     -0.83    5.46   737    1
+d[mirtazapine]      9.03   18.81  3524    1
+d[moclobemide]      8.86   17.50  2065    1
+d[pirlindole]       4.54   13.85  3182    1
+lp__             -130.83 -124.73   960    1
+tau                12.56   14.88  1328    1
+
+Samples were drawn using NUTS(diag_e) at Tue Jul 27 15:40:02 2021.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://dmphillippo.github.io/multinma/reference/relative_effects.html'>relative_effects</a></span><span class='op'>(</span><span class='va'>pain_int_rma</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="neuropathic_files/figure-html5/unnamed-chunk-18-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># gussy up the plot a bit</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>pain_int_rma</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>as_tibble</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code># A tibble: 50 × 11
+   parameter     mean     sd `2.5%` `25%` `50%` `75%` `97.5%` Bulk_ESS
+   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+ 1 mu[carette …  4.99  0.535   3.94  4.63  4.98  5.36    6.05    7327.
+ 2 mu[carette …  2.56  0.163   2.24  2.44  2.56  2.67    2.89    7897.
+ 3 mu[ginsberg…  7.00  0.276   6.47  6.81  7.00  7.19    7.54    7197.
+ 4 mu[ginsberg…  6.79  0.286   6.23  6.59  6.79  6.97    7.35    8188.
+ 5 mu[hannonen…  5.52  0.397   4.74  5.26  5.52  5.78    6.30    7191.
+ 6 mu[kayiran …  4.00 14.1   -23.6  -5.47  4.30 13.6    31.0     2597.
+ 7 mu[matthey … 52.9   2.77   47.4  51.1  52.9  54.8    58.4     4674.
+ 8 mu[mease 20… 51.8   0.110  51.6  51.7  51.8  51.9    52.0     8070.
+ 9 mu[pickerin…  5.60  0.361   4.89  5.36  5.59  5.84    6.33    6828.
+10 mu[shakiba … 22.1  14.1    -6.11 12.6  22.2  31.3    49.9     2767.
+# … with 40 more rows, and 2 more variables: Tail_ESS &lt;dbl&gt;,
+#   Rhat &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-moore_2015" class="csl-entry" role="doc-biblioentry">
+Moore, R. Andrew, Sheena Derry, Dominic Aldington, Peter Cole, and Philip J. Wiffen. 2015. <span>“Amitriptyline for Fibromyalgia in Adults.”</span> <em>Cochrane Database of Systematic Reviews</em>, no. 7. <a href="https://doi.org/10.1002/14651858.CD011824">https://doi.org/10.1002/14651858.CD011824</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

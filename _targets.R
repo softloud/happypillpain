@@ -101,15 +101,18 @@ list(
   ),
   
   
+  tar_target(p_output_raw,
+             p_obs %>%
+               left_join(p_metapar, by = c("study", "arm"))),
+  
+  
   tar_target(
     p_output,
-    p_obs %>%
-      left_join(p_metapar, by = c("study", "arm")) %>%
+    p_output_raw %>%
       gt() %>%
       hpp_tab(vertical_divider = "arm") %>%
       tab_header("Each row provides observations for one arm of one study",
                  subtitle = "Study-level and observational variables included")
-    
   ),
   
   # variables ---------------------------------------------------------------
@@ -161,11 +164,9 @@ list(
                read_csv("data/review_91309_extracted_data_csv_20210712234312.csv")
              ))),
   
-  tar_target(
-    w_covidence_cleaned,
-    r_covidence %>%
-      clean_names() 
-  ),
+  tar_target(w_covidence_cleaned,
+             r_covidence %>%
+               clean_names()),
   
   
   
@@ -313,7 +314,7 @@ list(
       # apply study labels
       left_join(w_study_key, by = c("study_identifier", "comments")) %>%
       mutate(across(everything(), tolower)) %>%
-      select(-study_identifier,-comments) %>%
+      select(-study_identifier, -comments) %>%
       select(study, everything())
   ),
   
@@ -379,7 +380,7 @@ list(
         main_aim = main_aim_pain_mood_quality_of_life_etc,
         design = group,
         everything()
-      ) %>% 
+      ) %>%
       rename(chronic_condition = condition) %>%
       left_join(w_condition, by = "chronic_condition") %>%
       mutate(
@@ -406,7 +407,7 @@ list(
   # wrangle scales ----------------------------------------------------------
   
   tar_target(r_scales,
-             read_rds("data/scales-2021-07-14_00:04:08.rds")),
+             read_rds("data/scales-2021-07-27_09:56:25.rds")),
   
   tar_target(
     w_scales,
@@ -471,7 +472,7 @@ list(
         measure_type = map_chr(measure_matches, 3),
         covidence_desc = map_chr(measure_matches, 2)
       ) %>%
-      select(-measure_matches,-covidence_colname) %>%
+      select(-measure_matches, -covidence_colname) %>%
       mutate(across(everything(), tolower)) %>%
       left_join(m_key, by = "outcome")
     ,
@@ -493,8 +494,11 @@ list(
         by = c("study", "arm")
       ) %>%
       # filter by condition & design
-      filter(condition_general %in% c("neuropathic", "fibromyalgia")) %>%
-      select(-condition_general, -design)
+      filter(
+        condition_general %in% c("neuropathic", "fibromyalgia") |
+          str_detect(study, "carette|ginsberg")
+      ) %>%
+      select(-condition_general,-design)
   ),
   
   # scales ------------------------------------------------------------------
@@ -503,11 +507,9 @@ list(
     w_obs_scale_matches,
     w_obs_long_filtered %>%
       mutate(scale_match = pmap(
-        list(
-        outcome,
-        covidence_desc,
-        model_type
-        ),
+        list(outcome,
+             covidence_desc,
+             model_type),
         .f = function(o, desc, m) {
           matches <-
             w_scales %>%
@@ -596,28 +598,34 @@ list(
               matches
           
           # brief pain short form item 5
-          matches <- 
-            if (nrow(matches) > 1 & str_detect(desc, "bpi_sf_item_5")) {
-              matches %>% 
-                filter(str_detect(scale_category, 
-                                  "brief_pain_short_form_inventory_item_5"))
-            } else matches
+          matches <-
+            if (nrow(matches) > 1 &
+                str_detect(desc, "bpi_sf_item_5")) {
+              matches %>%
+                filter(str_detect(
+                  scale_category,
+                  "brief_pain_short_form_inventory_item_5"
+                ))
+            } else
+              matches
           
           # eq vas
-          matches <- 
+          matches <-
             if (nrow(matches) > 1 & str_detect(desc, "eq_5d_vas")) {
-              matches %>% 
+              matches %>%
                 filter(str_detect(scale_category, "vas"))
-            } else matches
+            } else
+              matches
           
           # differentiate the unspecified
           matches <-
-            if (nrow(matches) > 1 & 
-                str_detect(desc, 
+            if (nrow(matches) > 1 &
+                str_detect(desc,
                            "\\d+.*likert|likert.*\\d+|\\d+.*vas|vas.*\\d+|\\d+.*nrs|nrs.*\\d+")) {
-              matches %>% 
+              matches %>%
                 filter(!str_detect(scale_category, "unspecified"))
-            } else matches 
+            } else
+              matches
           
           # choose scale category if only one matches the scale cat
           matches <-
@@ -633,19 +641,20 @@ list(
           matches <-
             if (m == "lor") {
               tibble(scale_category = "count")
-            } else matches
+            } else
+              matches
           
           return(matches)
           
         }
       ))
   ),
-
+  
   
   
   tar_target(
     w_obs_scale_counts,
-    w_obs_scale_matches %>% 
+    w_obs_scale_matches %>%
       # select(study, outcome, covidence_desc, scale_match) %>%
       mutate(cat_n = map_int(
         scale_match,
@@ -688,7 +697,7 @@ list(
             distinct() %>% pull(scale_category)
         }
       )) %>%
-      select(-scale_match,-cat_n)
+      select(-scale_match, -cat_n)
   ),
   
   tar_target(w_obs_scales,
@@ -765,13 +774,13 @@ list(
       select(outcome, study, arm, covidence_desc, timepoint, everything())
   ),
   
-
+  
   # bundle everything together ----------------------------------------------
   
   # get sds
   tar_target(
     w_obs_calc,
-      w_obs_time %>%
+    w_obs_time %>%
       mutate(
         # fix this later
         r = ifelse(!is.na(percent), n, NA),
@@ -1005,7 +1014,7 @@ list(
         interventions_n_p  = interventions_n,
         participants_p = participants
       ) %>%
-      select(-interventions,-type,-classes)
+      select(-interventions, -type, -classes)
   ),
   
   tar_target(
@@ -1117,7 +1126,7 @@ list(
   tar_target(
     export_dat_files,
     m_nma_key %>%
-      select(-nrow,-model_type) %>%
+      select(-nrow, -model_type) %>%
       mutate(
         file_name = glue("exports/hppdat/{outcome}-{subgroup}-{subgroup_value}.csv")
       )

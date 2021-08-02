@@ -50,8 +50,6 @@ tar_manifest(names = starts_with("r_"), fields = c(name, command)) %>%
 
 
 ```
-s
-
 
 
 # model input data

@@ -14,6 +14,10 @@ bibliography: references.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+> Current draft for discussion with Tamar, Gav, and Hollie. Will cut down for presentation to whole group.
+
+## packages
+
 ```{r pkgs}
 library(meta)
 library(gt)
@@ -21,15 +25,15 @@ library(tidyverse)
 library(skimr)
 library(metafor)
 library(targets)
+library(multinma)
 
 source("R/hpp_themes.R")
 
 ```
 
+# replication of amitriptyline and fibromyalgia
 
-# replication
-
-In this section I replicate the findings of Moore _et al._ [@moore_2015].
+In this section I replicate the substantial pain reduction findings of Moore *et al.* [@moore_2015].
 
 ## notes
 
@@ -37,28 +41,30 @@ Objective: measure efficacy of analgesic efficacy and adverse events of amitript
 
 ### Three tiers of evidence
 
-> Probably should incorporate these as variables into our analysis. 
+> Possibly should incorporate these as variables into our analysis.
 
 #### First tier
 
-- Study design follows current best standards
-- Minimal risk of bias
-- Outcome equivalent to substantial pain reduction
-- Intention to treat without inputation for dropouts (not sure what this means)
-- $\geqslant$ 200 participants in comparison; i.e., total sample size across arms
-- 8-12 weeks duration
-- parallel design
+-   Study design follows current best standards
+-   Minimal risk of bias
+-   Outcome equivalent to substantial pain reduction
+-   Intention to treat without inputation for dropouts (not sure what this means)
+-   $\geqslant$ 200 participants in comparison; i.e., total sample size across arms
+-   8-12 weeks duration
+-   parallel design
 
 #### Second tier
 
-- Failed to meet 1 or more items in First tier
-- At risk of bias
+-   Failed to meet 1 or more items in First tier
+-   At risk of bias
 
 #### Third tier
 
-- Small number of participants
-- Likely to be biased
-- Outcomes of limited clinical utility
+Only third-tier studies were found in the review
+
+-   Small number of participants
+-   Likely to be biased
+-   Outcomes of limited clinical utility
 
 ## Outcomes
 
@@ -66,7 +72,7 @@ Analgesic efficacy: NNT (number needed to treat)
 
 Harm: NNH number heeded to treat to harm
 
-> This is only important for transformation in the summary of findings, that is, after the model's log risk ratios have been calculated. Not important for model. Importantly, to calculate NNT and NNH, we require a something somehting. 
+> This is only important for transformation in the summary of findings, that is, after the model's log risk ratios have been calculated. Not important for model. Importantly, to calculate NNT and NNH, we require a something somehting.
 
 ## Model notes
 
@@ -74,10 +80,10 @@ Risk ratio of 50% pain relief using a fixed-effect meta-analysis
 
 ## Results
 
-- 9 studies, 2 with cross-over design
-- 649 participants
-- 6-12 weeks duration
-- 25mg and 50mg dosages
+-   9 studies, 2 with cross-over design
+-   649 participants
+-   6-12 weeks duration
+-   25mg and 50mg dosages
 
 ## import data from revman format
 
@@ -101,8 +107,6 @@ Our objective is to replicate the results shown in this analysis.
 knitr::include_graphics("external-figs/moore-third-tier.png")
 ```
 
-
-
 ```{r}
 third_tier_dat <- 
   fib_ami_dat %>% 
@@ -114,7 +118,6 @@ third_tier_dat %>%
   tab_header("Studies included in third-tier efficacy analysis")
   
 ```
-
 
 ```{r}
 third_tier_escalc <-
@@ -155,8 +158,6 @@ third_tier_mh <-
     data = third_tier_dat %>%   
       mutate(comp_c = n_c - event_c, comp_e = n_e - event_e),
     add = 1/2
-
-
   )  
 
 
@@ -164,9 +165,17 @@ forest(third_tier_mh, transf = exp)
 
 ```
 
-# reproduction
+Of course, Gav and I would likely do a random-effects model for this analysis, the results of which will likely adhere better to the NMA.
 
-> Discuss with Hollie why Carette 1995 is omitted from the review. 
+```{r}
+forest(third_tier_rma, transf = exp)
+
+
+```
+
+# reproduction of amitriptyline and fibromyalgia
+
+> Discuss with Hollie why Carette 1995 is omitted from the review.
 
 ```{r}
 tar_read(w_covidence) %>% 
@@ -176,12 +185,29 @@ tar_read(w_covidence) %>%
 
 ```
 
-
-
 ```{r}
 tar_load(w_obs)
 
 ```
+
+## reproduction of third-tier analysis
+
+```{r}
+
+# number of studies per outcome
+tar_read(w_obs_long) %>% 
+  group_by(outcome) %>% 
+  summarise(studies = n_distinct(study))
+
+
+# outcomes that have carette and ginsberg 
+tar_read(w_obs_long) %>% 
+  filter(str_detect(study, "caret|gins")) %>%
+  count(outcome, study)
+```
+
+
+> Discuss with Hollie scale labelling of Carette 1986; is analog scale 1-10 the same as vas?
 
 ```{r}
 neuropathic_dat <- 
@@ -197,5 +223,198 @@ w_obs %>%
 ```
 
 
+```{r}
+# look for studies
+neuropathic_dat %>% 
+  filter(str_detect(study, "care|gins"), str_detect(outcome, "pain")) %>% 
+  select(outcome, study) %>% 
+  distinct()
+
+```
+
+```{r}
+three_studies_dat <- 
+neuropathic_dat %>% 
+  filter(str_detect(study, "care|gins"), str_detect(outcome, "pain")) %>% 
+  select(study, arm, covidence, scale, mean, n, sd, intervention, type)
+
+
+```
+
+> Look into multilevel variance-covariance matrix structure
+
+```{r}
+three_studies_dat %>% 
+  filter(type != "placebo") %>% 
+  left_join(
+    three_studies_dat %>% 
+      filter(type == "placebo") %>% 
+      select(study, covidence, mean_p = mean, n_p = n, sd_p = sd),
+    by = c("study", "covidence")
+  ) %>% 
+  escalc(
+    m1i = mean,
+    sd1i = sd,
+    n1i = n,
+    m2i = mean_p,
+    sd2i = sd_p,
+    n2i = n_p,
+    measure = "SMD",
+    data = .,
+    slab = study
+  ) %>% 
+  rma.mv(
+    yi,
+    vi,
+    random = ~ 1 | study/covidence,
+    data = .
+  ) %>% forest()
+
+
+```
+
+
+## reproduction with all studies
+
+```{r}
+all_dat <- neuropathic_dat %>% 
+  filter(str_detect(outcome, "pain")) %>% 
+  select(study, arm, covidence, scale, mean, n, sd, intervention, type) 
+
+all_dat_rma <- 
+all_dat %>% 
+  filter(type != "placebo") %>% 
+  left_join(
+    all_dat %>% 
+      filter(type == "placebo") %>% 
+      select(study, covidence, mean_p = mean, n_p = n, sd_p = sd),
+    by = c("study", "covidence")
+  ) %>% 
+  escalc(
+    m1i = mean,
+    sd1i = sd,
+    n1i = n,
+    m2i = mean_p,
+    sd2i = sd_p,
+    n2i = n_p,
+    measure = "SMD",
+    data = .,
+    slab = study
+  ) %>% 
+  rma.mv(
+    yi = yi,
+    V = vi,
+    random = ~ 1 |study/ covidence,
+    data = .
+  ) 
+
+
+summary(all_dat_rma)
+
+forest(all_dat_rma)
+
+```
 
 # extension
+
+Now we'll try network meta-analysis. Again, we have to solve the multi-level thing.
+
+## nma of fibromyalgia
+
+```{r}
+# get fibromyalgia data
+fibro_dat <- 
+w_obs %>% 
+  filter(condition_general == "fibromyalgia") %>%
+  group_by(outcome, study) %>% 
+  mutate(arms_per_study = 1:n()) %>% 
+  filter(max(arms_per_study) > 1) %>% 
+  # select(-arms_per_study) %>% 
+  ungroup()
+
+```
+
+
+```{r}
+# outcomes
+fibro_dat %>% 
+  count(outcome) %>% 
+  gt()
+
+
+```
+
+### pain nma
+
+```{r}
+pain_sub_net <- 
+  set_agd_arm(
+  data = fibro_dat %>% filter(outcome == "pain_sub"),
+  trt = intervention,
+  r = r,
+  n = n,
+  sample_size = n,
+  trt_ref = "placebo",
+  study = study
+) 
+
+plot(pain_sub_net)
+
+
+```
+
+
+```{r include=FALSE}
+
+pain_sub_rma <-
+nma(
+  pain_sub_net,
+  trt_effects = "random"
+)
+
+
+```
+
+
+```{r}
+pain_int_net <- 
+  set_agd_arm(
+  data = fibro_dat %>% filter(outcome == "pain_int"),
+  trt = intervention,
+  y = mean,
+  se = se,
+  sample_size = n,
+  trt_ref = "placebo",
+  study = study
+) 
+
+pain_int_net
+
+plot(pain_int_net)
+
+```
+
+```{r include = FALSE}
+
+pain_int_rma <-
+nma(pain_int_net, trt_effects = "random")
+
+```
+
+
+```{r}
+print(pain_int_rma)
+
+relative_effects(pain_int_rma) %>% 
+  plot()
+
+```
+
+```{r}
+# gussy up the plot a bit
+summary(pain_int_rma) %>% 
+  as_tibble()
+
+```
+
+

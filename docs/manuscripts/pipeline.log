@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.7.12)  23 JUL 2021 10:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.7.12)  26 JUL 2021 21:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -172,34 +172,39 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 19.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 19.
- (./pipeline.bbl
-Underfull \hbox (badness 5161) in paragraph at lines 9--12
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./pipeline.bbl [2]
+Underfull \hbox (badness 3895) in paragraph at lines 43--46
 []\T1/aer/m/n/10 R. D. Peng.  Re-pro-ducible Re-search in Com-pu-ta-tional Sci-
 ence.
  []
 
-[1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) [2] (./pipeline.aux) ) 
+Underfull \hbox (badness 1874) in paragraph at lines 57--73
+[]\T1/aer/m/n/10 Mark D. Wilkin-son, Michel Du-mon-tier, IJs-brand Jan Aal-bers
+-berg,
+ []
+
+) [3] (./pipeline.aux) ) 
 Here is how much of TeX's memory you used:
- 2478 strings out of 481239
- 35811 string characters out of 5920377
- 269639 words of memory out of 5000000
- 17690 multiletter control sequences out of 15000+600000
- 555215 words of font info for 64 fonts, out of 8000000 for 9000
+ 2491 strings out of 481239
+ 35990 string characters out of 5920377
+ 270665 words of memory out of 5000000
+ 17699 multiletter control sequences out of 15000+600000
+ 558005 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,4n,29p,783b,258s stack positions out of 5000i,500n,10000p,200000b,80000s
-</u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmti10.pfb>
-Output written on pipeline.pdf (2 pages, 88166 bytes).
+ 38i,4n,29p,979b,258s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmb10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on pipeline.pdf (3 pages, 94133 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 39 PDF objects out of 1000 (max. 8388607)
+ 26 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  5 words of extra memory for PDF output out of 10000 (max. 10000000)
 

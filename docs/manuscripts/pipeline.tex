@@ -29,7 +29,18 @@ scientific research components, such as data and code; techniques that facilitat
 
 \subsection{Benefits of reproducibility and open science}
 
+Much has been said about the benefits of reproducibility, wherein precisely the same computational results are readily produced by another analyst, and open science. We differentiate between explicit replication of results, where the same scientific conclusion is drawn from a repeated experiment, as was the focus of the  semantically confusing Reproducibility Project~\cite{collaboration_2015}.  However, it is worth emphasising that reproducibility in and of itself does not necessarily further the `process of scientific discovery'~\cite{devezer_2019}. And in the context of open science, preregistratation, where a clear outline of a scientific methodology is published prior to embarking on the work, does not protect against poor conclusions~\cite{szollosi_2019b}. These discussions are central and ongoing in the meta-research community; a weighing of merits of pathways to scientific discovery, how to find truths or draw conclusions.
+
+In this manuscript, we do not seek to contribute to these worthy discussions. Instead, our focus is on scientific computational \emph{practice}, as opposed to conclusion. Setting aside which path leads us best to a result, let us instead focus on an aspect of computational reproducibility that provides utility for the analyst in avoiding pitfalls and foibles of answering scientific questions. For science has necessarily become ever more collaborative, as the demand for more complex algorithms rises. 
+
+In the example discussed in this manuscript, we examine the implementation of a network meta-analysis in a Cochrane review of the treatment of chronic pain with antidepressants~\cite{birkinshaw_2021}. A project such as this is necessarily collaborative; it is unrealistic to expect a single academic to provide expert-level data science, statistical analysis, and domain-knowledge insights. Scientific fraud is, of course, something we seek to guard against, but here we are more concerned with garden-variety errors the data-analyst and statistician, who by nature are discipline agnostic, make in absence of a genuine understanding of the domain. In so doing, we hope to contribute to the growing literature on selfish reasons for an analyst to adopt computational reprudicbility~\cite{markowetz_2015}.
+
 \subsection{The problem of black box analysis: pitfalls, foibles, and outright fraud}
+
+Reproducibility can certainly guard against fraud. By reproducing analyses, scientists have uncovered cases of outright manipulation of data and results~\cite{baggerly_2009, schleunes_2020}. Reproducibility provides a transparency that assists in uncovering academic misconduct of this kind. However, there is also a grey area of \textbf{Questionable Research Practices}, such as choosing variables to maximise statistical significance, wherein a scientist diligently follows methods they were trained in but lead to spurious results~\cite{fraser_questionable_2018}. Here we will focus not on questionable practices in statistical modelling, but in the preparation of data for modelling, variously known as \textbf{cleaning} or \textbf{wrangling}.
+
+
+
 
 \subsection{A reproducible workflow for collaboration}
 

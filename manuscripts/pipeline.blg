@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: pipeline.aux
+The style file: plain.bst
+Database file #1: biblio.bib
+Warning--entry type for "schleunes_2020" isn't style-file defined
+--line 153 of file biblio.bib
+Warning--empty journal in baggerly_2009
+Warning--empty year in baggerly_2009
+Warning--empty journal in birkinshaw_2021
+Warning--there's a number but no volume in birkinshaw_2021
+Warning--empty year in birkinshaw_2021
+Warning--empty journal in collaboration_2015
+Warning--empty year in collaboration_2015
+Warning--empty journal in devezer_2019
+Warning--empty year in devezer_2019
+Warning--empty journal in fraser_questionable_2018
+Warning--empty year in fraser_questionable_2018
+Warning--empty journal in laine_2018
+Warning--empty year in laine_2018
+Warning--empty publisher in landau_2021
+Warning--empty year in landau_2021
+Warning--empty journal in markowetz_2015
+Warning--empty year in markowetz_2015
+Warning--empty journal in peng_reproducible_2011-1
+Warning--empty year in peng_reproducible_2011-1
+Warning--empty journal in szollosi_2019b
+Warning--empty year in szollosi_2019b
+Warning--empty journal in wilkinson_2016
+Warning--empty year in wilkinson_2016
+You've used 13 entries,
+            2118 wiz_defined-function locations,
+            557 strings with 6955 characters,
+and the built_in function-call counts, 5518 in all, are:
+= -- 441
+> -- 467
+< -- 0
++ -- 189
+- -- 174
+* -- 523
+:= -- 982
+add.period$ -- 35
+call.type$ -- 13
+change.case$ -- 124
+chr.to.int$ -- 0
+cite$ -- 36
+duplicate$ -- 134
+empty$ -- 297
+format.name$ -- 174
+if$ -- 1014
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 12
+newline$ -- 64
+num.names$ -- 26
+pop$ -- 163
+preamble$ -- 1
+purify$ -- 113
+quote$ -- 0
+skip$ -- 82
+stack$ -- 0
+substring$ -- 204
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 50
+warning$ -- 23
+while$ -- 34
+width$ -- 15
+write$ -- 111
+(There were 24 warnings)
