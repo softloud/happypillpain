@@ -12,7 +12,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 ```{r packages}
@@ -27,6 +27,88 @@ library(gt) # tables
 source("R/hpp_themes.R")
 
 ```
+
+# Stuff for Hollie to investigate
+
+## studies
+
+Some studies' titles don't match covidence.
+
+```{r}
+
+tar_read()
+
+
+```
+
+
+## scales
+
+### unmatched scales
+
+```{r eval=FALSE}
+# these are the scales that aren't matching yet
+# some have 0 matches some have > 1
+# hit the green play button in the right of this chunk to see all
+# aka_det matches aka column (not raw), cat_det matches scale_category column
+
+excluded_scales <- 
+  tar_read(w_obs_scale_excluded) %>%
+select(study, arm, covidence_desc, scale_match) %>% 
+  unnest(scale_match) 
+
+# view it in RStudio
+excluded_scales %>% 
+  # patch in the titles
+  left_join(tar_read(w_study_key) %>% mutate(study = tolower(study))) %>%
+  select(
+    covidence_desc, study, title, contains("aka"), contains("cat"),  everything()
+  ) %>% 
+  View()
+
+# if you want to export it as a csv, remove the # from the line below and run it
+# it will write to exports
+# write_csv(excluded_scales, "export/excluded_scales.csv")
+
+```
+
+### higher direction of improvement
+
+- For direction of improvement `higher` find as many `upper_range` as possible, otherwise these observations will be excluded
+
+```{r eval=FALSE}
+# just look at direction of improvement is higher in scales
+# AND that upper range check is FALSE
+tar_read(w_scales) %>% 
+  mutate(upper_range_check = map(upper_range, is.double)) %>%
+  filter(direction_of_improvement != "Lower") %>%
+  select(direction_of_improvement, upper_range, upper_range_check, everything()) %>% 
+  arrange(direction_of_improvement, upper_range_check) %>% 
+  View()
+  
+```
+
+## duplicates
+
+This is for both of us to investigate after we've done all scales and all studies
+
+```{r}
+tar_read(w_obs_wide_duplicates) %>% View() 
+
+```
+
+## observations with problematic measurements
+
+```{r}
+# these are the problematic measurement  
+
+tar_read(w_obs_investigate) %>% 
+  count(outcome, study)
+
+tar_read(w_obs_investigate) %>% View()
+
+```
+
 
 # Hollie writes here:
 

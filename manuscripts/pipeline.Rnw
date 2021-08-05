@@ -22,7 +22,7 @@
 % package::function
 \newcommand{\pkgfn}[2]{\texttt{\detokenize{#1::#2}}}
 
-
+\usepackage{tabularx}
 
 \begin{document}
 
@@ -72,8 +72,10 @@ Reproducibility can certainly guard against fraud. By reproducing analyses, scie
 Much focus is given to correct model design. However, there is a deceptively mundane requirement before modelling can begin. Commonly, variables of interest must be encoded with finite levels in columns in a flat-form delimited data format, such as \code{.csv}. For this Cochrane review, we wish to build network meta-analyses, but in addition, we wish to create summary of findings tables, as well as provide the other scientists with an accessibly formatted delimited dataset that they can readily open in whatever spreadsheet software they are comfortable with. 
 
 
-<<>>=
-tar_read(p_output_raw) %>% gt()
+<<results = "asis", fig.width = "\\textwidth">>=
+tar_read(p_output_raw) %>% xtable() %>% 
+  print(tabular.environment = "tabularx", 
+        width = "\\textwidth")
 @
 
 

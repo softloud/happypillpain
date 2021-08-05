@@ -16,29 +16,7 @@ fluidPage(
     # sidebar -----------------------------------------------------------------
     
     sidebarPanel(
-      width = 2,
-      selectInput(
-        inputId = "outcome",
-        label = "Select an outcome:",
-        choices = outcome_choices,
-        selected = "pain"
-      ),
-      
-      selectInput(
-        inputId = "subgroup",
-        label = "Subgroup by condition or class",
-        choices = subgroup_choices,
-        selected = "NA"
-      ),
-      
-      selectInput(
-        inputId = "subgroup_value",
-        label = "Subgroup value",
-        choices = "all",
-        selected = "all"
-      ),
-      
-      
+
       h3("Scope of preliminary results"),
       p("- post-intervention"),
       p("- random-effects model"),
@@ -53,6 +31,19 @@ fluidPage(
     
     mainPanel(tabsetPanel(
 
+
+# summary of effects ------------------------------------------------------
+
+tabPanel(
+  "Summary of findings",
+  
+  # ‘Summary of findings’ tables include a row for each important outcome (up to a maximum of seven). Accepted formats of ‘Summary of findings’ tables and interactive ‘Summary of findings’ tables can be produced using GRADE’s software GRADEpro GDT.
+  # https://training.cochrane.org/handbook/current/chapter-14
+  
+  NULL
+),      
+      
+      
 # network panel -----------------------------------------------------------
 
       

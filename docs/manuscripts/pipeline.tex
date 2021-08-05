@@ -1,4 +1,54 @@
-\documentclass{article}
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 
 \usepackage{authblk}
 
@@ -12,11 +62,47 @@
 \affil[2]{Royal Holloway}
 \affil[3]{NINA}
 
-\usepackage{Sweave}
+% code macros
+% code
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+% package
+\newcommand{\package}[1]{\texttt{\detokenize{#1::}}}
+% function
+\newcommand{\function}[1]{\texttt{\detokenize{::#1}}}
+% package::function
+\newcommand{\pkgfn}[2]{\texttt{\detokenize{#1::#2}}}
+
+\usepackage{tabularx}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-\input{pipeline-concordance}
 
 \maketitle
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(tidyverse)}
+\hlkwd{library}\hlstd{(targets)}
+\hlkwd{library}\hlstd{(gt)}
+\hlkwd{library}\hlstd{(xtable)}
+
+\hlstd{knitr}\hlopt{::}\hlstd{opts_chunk}\hlopt{$}\hlkwd{set}\hlstd{(}\hlkwc{echo} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+
+\hlstd{knitr}\hlopt{::}\hlstd{opts_knit}\hlopt{$}\hlkwd{set}\hlstd{(}\hlkwc{root.dir} \hlstd{= here}\hlopt{::}\hlkwd{here}\hlstd{())}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{source}\hlstd{(}\hlstr{"R/hpp_themes.R"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 
 \section{Unboxing the black box of data wrangling}
 
@@ -39,17 +125,40 @@ In the example discussed in this manuscript, we examine the implementation of a 
 
 Reproducibility can certainly guard against fraud. By reproducing analyses, scientists have uncovered cases of outright manipulation of data and results~\cite{baggerly_2009, schleunes_2020}. Reproducibility provides a transparency that assists in uncovering academic misconduct of this kind. However, there is also a grey area of \textbf{Questionable Research Practices}, such as choosing variables to maximise statistical significance, wherein a scientist diligently follows methods they were trained in but lead to spurious results~\cite{fraser_questionable_2018}. Here we will focus not on questionable practices in statistical modelling, but in the preparation of data for modelling, variously known as \textbf{cleaning} or \textbf{wrangling}.
 
+Much focus is given to correct model design. However, there is a deceptively mundane requirement before modelling can begin. Commonly, variables of interest must be encoded with finite levels in columns in a flat-form delimited data format, such as \code{.csv}. For this Cochrane review, we wish to build network meta-analyses, but in addition, we wish to create summary of findings tables, as well as provide the other scientists with an accessibly formatted delimited dataset that they can readily open in whatever spreadsheet software they are comfortable with. 
+
+
+\begin{kframe}
+\begin{alltt}
+\hlkwd{tar_read}\hlstd{(p_output_raw)} \hlopt{%>%} \hlkwd{xtable}\hlstd{()} \hlopt{%>%}
+  \hlkwd{print}\hlstd{(}\hlkwc{tabular.environment} \hlstd{=} \hlstr{"tabularx"}\hlstd{,}
+        \hlkwc{width} \hlstd{=} \hlstr{"\textbackslash{}\textbackslash{}textwidth"}\hlstd{)}
+\end{alltt}
+\end{kframe}% latex table generated in R 4.1.0 by xtable 1.8-4 package
+% Wed Aug  4 17:15:54 2021
+\begin{table}[ht]
+\centering
+\begin{tabularx}{\textwidth}{rllllllllll}
+  \hline
+ & outcome & study & arm & obs & obs\_info & type & design & condition & class & main\_aim \\ 
+  \hline
+1 & mood, pain, etc. & unique study identifier & unique arm identifier & columns with mean, sd, counts, sample size, etc. & information extracted from column headers:
+        timepoint, scale, etc. & Intervention Type & Group & Chronic pain conditions(s) & Intervention Class & Main aim (Pain... \\ 
+   \hline
+\end{tabularx}
+\end{table}
 
 
 
 \subsection{A reproducible workflow for collaboration}
 
+From here we will detail an R-specific workflow using the \package{targets} package~\cite{landau_2021}, Google sheets, with data-scraping provided by the \package{googlesheets4} package~\cite{bryan_2021}.
+
 \section{Labelling scales and interpreting dosage}
 
 \section{Discussion}
 
-
 \bibliographystyle{plain}
-\bibliography{references}
+\bibliography{biblio}
 
 \end{document}

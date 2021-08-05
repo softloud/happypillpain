@@ -71,6 +71,8 @@
 \newcommand{\function}[1]{\texttt{\detokenize{::#1}}}
 % package::function
 \newcommand{\pkgfn}[2]{\texttt{\detokenize{#1::#2}}}
+
+\usepackage{tabularx}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -83,6 +85,8 @@
 \hlkwd{library}\hlstd{(tidyverse)}
 \hlkwd{library}\hlstd{(targets)}
 \hlkwd{library}\hlstd{(gt)}
+\hlkwd{library}\hlstd{(xtable)}
+
 \hlstd{knitr}\hlopt{::}\hlstd{opts_chunk}\hlopt{$}\hlkwd{set}\hlstd{(}\hlkwc{echo} \hlstd{=} \hlnum{TRUE}\hlstd{)}
 
 \hlstd{knitr}\hlopt{::}\hlstd{opts_knit}\hlopt{$}\hlkwd{set}\hlstd{(}\hlkwc{root.dir} \hlstd{= here}\hlopt{::}\hlkwd{here}\hlstd{())}
@@ -124,21 +128,26 @@ Reproducibility can certainly guard against fraud. By reproducing analyses, scie
 Much focus is given to correct model design. However, there is a deceptively mundane requirement before modelling can begin. Commonly, variables of interest must be encoded with finite levels in columns in a flat-form delimited data format, such as \code{.csv}. For this Cochrane review, we wish to build network meta-analyses, but in addition, we wish to create summary of findings tables, as well as provide the other scientists with an accessibly formatted delimited dataset that they can readily open in whatever spreadsheet software they are comfortable with. 
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{kframe}
 \begin{alltt}
-\hlkwd{tar_read}\hlstd{(p_output_raw)} \hlopt{%>%} \hlkwd{gt}\hlstd{()}
+\hlkwd{tar_read}\hlstd{(p_output_raw)} \hlopt{%>%} \hlkwd{xtable}\hlstd{()} \hlopt{%>%}
+  \hlkwd{print}\hlstd{(}\hlkwc{tabular.environment} \hlstd{=} \hlstr{"tabularx"}\hlstd{,}
+        \hlkwc{width} \hlstd{=} \hlstr{"\textbackslash{}\textbackslash{}textwidth"}\hlstd{)}
 \end{alltt}
-\end{kframe}\captionsetup[table]{labelformat=empty,skip=1pt}
-\begin{longtable}{llllllllll}
-\toprule
-outcome & study & arm & obs & obs\_info & type & design & condition & class & main\_aim \\ 
-\midrule
-mood, pain, etc. & unique study identifier & unique arm identifier & columns with mean, sd, counts, sample size, etc. & information extracted from column headers:
-      timepoint, scale, etc. & Intervention Type & Group & Chronic pain conditions(s) & Intervention Class & Main aim (Pain... \\ 
-\bottomrule
-\end{longtable}
-\end{knitrout}
+\end{kframe}% latex table generated in R 4.1.0 by xtable 1.8-4 package
+% Wed Aug  4 17:15:54 2021
+\begin{table}[ht]
+\centering
+\begin{tabularx}{\textwidth}{rllllllllll}
+  \hline
+ & outcome & study & arm & obs & obs\_info & type & design & condition & class & main\_aim \\ 
+  \hline
+1 & mood, pain, etc. & unique study identifier & unique arm identifier & columns with mean, sd, counts, sample size, etc. & information extracted from column headers:
+        timepoint, scale, etc. & Intervention Type & Group & Chronic pain conditions(s) & Intervention Class & Main aim (Pain... \\ 
+   \hline
+\end{tabularx}
+\end{table}
+
 
 
 \subsection{A reproducible workflow for collaboration}

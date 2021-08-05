@@ -13,6 +13,11 @@ Hollie Birkinshaw, Claire Friedrich, Peter Cole, Christopher Eccleston, Marc
   network meta‐analysis.
 \newblock (4).
 
+\bibitem{bryan_2021}
+Jennifer Bryan.
+\newblock {\em Googlesheets4: {{Access}} Google Sheets Using the Sheets {{API
+  V4}}}.
+
 \bibitem{collaboration_2015}
 Open~Science Collaboration.
 \newblock Estimating the reproducibility of psychological science.
@@ -33,6 +38,10 @@ Hannah Fraser, Tim Parker, Shinichi Nakagawa, Ashley Barnett, and Fiona Fidler.
 Heidi Laine.
 \newblock Open science and codes of conduct on research integrity.
 \newblock 37(4).
+
+\bibitem{landau_2021}
+Will Landau.
+\newblock {\em The Targets {{R Package User Manual}}}.
 
 \bibitem{markowetz_2015}
 Florian Markowetz.

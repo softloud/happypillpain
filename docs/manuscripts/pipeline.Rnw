@@ -12,10 +12,41 @@
 \affil[2]{Royal Holloway}
 \affil[3]{NINA}
 
+% code macros
+% code
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+% package
+\newcommand{\package}[1]{\texttt{\detokenize{#1::}}}
+% function
+\newcommand{\function}[1]{\texttt{\detokenize{::#1}}}
+% package::function
+\newcommand{\pkgfn}[2]{\texttt{\detokenize{#1::#2}}}
+
+\usepackage{tabularx}
+
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 
 \maketitle
+
+
+<<pkgs, message = FALSE>>=
+library(tidyverse)
+library(targets)
+library(gt)
+library(xtable)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_knit$set(root.dir = here::here())
+
+@
+
+
+<<>>=
+source("R/hpp_themes.R")
+
+@
+
 
 \section{Unboxing the black box of data wrangling}
 
@@ -38,17 +69,25 @@ In the example discussed in this manuscript, we examine the implementation of a 
 
 Reproducibility can certainly guard against fraud. By reproducing analyses, scientists have uncovered cases of outright manipulation of data and results~\cite{baggerly_2009, schleunes_2020}. Reproducibility provides a transparency that assists in uncovering academic misconduct of this kind. However, there is also a grey area of \textbf{Questionable Research Practices}, such as choosing variables to maximise statistical significance, wherein a scientist diligently follows methods they were trained in but lead to spurious results~\cite{fraser_questionable_2018}. Here we will focus not on questionable practices in statistical modelling, but in the preparation of data for modelling, variously known as \textbf{cleaning} or \textbf{wrangling}.
 
+Much focus is given to correct model design. However, there is a deceptively mundane requirement before modelling can begin. Commonly, variables of interest must be encoded with finite levels in columns in a flat-form delimited data format, such as \code{.csv}. For this Cochrane review, we wish to build network meta-analyses, but in addition, we wish to create summary of findings tables, as well as provide the other scientists with an accessibly formatted delimited dataset that they can readily open in whatever spreadsheet software they are comfortable with. 
 
+
+<<results = "asis", fig.width = "\\textwidth">>=
+tar_read(p_output_raw) %>% xtable() %>% 
+  print(tabular.environment = "tabularx", 
+        width = "\\textwidth")
+@
 
 
 \subsection{A reproducible workflow for collaboration}
+
+From here we will detail an R-specific workflow using the \package{targets} package~\cite{landau_2021}, Google sheets, with data-scraping provided by the \package{googlesheets4} package~\cite{bryan_2021}.
 
 \section{Labelling scales and interpreting dosage}
 
 \section{Discussion}
 
-
 \bibliographystyle{plain}
-\bibliography{references}
+\bibliography{biblio}
 
 \end{document}
