@@ -68,7 +68,7 @@ excluded_scales %>%
 
 # if you want to export it as a csv, remove the # from the line below and run it
 # it will write to exports
-# write_csv(excluded_scales, "export/excluded_scales.csv")
+# write_csv(excluded_scales, "exports/excluded_scales.csv")
 
 ```
 

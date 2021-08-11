@@ -86,33 +86,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>hpp: Hollie</title>
+  <title>hpp: Antidepressants for pain management in adults with chronic pain</title>
 
-  <meta property="description" itemprop="description" content="For exploration"/>
+  <meta property="description" itemprop="description" content="A network meta-analysis"/>
 
 
-  <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-08-05"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-08-05"/>
-  <meta name="article:author" content="Hollie and Charles"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="hpp: Hollie"/>
+  <meta property="og:title" content="hpp: Antidepressants for pain management in adults with chronic pain"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="For exploration"/>
+  <meta property="og:description" content="A network meta-analysis"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="hpp"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="hpp: Hollie"/>
-  <meta property="twitter:description" content="For exploration"/>
+  <meta property="twitter:title" content="hpp: Antidepressants for pain management in adults with chronic pain"/>
+  <meta property="twitter:description" content="A network meta-analysis"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie and Charles"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-08-05"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","site"]}},"value":[{"type":"character","attributes":{},"value":["Antidepressants for pain management in adults with chronic pain"]},{"type":"character","attributes":{},"value":["A network meta-analysis\n"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2060,7 +2056,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie and Charles","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-05T00:00:00.000+01:00","citationText":"Charles, 2021"}
+{"title":"Antidepressants for pain management in adults with chronic pain","description":"A network meta-analysis","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2096,304 +2092,15 @@ pipeline
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Hollie</h1>
+<h1>Antidepressants for pain management in adults with chronic pain</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>For exploration</p></p>
+<p><p>A network meta-analysis</p></p>
 </div>
 
-<div class="d-byline">
-  Hollie and Charles  
-  
-<br/>updated 2021-08-05
-</div>
 
 <div class="d-article">
-<div class="d-contents d-contents-float">
-<nav class="l-text toc figcaption" id="TOC">
-<h3>Contents</h3>
-<ul>
-<li><a href="#stuff-for-hollie-to-investigate">Stuff for Hollie to investigate</a>
-<ul>
-<li><a href="#studies">studies</a></li>
-<li><a href="#scales">scales</a>
-<ul>
-<li><a href="#unmatched-scales">unmatched scales</a></li>
-<li><a href="#higher-direction-of-improvement">higher direction of improvement</a></li>
-</ul></li>
-<li><a href="#duplicates">duplicates</a></li>
-<li><a href="#observations-with-problematic-measurements">observations with problematic measurements</a></li>
-</ul></li>
-<li><a href="#hollie-writes-here">Hollie writes here:</a></li>
-<li><a href="#tutorial-stuff-from-charles">Tutorial stuff from Charles</a>
-<ul>
-<li><a href="#targets">targets</a></li>
-<li><a href="#syncing-with-charles">syncing with Charles</a></li>
-</ul></li>
-<li><a href="#scales-1">scales</a>
-<ul>
-<li><a href="#investigate-unmatched-scales">investigate unmatched scales</a></li>
-<li><a href="#notes">notes</a></li>
-<li><a href="#assumptions-about-scales">assumptions about scales</a></li>
-<li><a href="#changes-to-make-outcome-extractions">changes to make outcome extractions</a></li>
-<li><a href="#scales-to-discuss-furtherinvestigate">scales to discuss further/investigate</a></li>
-</ul></li>
-<li><a href="#using-gt">using <code>gt::</code></a></li>
-</ul>
-</nav>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># if it says package not installed:</span>
-<span class='co'># run renv::restore() in the console to install all packages</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span> <span class='co'># vis and wrangling</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/targets/'>targets</a></span><span class='op'>)</span> <span class='co'># pipeline</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span> <span class='co'># tables</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/source.html'>source</a></span><span class='op'>(</span><span class='st'>"R/hpp_themes.R"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h1 id="stuff-for-hollie-to-investigate">Stuff for Hollie to investigate</h1>
-<h2 id="studies">studies</h2>
-<p>Some studies’ titles don’t match covidence.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h2 id="scales">scales</h2>
-<h3 id="unmatched-scales">unmatched scales</h3>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># these are the scales that aren't matching yet</span>
-<span class='co'># some have 0 matches some have &gt; 1</span>
-<span class='co'># hit the green play button in the right of this chunk to see all</span>
-<span class='co'># aka_det matches aka column (not raw), cat_det matches scale_category column</span>
-
-<span class='va'>excluded_scales</span> <span class='op'>&lt;-</span> 
-  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_excluded</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-<span class='fu'>select</span><span class='op'>(</span><span class='va'>study</span>, <span class='va'>arm</span>, <span class='va'>covidence_desc</span>, <span class='va'>scale_match</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>scale_match</span><span class='op'>)</span> 
-
-<span class='co'># view it in RStudio</span>
-<span class='va'>excluded_scales</span> <span class='op'>%&gt;%</span> 
-  <span class='co'># patch in the titles</span>
-  <span class='fu'>left_join</span><span class='op'>(</span><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_study_key</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>study <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>study</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>select</span><span class='op'>(</span>
-    <span class='va'>covidence_desc</span>, <span class='va'>study</span>, <span class='va'>title</span>, <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"aka"</span><span class='op'>)</span>, <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"cat"</span><span class='op'>)</span>,  <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># if you want to export it as a csv, remove the # from the line below and run it</span>
-<span class='co'># it will write to exports</span>
-<span class='co'># write_csv(excluded_scales, "exports/excluded_scales.csv")</span>
-</code></pre>
-</div>
-</div>
-<h3 id="higher-direction-of-improvement">higher direction of improvement</h3>
-<ul>
-<li>For direction of improvement <code>higher</code> find as many <code>upper_range</code> as possible, otherwise these observations will be excluded</li>
-</ul>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># just look at direction of improvement is higher in scales</span>
-<span class='co'># AND that upper range check is FALSE</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_scales</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>upper_range_check <span class='op'>=</span> <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>map</a></span><span class='op'>(</span><span class='va'>upper_range</span>, <span class='va'>is.double</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>direction_of_improvement</span> <span class='op'>!=</span> <span class='st'>"Lower"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>select</span><span class='op'>(</span><span class='va'>direction_of_improvement</span>, <span class='va'>upper_range</span>, <span class='va'>upper_range_check</span>, <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>arrange</span><span class='op'>(</span><span class='va'>direction_of_improvement</span>, <span class='va'>upper_range_check</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h2 id="duplicates">duplicates</h2>
-<p>This is for both of us to investigate after we’ve done all scales and all studies</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_wide_duplicates</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span> 
-</code></pre>
-</div>
-</div>
-<h2 id="observations-with-problematic-measurements">observations with problematic measurements</h2>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># these are the problematic measurement  </span>
-
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_investigate</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>count</span><span class='op'>(</span><span class='va'>outcome</span>, <span class='va'>study</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_investigate</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h1 id="hollie-writes-here">Hollie writes here:</h1>
-<p>This is a test</p>
-<h1 id="tutorial-stuff-from-charles">Tutorial stuff from Charles</h1>
-<p>NB: only edit this file</p>
-<h2 id="targets">targets</h2>
-<p>The pipeline is managed by the <code>targets::</code> package.</p>
-<p>A few key commmands.</p>
-<p>NB: we’ve turned off this “code chunk” because it takes ages to render</p>
-<p>You can run single lines of code by hitting <code>cmd + enter</code> or the whole chunk by clicking the green play button.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># inspect the pipeline</span>
-
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># inspect a subset of the pipeline</span>
-
-<span class='co'># run specific parts of the pipeline: starts_with *_</span>
-
-<span class='co'># starts_with labels</span>
-
-<span class='co'># r := raw</span>
-<span class='co'># w := wrangling</span>
-<span class='co'># m := model</span>
-<span class='co'># c := check, for exporting checks and asserts</span>
-<span class='co'># e := exploratory data analysis table or vis</span>
-<span class='co'># p := pipeline design</span>
-
-<span class='co'># secondary signifiers ^_*_</span>
-
-<span class='co'># h := prepared by hollie</span>
-
-<span class='co'># targets that contain</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"_h_"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># targets that start with</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_glimpse.html'>tar_glimpse</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"r_"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>Accessing data from targets.</p>
-<p>Desired table output of all observations.</p>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>outcome</th>
-<th>study</th>
-<th>arm</th>
-<th>observations</th>
-<th>observation info</th>
-<th>study-level descriptors</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>outcome label</td>
-<td>unique identifier for study</td>
-<td>unique identifier for arm</td>
-<td>mean, sd, counts, etc.</td>
-<td>timepoint, scale, etc.</td>
-<td>condition, study design (parallel/crossover), antyhing we need to filter by, subgroups, etc.</td>
-</tr>
-</tbody>
-</table>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># inspect the data at a point in the pipeline with </span>
-
-<span class='co'># this is the output table described as the desired output at the top</span>
-<span class='co'># of the pipeline (copied in above)</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h2 id="syncing-with-charles">syncing with Charles</h2>
-<p>NB: Charles is learning, too!</p>
-<p>See <a href="https://usethis.r-lib.org/articles/articles/pr-functions.html">this</a> page for more details:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># grab latest changes from Charles</span>
-<span class='fu'>pr_merge_main</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># make changes</span>
-<span class='co'># commit in the git pane</span>
-
-<span class='co'># send changes to Charles</span>
-<span class='fu'>pr_push</span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h1 id="scales-1">scales</h1>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_visnetwork.html'>tar_visnetwork</a></span><span class='op'>(</span>allow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span><span class='op'>(</span><span class='st'>"scale"</span><span class='op'>)</span>, <span class='va'>w_obs_long</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_snapshot</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h2 id="investigate-unmatched-scales">investigate unmatched scales</h2>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># look at the first 0 matches</span>
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cat_n</span> <span class='op'>==</span> <span class='fl'>0</span>,
-         <span class='co'># fix in Covidence bansal 2009 add in 0-4 </span>
-         <span class='va'>study</span> <span class='op'>!=</span> <span class='st'>"bansal 2009"</span>,
-         <span class='co'># change kayiran vas 0-10 </span>
-         <span class='va'>study</span> <span class='op'>!=</span> <span class='st'>"kayiran 2010"</span>,
-         <span class='co'># change extractions</span>
-         <span class='op'>!</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>covidence_desc</span>, <span class='st'>"catastrophising"</span><span class='op'>)</span> 
-         <span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h2 id="notes">notes</h2>
-<ul>
-<li>only need range of scale if direction is higher not lower</li>
-</ul>
-<h2 id="assumptions-about-scales">assumptions about scales</h2>
-<ul>
-<li>kayiran 2010 lowest is ~1 and highest ~9, so we assumed it is 0-10 vas scale</li>
-</ul>
-<h2 id="changes-to-make-outcome-extractions">changes to make outcome extractions</h2>
-<ul class="task-list">
-<li><input type="checkbox" disabled="" checked="" />
-exclude tetreault 2018 catatrosphising columns</li>
-</ul>
-<h2 id="scales-to-discuss-furtherinvestigate">scales to discuss further/investigate</h2>
-<ul>
-<li>chest_pain_pain_index_duration_of_chest_pain_weighed_by_the_intensity_of_chest_pain_baseline in spinhoven 2010</li>
-<li>tetreault 2018 - detect questionnaire scales</li>
-</ul>
-<h1 id="using-gt">using <code>gt::</code></h1>
-<p><code>gt::</code> is an R package for creating tables</p>
-<ul>
-<li><a href="https://themockup.blog/static/gt-cookbook.html#Introduction">cookbook</a></li>
-<li><a href="https://gt.rstudio.com/">pkg site</a></li>
-</ul>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># example of using gt</span>
-
-<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='co'># select first 10 columns</span>
-  <span class='fu'>select</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>covidence</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='co'># first 10 rows</span>
-  <span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_pattern.html'>head</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>hpp_tab</span><span class='op'>(</span>vertical_divider <span class='op'>=</span> <span class='st'>"outcome"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
+<p>`</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
