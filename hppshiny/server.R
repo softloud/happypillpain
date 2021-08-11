@@ -22,7 +22,7 @@ function(input, output) {
 
 # selection choices -------------------------------------------------------
 
-output$studies <- reactive({
+studies <- reactive({
   obs() %>% pull(study) %>% unique()
 })  
   
