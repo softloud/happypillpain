@@ -2,12 +2,12 @@
 .Rhistory
 .RData
 .Ruserdata
-data/*.csv
-data/outcomes-*/
+# data/*.csv
+# data/outcomes-*/
 outputs/
-targets/
+# targets/
 +_files/
-_targets/
+# _targets/
 old-data/
 simulation/
 *.zip

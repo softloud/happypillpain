@@ -1,0 +1,11 @@
+covidence,description,role,issues...4,variable,table,theory,protocol,counts,unmatched,multiple matches,random,issues...13,fully labelled,section,read_edit...16,read_edit...17,read_edit...18
+Study Identifier + Comments,"Unique identifier for study; comments contains title, study identifier is first author and year",model,28,study,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+obs header,"Short-term follow up, baseline, long-term follow up, post-intervention; atm the other time points are filtered out and just postintervention is going through to the anlaysis",filter,26,timepoint,TRUE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE
+obs header,We searched the column headers for names of scales (such as vas),filter,NA,scale,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+Chronic pain condition(s),"Condition of pain in the study, such as lower back pain. NB condition can be tagged in multiple ways, see condition classifier gs. In particular prioritise general_grouping as the condition variable.
+temporomandibular disorder",subgroup,NA,condition,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+Intervention Type,"Type of intervention: e.g., antidepressant, placebo, CBT",filter,NA,type,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+Intervention Class,Class of antidepressant: e.g. SNRI; this variable only applies to antidepressant,subgroup,NA,class,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+Intervention Name,"Name of intervention drug: e.g., Desvenlafaxin",model,NA,intervention,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+"Main aim (Pain, mood, quality of life etc)","Primary aim of the original study: e.g., pain, mood, etc.",subgroup,NA,main_aim,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+Group,crossover or parallel; for now we filter parallel not crossover,filter,NA,design,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE

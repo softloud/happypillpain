@@ -16,7 +16,6 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 ```{r packages}
-
 # if it says package not installed:
 # run renv::restore() in the console to install all packages
 
