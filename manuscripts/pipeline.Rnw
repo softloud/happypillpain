@@ -67,10 +67,16 @@ In the example discussed in this manuscript, we examine the implementation of a 
 
 \subsection{The problem of black box analysis: pitfalls, foibles, and outright fraud}
 
-Reproducibility can certainly guard against fraud. By reproducing analyses, scientists have uncovered cases of outright manipulation of data and results~\cite{baggerly_2009, schleunes_2020}. Reproducibility provides a transparency that assists in uncovering academic misconduct of this kind. However, there is also a grey area of \textbf{Questionable Research Practices}, such as choosing variables to maximise statistical significance, wherein a scientist diligently follows methods they were trained in but lead to spurious results~\cite{fraser_questionable_2018}. Here we will focus not on questionable practices in statistical modelling, but in the preparation of data for modelling, variously known as \textbf{cleaning} or \textbf{wrangling}.
+Reproducibility can certainly guard against fraud; by reproducing analyses, scientists have uncovered cases of outright manipulation of data and results~\cite{baggerly_2009, schleunes_2020}. Reproducibility provides a transparency that assists in uncovering academic misconduct of this kind. However, there is also a grey area of \textbf{Questionable Research Practices}, such as choosing variables to maximise statistical significance, wherein a scientist diligently follows methods they were trained in but lead to spurious results~\cite{fraser_questionable_2018}. Here we will focus not on questionable practices in statistical modelling, but in the preparation of data for modelling, variously known as \textbf{cleaning} or \textbf{wrangling}.
 
-Much focus is given to correct model design. However, there is a deceptively mundane requirement before modelling can begin. Commonly, variables of interest must be encoded with finite levels in columns in a flat-form delimited data format, such as \code{.csv}. For this Cochrane review, we wish to build network meta-analyses, but in addition, we wish to create summary of findings tables, as well as provide the other scientists with an accessibly formatted delimited dataset that they can readily open in whatever spreadsheet software they are comfortable with. 
+Much focus is given to correct model design. However, there is a deceptively mundane requirement before modelling can begin. Commonly, categorical variables of interest must be encoded with minimal levels in columns in a flat-form delimited data format, such as \code{.csv}. The number of levels are minimised as the model will interpret each level as a new variable, decreasing the precision of the model. 
+\morewords{Need to investigate and reference this. Should run some sims to see how this works.}
 
+For this Cochrane review, we wish to build network meta-analyses, but in addition, we wish to create summary of findings tables, as well as provide the other scientists with an accessibly formatted delimited (flat) dataset that they can readily open in whatever spreadsheet software they are comfortable with. For the models, the summary, and the accessible flat-format dataset, we use an underlying dataset (Table \ref{tab: obs}) that comprises columns that describe outcome, condition, arm, study, measures of outcome, variables associated with measures, such as timepoint and scale, as well as study-level variables, such as design. 
+
+\begin{table}
+\caption[Observation output]{Desired format of machine-readable observations.}
+\label{tab: obs}
 
 <<results = "asis", fig.width = "\\textwidth">>=
 tar_read(p_output_raw) %>% xtable() %>% 
@@ -78,12 +84,39 @@ tar_read(p_output_raw) %>% xtable() %>%
         width = "\\textwidth")
 @
 
+\end{table}
+
+<<>>=
+tar_load(r_covidence)
+@
+
+
+This sounds relatively straight-forward, however, there is a significant gap between the format of the data exported from Cochrane's systematic review tool Covidence and the desired output shown in Table \ref{tab: obs}. The raw data export has `r nrow(r_covidence)` rows and `r ncol(r_covidence)` columns. In Table \ref{table: }
+
+\begin{table}
+
+% table showing column number and column header from raw covidence export
+
+<<>>=
+
+@
+
+\end{table}
 
 \subsection{A reproducible workflow for collaboration}
 
 From here we will detail an R-specific workflow using the \package{targets} package~\cite{landau_2021}, Google sheets, with data-scraping provided by the \package{googlesheets4} package~\cite{bryan_2021}.
 
-\section{Labelling scales and interpreting dosage}
+\section{Labelling scales}
+
+% and interpreting dosage? 
+ 
+To see how this workflow is used to solve a specific problem, we focus now on the labelling of measurement scales in the Cochrane review of the use of antidepressants for the treatment of chronic pain in adults. There is a somewhat dizzying array of scales for the different outcomes associated with chronic pain, along with various ways for these scales to be described. In addition to this, the scales are not necessarily measured with the same direction of improvement. Identifying which scales are in the dataset, how they are labelled, and how they should be labeled is best an iterative problem for both the data analysts and domain-knowledge experts. 
+
+\subsection{Measuring chronic pain in adults}
+
+\subsection{Workflow for labelling of scales}
+
 
 \section{Discussion}
 

@@ -25,12 +25,14 @@ if ("dontpanic" %in% installed_pkg) {
 
 
 # functions ---------------------------------------------------------------
-c("study_id",
+c(
+  "study_id",
   "lotr_study_hash",
   "hpp_net",
   "hpp_themes",
-  "viable_observations"
-  ) %>%
+  "viable_observations",
+  "scale_match"
+) %>%
   paste0("R/", ., ".R") %>%
   map(source)
 
@@ -56,7 +58,7 @@ safe_nma <- safely(nma, otherwise = "failed")
 
 
 list(
-  #   # pipeline design ---------------------------------------------------------
+  # pipeline design ---------------------------------------------------------
   
   tar_target(test_empty_tar,
              NULL),
@@ -161,14 +163,23 @@ list(
   
   # covidence export --------------------------------------------------------
   
-  tar_target(r_covidence,
-             suppressWarnings(suppressMessages(
-               read_csv("data/review_91309_extracted_data_csv_20210712234312.csv")
-             ))),
+  tar_target(
+    r_covidence,
+    #suppressWarnings(suppressMessages(
+    read_csv("data/review_91309_extracted_data_csv_20210820014615.csv")
+    #))
+  ),
   
-  tar_target(w_covidence_cleaned,
-             r_covidence %>%
-               clean_names()),
+  tar_target(
+    w_covidence_cleaned,
+    r_covidence %>%
+      clean_names() %>%
+      select(
+        study_covidence = study_identifier,
+        title_covidence = comments,
+        everything()
+      )
+  ),
   
   
   
@@ -176,49 +187,49 @@ list(
   
   tar_target(r_h_outcome_adverse,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Adverse Events.csv")
+               read_csv("data/outcomes-2021-08-16/Adverse Events.csv")
              ))),
   
   tar_target(r_h_outcome_mood,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Mood.csv"),
+               read_csv("data/outcomes-2021-08-16/Mood.csv"),
              ))),
   
   tar_target(r_h_outcome_pain_int,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Pain intensity.csv")
+               read_csv("data/outcomes-2021-08-16/Pain intensity.csv")
              ))),
   
   # bring in the new stuff
   # the 2021-07-07 h_ exports have the same number of rows
   tar_target(r_h_outcome_pain_mod,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Moderate pain relief.csv")
+               read_csv("data/outcomes-2021-08-16/Moderate pain relief.csv")
              ))),
   
   tar_target(r_h_outcome_physical,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Physical function.csv")
+               read_csv("data/outcomes-2021-08-16/Physical function.csv")
              ))),
   
   tar_target(r_h_outcome_qol,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Quality of life.csv")
+               read_csv("data/outcomes-2021-08-16/Quality of life.csv")
              ))),
   
   tar_target(r_h_outcome_sleep,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Sleep.csv")
+               read_csv("data/outcomes-2021-08-16/Sleep.csv")
              ))),
   
   tar_target(r_h_outcome_withdrawal,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Withdrawal.csv")
+               read_csv("data/outcomes-2021-08-16/Withdrawal.csv")
              ))),
   
   tar_target(r_h_outcome_pain_sub,
              suppressWarnings(suppressMessages(
-               read_csv("data/outcomes-2021-07-12/Substantial pain relief.csv")
+               read_csv("data/outcomes-2021-08-16/Substantial pain relief.csv")
              ))),
   
   
@@ -263,14 +274,15 @@ list(
       rename(arm = intervention) %>%
       # add outcome
       mutate(outcome = w_outcomes) %>%
-      select(outcome, everything()) %>%
+      select(outcome, study_h = study_identifier, title_h = comments,
+             everything()) %>%
       # title don't quite match, must be an errant symbol for Richards
       mutate(
-        comments = if_else(
-          str_detect(study_identifier, "Richards 2015") &
-            str_detect(comments, "Venlafaxine XR"),
+        title = if_else(
+          str_detect(study_h, "Richards 2015") &
+            str_detect(title_h, "Venlafaxine XR"),
           "Title: Efficacy of Venlafaxine XR for the Treatment of Pain in Patients With Spinal Cord Injury and Major Depression: A Randomized, Controlled Trial",
-          comments
+          title_h
         )
       )
     
@@ -302,11 +314,14 @@ list(
   tar_target(
     w_study_key,
     w_covidence_cleaned %>%
-      select(study_identifier, comments) %>%
+      select(study_covidence, title_covidence) %>%
       distinct() %>%
-      arrange(study_identifier) %>%
+      arrange(study_covidence) %>%
       study_id() %>%
-      mutate(title = str_replace(comments, "Title: ", ""))
+      mutate(
+        title = str_replace(title_covidence, "Title: ", ""),
+        study = as.character(study)
+      )
   ),
   
   # now we have a study key we can instantiate study_arm info
@@ -314,18 +329,20 @@ list(
     w_covidence,
     w_covidence_cleaned %>%
       # apply study labels
-      left_join(w_study_key, by = c("study_identifier", "comments")) %>%
+      left_join(w_study_key, by = c("study_covidence", "title_covidence")) %>%
       mutate(across(everything(), tolower)) %>%
-      select(-study_identifier,-comments) %>%
-      select(study, everything())
+      select(study, everything(), study_covidence, title_covidence)
   ),
   
   # apply study labels to observations
   tar_target(
     w_study_label_obs,
     w_outcome_obs %>%
-      left_join(w_study_key, by = c("study_identifier", "comments")) %>%
-      select(-c(study_identifier, comments, title)) %>%
+      left_join(
+        w_study_key,
+        by = c("study_h" = "study_covidence",
+               "title_h" = "title_covidence")
+      ) %>%
       select(outcome, study, arm, everything()),
     pattern = map(w_outcome_obs),
     iteration = "list"
@@ -392,6 +409,11 @@ list(
                                  type == "placebo",
                                "placebo",
                                intervention),
+        # input missing interventions
+        intervention =
+          str_remove_all(arm, "[\\d*.*\\d|mg|-]") %>%
+          str_remove_all("\\s{2,}|\\s$"),
+        
         # classes
         
         # fix a spelling mistake in classes
@@ -405,33 +427,30 @@ list(
     
   ),
   
-
-# dose --------------------------------------------------------------------
-
+  
+  # dose --------------------------------------------------------------------
+  
   
   tar_target(
     w_par_dose,
     w_par_labels %>%
-      mutate(dose_extract = map(arm, str_extract_all, "\\d+\\w*")
-             ) %>% 
+      mutate(dose_extract = map(arm, str_extract_all, "\\d+\\w*")) %>%
       select(dose_extract, everything())
-      
+    
   ),
-
-
-# set study-level parameters ----------------------------------------------
-
   
-  tar_target(
-    w_study_arm_par,
-    w_par_dose
-  ),
+  
+  # set study-level parameters ----------------------------------------------
+  
+  
+  tar_target(w_study_arm_par,
+             w_par_dose),
   
   
   # wrangle scales ----------------------------------------------------------
   
   tar_target(r_scales,
-             read_rds("data/scales-2021-07-27_09:56:25.rds")),
+             read_rds("data/scales-2021-08-18_13:56:22.rds")),
   
   tar_target(
     w_scales,
@@ -479,13 +498,12 @@ list(
   
   # observations ------------------------------------------------------------
   
-  
   tar_target(
     w_obs_long,
     w_study_label_obs %>%
       mutate(across(everything(), as.character)) %>%
       pivot_longer(
-        cols = -c(outcome, study, arm),
+        cols = -c(outcome, study, arm, study_h, title_h),
         names_to = "covidence_colname",
         values_to = "covidence_value",
         values_drop_na = TRUE
@@ -496,11 +514,36 @@ list(
         measure_type = map_chr(measure_matches, 3),
         covidence_desc = map_chr(measure_matches, 2)
       ) %>%
-      select(-measure_matches,-covidence_colname) %>%
+      select(-measure_matches, -covidence_colname) %>%
       mutate(across(everything(), tolower)) %>%
       left_join(m_key, by = "outcome")
     ,
     pattern = map(w_study_label_obs)
+  ),
+  
+  
+  # study unmatched ---------------------------------------------------------
+  
+  tar_target(
+    study_unmatched,
+    w_obs_long %>%
+      filter(is.na(study)) %>%
+      select(study_h, title_h) %>%
+      distinct()
+  ),
+  
+  # tar_target(
+  #   study_unmatched_write,
+  #   write_csv(study_unmatched, "exports/study_unmatched.csv")
+  # ),
+  
+  tar_target(study_unmatched_studies,
+             study_unmatched %>% pull(study_h)),
+  
+  tar_target(
+    study_unmatched_key,
+    w_study_key %>%
+      filter(study_covidence %in% study_unmatched_studies)
   ),
   
   # filters -----------------------------------------------------------------
@@ -509,8 +552,10 @@ list(
   # in order to filter, need study-level things
   
   tar_target(
-    w_obs_long_filtered,
+    w_obs_long_metapar,
     w_obs_long %>%
+      # hack until studies are sorted
+      filter(!is.na(study)) %>% 
       left_join(
         w_study_arm_par %>%
           select(study, arm, condition_general, design)
@@ -519,153 +564,17 @@ list(
       )
   ),
   
-  # scales ------------------------------------------------------------------
+  # scale matches -----------------------------------------------------------
   
   tar_target(
     w_obs_scale_matches,
-    w_obs_long_filtered %>%
+    w_obs_long_metapar %>%
       mutate(scale_match = pmap(
         list(outcome,
              covidence_desc,
              model_type),
-        .f = function(o, desc, m) {
-          matches <-
-            w_scales %>%
-            filter(outcome == o) %>%
-            mutate() %>%
-            mutate(
-              aka_det = map_lgl(
-                aka,
-                .f = function(a) {
-                  str_detect(desc, a)
-                }
-              ),
-              cat_det = map_lgl(
-                scale_category,
-                .f = function(c) {
-                  str_detect(desc, c)
-                }
-              )
-            ) %>%
-            mutate(aka_det =
-                     if_else(is.na(aka_det), FALSE, aka_det))  %>%
-            filter(aka_det | cat_det)
-          
-          # filter out the sleep disturbance when rows > 2
-          matches <-
-            if ((nrow(matches) > 1) &
-                str_detect(desc, "sleep_disturbance")) {
-              matches %>%
-                filter(scale_category != "sleep_disturbance")
-            } else
-              matches
-          
-          # deal with vas_0_100
-          matches <-
-            if (str_detect(desc, "vas_0_100|0_100_vas|100_mm_vas")) {
-              matches %>% filter(str_detect(scale_category, "0_100"))
-            } else
-              matches
-          
-          # anxiety & depression
-          matches <-
-            if (str_starts(desc, "anxiety")) {
-              matches %>%
-                filter(str_detect(outcome_label, "anxiety"))
-            } else if (o == "mood") {
-              matches %>%
-                filter(str_detect(outcome_label, "depression"))
-            } else
-              matches
-          
-          # score rated by patient
-          matches <-
-            if (str_detect(desc,
-                           "depression_score_rated_by_patient")) {
-              matches %>%
-                filter(scale_category != "scale_unknown")
-            } else
-              matches
-          
-          # nrs 0-10
-          matches <-
-            if (nrow(matches) > 1 &
-                o == "pain_int" &
-                str_detect(desc, "nrs|numerical_rating_scale")) {
-              matches %>%
-                filter(str_detect(scale_category, "numerical_rating"))
-            } else
-              matches
-          
-          # mcgill short form
-          matches <-
-            if (nrow(matches) > 1 &
-                str_detect(desc, "short_form_mc_gill")) {
-              matches %>%
-                filter(str_detect(scale_category, "short_form"))
-            } else
-              matches
-          
-          # present pain intensity
-          matches <-
-            if (nrow(matches) > 1 &
-                str_detect(desc, "present_pain_intensity")) {
-              matches %>%
-                filter(str_detect(scale_category, "present_pain_intensity"))
-            } else
-              matches
-          
-          # brief pain short form item 5
-          matches <-
-            if (nrow(matches) > 1 &
-                str_detect(desc, "bpi_sf_item_5")) {
-              matches %>%
-                filter(str_detect(
-                  scale_category,
-                  "brief_pain_short_form_inventory_item_5"
-                ))
-            } else
-              matches
-          
-          # eq vas
-          matches <-
-            if (nrow(matches) > 1 &
-                str_detect(desc, "eq_5d_vas")) {
-              matches %>%
-                filter(str_detect(scale_category, "vas"))
-            } else
-              matches
-          
-          # differentiate the unspecified
-          matches <-
-            if (nrow(matches) > 1 &
-                str_detect(desc,
-                           "\\d+.*likert|likert.*\\d+|\\d+.*vas|vas.*\\d+|\\d+.*nrs|nrs.*\\d+")) {
-              matches %>%
-                filter(!str_detect(scale_category, "unspecified"))
-            } else
-              matches
-          
-          # choose scale category if only one matches the scale cat
-          matches <-
-            if (sum(matches$cat_det) == 1) {
-              matches %>%
-                filter(cat_det)
-            } else if (n_distinct(matches$scale_category) == 1) {
-              matches %>%
-                head(1)
-            } else
-              matches
-          
-          matches <-
-            if (m == "lor") {
-              tibble(scale_category = "count")
-            } else
-              matches
-          
-          return(matches)
-          
-        }
+        .f = scale_match,
+        scale_df = w_scales
       ))
   ),
   
@@ -716,7 +625,7 @@ list(
             distinct() %>% pull(scale_category)
         }
       )) %>%
-      select(-scale_match,-cat_n)
+      select(-scale_match, -cat_n)
   ),
   
   tar_target(w_obs_scales,
@@ -850,10 +759,9 @@ list(
         se = if_else(sd > 0 & is.na(se) & n > 0,
                      sd / sqrt(n),
                      se),
-        sd = if_else(se > 0 & is.na(sd) & n > 0, 
+        sd = if_else(se > 0 & is.na(sd) & n > 0,
                      se * sqrt(n),
-                     sd
-                     ),
+                     sd),
         n = if_else(model_type == "lor" & percent > 0,
                     as.integer(r * 100 / percent),
                     n)
@@ -895,21 +803,27 @@ list(
         # tidy up intervention
         intervention = if_else(
           is.na(intervention) | intervention == "n",
-          str_remove_all(arm, "[^a-z|\\s|+]") %>% 
-            str_remove_all("and mg") %>% 
+          str_remove_all(arm, "[^a-z|\\s|+]") %>%
+            str_remove_all("and mg") %>%
             str_remove_all("[mg ]*\\s*$"),
           intervention
         ),
         # create intervention-scale & arm-scale
-        intervention_scale = 
-          if_else(intervention == "placebo", intervention, 
-                  str_c(intervention, scale, sep = " x "))
-          ,
-        arm_scale = 
-          if_else(intervention == "placebo", intervention, 
-                  str_c(arm, scale, sep = " x "))
+        intervention_scale =
+          if_else(
+            intervention == "placebo",
+            intervention,
+            str_c(intervention, scale, sep = " x ")
+          )
+        ,
+        arm_scale =
+          if_else(
+            intervention == "placebo",
+            intervention,
+            str_c(arm, scale, sep = " x ")
+          )
         
-      ) %>% 
+      ) %>%
       select(study, intervention_scale, arm_scale, everything())
   ),
   
@@ -927,348 +841,26 @@ list(
   ),
   
   
-
-# shiny export obs --------------------------------------------------------
-
-
+  
+  # shiny export obs --------------------------------------------------------
+  
+  
   # tar_target(o_shiny,
   #            {
   #              write_rds(w_obs, "hppshiny/obs.rds")
   #              write_rds(m_key, "hppshiny/model-key.rds")
-  #              
+  #
   #            }),
-
-
-# shiny preloaded models --------------------------------------------------
-
-tar_target(
-  m_pain_int,
-  w_obs_m %>% 
-    filter(outcome == "pain_int") %>% 
-    viable_observations() %>% 
-             set_agd_arm(
-               data = .,
-               study = study,
-               trt = intervention,
-               y = mean,
-               se = se,
-               sample_size = n,
-               trt_ref = "placebo"
-             ) %>% 
-    nma(trt_effects = "random")
-
-           ),
-
   
-  #   # models ------------------------------------------------------------------
-  #
-  #
-  #   # inputs ------------------------------------------------------------------
-  #
-  #
-  # #   tar_target(
-  # #     m_dat_outcome,
-  # #     w_obs_m %>%
-  # #       filter(outcome == w_outcomes),
-  # #     pattern = map(w_outcomes),
-  # #     iteration = "list"
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_condition_general,
-  # #     w_obs_m %>%
-  # #       select(outcome, condition_general) %>%
-  # #       distinct()
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_dat_condition_general,
-  # #     left_join(m_condition_general, w_obs),
-  # #     pattern = map(m_condition_general),
-  # #     iteration = "list"
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_condition_iasp,
-  # #     w_obs_m %>%
-  # #       select(outcome, condition_iasp) %>%
-  # #       distinct()
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_dat_condition_iasp,
-  # #     left_join(m_condition_iasp, w_obs),
-  # #     pattern = map(m_condition_iasp),
-  # #     iteration = "list"
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_class,
-  # #     w_obs_m %>%
-  # #       mutate(class = if_else(type == "placebo",
-  # #                              "placebo",
-  # #                              class)) %>%
-  # #       select(outcome, class) %>%
-  # #       distinct() %>%
-  # #       filter(class != "placebo")
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_dat_class,
-  # #     {
-  # #       binding_dat <-
-  # #         m_class %>%
-  # #         bind_rows(m_class)
-  # #
-  # #       binding_dat[2, 2] <- "placebo"
-  # #
-  # #       binding_dat %>% left_join(w_obs)
-  # #     },
-  # #     pattern = map(m_class),
-  # #     iteration = "list"
-  # #   ),
-  # #
-  # #   tar_target(
-  # #     m_dat,
-  # #     m_dat_outcome %>%
-  # #       append(m_dat_condition_general) %>%
-  # #       append(m_dat_condition_iasp) %>%
-  # #       append(m_dat_class) %>%
-  # #       map(
-  # #         .f = function(df) {
-  # #           df %>%
-  # #             group_by(study) %>%
-  # #             filter(length(intervention) > 1) %>%
-  # #             ungroup()
-  # #         }
-  # #       )
-  # #   ),
-  # #
-  # #
-  # #
-  # #   tar_target(
-  # #     m_subgroups,
-  # #     tibble(
-  # #       outcome = w_outcomes,
-  # #       subgroup = "all",
-  # #       subgroup_value = "all"
-  # #     ) %>%
-  # #       bind_rows(
-  # #         m_condition_general %>%
-  # #           rename(subgroup_value = condition_general) %>%
-  # #           mutate(subgroup = "condition_general")
-  # #       ) %>%
-  # #       bind_rows(
-  # #         m_condition_iasp %>%
-  # #           rename(subgroup_value = condition_iasp) %>%
-  # #           mutate(subgroup = "condition_iasp")
-  # #       ) %>%
-  # #       bind_rows(
-  # #         m_class %>%
-  # #           filter(class != "placebo") %>%
-  # #           rename(subgroup_value = class) %>%
-  # #           mutate(subgroup = "class")
-  # #       ) %>%
-  # #       left_join(m_key, by = "outcome") %>%
-  # #       mutate(dat = m_dat,
-  # #              nrow = map_int(dat, nrow)) %>%
-  # #       filter(nrow > 1)
-  # #
-  # #   ),
-  # #
-  #   # nma ---------------------------------------------------------------------
-  #
-  #   tar_target(
-  #     m_net,
-  #     map2(
-  #       m_subgroups %>% pull(dat),
-  #       m_subgroups %>% pull(model_type),
-  #       hpp_net
-  #     )
-  #
-  #   ),
-  #
-  #   tar_target(m_nma_all,
-  #              m_net %>%
-  #                map(safe_nma, trt_effects = "random")),
-  #
-  #   tar_target(m_beep, {
-  #     m_nma %>% str(1)
-  #     beepr::beep()
-  #   }),
-  #
-  #   tar_target(
-  #     m_nma_key_all,
-  #     m_subgroups %>%
-  #       mutate(no_fail = m_nma_all %>% map(1) %>% map(length) != 1)
-  #   ),
-  #
-  #   tar_target(
-  #     m_nma_key,
-  #     m_nma_key_all %>%
-  #       filter(no_fail) %>%
-  #       select(-no_fail)
-  #   ),
-  #
-  #   tar_target(m_nma,
-  #              m_nma_all[m_nma_key_all %>% pull(no_fail)]),
-  #
-  #   # eda all outcomes --------------------------------------------------------
-  #
-  #
-  #   # outcome and condition ---------------------------------------------------
-  #
-  #   tar_target(
-  #     e_outcome_condition_counts,
-  #     w_obs %>%
-  #       group_by(outcome, condition_general, type) %>%
-  #       summarise(
-  #         participants = sum(n, na.rm = TRUE),
-  #         studies = n_distinct(study),
-  #         interventions_n = n_distinct(intervention),
-  #         interventions = intervention %>% unique() %>% paste(collapse = "; "),
-  #         classes = class %>% unique() %>% paste(collapse = "; ")
-  #       ) %>%
-  #       ungroup()
-  #   ),
-  #
-  #   tar_target(
-  #     e_outcome_condition_placebo,
-  #     e_outcome_condition_counts %>%
-  #       filter(type == "placebo") %>%
-  #       rename(
-  #         studies_p = studies,
-  #         interventions_n_p  = interventions_n,
-  #         participants_p = participants
-  #       ) %>%
-  #       select(-interventions, -type, -classes)
-  #   ),
-  #
-  #   tar_target(
-  #     e_outcome_condition_intervention,
-  #     e_outcome_condition_counts %>%
-  #       filter(type == "antidepressant") %>%
-  #       rename(
-  #         studies_i = studies,
-  #         interventions_n_i  = interventions_n,
-  #         participants_i = participants
-  #       ) %>%
-  #       select(-type)
-  #   ),
-  #
-  #   tar_target(
-  #     e_outcome_condition_all_types,
-  #     w_obs %>%
-  #       group_by(outcome, condition_general) %>%
-  #       summarise(
-  #         participants_t = sum(n, na.rm = TRUE),
-  #         studies_t = n_distinct(study),
-  #         interventions_n_t = n_distinct(intervention),
-  #       )
-  #   ),
-  #
-  #   tar_target(
-  #     e_outcome_condition,
-  #     left_join(
-  #       e_outcome_condition_placebo,
-  #       e_outcome_condition_intervention,
-  #       by = c("outcome", "condition_general")
-  #     ) %>%
-  #       left_join(
-  #         e_outcome_condition_all_types,
-  #         by = c("outcome", "condition_general")
-  #       )
-  #   ),
-  #
-  #   tar_target(
-  #     e_outcome_condition_tab,
-  #     e_outcome_condition %>%
-  #       ungroup() %>%
-  #       gt(groupname_col = "outcome",
-  #          rowname_col = "condition_general") %>%
-  #       hpp_tab() %>%
-  #       summary_rows(
-  #         columns = c(
-  #           contains("participants"),
-  #           contains("studies"),
-  #           contains("interventions_n")
-  #         ),
-  #         fns = list(Total = ~ sum(., na.rm = TRUE)),
-  #         groups = TRUE,
-  #         formatter = fmt_number,
-  #         decimals = 0
-  #       ) %>%
-  #       tab_spanner(label = "placebo",
-  #                   columns = contains("_p")) %>%
-  #       tab_spanner(label = "intervention",
-  #                   columns = contains("_i")) %>%
-  #       tab_spanner(label = "total",
-  #                   columns = contains("_t")) %>%
-  #       cols_label(
-  #         participants_p = "participants",
-  #         studies_p = "studies",
-  #         interventions_n_p = "interventions",
-  #         participants_i = "participants",
-  #         studies_i = "studies",
-  #         interventions_n_i = "interventions",
-  #         participants_t = "participants",
-  #         studies_t = "studies",
-  #         interventions_n_t = "interventions"
-  #       ) %>%
-  #       tab_header(
-  #         "Outcomes and conditions",
-  #         "Number of participants, studies, and interventions in for each
-  #         condition in each outcome"
-  #       ) %>%
-  #       tab_style(style = list(cell_fill(hpp_pal(
-  #         1
-  #       ))),
-  #       locations = cells_summary()) %>%
-  #       tab_style(
-  #         style = cell_text(size = "x-small"),
-  #         locations =
-  #           cells_column_labels(columns = c(
-  #             contains("participants"),
-  #             contains("studies"),
-  #             contains("interventions_n")
-  #           ))
-  #       )
-  #   ),
-  #
-  #   # shiny -------------------------------------------------------------------
-  #
-  #   # for some reason the structure of the all ins are different
-  #
-  #   tar_target(shiny_nma,
-  #              write_rds(m_nma, "hppshiny/nma-2.rds")),
-  #
-  #   tar_target(
-  #     shiny_key ,
-  #     write_rds(m_nma_key %>% select(-dat), "hppshiny/key-2.rds")
-  #   ),
-  #
-  #
-  #
-  #   # export data -------------------------------------------------------------
-  #   tar_target(
-  #     export_dat_files,
-  #     m_nma_key %>%
-  #       select(-nrow, -model_type) %>%
-  #       mutate(
-  #         file_name = glue("exports/hppdat/{outcome}-{subgroup}-{subgroup_value}.csv")
-  #       )
-  #   ),
-  #
-  #   tar_target(
-  #     export_data,
-  #     map2(
-  #       export_dat_files %>% pull(dat),
-  #       export_dat_files %>% pull(file_name),
-  #       write_csv
-  #     )
-  #   ),
-  #
-  #
+  
+  
+  # models ------------------------------------------------------------------
+  
+  
+  # all in ------------------------------------------------------------------
+  
+  
+  
   # null --------------------------------------------------------------------
   
   NULL

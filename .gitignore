@@ -7,7 +7,7 @@
 outputs/
 # targets/
 +_files/
-_targets/
+2_targets/
 old-data/
 simulation/
 *.zip

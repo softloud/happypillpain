@@ -92,8 +92,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-08-11"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-08-11"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-08-19"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-08-19"/>
   <meta name="article:author" content="Hollie and Charles"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie and Charles"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-08-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Hollie"]},{"type":"character","attributes":{},"value":["For exploration\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hollie and Charles"]}]}]},{"type":"character","attributes":{},"value":["updated 2021-08-19"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2060,7 +2060,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie and Charles","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-11T00:00:00.000+01:00","citationText":"Charles, 2021"}
+{"title":"Hollie","description":"For exploration","authors":[{"author":"Hollie and Charles","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-19T00:00:00.000+01:00","citationText":"Charles, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2070,7 +2070,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="nav-left">
 <a href="index.html" class="title">hpp</a>
 <a href="overview.html">overview</a>
-<a href="neuropathic.html">neuropathic</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+neuropathic
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="neuropathic-summary.html">analysis</a>
+<a href="neuropathic.html">notes</a>
+</div>
+</div>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -2105,7 +2115,7 @@ pipeline
 <div class="d-byline">
   Hollie and Charles  
   
-<br/>updated 2021-08-11
+<br/>updated 2021-08-19
 </div>
 
 <div class="d-article">
@@ -2166,6 +2176,44 @@ pipeline
 </div>
 <h2 id="scales">scales</h2>
 <h3 id="unmatched-scales">unmatched scales</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># get overview counts</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_snapshot</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># view the list of unmatched descriptions &amp; how many matches</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cat_n</span> <span class='op'>!=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># view the unmatches that have more than one match</span>
+<span class='co'># mouse over to see the table </span>
+<span class='co'># next chunk expands "unnests" those tables </span>
+<span class='co'># creates new row for each match</span>
+<span class='co'># so, if three matches, three rows in next</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cat_n</span> <span class='op'>&gt;</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># view list of 0 matches</span>
+<span class='fu'><a href='https://docs.ropensci.org/targets/reference/tar_read.html'>tar_read</a></span><span class='op'>(</span><span class='va'>w_obs_scale_counts</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cat_n</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># these are the scales that aren't matching yet</span>

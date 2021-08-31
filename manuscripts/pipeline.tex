@@ -134,8 +134,8 @@ Much focus is given to correct model design. However, there is a deceptively mun
   \hlkwd{print}\hlstd{(}\hlkwc{tabular.environment} \hlstd{=} \hlstr{"tabularx"}\hlstd{,}
         \hlkwc{width} \hlstd{=} \hlstr{"\textbackslash{}\textbackslash{}textwidth"}\hlstd{)}
 \end{alltt}
-\end{kframe}% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Wed Aug  4 17:15:54 2021
+\end{kframe}% latex table generated in R 4.1.1 by xtable 1.8-4 package
+% Wed Aug 25 16:42:29 2021
 \begin{table}[ht]
 \centering
 \begin{tabularx}{\textwidth}{rllllllllll}
@@ -154,7 +154,16 @@ Much focus is given to correct model design. However, there is a deceptively mun
 
 From here we will detail an R-specific workflow using the \package{targets} package~\cite{landau_2021}, Google sheets, with data-scraping provided by the \package{googlesheets4} package~\cite{bryan_2021}.
 
-\section{Labelling scales and interpreting dosage}
+\section{Labelling scales}
+
+% and interpreting dosage? 
+ 
+To see how this workflow is used to solve a specific problem, we focus now on the labelling of measurement scales in the Cochrane review of the use of antidepressants for the treatment of chronic pain in adults. There is a somewhat dizzying array of scales for the different outcomes associated with chronic pain, along with various ways for these scales to be described. In addition to this, the scales are not necessarily measured with the same direction of improvement. Identifying which scales are in the dataset, how they are labelled, and how they should be labeled is best an iterative problem for both the data analysts and domain-knowledge experts. 
+
+\subsection{Measuring chronic pain in adults}
+
+\subsection{Workflow for labelling of scales}
+
 
 \section{Discussion}
 

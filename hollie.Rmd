@@ -45,6 +45,46 @@ tar_read()
 
 ### unmatched scales
 
+```{r}
+# get overview counts
+tar_read(w_obs_scale_snapshot)
+
+```
+
+
+```{r eval=FALSE}
+# view the list of unmatched descriptions & how many matches
+tar_read(w_obs_scale_counts) %>% 
+  filter(cat_n != 1) %>% 
+  View()
+
+
+```
+
+```{r}
+
+# view the unmatches that have more than one match
+# mouse over to see the table 
+# next chunk expands "unnests" those tables 
+# creates new row for each match
+# so, if three matches, three rows in next
+tar_read(w_obs_scale_counts) %>% 
+  filter(cat_n > 1) %>% 
+  View()
+
+
+```
+
+```{r}
+# view list of 0 matches
+tar_read(w_obs_scale_counts) %>% 
+  filter(cat_n == 0) %>% 
+  View()
+
+```
+
+
+
 ```{r eval=FALSE}
 # these are the scales that aren't matching yet
 # some have 0 matches some have > 1

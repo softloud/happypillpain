@@ -8,8 +8,14 @@ navbar:
   left: 
     - text: "overview"
       href: overview.html
+    - text: "report"
+      href: report.html
     - text: "neuropathic"
-      href: neuropathic.html
+      menu: 
+        - text: "analysis"
+          href: neuropathic-summary.html
+        - text: "notes"
+          href: neuropathic.html
     # - text: "outcomes"
     #   menu:
     #     - text: "adverse"

@@ -11,7 +11,7 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```
 
 > Current draft for discussion with Tamar, Gav, and Hollie. Will cut down for presentation to whole group.
