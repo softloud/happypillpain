@@ -232,15 +232,6 @@ list(
                read_csv("data/outcomes-2021-08-16/Substantial pain relief.csv")
              ))),
   
-  
-  # pain mod doesn't have comments column
-  # has the same number of rows, will just cbind it
-  tar_target(
-    w_h_outcome_pain_mod,
-    r_h_outcome_withdrawal %>% select(Comments) %>%
-      cbind(r_h_outcome_pain_mod)
-  ),
-  
   # put all observations in one list
   tar_target(
     r_h_outcome_obs,
@@ -251,7 +242,7 @@ list(
       physical = r_h_outcome_physical,
       qol = r_h_outcome_qol,
       sleep = r_h_outcome_sleep,
-      pain_mod = w_h_outcome_pain_mod,
+      pain_mod = r_h_outcome_pain_mod,
       withdrawal = r_h_outcome_withdrawal,
       pain_sub = r_h_outcome_pain_sub
     )
@@ -274,22 +265,40 @@ list(
       rename(arm = intervention) %>%
       # add outcome
       mutate(outcome = w_outcomes) %>%
-      select(outcome, study_h = study_identifier, title_h = comments,
-             everything()) %>%
-      # title don't quite match, must be an errant symbol for Richards
-      mutate(
-        title = if_else(
-          str_detect(study_h, "Richards 2015") &
-            str_detect(title_h, "Venlafaxine XR"),
-          "Title: Efficacy of Venlafaxine XR for the Treatment of Pain in Patients With Spinal Cord Injury and Major Depression: A Randomized, Controlled Trial",
-          title_h
-        )
-      )
-    
-    ,
+      select(outcome,
+             study_h = study_identifier,
+             title_h = comments,
+             everything()),
     pattern = map(w_outcomes),
     iteration = "list"
   ),
+  
+  
+  # take hollie's extractions long ------------------------------------------
+  tar_target(
+    w_obs_long,
+    w_outcome_obs %>%
+      mutate(across(everything(), as.character)) %>%
+      pivot_longer(
+        cols = -c(outcome, study_h, arm, title_h),
+        names_to = "covidence_colname",
+        values_to = "covidence_value",
+        values_drop_na = TRUE
+      ) %>%
+      mutate(
+        measure_matches =
+          map(covidence_colname, str_match, "(.+)_([a-z]+)[_\\d]*$"),
+        measure_type = map_chr(measure_matches, 3),
+        covidence_desc = map_chr(measure_matches, 2)
+      ) %>%
+      select(-measure_matches, -covidence_colname) %>%
+      mutate(across(everything(), tolower)) %>%
+      left_join(m_key, by = "outcome")
+    ,
+    pattern = map(w_outcome_obs)
+  ),
+  
+  
   
   # model types -------------------------------------------------------------
   
@@ -321,7 +330,8 @@ list(
       mutate(
         title = str_replace(title_covidence, "Title: ", ""),
         study = as.character(study)
-      )
+      ) %>%
+      mutate(across(everything(), tolower))
   ),
   
   # now we have a study key we can instantiate study_arm info
@@ -336,370 +346,87 @@ list(
   
   # apply study labels to observations
   tar_target(
-    w_study_label_obs,
-    w_outcome_obs %>%
+    w_obs_study,
+    w_obs_long %>%
       left_join(
         w_study_key,
         by = c("study_h" = "study_covidence",
                "title_h" = "title_covidence")
       ) %>%
-      select(outcome, study, arm, everything()),
-    pattern = map(w_outcome_obs),
-    iteration = "list"
+      select(outcome, study, arm, everything())
   ),
-  
-  # wrangle study-arm labels ------------------------------------------------
-  
-  tar_target(
-    r_condition,
-    read_csv("data/conditions-2021-07-12_16:37:56.csv")
-  ),
-  
-  tar_target(
-    w_condition,
-    r_condition %>%
-      select(-condition_no_chronic) %>%
-      rename(condition_general = general_grouping,
-             condition_iasp = iasp_classification)
-  ),
-  
-  
-  tar_target(
-    w_par_labels,
-    w_covidence  %>%
-      select(
-        study,
-        intervention,
-        title,
-        intervention_type,
-        intervention_class,
-        intervention_name,
-        group,
-        sponsorship_source,
-        authors_name,
-        duration_weeks,
-        pain_duration,
-        inclusion_criteria,
-        exclusion_criteria,
-        starts_with("main_aim"),
-        starts_with("chronic_pain"),
-        starts_with("total_number_of_participants"),
-        starts_with("number_in_each_arm"),
-        starts_with("type_of_participant"),
-        starts_with("intervention_adverse"),
-        starts_with("withdrawal_total")
-      ) %>%
-      # rename variables
-      select(
-        study,
-        arm = intervention,
-        intervention = intervention_name,
-        type = intervention_type,
-        class = intervention_class,
-        condition = chronic_pain_condition_s,
-        main_aim = main_aim_pain_mood_quality_of_life_etc,
-        design = group,
-        everything()
-      ) %>%
-      rename(chronic_condition = condition) %>%
-      left_join(w_condition, by = "chronic_condition") %>%
-      mutate(
-        # label placebo interventions
-        intervention = if_else(is.na(intervention) &
-                                 type == "placebo",
-                               "placebo",
-                               intervention),
-        # input missing interventions
-        intervention =
-          str_remove_all(arm, "[\\d*.*\\d|mg|-]") %>%
-          str_remove_all("\\s{2,}|\\s$"),
-        
-        # classes
-        
-        # fix a spelling mistake in classes
-        class = if_else(str_detect(class, "tetra"),
-                        "tetracyclic (teca)",
-                        class),
-        
-        # one of the placebo classes is labelled "n"
-        class = ifelse(class == "n", NA, class)
-      )
-    
-  ),
-  
-  
-  # dose --------------------------------------------------------------------
-  
-  
-  tar_target(
-    w_par_dose,
-    w_par_labels %>%
-      mutate(dose_extract = map(arm, str_extract_all, "\\d+\\w*")) %>%
-      select(dose_extract, everything())
-    
-  ),
-  
-  
-  # set study-level parameters ----------------------------------------------
-  
-  
-  tar_target(w_study_arm_par,
-             w_par_dose),
-  
-  
-  # wrangle scales ----------------------------------------------------------
-  
-  tar_target(r_scales,
-             read_rds("data/scales-2021-08-18_13:56:22.rds")),
-  
-  tar_target(
-    w_scales,
-    r_scales %>%
-      clean_names() %>%
-      rename(scale_category = scale) %>%
-      mutate(
-        outcome_label = outcome,
-        scale_label = scale_category,
-        scale_category = tolower(scale_category),
-        aka = tolower(aka),
-        outcome = tolower(outcome),
-        outcome =
-          case_when(
-            str_detect(outcome, "mood") ~ "mood",
-            outcome == "pain" ~ "pain_int",
-            str_detect(outcome, "physical") ~ "physical",
-            str_detect(outcome, "quality") ~ "qol",
-            TRUE ~ outcome
-          )
-      ) %>%
-      mutate(aka = strsplit(aka, split = "\\s*;\\s*"))  %>%
-      unnest(aka) %>%
-      # clean the aka column so it's the same as the cleaned janitor names
-      mutate(
-        # store raw aka for troubleshooting
-        aka_raw = aka,
-        # remove whitespace from start and end
-        aka = str_trim(aka),
-        aka =
-          # replace () and [] with nothing
-          str_replace_all(aka, "[\\(\\)\\[\\]]", "") %>%
-          # replace - and space with _
-          str_replace_all("[\\s+-]", "_")
-      ) %>%
-      mutate(
-        scale_category =
-          str_replace_all(scale_category, "[\\s+\\-,]", "_") %>%
-          str_remove_all("[\\(\\)]") %>%
-          str_replace_all("_+", "_")
-      )
-    
-  ),
-  
-  
-  # observations ------------------------------------------------------------
-  
-  tar_target(
-    w_obs_long,
-    w_study_label_obs %>%
-      mutate(across(everything(), as.character)) %>%
-      pivot_longer(
-        cols = -c(outcome, study, arm, study_h, title_h),
-        names_to = "covidence_colname",
-        values_to = "covidence_value",
-        values_drop_na = TRUE
-      ) %>%
-      mutate(
-        measure_matches =
-          map(covidence_colname, str_match, "(.+)_([a-z]+)[_\\d]*$"),
-        measure_type = map_chr(measure_matches, 3),
-        covidence_desc = map_chr(measure_matches, 2)
-      ) %>%
-      select(-measure_matches, -covidence_colname) %>%
-      mutate(across(everything(), tolower)) %>%
-      left_join(m_key, by = "outcome")
-    ,
-    pattern = map(w_study_label_obs)
-  ),
-  
-  
   # study unmatched ---------------------------------------------------------
   
   tar_target(
-    study_unmatched,
-    w_obs_long %>%
+    w_study_unmatched,
+    w_obs_study %>%
       filter(is.na(study)) %>%
       select(study_h, title_h) %>%
       distinct()
   ),
   
-  # tar_target(
-  #   study_unmatched_write,
-  #   write_csv(study_unmatched, "exports/study_unmatched.csv")
-  # ),
-  
-  tar_target(study_unmatched_studies,
-             study_unmatched %>% pull(study_h)),
+  tar_target(
+    w_study_unmatched_studies,
+    w_study_unmatched %>% pull(study_h)
+  ),
   
   tar_target(
-    study_unmatched_key,
+    w_study_unmatched_key,
     w_study_key %>%
-      filter(study_covidence %in% study_unmatched_studies)
+      filter(study_covidence %in% w_study_unmatched_studies)
   ),
   
-  # filters -----------------------------------------------------------------
-  
-  # currently filtering to neuropathic and scales categorised to 1
-  # in order to filter, need study-level things
-  
+  # as the studis that are unmatched have only a single, we can join on study only
   tar_target(
-    w_obs_long_metapar,
-    w_obs_long %>%
-      # hack until studies are sorted
-      filter(!is.na(study)) %>% 
-      left_join(
-        w_study_arm_par %>%
-          select(study, arm, condition_general, design)
-        ,
-        by = c("study", "arm")
+    w_obs_study_fix,
+    w_obs_study %>%
+      mutate(
+        study = map2_chr(
+          study,
+          study_h,
+          .f = function(s, h) {
+            if (is.na(s)) {
+              w_study_unmatched_key %>%
+                filter(study_covidence == h) %>% pull(study)
+            } else
+              s
+          }
+        ),
+        title = map2_chr(
+          study_h,
+          title,
+          .f = function(h, t) {
+            if (is.na(t)) {
+              w_study_unmatched_key %>%
+                filter(study_covidence == h) %>% pull(title)
+            } else
+              t
+          }
+        )
       )
+    
   ),
   
-  # scale matches -----------------------------------------------------------
-  
-  tar_target(
-    w_obs_scale_matches,
-    w_obs_long_metapar %>%
-      mutate(scale_match = pmap(
-        list(outcome,
-             covidence_desc,
-             model_type),
-        .f = scale_match,
-        scale_df = w_scales
-      ))
-  ),
-  
-  
-  
-  tar_target(
-    w_obs_scale_counts,
-    w_obs_scale_matches %>%
-      # select(study, outcome, covidence_desc, scale_match) %>%
-      mutate(cat_n = map_int(
-        scale_match,
-        .f = function(df) {
-          df %>%
-            select(scale_category) %>%
-            distinct() %>%
-            nrow()
-        }
-      ))
-  ),
-  
-  tar_target(w_obs_scale_snapshot,
-             w_obs_scale_counts %>%
-               count(cat_n)),
-  
-  tar_target(w_obs_scale_excluded,
-             w_obs_scale_counts %>%
-               filter(cat_n != 1)),
-  
-  tar_target(
-    w_obs_scale_excluded_next,
-    w_obs_scale_excluded %>%
-      filter(cat_n != 1) %>%
-      filter(!str_detect(covidence_desc, "0_10_cm_vas")) %>%
-      head(1) %>%
-      select(outcome, covidence_desc, scale_match)
-  ),
-  
-  
-  
-  tar_target(
-    w_obs_scales_viable,
-    w_obs_scale_counts %>%
-      filter(cat_n == 1) %>%
-      mutate(scale = map_chr(
-        scale_match,
-        .f = function(df) {
-          df %>% select(scale_category) %>%
-            distinct() %>% pull(scale_category)
-        }
-      )) %>%
-      select(-scale_match, -cat_n)
-  ),
-  
-  tar_target(w_obs_scales,
-             w_obs_scales_viable),
-  
-  
+  tar_target(w_study_assert, {
+    count_unmatched <-
+      w_obs_study_fix %>%
+      filter(is.na(study) | is.na(title)) %>%
+      nrow()
+    
+    assert_that(count_unmatched == 0,
+                msg = "NAs in either study or title label")
+  }),
   
   
   # go wide -----------------------------------------------------------------
   
-  
-  tar_target(
-    w_obs_wide_duplicates,
-    w_obs_scales_viable %>%
-      pivot_wider(
-        values_fn = length,
-        # for debugging
-        id_cols = c(outcome,
-                    study,
-                    arm,
-                    covidence_desc,
-                    scale,
-                    model_type),
-        names_from = measure_type,
-        values_from = covidence_value
-      ) %>%
-      filter(
-        mean > 1 |
-          sd > 1 |
-          n > 1 |
-          percent > 1 |
-          se > 1 |
-          range > 1 |
-          median > 1 |
-          ci > 1 |
-          intervals > 1 |
-          iqr > 1 |
-          limits > 1
-      )
-  ),
-  
-  tar_target(
-    w_obs_wide_to_filter,
-    w_obs_wide_duplicates %>%
-      select(outcome, study, arm, covidence_desc, scale) %>%
-      distinct()
-  ),
-  
-  tar_target(
-    w_obs_wide_viable,
-    w_obs_scales_viable %>%
-      anti_join(w_obs_wide_to_filter)
-  ),
-  
   tar_target(
     w_obs_wide,
-    w_obs_wide_viable %>%
-      pivot_wider(
-        id_cols = c(outcome,
-                    study,
-                    arm,
-                    covidence_desc,
-                    scale,
-                    model_type),
-        names_from = measure_type,
-        values_from = covidence_value
-      ) %>%
-      mutate(across(any_of(
-        c("mean", "sd", "se", "percent", "median")
-      ), as.numeric)) %>%
-      mutate(n = as.integer(n))
+    w_obs_study_fix %>%
+      select(-study_h,-title_h) %>%
+      pivot_wider(names_from = measure_type,
+                  values_from = covidence_value)
   ),
-  
-  
   # timepoints --------------------------------------------------------------
   
   tar_target(
@@ -746,121 +473,432 @@ list(
       select(outcome, study, arm, covidence_desc, timepoint, everything())
   ),
   
-  
-  # bundle everything together ----------------------------------------------
-  
-  # get sds
+  # wrangle scales ----------------------------------------------------------
+
+  tar_target(r_scales,
+             read_rds("data/scales-2021-08-18_13:56:22.rds")),
+
   tar_target(
-    w_obs_calc,
+    w_scales,
+    r_scales %>%
+      clean_names() %>%
+      rename(scale_category = scale) %>%
+      mutate(
+        outcome_label = outcome,
+        scale_label = scale_category,
+        scale_category = tolower(scale_category),
+        aka = tolower(aka),
+        outcome = tolower(outcome),
+        outcome =
+          case_when(
+            str_detect(outcome, "mood") ~ "mood",
+            outcome == "pain" ~ "pain_int",
+            str_detect(outcome, "physical") ~ "physical",
+            str_detect(outcome, "quality") ~ "qol",
+            TRUE ~ outcome
+          )
+      ) %>%
+      mutate(aka = strsplit(aka, split = "\\s*;\\s*"))  %>%
+      unnest(aka) %>%
+      # clean the aka column so it's the same as the cleaned janitor names
+      mutate(
+        # store raw aka for troubleshooting
+        aka_raw = aka,
+        # remove whitespace from start and end
+        aka = str_trim(aka),
+        aka =
+          # replace () and [] with nothing
+          str_replace_all(aka, "[\\(\\)\\[\\]]", "") %>%
+          # replace - and space with _
+          str_replace_all("[\\s+-]", "_")
+      ) %>%
+      mutate(
+        scale_category =
+          str_replace_all(scale_category, "[\\s+\\-,]", "_") %>%
+          str_remove_all("[\\(\\)]") %>%
+          str_replace_all("_+", "_")
+      )
+
+  ),
+
+  # scale matches -----------------------------------------------------------
+
+  tar_target(
+    w_obs_scale_matches,
     w_obs_time %>%
-      mutate(
-        # fix this later
-        r = ifelse(!is.na(percent), n, NA),
-        se = if_else(sd > 0 & is.na(se) & n > 0,
-                     sd / sqrt(n),
-                     se),
-        sd = if_else(se > 0 & is.na(sd) & n > 0,
-                     se * sqrt(n),
-                     sd),
-        n = if_else(model_type == "lor" & percent > 0,
-                    as.integer(r * 100 / percent),
-                    n)
-      )
+      mutate(scale_match = pmap(
+        list(outcome,
+             covidence_desc,
+             model_type),
+        .f = scale_match,
+        scale_df = w_scales
+      ))
   ),
-  
-  # todo: target for rows not used
+
+
+
   tar_target(
-    w_obs_viable,
-    w_obs_calc %>%
-      mutate(
-        model_viable = case_when(
-          model_type == "lor" ~ n > 0 & r > 0,
-          model_type == "smd" ~ mean > 0 & se > 0 & n > 0
-        )
-      ) %>%
-      filter(model_viable) %>%
-      filter(!is.na(study)) %>%
-      select(-model_viable)
+    w_obs_scale_counts,
+    w_obs_scale_matches %>%
+      # select(study, outcome, covidence_desc, scale_match) %>%
+      mutate(cat_n = map_int(
+        scale_match,
+        .f = function(df) {
+          df %>%
+            select(scale_category) %>%
+            distinct() %>%
+            nrow()
+        }
+      ))
   ),
-  
-  tar_target(w_obs_investigate,
-             anti_join(w_obs_calc, w_obs_viable)),
-  
-  # todo: add filters to observation
-  
-  # keep this target as the final all-in output dataframe to be shared
-  # use this target for EDA
+
+  tar_target(w_obs_scale_snapshot,
+             w_obs_scale_counts %>%
+               count(cat_n)),
+
+  tar_target(w_obs_scale_excluded,
+             w_obs_scale_counts %>%
+               filter(cat_n != 1)),
+
   tar_target(
-    w_obs,
-    w_obs_viable %>%
-      left_join(w_study_arm_par, by = c("study", "arm")) %>%
-      rename(covidence = covidence_desc) %>%
-      select(study, intervention, arm, everything(), covidence) %>%
-      # select(-range, -median, -ci, -iqr, -percent, -intervals, -model_type) %>%
-      relocate(r, .before = n) %>%
-      ungroup() %>%
-      mutate(
-        # tidy up intervention
-        intervention = if_else(
-          is.na(intervention) | intervention == "n",
-          str_remove_all(arm, "[^a-z|\\s|+]") %>%
-            str_remove_all("and mg") %>%
-            str_remove_all("[mg ]*\\s*$"),
-          intervention
-        ),
-        # create intervention-scale & arm-scale
-        intervention_scale =
-          if_else(
-            intervention == "placebo",
-            intervention,
-            str_c(intervention, scale, sep = " x ")
-          )
-        ,
-        arm_scale =
-          if_else(
-            intervention == "placebo",
-            intervention,
-            str_c(arm, scale, sep = " x ")
-          )
-        
-      ) %>%
-      select(study, intervention_scale, arm_scale, everything())
+    w_obs_scale_excluded_next,
+    w_obs_scale_excluded %>%
+      filter(cat_n != 1) %>%
+      filter(!str_detect(covidence_desc, "0_10_cm_vas")) %>%
+      head(1) %>%
+      select(outcome, covidence_desc, scale_match)
   ),
-  
+
+
+
   tar_target(
-    w_obs_m,
-    w_obs  %>%
-      # apply filters here for now
-      filter(
-        timepoint == "post_int",
-        str_detect(design, "parallel"),
-        # this is a sledgehammer
-        type %in% c("placebo", "antidepressant")
-      )
-    
+    w_obs_scales_viable,
+    w_obs_scale_counts %>%
+      filter(cat_n == 1) %>%
+      mutate(scale = map_chr(
+        scale_match,
+        .f = function(df) {
+          df %>% select(scale_category) %>%
+            distinct() %>% pull(scale_category)
+        }
+      )) %>%
+      select(-scale_match,-cat_n)
   ),
+
+  tar_target(w_obs_scales,
+             w_obs_scales_viable),
+
+
+
+
   
   
-  
-  # shiny export obs --------------------------------------------------------
-  
-  
-  # tar_target(o_shiny,
-  #            {
-  #              write_rds(w_obs, "hppshiny/obs.rds")
-  #              write_rds(m_key, "hppshiny/model-key.rds")
+  # # wrangle study-arm labels ------------------------------------------------
   #
-  #            }),
+  # tar_target(
+  #   r_condition,
+  #   read_csv("data/conditions-2021-07-12_16:37:56.csv")
+  # ),
+  #
+  # tar_target(
+  #   w_condition,
+  #   r_condition %>%
+  #     select(-condition_no_chronic) %>%
+  #     rename(condition_general = general_grouping,
+  #            condition_iasp = iasp_classification)
+  # ),
+  #
+  #
+  # tar_target(
+  #   w_par_labels,
+  #   w_covidence  %>%
+  #     select(
+  #       study,
+  #       intervention,
+  #       title,
+  #       intervention_type,
+  #       intervention_class,
+  #       intervention_name,
+  #       group,
+  #       sponsorship_source,
+  #       authors_name,
+  #       duration_weeks,
+  #       pain_duration,
+  #       inclusion_criteria,
+  #       exclusion_criteria,
+  #       starts_with("main_aim"),
+  #       starts_with("chronic_pain"),
+  #       starts_with("total_number_of_participants"),
+  #       starts_with("number_in_each_arm"),
+  #       starts_with("type_of_participant"),
+  #       starts_with("intervention_adverse"),
+  #       starts_with("withdrawal_total")
+  #     ) %>%
+  #     # rename variables
+  #     select(
+  #       study,
+  #       arm = intervention,
+  #       intervention = intervention_name,
+  #       type = intervention_type,
+  #       class = intervention_class,
+  #       condition = chronic_pain_condition_s,
+  #       main_aim = main_aim_pain_mood_quality_of_life_etc,
+  #       design = group,
+  #       everything()
+  #     ) %>%
+  #     rename(chronic_condition = condition) %>%
+  #     left_join(w_condition, by = "chronic_condition") %>%
+  #     mutate(
+  #       # label placebo interventions
+  #       intervention = if_else(is.na(intervention) &
+  #                                type == "placebo",
+  #                              "placebo",
+  #                              intervention),
+  #       # input missing interventions
+  #       intervention =
+  #         str_remove_all(arm, "[\\d*.*\\d|mg|-]") %>%
+  #         str_remove_all("\\s{2,}|\\s$"),
+  #
+  #       # classes
+  #
+  #       # fix a spelling mistake in classes
+  #       class = if_else(str_detect(class, "tetra"),
+  #                       "tetracyclic (teca)",
+  #                       class),
+  #
+  #       # one of the placebo classes is labelled "n"
+  #       class = ifelse(class == "n", NA, class)
+  #     )
+  #
+  # ),
+  #
+  #
+  # # dose --------------------------------------------------------------------
+  #
+  #
+  # tar_target(
+  #   w_par_dose,
+  #   w_par_labels %>%
+  #     mutate(dose_extract = map(arm, str_extract_all, "\\d+\\w*")) %>%
+  #     select(dose_extract, everything())
+  #
+  # ),
+  #
+  #
+  # # set study-level parameters ----------------------------------------------
+  #
+  #
+  # tar_target(w_study_arm_par,
+  #            w_par_dose),
+  #
+  #
+
+  # # observations ------------------------------------------------------------
+  #
+  #
+  #
+  # # filters -----------------------------------------------------------------
+  #
+  # # currently filtering to neuropathic and scales categorised to 1
+  # # in order to filter, need study-level things
+  #
+  # tar_target(
+  #   w_obs_long_metapar,
+  #   w_obs_long %>%
+  #     # hack until studies are sorted
+  #     filter(!is.na(study)) %>%
+  #     left_join(
+  #       w_study_arm_par %>%
+  #         select(study, arm, condition_general, design)
+  #       ,
+  #       by = c("study", "arm")
+  #     )
+  # ),
+  #
+
+  # # go wide -----------------------------------------------------------------
+  #
+  #
+  # tar_target(
+  #   w_obs_wide_duplicates,
+  #   w_obs_scales_viable %>%
+  #     pivot_wider(
+  #       values_fn = length,
+  #       # for debugging
+  #       id_cols = c(outcome,
+  #                   study,
+  #                   arm,
+  #                   covidence_desc,
+  #                   scale,
+  #                   model_type),
+  #       names_from = measure_type,
+  #       values_from = covidence_value
+  #     ) %>%
+  #     filter(
+  #       mean > 1 |
+  #         sd > 1 |
+  #         n > 1 |
+  #         percent > 1 |
+  #         se > 1 |
+  #         range > 1 |
+  #         median > 1 |
+  #         ci > 1 |
+  #         intervals > 1 |
+  #         iqr > 1 |
+  #         limits > 1
+  #     )
+  # ),
+  #
+  # tar_target(
+  #   w_obs_wide_to_filter,
+  #   w_obs_wide_duplicates %>%
+  #     select(outcome, study, arm, covidence_desc, scale) %>%
+  #     distinct()
+  # ),
+  #
+  # tar_target(
+  #   w_obs_wide_viable,
+  #   w_obs_scales_viable %>%
+  #     anti_join(w_obs_wide_to_filter)
+  # ),
+  #
+  # tar_target(
+  #   w_obs_wide,
+  #   w_obs_wide_viable %>%
+  #     pivot_wider(
+  #       id_cols = c(outcome,
+  #                   study,
+  #                   arm,
+  #                   covidence_desc,
+  #                   scale,
+  #                   model_type),
+  #       names_from = measure_type,
+  #       values_from = covidence_value
+  #     ) %>%
+  #     mutate(across(any_of(
+  #       c("mean", "sd", "se", "percent", "median")
+  #     ), as.numeric)) %>%
+  #     mutate(n = as.integer(n))
+  # ),
+  #
+  #
   
-  
-  
-  # models ------------------------------------------------------------------
-  
-  
-  # all in ------------------------------------------------------------------
-  
-  
-  
+  #
+  #
+  # # bundle everything together ----------------------------------------------
+  #
+  # # get sds
+  # tar_target(
+  #   w_obs_calc,
+  #   w_obs_time %>%
+  #     mutate(
+  #       # fix this later
+  #       r = ifelse(!is.na(percent), n, NA),
+  #       se = if_else(sd > 0 & is.na(se) & n > 0,
+  #                    sd / sqrt(n),
+  #                    se),
+  #       sd = if_else(se > 0 & is.na(sd) & n > 0,
+  #                    se * sqrt(n),
+  #                    sd),
+  #       n = if_else(model_type == "lor" & percent > 0,
+  #                   as.integer(r * 100 / percent),
+  #                   n)
+  #     )
+  # ),
+  #
+  # # todo: target for rows not used
+  # tar_target(
+  #   w_obs_viable,
+  #   w_obs_calc %>%
+  #     mutate(
+  #       model_viable = case_when(
+  #         model_type == "lor" ~ n > 0 & r > 0,
+  #         model_type == "smd" ~ mean > 0 & se > 0 & n > 0
+  #       )
+  #     ) %>%
+  #     filter(model_viable) %>%
+  #     filter(!is.na(study)) %>%
+  #     select(-model_viable)
+  # ),
+  #
+  # tar_target(w_obs_investigate,
+  #            anti_join(w_obs_calc, w_obs_viable)),
+  #
+  # # todo: add filters to observation
+  #
+  # # keep this target as the final all-in output dataframe to be shared
+  # # use this target for EDA
+  # tar_target(
+  #   w_obs,
+  #   w_obs_viable %>%
+  #     left_join(w_study_arm_par, by = c("study", "arm")) %>%
+  #     rename(covidence = covidence_desc) %>%
+  #     select(study, intervention, arm, everything(), covidence) %>%
+  #     # select(-range, -median, -ci, -iqr, -percent, -intervals, -model_type) %>%
+  #     relocate(r, .before = n) %>%
+  #     ungroup() %>%
+  #     mutate(
+  #       # tidy up intervention
+  #       intervention = if_else(
+  #         is.na(intervention) | intervention == "n",
+  #         str_remove_all(arm, "[^a-z|\\s|+]") %>%
+  #           str_remove_all("and mg") %>%
+  #           str_remove_all("[mg ]*\\s*$"),
+  #         intervention
+  #       ),
+  #       # create intervention-scale & arm-scale
+  #       intervention_scale =
+  #         if_else(
+  #           intervention == "placebo",
+  #           intervention,
+  #           str_c(intervention, scale, sep = " x ")
+  #         )
+  #       ,
+  #       arm_scale =
+  #         if_else(
+  #           intervention == "placebo",
+  #           intervention,
+  #           str_c(arm, scale, sep = " x ")
+  #         )
+  #
+  #     ) %>%
+  #     select(study, intervention_scale, arm_scale, everything())
+  # ),
+  #
+  # tar_target(
+  #   w_obs_m,
+  #   w_obs  %>%
+  #     # apply filters here for now
+  #     filter(
+  #       timepoint == "post_int",
+  #       str_detect(design, "parallel"),
+  #       # this is a sledgehammer
+  #       type %in% c("placebo", "antidepressant")
+  #     )
+  #
+  # ),
+  #
+  #
+  #
+  # # shiny export obs --------------------------------------------------------
+  #
+  #
+  # # tar_target(o_shiny,
+  # #            {
+  # #              write_rds(w_obs, "hppshiny/obs.rds")
+  # #              write_rds(m_key, "hppshiny/model-key.rds")
+  # #
+  # #            }),
+  #
+  #
+  #
+  # # models ------------------------------------------------------------------
+  #
+  #
+  # # all in ------------------------------------------------------------------
+  #
+  #
+  #
   # null --------------------------------------------------------------------
   
   NULL
